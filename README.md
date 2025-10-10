@@ -1,5 +1,6 @@
 # plant-partner
-Plant-Partner repo. for CEN4907c
+Plant Partner repo. for CEN4907c
+- [Project link](https://github.com/users/aboler/projects/1)
 
 ## Notes for adding code
 - Please create a new branch off of dev
