@@ -1,2 +1,12 @@
 # plant-partner
 Plant-Partner repo. for CEN4907c
+
+## Notes for adding code
+- Please create a new branch off of dev
+  - main remains as a mimumum viable product branch avaiable
+  - Allows PR's to be made for adding to dev so group members can review code made
+
+## Notes for reports
+- Add reports for any changes/development work done in a day
+  - Make reports in Documentation/Reports
+  - Make title of report month_day_lastName
