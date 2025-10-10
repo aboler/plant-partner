@@ -1,4 +1,5 @@
-10/10/25
+# 10/10/25: GitHub Set Up
+## Aspen Boler
 
 - Created GitHub Project (https://github.com/users/aboler/projects/1)
 - Created GitHub Repository (https://github.com/aboler/plant-partner)
