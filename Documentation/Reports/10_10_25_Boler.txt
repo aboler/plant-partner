@@ -1,0 +1,7 @@
+10/10/25
+
+- Created GitHub Repository (https://github.com/aboler/plant-partner)
+	- Private so only group members can access
+	- Added members as collaborators with full-access
+	- Created Documentation folder
+	- Created Documentation/Reports folder
