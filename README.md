@@ -3,7 +3,7 @@ Plant-Partner repo. for CEN4907c
 
 ## Notes for adding code
 - Please create a new branch off of dev
-  - main remains as a mimumum viable product branch avaiable
+  - main remains as a minimum viable product branch available
   - Allows PR's to be made for adding to dev so group members can review code made
 
 ## Notes for reports
