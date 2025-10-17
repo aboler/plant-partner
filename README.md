@@ -10,5 +10,4 @@ Plant Partner repo. for CEN4907c
 
 ## Notes for reports
 - Add reports for any changes/development work done in a day in main branch
-  - Make reports in Documentation/Reports
-  - Make title of report month_day_lastName
+  - Make reports in Documentation/Reports in relevant timesheet
