@@ -1,0 +1,55 @@
+﻿CEN3907C 
+Plant Partner 
+Bill of Materials Draft
+
+
+______________________________________
+uController: ESP32Wroom: https://www.alibaba.com/product-detail/esp32-dev-kit-c-devkitc-v4_1600232911068.html
+______________________________________
+Sensors:
+NPK:
+https://www.alibaba.com/product-detail/7-in-1-Soil-Integrated-Sensor_1601229125395.html?spm=a2700.prosearch.normal_offer.d_title.1ed967afnOLsun&priceId=b465b85fd3814c4c8e0b8c5ea3a6f102
+
+
+RS485-UART Transc
+______________________________________
+Pump Circuit:
+* Makerverse Motor Controller 
+* ______________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Resources:
+Sensors:
+NPK: https://www.instructables.com/Arduino-Soil-NPK-Sensor-Maximizing-Plant-Nutrition/
+Pump:
+https://core-electronics.com.au/guides/arduino/how-to-control-a-pump-with-an-arduino/
