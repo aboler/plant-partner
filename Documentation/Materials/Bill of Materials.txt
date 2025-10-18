@@ -11,12 +11,16 @@ NPK:
 https://www.alibaba.com/product-detail/7-in-1-Soil-Integrated-Sensor_1601229125395.html?spm=a2700.prosearch.normal_offer.d_title.1ed967afnOLsun&priceId=b465b85fd3814c4c8e0b8c5ea3a6f102
 
 
-RS485-UART Transc
+RS485-UART Transceiver
 ______________________________________
 Pump Circuit:
 * Makerverse Motor Controller 
 * ______________________________________
-
+Power Supply
+12 V adapter:
+https://www.alibaba.com/product-detail/Factory-Price-OEM-FCC-RoHS-Power_1600555965961.html?spm=a2700.prosearch.normal_offer.d_title.46db67afZLSgsE&priceId=877148af34cc4a8483d0f2e71c000739
+Buck Converter down to 	5 V:
+https://www.adafruit.com/product/4739
 
 
 
