@@ -5,6 +5,7 @@ Bill of Materials Draft
 
 ______________________________________
 uController: ESP32Wroom: https://www.alibaba.com/product-detail/esp32-dev-kit-c-devkitc-v4_1600232911068.html
+https://www.amazon.com/ESP-WROOM-32-Development-Microcontroller-Integrated-Compatible/dp/B08D5ZD528?th=1
 ______________________________________
 Sensors:
 NPK:
@@ -15,7 +16,8 @@ RS485-UART Transceiver
 ______________________________________
 Pump Circuit:
 * Makerverse Motor Controller 
-* ______________________________________
+https://core-electronics.com.au/makerverse-motor-driver-2-channel.html
+ ______________________________________
 Power Supply
 12 V adapter:
 https://www.alibaba.com/product-detail/Factory-Price-OEM-FCC-RoHS-Power_1600555965961.html?spm=a2700.prosearch.normal_offer.d_title.46db67afZLSgsE&priceId=877148af34cc4a8483d0f2e71c000739
