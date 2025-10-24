@@ -6,4 +6,6 @@ https://github.com/espressif/esp-idf has examples/functions ect. and will help s
 	- run ./install.ps1 with a powershell with access to python
 	- run ./export.ps1
 
-Then follow the instructions from https://github.com/espressif/vscode-esp-idf-extension/blob/master/README.md and select the submodule directory as location for ESP_IDF
+Then can either
+	- follow the instructions from https://github.com/espressif/vscode-esp-idf-extension/blob/master/README.md and select the submodule directory as location for ESP_IDF
+	- follow instructions in original GitHub/youtube video to build projects/examples
