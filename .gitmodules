@@ -1,0 +1,3 @@
+[submodule "microSrc/submodules/esp-idf"]
+	path = microSrc/submodules/esp-idf
+	url = https://github.com/espressif/esp-idf.git
