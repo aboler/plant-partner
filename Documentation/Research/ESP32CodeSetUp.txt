@@ -1,3 +1,9 @@
 Following from https://www.youtube.com/watch?v=dOVjb2wXI84
 
 https://github.com/espressif/esp-idf has examples/functions ect. and will help set up build environment
+	- cd into submodule
+	- run git submodule update --init --recursive
+	- run ./install.ps1 with a powershell with access to python
+	- run ./export.ps1
+
+Then follow the instructions from https://github.com/espressif/vscode-esp-idf-extension/blob/master/README.md and select the submodule directory as location for ESP_IDF
