@@ -1,0 +1,3 @@
+Following from https://www.youtube.com/watch?v=dOVjb2wXI84
+
+https://github.com/espressif/esp-idf has examples/functions ect. and will help set up build environment
