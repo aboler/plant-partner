@@ -11,3 +11,8 @@ Plant Partner repo. for CEN4907c
 ## Notes for reports
 - Add reports for any changes/development work done in a day in main branch
   - Make reports in Documentation/Reports in relevant timesheet
+
+## Project Architecture
+The ESP32 board interfaces with multiple sensors to collect real-time environmental and system data. This data is processed to inform and schedule the operation of actuators thus, automating the control of p. 
+The ESP32 also manages communication with external circuits that drive the pumping systems for both water and fertilizer. Additionally, all sensor readings are logged in a database and displayed on a mobile application, providing users with remote monitoring and control capabilities.
+
