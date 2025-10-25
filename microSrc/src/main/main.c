@@ -18,10 +18,11 @@
 
 void app_main(void)
 {
+    // Debug Tag
     const static char *TAG = "DEBUG";
 
     // Initialize plant structure data with test values
-    struct plantData plantData = {0, 0, 0};
+    struct plantData plant_data = {0, 0, 0};
 
     // Declare arrays for ADC raw data and voltage
     int adc_raw;
@@ -37,9 +38,9 @@ void app_main(void)
     adc_cali_handle_t adc1_cali_chan0_handle = NULL;
     bool do_calibration1_chan0 = adc_calibration_init(ADC_UNIT_1, ADC1_CHAN0, ADC_ATTEN, &adc1_cali_chan0_handle);
 
-    // Configure GPIO16 - io_config defined in gpio_led.h
-    gpio_config(&io_conf_blueLED);
-    gpio_config(&io_conf_externalLED); // Configure external LED GPIO
+    // Configure LEDs
+    configure_activeHigh_LED(INTERNAL_BLUE_LED_GPIO);
+    configure_activeHigh_LED(EXTERNAL_LED_GPIO);
 
     while (1)
     {
@@ -60,11 +61,11 @@ void app_main(void)
         // If voltage below threshold, turn LEDs on
         else if (voltage < LED_THRESHOLD) {
             // Turn on Internal and External LEDs
-            gpio_set_level(GPIO_NUM_2, 1);  
-            gpio_set_level(GPIO_NUM_14, 1); 
+            set_activeHigh_LED(INTERNAL_BLUE_LED_GPIO);
+            set_activeHigh_LED(EXTERNAL_LED_GPIO);
 
             // Store data into plant structure
-            plantData.lightData = voltage;
+            plant_data.lightData = voltage;
 
             // Print LED Status and Voltage level as ESP log
             ESP_LOGI(TAG, "LEDs ON: Voltage %d mV below threshold", voltage);
@@ -72,11 +73,11 @@ void app_main(void)
         // If voltage above or equal to threshold, turn LEDs off
         else if (voltage >= LED_THRESHOLD){
             // Turn off Internal and External LEDs
-            gpio_set_level(GPIO_NUM_2, 0);  
-            gpio_set_level(GPIO_NUM_14, 0); 
+            clear_activeHigh_LED(INTERNAL_BLUE_LED_GPIO);
+            clear_activeHigh_LED(EXTERNAL_LED_GPIO);
 
             // Store data into plant structure
-            plantData.lightData = voltage;
+            plant_data.lightData = voltage;
 
             // Print statement to confirm LEDs are off
             ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV above threshold", voltage);

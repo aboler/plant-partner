@@ -4,25 +4,12 @@
 #include "driver/gpio.h"
 
 #define LED_THRESHOLD 650
+#define EXTERNAL_LED_GPIO GPIO_NUM_14
+#define INTERNAL_BLUE_LED_GPIO GPIO_NUM_2
 
-// Initialize actuator communication (GPIO 2)
-gpio_config_t io_conf_blueLED = {
-    .pin_bit_mask = (1ULL << GPIO_NUM_2),
-    .mode = GPIO_MODE_OUTPUT,
-    .pull_up_en = GPIO_PULLUP_DISABLE,
-    .pull_down_en = GPIO_PULLDOWN_DISABLE,
-    .intr_type = GPIO_INTR_DISABLE,
-};
-
-// Initialize actuator communication (GPIO 14)
-gpio_config_t io_conf_externalLED = {
-    .pin_bit_mask = (1ULL << GPIO_NUM_14),
-    .mode = GPIO_MODE_OUTPUT,
-    .pull_up_en = GPIO_PULLUP_DISABLE,
-    .pull_down_en = GPIO_PULLDOWN_DISABLE,
-    .intr_type = GPIO_INTR_DISABLE,
-};
-
-
+// GPIO Configuration & Control for active High LEDs
+void configure_activeHigh_LED(int gpio_num);
+void set_activeHigh_LED(int gpio_num);
+void clear_activeHigh_LED(int gpio_num);
 
 #endif // GPIO_LED_H
