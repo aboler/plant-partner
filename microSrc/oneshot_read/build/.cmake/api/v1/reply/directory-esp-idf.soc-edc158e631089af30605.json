@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/soc",
+		"source" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/soc"
+	}
+}
