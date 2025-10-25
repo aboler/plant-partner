@@ -1,24 +1,34 @@
 const express = require('express')
 const router = express.Router()
 
-// Getting all pieces of information
+// Getting all sensor values
 router.get('/', (req, res) => {
-
+    res.send('Hello World 0!')
 
 })
 
-// Getting one piece of information
+// Getting one sensor's information
 router.get('/:id', (req, res) => {
     req.params.id
+    res.send('Hello World 1!')
 
 })
 
-// Creating a piece of information
+// Creating the post of the sensor's information
 router.post('/', (req, res) => {
+    res.send('Hello World 2!')
 
-    
 })
 
+//Updating a sensor's information
+router.patch('/:id', (req, res) => {
+    res.send('Hello World 3!')
+})
+
+//Deleting a sensor's information
+router.delete('/:id', (req, res) => {
+    res.send('Hello World 4!')
+})
 
 
 module.exports = router
