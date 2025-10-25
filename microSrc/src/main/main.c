@@ -16,34 +16,26 @@
 #include "../peripherals/gpio_led.h"
 #include "../peripherals/adc_lightDiode.h"
 
-
-const static char *TAG = "EXAMPLE";
-static int adc_raw[2][10];
-static int voltage[2][10];
-
 void app_main(void)
 {
+    const static char *TAG = "DEBUG";
+
     // Initialize plant structure data with test values
-    struct plantData testStructure = {0, 0, 0};
+    struct plantData plantData = {0, 0, 0};
 
-    // Initialize one-shot ADC
-    //From code
-    adc_oneshot_unit_handle_t adc1_handle;
-    adc_oneshot_unit_init_cfg_t init_config1 = {
-        .unit_id = ADC_UNIT_1,
-    };
-    ESP_ERROR_CHECK(adc_oneshot_new_unit(&init_config1, &adc1_handle));
+    // Declare arrays for ADC raw data and voltage
+    int adc_raw;
+    int voltage;
 
-    //-------------ADC1 Config---------------//
-    adc_oneshot_chan_cfg_t config = {
-        .atten = ADC_ATTEN,
-        .bitwidth = ADC_BITWIDTH_DEFAULT,
-    };
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, ADC1_CHAN0, &config));
+    // Initialize ADC Unit 1 Channel 0
+    adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
 
-    //-------------ADC1 Calibration Init---------------//
+    // Configure ADC Channel 0
+    adc_oneshot_channel_config(adc1_handle);
+
+    // ADC1 CH0 Calibration Init
     adc_cali_handle_t adc1_cali_chan0_handle = NULL;
-    bool do_calibration1_chan0 = example_adc_calibration_init(ADC_UNIT_1, ADC1_CHAN0, ADC_ATTEN, &adc1_cali_chan0_handle);
+    bool do_calibration1_chan0 = adc_calibration_init(ADC_UNIT_1, ADC1_CHAN0, ADC_ATTEN, &adc1_cali_chan0_handle);
 
     // Configure GPIO16 - io_config defined in gpio_led.h
     gpio_config(&io_conf_blueLED);
@@ -51,31 +43,43 @@ void app_main(void)
 
     while (1)
     {
-        // Read data in from ADC
-        ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, ADC1_CHAN0, &adc_raw[0][0]));
-        ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC1_CHAN0, adc_raw[0][0]);
+        // Read raw data in from ADC
+        adc_read(adc1_handle, ADC1_CHAN0, &adc_raw);
+        ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC1_CHAN0, adc_raw);
+
+        // If calibration is enabled, convert raw data to voltage
         if (do_calibration1_chan0) {
-            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw[0][0], &voltage[0][0]));
-            ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC1_CHAN0, voltage[0][0]);
+            adc_rawToVoltage(adc1_cali_chan0_handle, adc_raw, &voltage);
+            ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC1_CHAN0, voltage);
         }
         
-
+        // Error handling for voltage reading
+        if (voltage < 0) {
+            ESP_LOGW(TAG, "Invalid voltage reading: %d mV", voltage);
+        }
         // If voltage below threshold, turn LEDs on
-        if (voltage[0][0] < LED_THRESHOLD) {
-            gpio_set_level(GPIO_NUM_2, 1);  // Internal LED on
-            gpio_set_level(GPIO_NUM_14, 1); // External LED on
+        else if (voltage < LED_THRESHOLD) {
+            // Turn on Internal and External LEDs
+            gpio_set_level(GPIO_NUM_2, 1);  
+            gpio_set_level(GPIO_NUM_14, 1); 
+
+            // Store data into plant structure
+            plantData.lightData = voltage;
 
             // Print LED Status and Voltage level as ESP log
-            ESP_LOGI(TAG, "LEDs ON: Voltage %d mV below threshold", voltage[0][0]);
+            ESP_LOGI(TAG, "LEDs ON: Voltage %d mV below threshold", voltage);
         }
         // If voltage above or equal to threshold, turn LEDs off
-        else if (voltage[0][0] >= LED_THRESHOLD)
-        {
-            gpio_set_level(GPIO_NUM_2, 0);  // Internal LED off
-            gpio_set_level(GPIO_NUM_14, 0); // External LED off
+        else if (voltage >= LED_THRESHOLD){
+            // Turn off Internal and External LEDs
+            gpio_set_level(GPIO_NUM_2, 0);  
+            gpio_set_level(GPIO_NUM_14, 0); 
+
+            // Store data into plant structure
+            plantData.lightData = voltage;
 
             // Print statement to confirm LEDs are off
-            ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV above threshold", voltage[0][0]);
+            ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV above threshold", voltage);
         }
         
     }
