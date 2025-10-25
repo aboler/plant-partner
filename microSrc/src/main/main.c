@@ -17,7 +17,7 @@ static int voltage[2][10];
 void app_main(void)
 {
     // Initialize plant structure data with test values
-    struct plantData testStructure = {50, 54, 87};
+    // struct plantData testStructure = {50, 54, 87};
 
     // Initialize one-shot ADC
     //From code
@@ -41,19 +41,8 @@ void app_main(void)
     // Configure GPIO16 - io_config defined in gpio_led.h
     gpio_config(&io_conf);
 
-    // Simple observable test: toggle GPIO16 every 500 ms and print state.
-    // Use this to verify the pin is being driven (measure with multimeter/logic analyzer).
-    bool level = false;
     while (1)
     {
-        level = !level;
-        gpio_set_level(GPIO_NUM_16, level ? 1 : 0);
-        // Print with newline so the monitor shows lines promptly
-        printf("GPIO16 set to %d\n", level ? 1 : 0);
-        // Delay so toggles are slow and observable (500 ms)
-        vTaskDelay(pdMS_TO_TICKS(500));
-        
-        printf("Hello World");
         // Read data in from ADC
         ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, ADC1_CHAN0, &adc_raw[0][0]));
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC1_CHAN0, adc_raw[0][0]);
@@ -61,11 +50,23 @@ void app_main(void)
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw[0][0], &voltage[0][0]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC1_CHAN0, voltage[0][0]);
         }
-        vTaskDelay(pdMS_TO_TICKS(1000));
-        // Process data from ADC to get reasonable digital value
+        // vTaskDelay(pdMS_TO_TICKS(1000));
 
-        // If value below threshold, turn actuator off (Note: actuator is in form of wired LED, so gpio pin down)
+        // If value below threshold, turn actuator on (Note: actuator is in form of wired LED, so gpio pin down)
+        if (voltage[0][0] < 500) {
+            gpio_set_level(GPIO_NUM_16, 1); // Turn on actuator
 
-        // If value above threshold, turn actuator on for certain amount of time (define through poll or timer)
+            // Print statement to confirm actuator is on
+            ESP_LOGI(TAG, "Actuator ON: Voltage %d mV below threshold", voltage[0][0]);
+        }
+        else if (voltage[0][0] >= 501)
+        {
+            gpio_set_level(GPIO_NUM_16, 0); // Turn off actuator
+
+            // Print statement to confirm actuator is off
+            ESP_LOGI(TAG, "Actuator OFF: Voltage %d mV above threshold", voltage[0][0]);
+        }
+        // vTaskDelay(pdMS_TO_TICKS(1000));
+        
     }
 }
