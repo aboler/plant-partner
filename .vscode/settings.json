@@ -1,4 +1,9 @@
 {
     "idf.pythonInstallPath": "/usr/local/bin/python3",
-    "idf.port": "/dev/ttyUSB0"
+    "idf.port": "/dev/ttyUSB0",
+    "idf.flashType": "UART",
+    "files.associations": {
+        "plantdata.h": "c",
+        "gpio.h": "c"
+    }
 }
