@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 dotenv.config();
 
-const PORT = process.env.PORT || 8000; //change to our desired port
+const PORT = process.env.PORT || 8000; //change to our desired port or if desired port changes
 const MONGOURL = process.env.MONGO_URL || 'mongodb://localhost:27017/SensorDatabase';
 
 
