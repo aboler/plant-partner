@@ -40,3 +40,17 @@ export const updateSensor = async (req, res) => {
         res.status(500).json({ error: 'Failed to update sensor data' });
     }
 };
+
+export const deleteSensor = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const sensorExist = await Sensor.findById(id);
+        if (!sensorExist) {
+            return res.status(404).json({ message: 'Sensor not found' });
+        }
+        await Sensor.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Sensor deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete sensor data' });
+    }
+};
