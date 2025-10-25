@@ -1,14 +1,39 @@
-const express = require('express');
+import express from "express"
+import mongoose from "mongoose"
+import dotenv from "dotenv";
+
 const app = express();
-const port = 8000; //change to our desired port
+dotenv.config();
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://Nicholas_Ci:rY6MLdu4uAzEDagm@plantpartnercluster.mgobjwu.mongodb.net/'
-, {useNewUrlParser: true, useUnifiedTopology : true});
+const PORT = process.env.PORT || 3000; //change to our desired port
+const MONGOURL = process.env.MONGO_URL;
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {console.log('Connected to MongoDB')});
+
+mongoose.connect(MONGOURL).then(() => {
+    console.log('Connected to MongoDB')
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}).catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+});
+
+const sensorSchema = new mongoose.Schema({
+    id: String,
+    Time: Number,
+    Value: Number,
+});
+
+const Sensor = mongoose.model('sensors', sensorSchema)
+
+app.get('/get-sensor-data', async (req, res) => {
+    const sensorData = await Sensor.find();
+    res.json(sensorData);
+});
+    
+//const db = mongoose.connection;
+//db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//db.once('open', () => {console.log('Connected to MongoDB')});
 
 //const { MongoClient, ServerApiVersion } = require('mongodb');
 //const uri = "mongodb+srv://Nicholas_Ci:rY6MLdu4uAzEDagm@plantpartnercluster.mgobjwu.mongodb.net/?appName=PlantPartnerCluster";
@@ -34,4 +59,4 @@ db.once('open', () => {console.log('Connected to MongoDB')});
 //}
 //run().catch(console.dir);
 
-app.get('/items', (req, res) => {res.json({message: 'Get all items'})});
+//app.get('/items', (req, res) => {res.json({message: 'Get all items'})});
