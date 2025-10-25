@@ -25,3 +25,18 @@ export const fetchSensors = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch sensor data' });
     }       
 };
+
+export const updateSensor = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const sensorExist = await Sensor.findById(id);
+
+        if (!sensorExist) {
+            return res.status(404).json({ message: 'Sensor not found' });
+        }
+        const updateSensor = await Sensor.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json(updateSensor);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update sensor data' });
+    }
+};
