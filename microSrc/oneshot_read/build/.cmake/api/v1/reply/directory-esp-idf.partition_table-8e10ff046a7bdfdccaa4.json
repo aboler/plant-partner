@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/partition_table",
+		"source" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table"
+	}
+}

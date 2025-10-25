@@ -1,0 +1,1701 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/project.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/idf.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/build.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/third_party/GetGitRevisionDescription.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckCCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/git_submodules.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindGit.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/tool_version_check.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/kconfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject/shared_internal_commands.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/component.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/utilities.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/depgraph.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/ldgen.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/dfu.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/gdbinit.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/prefix_map.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/openocd.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/third_party/GetGitRevisionDescription.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/git-data/grabRef.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/HEAD"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/toolchain-esp32.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/utilities.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystem.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.30.2/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/toolchain-esp32.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/utilities.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeNinjaFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Bruce-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Compaq-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/HP-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/LCC-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/SDCC-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/SunPro-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/XL-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/XLClang-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.30.2/CMakeCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.30.2/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeASMCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.30.2/CMakeASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.30.2/CMakeCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.30.2/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeTestASMCompiler.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/kconfig_new/config.env.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/config/sdkconfig.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/config/sdkconfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/xtensa/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bootloader/project_include.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject/mkdirs.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/bootloader-prefix/tmp/bootloader-mkdirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject/RepositoryInfo.txt.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject/UpdateInfo.txt.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject/PatchInfo.txt.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/ExternalProject/cfgcmd.txt.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esptool_py/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esptool_py/espefuse.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_common/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/newlib/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_bitscrambler/project_include.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/config/sdkconfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/symbols.gdbinit.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/project_description.json.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bootloader/subproject/components/micro-ecc/micro-ecc/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bootloader/subproject/components/micro-ecc/micro-ecc/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/controller/lib_esp32/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/controller/lib_esp32/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/controller/lib_esp32c2/esp32c2-bt-lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/controller/lib_esp32c2/esp32c2-bt-lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/controller/lib_esp32c3_family/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/controller/lib_esp32c3_family/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/controller/lib_esp32c5/esp32c5-bt-lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/controller/lib_esp32c5/esp32c5-bt-lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/controller/lib_esp32c6/esp32c6-bt-lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/controller/lib_esp32c6/esp32c6-bt-lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/controller/lib_esp32h2/esp32h2-bt-lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/controller/lib_esp32h2/esp32h2-bt-lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/esp_ble_mesh/lib/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/esp_ble_mesh/lib/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bt/host/nimble/nimble/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/bt/host/nimble/nimble/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/cmock/CMock/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/cmock/CMock/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_coex/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/esp_coex/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_phy/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/esp_phy/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_wifi/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/esp_wifi/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/heap/tlsf/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/heap/tlsf/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/json/cJSON/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/json/cJSON/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/lwip/lwip/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/lwip/lwip/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/mbedtls/mbedtls/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mqtt/esp-mqtt/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/mqtt/esp-mqtt/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/openthread/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/openthread/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/openthread/openthread/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/openthread/openthread/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/protobuf-c/protobuf-c/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/protobuf-c/protobuf-c/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/spiffs/spiffs/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/spiffs/spiffs/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/unity/unity/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/.git/modules/components/unity/unity/HEAD"
+		},
+		{
+			"path" : "sdkconfig"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/config/sdkconfig.h"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/config/sdkconfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/tools/kconfig_new/confgen.py"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table/partitions_singleapp.csv"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/flash_args.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/flash_args"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/ldgen_libraries.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/xtensa/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_timer/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_pm/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakePackageConfigHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/WriteBasicConfigVersionFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakePrintHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPython3.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPython/Support.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CheckCCompilerFlag.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/include/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/3rdparty/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/3rdparty/everest/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/3rdparty/p256-m/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/library/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/mbedtls/mbedtls/pkgconfig/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bootloader/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/esp-idf/bootloader/bootloader-flash_args.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/bootloader-flash_args"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esptool_py/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/esp-idf/esptool_py/app-flash_args.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/app-flash_args"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/esp-idf/esptool_py/flasher_args.json.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/esp-idf/partition_table/partition-table-flash_args.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_app_format/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_bootloader_format/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/app_update/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_partition/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/efuse/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/efuse/esp32/sources.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bootloader_support/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_mm/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/spi_flash/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_system/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_system/ld/ld.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_system/port/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_system/port/soc/esp32/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_common/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_rom/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/hal/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/log/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/heap/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/soc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_security/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_hw_support/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_hw_support/port/esp32/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_hw_support/lowpower/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/freertos/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/newlib/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/newlib/src/port/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/pthread/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/cxx/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_gpio/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_ringbuf/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_i2s/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_pcnt/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_gptimer/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_spi/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_mcpwm/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_ana_cmpr/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/sdmmc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_sdmmc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_sdspi/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_sdio/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_dac/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_bitscrambler/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_rmt/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_tsens/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_sdm/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_i2c/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_uart/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_ledc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_parlio/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_usb_serial_jtag/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_driver_twai/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/driver/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Espressif/frameworks/esp-idf-v5.5.1/components/esp_adc/CMakeLists.txt"
+		},
+		{
+			"path" : "main/CMakeLists.txt"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "C:/Users/eudeu/CpE_Capstone/Group_Project/ESP32_Tests/oneshot_read/build",
+		"source" : "C:/Users/eudeu/CpE_Capstone/Group_Project/ESP32_Tests/oneshot_read"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 1
+	}
+}
