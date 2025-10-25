@@ -1,11 +1,18 @@
-// Basic Main Loop
-
+// Standard C Libraries
 #include <stdio.h>
 #include <stdbool.h>
+
+// ESP-IDF Libraries
 #include "esp_log.h"
+
+// FreeRTOS
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+
+// Data Types
 #include "../dataTypes/plantData.h"
+
+// Peripherals
 #include "../peripherals/gpio_led.h"
 #include "../peripherals/adc_lightDiode.h"
 
@@ -17,7 +24,7 @@ static int voltage[2][10];
 void app_main(void)
 {
     // Initialize plant structure data with test values
-    // struct plantData testStructure = {50, 54, 87};
+    struct plantData testStructure = {0, 0, 0};
 
     // Initialize one-shot ADC
     //From code
@@ -39,7 +46,8 @@ void app_main(void)
     bool do_calibration1_chan0 = example_adc_calibration_init(ADC_UNIT_1, ADC1_CHAN0, ADC_ATTEN, &adc1_cali_chan0_handle);
 
     // Configure GPIO16 - io_config defined in gpio_led.h
-    gpio_config(&io_conf);
+    gpio_config(&io_conf_blueLED);
+    gpio_config(&io_conf_externalLED); // Configure external LED GPIO
 
     while (1)
     {
@@ -50,23 +58,25 @@ void app_main(void)
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw[0][0], &voltage[0][0]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC1_CHAN0, voltage[0][0]);
         }
-        // vTaskDelay(pdMS_TO_TICKS(1000));
+        
 
-        // If value below threshold, turn actuator on (Note: actuator is in form of wired LED, so gpio pin down)
-        if (voltage[0][0] < 500) {
-            gpio_set_level(GPIO_NUM_16, 1); // Turn on actuator
+        // If voltage below threshold, turn LEDs on
+        if (voltage[0][0] < LED_THRESHOLD) {
+            gpio_set_level(GPIO_NUM_2, 1);  // Internal LED on
+            gpio_set_level(GPIO_NUM_14, 1); // External LED on
 
-            // Print statement to confirm actuator is on
-            ESP_LOGI(TAG, "Actuator ON: Voltage %d mV below threshold", voltage[0][0]);
+            // Print LED Status and Voltage level as ESP log
+            ESP_LOGI(TAG, "LEDs ON: Voltage %d mV below threshold", voltage[0][0]);
         }
-        else if (voltage[0][0] >= 501)
+        // If voltage above or equal to threshold, turn LEDs off
+        else if (voltage[0][0] >= LED_THRESHOLD)
         {
-            gpio_set_level(GPIO_NUM_16, 0); // Turn off actuator
+            gpio_set_level(GPIO_NUM_2, 0);  // Internal LED off
+            gpio_set_level(GPIO_NUM_14, 0); // External LED off
 
-            // Print statement to confirm actuator is off
-            ESP_LOGI(TAG, "Actuator OFF: Voltage %d mV above threshold", voltage[0][0]);
+            // Print statement to confirm LEDs are off
+            ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV above threshold", voltage[0][0]);
         }
-        // vTaskDelay(pdMS_TO_TICKS(1000));
         
     }
 }
