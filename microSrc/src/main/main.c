@@ -16,13 +16,27 @@ static int voltage[2][10];
 
 void app_main(void)
 {
-    struct adcStructure lightDiodeStructure;
     // Initialize plant structure data with test values
     struct plantData testStructure = {50, 54, 87};
 
     // Initialize one-shot ADC
     //From code
-    bool do_calibration1_chan0 = example_adc_calibration_init(ADC_UNIT_1, ADC1_CHAN0, ADC_ATTEN, &lightDiodeStructure);
+    adc_oneshot_unit_handle_t adc1_handle;
+    adc_oneshot_unit_init_cfg_t init_config1 = {
+        .unit_id = ADC_UNIT_1,
+    };
+    ESP_ERROR_CHECK(adc_oneshot_new_unit(&init_config1, &adc1_handle));
+
+    //-------------ADC1 Config---------------//
+    adc_oneshot_chan_cfg_t config = {
+        .atten = ADC_ATTEN,
+        .bitwidth = ADC_BITWIDTH_DEFAULT,
+    };
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, ADC1_CHAN0, &config));
+
+    //-------------ADC1 Calibration Init---------------//
+    adc_cali_handle_t adc1_cali_chan0_handle = NULL;
+    bool do_calibration1_chan0 = example_adc_calibration_init(ADC_UNIT_1, ADC1_CHAN0, ADC_ATTEN, &adc1_cali_chan0_handle);
 
     // Configure GPIO16 - io_config defined in gpio_led.h
     gpio_config(&io_conf);
@@ -39,11 +53,12 @@ void app_main(void)
         // Delay so toggles are slow and observable (500 ms)
         vTaskDelay(pdMS_TO_TICKS(500));
         
+        printf("Hello World");
         // Read data in from ADC
-        ESP_ERROR_CHECK(adc_oneshot_read(lightDiodeStructure.adc1Handle, ADC1_CHAN0, &adc_raw[0][0]));
+        ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, ADC1_CHAN0, &adc_raw[0][0]));
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC1_CHAN0, adc_raw[0][0]);
         if (do_calibration1_chan0) {
-            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(lightDiodeStructure.adc1CaliChan0Handle, adc_raw[0][0], &voltage[0][0]));
+            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw[0][0], &voltage[0][0]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC1_CHAN0, voltage[0][0]);
         }
         vTaskDelay(pdMS_TO_TICKS(1000));

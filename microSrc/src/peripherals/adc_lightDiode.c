@@ -1,17 +1,13 @@
 #include "adc_lightDiode.h"
 
-bool example_adc_calibration_init(adc_unit_t unit, adc_channel_t channel, adc_atten_t atten, struct adcStructure *lightDiodeStructure)
+bool example_adc_calibration_init(adc_unit_t unit, adc_channel_t channel, adc_atten_t atten, adc_cali_handle_t *out_handle)
 {
+    // Check if configuration is actually valid
+    
+
     adc_cali_handle_t handle = NULL;
     esp_err_t ret = ESP_FAIL;
     bool calibrated = false;
-    lightDiodeStructure->initConfig.unit_id = ADC_UNIT_1;
-    lightDiodeStructure->config.atten = ADC_ATTEN;
-    lightDiodeStructure->config.bitwidth = ADC_BITWIDTH_DEFAULT;
-
-    // Check if configuration is actually valid
-    ESP_ERROR_CHECK(adc_oneshot_new_unit(&lightDiodeStructure->initConfig, &lightDiodeStructure->adc1Handle));
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(lightDiodeStructure->adc1Handle, ADC1_CHAN0, &lightDiodeStructure->config));
 
     if (!calibrated) {
         adc_cali_line_fitting_config_t cali_config = {
@@ -25,7 +21,7 @@ bool example_adc_calibration_init(adc_unit_t unit, adc_channel_t channel, adc_at
         }
     }
 
-    lightDiodeStructure->adc1CaliChan0Handle = handle;
+    *out_handle = handle;
 
     return calibrated;
 }
