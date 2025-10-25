@@ -7,7 +7,9 @@
 #include "esp_adc/adc_cali_scheme.h"
 #include "esp_log.h"
 #include "../dataTypes/plantData.h"
-#include "driver/gpio.h"
+
+#include "../peripherals/gpio_led.h"
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
@@ -74,16 +76,7 @@ void app_main(void)
     adc_cali_handle_t adc1_cali_chan0_handle = NULL;
     bool do_calibration1_chan0 = example_adc_calibration_init(ADC_UNIT_1, EXAMPLE_ADC1_CHAN0, EXAMPLE_ADC_ATTEN, &adc1_cali_chan0_handle);
 
-
-
-    // Initialize actuator communication (GPIO 16) using gpio_config for clarity
-    gpio_config_t io_conf = {
-        .pin_bit_mask = (1ULL << GPIO_NUM_16),
-        .mode = GPIO_MODE_OUTPUT,
-        .pull_up_en = GPIO_PULLUP_DISABLE,
-        .pull_down_en = GPIO_PULLDOWN_DISABLE,
-        .intr_type = GPIO_INTR_DISABLE,
-    };
+    // Configure GPIO16 - io_config defined in gpio_led.h
     gpio_config(&io_conf);
 
     // Simple observable test: toggle GPIO16 every 500 ms and print state.
@@ -97,6 +90,7 @@ void app_main(void)
         printf("GPIO16 set to %d\n", level ? 1 : 0);
         // Delay so toggles are slow and observable (500 ms)
         vTaskDelay(pdMS_TO_TICKS(500));
+        
         printf("Hello World");
         // Read data in from ADC
         ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN0, &adc_raw[0][0]));
