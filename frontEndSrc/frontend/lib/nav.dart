@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/dashboard_nav.dart';
+import 'package:frontend/navPages/dashView.dart';
+import 'package:frontend/navPages/settingsView.dart';
+import 'package:frontend/navPages/taskView.dart';
 
 class Nav extends StatefulWidget {
   const Nav({super.key});
@@ -71,6 +75,19 @@ class _NavState extends State<Nav> {
             label: 'Settings',
           ),
         ],
+      ),
+
+      //body
+      body: SafeArea(
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: const <Widget>[
+            TaskView(),
+            DashView(),
+            SettingsView()
+          ],
+          
+        ),
       ),
     );
   }
