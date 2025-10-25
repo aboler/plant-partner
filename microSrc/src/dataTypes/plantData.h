@@ -1,3 +1,6 @@
+#ifndef PLANTDATA_H
+#define PLANTDATA_H
+
 #include <stdint.h>
 
 // Temporary structure for plant data for what could be recorded from sensors
@@ -9,3 +12,5 @@ struct plantData
     uint16_t waterData;
     uint16_t nutrientData;
 };
+
+#endif
