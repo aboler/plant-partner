@@ -2,6 +2,9 @@
 
 bool example_adc_calibration_init(adc_unit_t unit, adc_channel_t channel, adc_atten_t atten, adc_cali_handle_t *out_handle)
 {
+    // Check if configuration is actually valid
+    
+
     adc_cali_handle_t handle = NULL;
     esp_err_t ret = ESP_FAIL;
     bool calibrated = false;
