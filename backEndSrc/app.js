@@ -1,12 +1,16 @@
-import express from "express"
-import mongoose from "mongoose"
+import express from "express";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
+import route from "./routes/sensorRoute.js";
 
 const app = express();
+app.use(bodyParser.json());
+app.use(express.json());
 dotenv.config();
 
-const PORT = process.env.PORT || 3000; //change to our desired port
-const MONGOURL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 8000; //change to our desired port
+const MONGOURL = process.env.MONGO_URL || 'mongodb://localhost:27017/SensorDatabase';
 
 
 mongoose.connect(MONGOURL).then(() => {
@@ -19,17 +23,21 @@ mongoose.connect(MONGOURL).then(() => {
 });
 
 const sensorSchema = new mongoose.Schema({
-    id: String,
-    Time: Number,
-    Value: Number,
-});
+    name: String,
+    time: Number,
+    value: Number}
+);
 
-const Sensor = mongoose.model('sensors', sensorSchema)
+app.use("/api/sensor", route);
 
-app.get('/get-sensor-data', async (req, res) => {
-    const sensorData = await Sensor.find();
-    res.json(sensorData);
-});
+
+//const Sensor = mongoose.model("sensors", sensorSchema)
+
+//app.get("/getSensors", async (req, res) => {
+//    const sensorData = await Sensor.find();
+//    res.json(sensorData).status(200);
+//});
+
     
 //const db = mongoose.connection;
 //db.on('error', console.error.bind(console, 'MongoDB connection error:'));
