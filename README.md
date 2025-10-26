@@ -34,48 +34,32 @@ Plant Partner repo. for CEN4907c
 
 The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is only configured to interact with a photoresistor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, this only involves an external LED.
 
-All sensor readings are to be logged in a database and displayed on a mobile application, providing users with remote monitoring and control capabilities. This aspect is still in development
+All sensor readings are to be logged in a database and displayed on a mobile application, providing users with remote monitoring and control capabilities. This aspect is still in development, so currently their interactions have not been implemented.
 
 ### File Structure Summary
 
 - ``microsrc`` : directory containing relevant ESP32 code
-
   - ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
     - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
     - ``dataTypes`` : contains code defining common data types created for the project, like plantData
     - ``peripherals`` : code for modularizing intercations with certain peripheral systems, like ADC and GPIO
   - ``submodules`` : directory containing other repositories utilized within the main code
     - ``esp-idf`` : submodule containing examples and ESP32 interfaces in c
-- ``backEndSrc`` : directory containing relevant backend code
-- ``frontEndSrc`` : directory containing relevant frontend Android code
 
-  - ``lib/``: directory containing dart code for screen components
+- ``backEndSrc`` : directory containing relevant backend code
+
+- ``frontEndSrc`` : directory containing relevant frontend Android code
+  - ``lib``: directory containing dart code for screen components
     - ``main``: app entry point, launches navigation shell
     - `nav`: bottom navigation bar and routing
-    - ``navPages/``: directory containing the task, home, settings placeholder screens
-- ``Documentation`` : directory containing relevant project documentation
+    - ``navPages``: directory containing the task, home, settings placeholder screens
 
+- ``Documentation`` : directory containing relevant project documentation
   - ``Circuits`` : directory containing relevant circuits created during development
   - ``Diagrams`` : directory containing relevant diagrams created during development
   - ``Materials`` : directory containing documentation related to materials, such as which items were purchased and from where
   - ``Research`` : directory containing research collected during the project, such as hwo to set up a coding environment for the ESP32
   - ``TimeSheets`` : directory containing all members' timesheet records
-- ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
-
-  - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
-  - ``dataTypes`` : contains code defining common data types created for the project, like plantData
-  - ``peripherals`` : code for modularizing intercations with certain peripheral systems, like ADC and GPIO
-- ``submodules`` : directory containing other repositories utilized within the main code
-
-  - ``esp-idf`` : submodule containing examples and ESP32 interfaces in c
-  - ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
-
-    - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
-    - ``dataTypes`` : contains code defining common data types created for the project, like plantData
-    - ``peripherals`` : code for modularizing intercations with certain peripheral systems, like ADC and GPIO
-  - ``submodules`` : directory containing other repositories utilized within the main code
-
-    - ``esp-idf`` : submodule containing examples and ESP32 interfaces in c
 
 ## Current Bugs:
 
