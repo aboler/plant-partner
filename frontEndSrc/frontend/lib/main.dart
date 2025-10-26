@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/nav.dart';
 
+//main app dev
 void main() {
   runApp(const MyApp());
 }
