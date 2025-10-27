@@ -28,7 +28,11 @@ Plant Partner repo. for CEN4907c
   - Built a persistent bottom navigation bar (Tasks, Home, Settings)
   - Developed placeholder screens for each tab
   - Tested UI flow and verified emulator functionality
-- Implemented skeleton of database with basic functions
+- Implemented locally-hosted database and backend API source code with basic functions
+  - Set up MongoDB database that can be hosted locally, currently stores one JSON data model
+  - Created Backend App source code with an API via Express.JS that allows for communication with the backend server and database
+  - Organized the source code into folders for function controllers, JSON data models, and CRUD routes for easy addition of new functionality
+
 
 ## Project Architecture
 
@@ -47,6 +51,17 @@ All sensor readings are to be logged in a database and displayed on a mobile app
     - ``esp-idf`` : submodule containing examples and ESP32 interfaces in c
 
 - ``backEndSrc`` : directory containing relevant backend code
+  - ``controller`` : directory containing code for controllers that implement backend API CRUD functions for the server
+    - ``sensorController.js`` : code for implementing CRUD functions that work with JSON data of the Sensor model
+  - ``model`` : directory containing code for JSON data models to be used by the backend server and MongoDB database
+    - ``sensorModel.js`` : code for creating the JSON Sensor data model
+  - ``routes`` : directory containing code for the API's routes that allow CRUD functions to be accessed via URI in an HTTP request
+    - ``sensorRoute.js`` : code for the routes that make use of functions that work with the Sensor JSON data model
+  - ``node_modules`` : directory containing the node.js dependencies needed to create the backend code
+  - ``.env`` : file that holds environment variables to be used by the main code of the backend server, app.js
+  - ``app.js`` : the main code of the backend server, connecting to the mongoDB database, linking the routes, and locally hosting server
+  - ``package-lock.json`` : the package-lock file for all the node package dependencies needed for the backend server
+  - ``package.json`` : the package file listing the basic details and dependencies of the backend server project
 
 - ``frontEndSrc`` : directory containing relevant frontend Android code
   - ``lib``: directory containing dart code for screen components
