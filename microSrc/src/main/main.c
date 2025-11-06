@@ -15,6 +15,7 @@
 // Peripherals
 #include "../peripherals/gpio_led.h"
 #include "../peripherals/adc_lightDiode.h"
+#include "../peripherals/pwm_pump.h"
 
 void app_main(void)
 {
@@ -41,6 +42,10 @@ void app_main(void)
     // Configure LEDs
     configure_activeHigh_LED(INTERNAL_BLUE_LED_GPIO);
     configure_activeHigh_LED(EXTERNAL_LED_GPIO);
+
+    // Configure PWM and set to 30/256
+    pwm_pump_init();
+    modify_pump_duty_cycle(30);
 
     while (1)
     {
