@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import route from "./routes/sensorRoute.js";
 import cors from "cors";
 import mqtt from "mqtt";
+import http from "http";
 
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
@@ -21,6 +22,11 @@ mqttClient.on('connect', () => {
     });
 });
 
+mqttClient.on('message', (topic, message) => {
+    console.log(`Received message on topic ${topic}: ${message.toString()}`);
+    // Here you can add logic to process the message and update the database if needed
+});
+
 // Backend Server Setup
 const app = express();
 app.use(cors());
@@ -31,6 +37,18 @@ dotenv.config();
 const PORT = process.env.PORT || 8000; //change to our desired port or if desired port changes
 const MONGOURL = process.env.MONGO_URL || 'mongodb://localhost:27017/SensorDatabase';
 
+// HTTP Server Setup
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello from Node.js HTTP server!\n');
+});
+
+server.listen(PORT, "localhost", () => {
+    console.log(`HTTP Server running at port ${PORT}`);
+});
+
+// MongoDB Connection
 
 mongoose.connect(MONGOURL).then(() => {
     console.log('Connected to MongoDB')
