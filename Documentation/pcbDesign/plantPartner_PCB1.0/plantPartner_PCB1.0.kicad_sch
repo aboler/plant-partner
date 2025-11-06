@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "d847e792-0b52-40d2-ab70-4b75cb25c129")
-	(paper "A4")
+	(paper "A3")
 	(title_block
 		(title "Plant Partner PCB")
 		(date "2025-11-04")
@@ -804,7 +804,7 @@
 	)
 	(symbol
 		(lib_id "RF_Module:ESP32-WROOM-32")
-		(at 78.74 152.4 0)
+		(at 53.34 236.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -813,7 +813,7 @@
 		(fields_autoplaced yes)
 		(uuid "435d86aa-5263-4534-b3f6-5f32bb42b1a9")
 		(property "Reference" "U1"
-			(at 80.8833 114.3 0)
+			(at 55.4833 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -822,7 +822,7 @@
 			)
 		)
 		(property "Value" "ESP32-WROOM-32"
-			(at 80.8833 116.84 0)
+			(at 55.4833 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -831,7 +831,7 @@
 			)
 		)
 		(property "Footprint" "RF_Module:ESP32-WROOM-32"
-			(at 78.74 190.5 0)
+			(at 53.34 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -840,7 +840,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf"
-			(at 71.12 151.13 0)
+			(at 45.72 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -849,7 +849,7 @@
 			)
 		)
 		(property "Description" "RF Module, ESP32-D0WDQ6 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, onboard antenna, SMD"
-			(at 78.74 152.4 0)
+			(at 53.34 236.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
