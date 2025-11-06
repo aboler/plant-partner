@@ -28,6 +28,9 @@ https://core-electronics.com.au/makerverse-motor-driver-2-channel.html
 Fluid Motor Pumps:
 https://www.amazon.com/ALAMSCN-Submersible-Aquariums-Fountain-Hydroponics/dp/B08PBQ1N1G/ref=sr_1_6?dib=eyJ2IjoiMSJ9.CXQ7SuDIWo8pqrsiYq5cQQmCmIQ6ne4251TEZ3vFQ-hwnjEkE-RhoQAQI1XxNsgntExouYbKgiSTY1L-0Ojgrokd-pVFRERrSMt_HBiWo3c_57IGq79oayBiD17Xl4x33OstGGCkaUIJl_ZAIV5W7rWrvA_Rz1nUbsiavkRyAwtUfKlb-D8aFUYrCf2V5X1hs9wpSAcnxlto5a2L6sAgwtCIZms8W4F__k-FLBOkC90sZVJGjPGSIXnRWuiAVD5InAOJrYUwY2tHBULdxZX78KGr1ZvDbKpFISLVVaF8ptA._cGNCDGgu_vE3_vhSVUo-I5565acxN2yPAVuoj8RkfA&dib_tag=se&keywords=arduino+water+pump&qid=1761337467&sr=8-6
 
+5V Relay:
+https://www.amazon.com/AEDIKO-Channel-Optocoupler-Isolation-Support/dp/B095YD3732/ref=sr_1_3?crid=3EUR2VYVUL0VQ&dib=eyJ2IjoiMSJ9.47hxJqYJ_AJGQnsxdjq9PMIH3gFuKcyYvVF1G7uUNTxFALHrtRZWza8w1EamDoJiQKT8vyt532mh335FGC_23LCyOQ9WfpAKeKJuZ1Fc9prTavR1uy2a8kab1rMM1WWHY_o_ttorVbYI-0KEXudX-mqBztrooqOv7IK0yoXknLixVasYoxuLYS04SeNEISrKlWESRIzfGYLVHd7oAHrWM1DT5cH6qxhXDAJJ4iJZdS8.rr_XEiUhv9OPQw97o2FiCRlnynbT-FrJBAPFeEuQm1I&dib_tag=se&keywords=5v%2Brelay&qid=1762442693&sprefix=5v%2Brela%2Caps%2C108&sr=8-3&th=1
+
  ______________________________________
 Power Supply
 12 V adapter:
