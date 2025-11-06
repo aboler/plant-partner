@@ -31,6 +31,14 @@ class PlantDetailsView extends StatelessWidget {
                 Text("Optimal"),
               ],
             ),
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text("Light:"),
+                Text("Optimal"),
+              ],
+            ),
             const Spacer(),
             ElevatedButton.icon(
               onPressed: () {},

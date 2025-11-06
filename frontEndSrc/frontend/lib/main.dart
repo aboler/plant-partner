@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//GET api request
+//GET API request
 Future<void> fetchDataFromBackend() async {
   //todo: port forwarding this is the wireless wifi ip lan address
   final resp = await http.get(Uri.parse('http://10.136.159.184:8000/api/sensor/fetchSensors'));
@@ -51,3 +51,9 @@ Future<void> fetchDataFromBackend() async {
     print('failed to load data: ${resp.statusCode}');
   }
 }
+
+//POST API req
+
+//PUT API req
+
+//DELETE API req
