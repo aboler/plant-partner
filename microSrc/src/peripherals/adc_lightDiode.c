@@ -16,7 +16,7 @@ void adc_oneshot_channel_config(adc_oneshot_unit_handle_t handle){
         .atten = ADC_ATTEN,
         .bitwidth = ADC_BITWIDTH_DEFAULT,
     };
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC1_CHAN0, &config));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_CHANNEL_0, &config));
 }
 
 // Initialize ADC Calibration

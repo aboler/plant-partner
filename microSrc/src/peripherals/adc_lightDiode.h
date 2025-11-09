@@ -6,7 +6,6 @@
 #include "esp_adc/adc_cali_scheme.h"
 
 #define ADC_ATTEN    ADC_ATTEN_DB_12
-#define ADC1_CHAN0   ADC_CHANNEL_0
 
 // ADC Initialization and Configuration Functions
 adc_oneshot_unit_handle_t adc_oneshot_unit1_init();
