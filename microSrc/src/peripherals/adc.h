@@ -11,7 +11,7 @@
 
 // ADC Initialization and Configuration Functions
 adc_oneshot_unit_handle_t adc_oneshot_unit1_init();
-void adc_oneshot_channel_config(bool isLightDiodeisNotMoisture, adc_oneshot_unit_handle_t handle);
+void adc_oneshot_channel_config(bool component, adc_oneshot_unit_handle_t handle);
 bool adc_calibration_init(adc_unit_t unit, adc_atten_t atten, adc_cali_handle_t *out_handle);
 
 // ADC Data Reading and Conversion Functions
