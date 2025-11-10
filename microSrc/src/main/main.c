@@ -14,7 +14,7 @@
 
 // Peripherals
 #include "../peripherals/gpio_led.h"
-#include "../peripherals/adc_lightDiode.h"
+#include "../peripherals/adc.h"
 #include "../peripherals/pwm_pump.h"
 
 void app_main(void)

@@ -1,4 +1,4 @@
-#include "adc_lightDiode.h"
+#include "adc.h"
 
 // Initialize ADC Unit 1
 adc_oneshot_unit_handle_t adc_oneshot_unit1_init(){
