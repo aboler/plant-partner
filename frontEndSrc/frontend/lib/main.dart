@@ -20,31 +20,23 @@ class MyApp extends StatelessWidget {
       routes: appRoutes,
       home: Nav(),
       
-      // home: Scaffold(
-      //   backgroundColor: Color.fromARGB(255, 255, 248, 237),
-      //   appBar: AppBar(
-      //     title: Text("Dashboard"),
-      //     backgroundColor:  const Color.fromARGB(255, 186, 255, 161),
-      //   ),
-      //   bottomNavigationBar: BottomAppBar(
-      //     child: IconButton(onPressed: (){}, icon: Icon(Icons.home)),
-      //     color: Colors.lightGreen,
-        
-      //   ),
-      // ),
     );
   }
 }
 
+const String baseUrl = 'http://10.136.159.184:8000/api/sensor/fetchSensors';
+
 //GET API request
 Future<void> fetchDataFromBackend() async {
   //todo: port forwarding this is the wireless wifi ip lan address
-  final resp = await http.get(Uri.parse('http://10.136.159.184:8000/api/sensor/fetchSensors'));
+  final resp = await http.get(Uri.parse(baseUrl));
 
   if (resp.statusCode == 200)
   {
     final data = json.encode(resp.body);
     print('received data: $data');
+    //received data: "[{\"_id\":\"68fed1313fbfd4545947b6df\",\"name\":\"MoistureSensor\",\"time\":10,\"value\":25,\"__v\":0}]"
+    //from the debug console
 
   }
   else {
@@ -53,7 +45,11 @@ Future<void> fetchDataFromBackend() async {
 }
 
 //POST API req
+//dynamic bcus it can be any data
+Future<dynamic> createPost(String api) async{}
 
 //PUT API req
+Future<dynamic> put(String api) async{}
 
 //DELETE API req
+Future<dynamic> deletePost(String api) async{}
