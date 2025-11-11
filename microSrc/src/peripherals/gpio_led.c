@@ -3,6 +3,10 @@
 #include "esp_mac.h"
 #include <inttypes.h>
 
+// Current Issues: I can get the interrupts to work if they both use the same ISR
+// But like no, and if I create three ISR's it causes a memory issue and idk how fix
+
+// Declarations
 static bool external_LED_state;
 static bool internal_blue_LED_state; 
 static void __attribute__((section(".iram1.0"))) switch0_isr_handler(void *arg);
@@ -11,11 +15,12 @@ void set_activeHigh_LED(bool ioType, uint8_t gpio_num);
 void clear_activeHigh_LED(bool ioType, uint8_t gpio_num);
 void toggle_activeHigh_LED(bool ioType, uint8_t gpio_num);
 
-// ISR routine for switch
+// ISR routine for switches
 static void __attribute__((section(".iram1.0"))) switch0_isr_handler(void *arg)
 {
     uint8_t *pin_address = (uint8_t *)arg;
     toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+    toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
     gpio_isr_handler_add(*pin_address, switch0_isr_handler, pin_address);
     gpio_intr_enable(*pin_address);
@@ -51,14 +56,15 @@ void configure_IO(bool ioType, uint8_t gpio_num) {
         };
 
         ESP_ERROR_CHECK(gpio_config(&configuration));
-        gpio_set_intr_type(gpio_num, GPIO_INTR_ANYEDGE);
-        gpio_isr_handler_add(gpio_num, switch0_isr_handler, &gpio_num);
-        gpio_intr_enable(gpio_num);
+
+        //gpio_set_intr_type(gpio_num, GPIO_INTR_ANYEDGE);
+        //gpio_isr_handler_add(gpio_num, switch0_isr_handler, &gpio_num);
+        //gpio_intr_enable(gpio_num);
 
     }
 }
 
-void initialize_Interrupts()
+void initialize_interrupts()
 {
     gpio_install_isr_service(0);
 }

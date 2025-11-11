@@ -14,7 +14,7 @@
 
 // GPIO Configuration & Control for active High LEDs
 void configure_IO(bool ioType, uint8_t gpio_num);
-void initialize_Interrupts();
+void initialize_interrupts();
 void set_activeHigh_LED(bool ioType, uint8_t gpio_num);
 void clear_activeHigh_LED(bool ioType, uint8_t gpio_num);
 void toggle_activeHigh_LED(bool ioType, uint8_t gpio_num);
