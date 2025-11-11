@@ -16,6 +16,7 @@
 #include "../peripherals/gpio_led.h"
 #include "../peripherals/adc.h"
 #include "../peripherals/pwm_pump.h"
+#include "../wifi/wifi.h"
 
 void app_main(void)
 {
@@ -49,6 +50,14 @@ void app_main(void)
 
     while (1)
     {
+        //Initialize NonVolatile Flash
+        esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+      ESP_ERROR_CHECK(nvs_flash_erase());
+      ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
         // Read raw data in from ADC
         adc_read(LIGHT, adc1_handle, &adc_raw);
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_CHANNEL_0, adc_raw);
