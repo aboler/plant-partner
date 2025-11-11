@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/navPages/homeView.dart';
-import 'package:frontend/navPages/taskView.dart';
+import 'package:frontend/views/homeView.dart';
+import 'package:frontend/views/taskView.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

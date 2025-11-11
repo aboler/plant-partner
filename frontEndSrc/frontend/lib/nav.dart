@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:frontend/dashboard_nav.dart';
-import 'package:frontend/navPages/homeView.dart';
-import 'package:frontend/navPages/settingsView.dart';
-import 'package:frontend/navPages/taskView.dart';
+import 'package:frontend/views/homeView.dart';
+import 'package:frontend/views/settingsView.dart';
+import 'package:frontend/views/taskView.dart';
 
 class Nav extends StatefulWidget {
   const Nav({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/plantDetailsView.dart';
-import 'package:frontend/addPlantView.dart';
+import 'package:frontend/views/plantDetailsView.dart';
+import 'package:frontend/views/addPlantView.dart';
 
 Map<String, WidgetBuilder> appRoutes = {
   '/addPlant': (context) => const AddPlantView(),
