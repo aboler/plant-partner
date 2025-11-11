@@ -43,7 +43,7 @@ void uart_kill(const uart_port_t uartPort)
     }
 }
 
-int uart_write_bytes_blocking(const uart_port_t uartPort, const uint8_t *data)
+uart_error_t uart_write_bytes_blocking(const uart_port_t uartPort, const uint8_t *data, uint8_t numBytes)
 {
     // Check if requested driver is initialized
     if (!uart_is_driver_installed(uartPort)) {
@@ -52,40 +52,46 @@ int uart_write_bytes_blocking(const uart_port_t uartPort, const uint8_t *data)
     }
 
     // Send data
-    int written = uart_write_bytes(uartPort, (const char *)data, sizeof(data));
+    int written = uart_write_bytes(uartPort, (const char *)data, numBytes);
     if (written < 0) {
         return UART_ERROR_WRITE_FAILED;
     }
 
-    // Wait until transmission is complete
+    // Wait a set 100 ticks for Transmission to complete
     ESP_ERROR_CHECK(uart_wait_tx_done(uartPort, UART_TICKS_TO_WAIT));
 
-    return written;
+    return UART_ERROR_NONE;
 }
 
-int uart_read_bytes_blocking(const uart_port_t uartPort, uint8_t *buf, size_t maxlen, TickType_t ticks_to_wait)
+uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, uint8_t *buf)
 {
+    // Check if requested driver is initialized
     if (!uart_is_driver_installed(uartPort)) {
         ESP_LOGE(UART_TAG, "read: driver not installed for port %d", uartPort);
-        return -1;
+        return UART_ERROR_DRIVER_NOT_INSTALLED;
     }
-    size_t avail = 0;
-    esp_err_t err = uart_get_buffered_data_len(uartPort, &avail);
-    if (err != ESP_OK) {
-        ESP_LOGE(UART_TAG, "uart_get_buffered_data_len failed: %d", err);
-        return -1;
+
+    // Read in Receive FIFO
+    int readBufferLength; 
+    ESP_ERROR_CHECK(uart_get_buffered_data_len(uartPort, (size_t*)&readBufferLength));
+
+    // Check if readBufferLength is longer than 256 bytes and clamp if needed
+    if (readBufferLength > UART_RX_MAX_LENGTH){
+        readBufferLength = 255;
     }
-    size_t to_read = (avail > maxlen) ? maxlen : avail;
-    if (to_read == 0) {
-        // no data right now: wait for up to ticks_to_wait by attempting a read
-        int r = uart_read_bytes(uartPort, buf, maxlen, ticks_to_wait);
-        return r;
+    if (readBufferLength <= 0){
+        return UART_ERROR_NO_BYTES_TO_READ;
     }
-    int r = uart_read_bytes(uartPort, buf, to_read, 0);
-    return r;
+
+    // Read in Bytes to buf
+    uart_read_bytes(uartPort, buf, readBufferLength, UART_TICKS_TO_WAIT);
+
+    return UART_ERROR_NONE;
 }
 
-esp_err_t uart_rs485_init(const uart_port_t uartPort, int tx_io_num, int rx_io_num, int rts_io_num, int cts_io_num, uint32_t baud_rate)
+// This code is NOT finished but is meant for rs485 communication specifically
+
+esp_err_t uart_rs485_init(const uart_port_t uartPort)
 {
     // Install driver with ring buffers for RS485
     uart_config_t uart_config = {
@@ -101,7 +107,7 @@ esp_err_t uart_rs485_init(const uart_port_t uartPort, int tx_io_num, int rx_io_n
     ESP_ERROR_CHECK(uart_set_pin(uartPort, tx_io_num, rx_io_num, rts_io_num, cts_io_num));
 
     // Install driver: give both rx and tx buffers to allow background TX
-    ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, UART_RX_BUFFER_SIZE, 0, NULL, 0));
+    ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
 
     // Enable RS485 half duplex mode so driver controls RTS for DE/RE pin
     ESP_ERROR_CHECK(uart_set_mode(uartPort, UART_MODE_RS485_HALF_DUPLEX));
@@ -109,13 +115,13 @@ esp_err_t uart_rs485_init(const uart_port_t uartPort, int tx_io_num, int rx_io_n
     return ESP_OK;
 }
 
-esp_err_t uart_rs485_write(const uart_port_t uartPort, const uint8_t *data, size_t len, TickType_t ticks_to_wait)
+esp_err_t uart_rs485_write(const uart_port_t uartPort, const uint8_t *data)
 {
-    int written = uart_write_bytes_blocking(uartPort, data, len, ticks_to_wait);
+    int written = uart_write_bytes_blocking(uartPort, data);
     return (written >= 0) ? ESP_OK : ESP_FAIL;
 }
 
-int uart_rs485_read(const uart_port_t uartPort, uint8_t *buf, size_t maxlen, TickType_t ticks_to_wait)
+int uart_rs485_read(const uart_port_t uartPort, uint8_t *buf)
 {
     return uart_read_bytes_blocking(uartPort, buf, maxlen, ticks_to_wait);
 }
