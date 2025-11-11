@@ -3,4 +3,5 @@ idf_component_register(SRCS "main.c" "../peripherals/adc_lightDiode.c" "../perip
                        PRIV_REQUIRES esp_driver_gpio
                        PRIV_REQUIRES esp_adc
                        PRIV_REQUIRES esp_driver_ledc
+                       PRIV_REQUIRES esp_driver_uart
                        INCLUDE_DIRS "" "../peripherals")
