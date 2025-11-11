@@ -10,10 +10,10 @@ export const createPlant = async (req, res) => {
             return res.status(400).json({ message: 'Plant data already exists' });
         }
 
-        await plantData.save();
-        res.status(201).json({ message: "Plant created successfully", plantName });
+        const savedPlant = await plantData.save();
+        res.status(200).json(savedPlant);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: 'Failed to create plant data' });
     }
 };
 

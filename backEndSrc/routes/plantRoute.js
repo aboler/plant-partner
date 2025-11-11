@@ -3,10 +3,10 @@ import { createPlant, fetchPlants, getPlantByName, updatePlantByName, deletePlan
 
 const router = express.Router();
 
-router.post("/", createPlant);
-router.get("/", fetchPlants);
-router.get("/:name", getPlantByName);
-router.put("/:name", updatePlantByName);
-router.delete("/:name", deletePlantByName);
+router.post("/createPlant", createPlant);
+router.get("/fetchPlants", fetchPlants);
+router.get("/getPlantByName/:name", getPlantByName);
+router.put("/updatePlantByName/:name", updatePlantByName);
+router.delete("/deletePlantByName/:name", deletePlantByName);
 
 export default router;
