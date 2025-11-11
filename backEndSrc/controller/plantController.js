@@ -55,4 +55,18 @@ export const updatePlantByName = async (req, res) => {
         res.status(500).json({ error: 'Failed to update plant data' });
     }
 };
-    
+
+export const deletePlantByName = async (req, res) => {
+    try {
+        const name = req.params.name;
+        const plantExist = await Plant.find({ plantName: name });
+
+        if (!plantExist) {
+            return res.status(404).json({ message: 'Plant not found' });
+        }
+        await Plant.findByIdAndDelete(plantExist[0]._id);
+        res.status(200).json({ message: 'Plant deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete plant data' });
+    }
+};

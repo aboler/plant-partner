@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import route from "./routes/sensorRoute.js";
+import router from "./routes/plantRoute.js";
 import cors from "cors";
 import mqtt from "mqtt";
 import http from "http";
@@ -60,3 +61,4 @@ mongoose.connect(MONGOURL).then(() => {
 });
 
 app.use("/api/sensor", route);
+app.use("/api/plant", router);
