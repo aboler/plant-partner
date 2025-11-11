@@ -27,6 +27,6 @@
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT      BIT1
 
-void start_config_wifi();
+void start_wifi();
 
 #endif
