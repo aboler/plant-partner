@@ -8,14 +8,16 @@ Post postFromJson(String str) => Post.fromJson(json.decode(str));
 String postToJson(Post data) => json.encode(data.toJson());
 
 class Post {
+    String id;
     String plantName;
-    int soilMoisture;
+    double soilMoisture;
     int lightIntensity;
     int nLevel;
     int pLevel;
     int kLevel;
 
     Post({
+        required this.id,
         required this.plantName,
         required this.soilMoisture,
         required this.lightIntensity,
@@ -25,8 +27,9 @@ class Post {
     });
 
     factory Post.fromJson(Map<String, dynamic> json) => Post(
+        id: json["_id"],
         plantName: json["plantName"],
-        soilMoisture: json["soilMoisture"],
+        soilMoisture: json["soilMoisture"]?.toDouble(),
         lightIntensity: json["lightIntensity"],
         nLevel: json["nLevel"],
         pLevel: json["pLevel"],
@@ -34,6 +37,7 @@ class Post {
     );
 
     Map<String, dynamic> toJson() => {
+        "_id": id,
         "plantName": plantName,
         "soilMoisture": soilMoisture,
         "lightIntensity": lightIntensity,
