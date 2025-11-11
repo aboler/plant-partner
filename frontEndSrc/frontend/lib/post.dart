@@ -15,6 +15,7 @@ class Post {
     int nLevel;
     int pLevel;
     int kLevel;
+    int v;
 
     Post({
         required this.id,
@@ -24,6 +25,7 @@ class Post {
         required this.nLevel,
         required this.pLevel,
         required this.kLevel,
+        required this.v,
     });
 
     factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -34,6 +36,7 @@ class Post {
         nLevel: json["nLevel"],
         pLevel: json["pLevel"],
         kLevel: json["kLevel"],
+        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -44,5 +47,6 @@ class Post {
         "nLevel": nLevel,
         "pLevel": pLevel,
         "kLevel": kLevel,
+        "__v": v,
     };
 }

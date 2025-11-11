@@ -6,7 +6,7 @@ import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
-  fetchDataFromBackend();
+  dataBackend();
 }
 
 class MyApp extends StatelessWidget {
@@ -24,10 +24,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const String baseUrl = 'http://10.136.159.184:8000/api/sensor/fetchSensors';
+// const String baseUrl = 'http://10.136.159.184:8000/api/sensor/fetchSensors';
+// const String baseUrl = 'http://10.136.117.191:8000/sensors/fetchSensors';
+const String baseUrl = 'http://10.136.117.191:8000/plants/getPlantByName/Sunflower';
 
 //GET API request
-Future<void> fetchDataFromBackend() async {
+Future<void> dataBackend() async {
   //todo: port forwarding this is the wireless wifi ip lan address
   final resp = await http.get(Uri.parse(baseUrl));
 
@@ -42,6 +44,9 @@ Future<void> fetchDataFromBackend() async {
   else {
     print('failed to load data: ${resp.statusCode}');
   }
+
+
+
 }
 
 //POST API req
