@@ -28,7 +28,7 @@ export const fetchPlants = async (req, res) => {
 
 export const getPlantByName = async (req, res) => {
     try {
-        const name = req.params.plantName;
+        const name = req.params.name;
         const plantExist = await Plant.find({ plantName: name });
 
         if (!plantExist) {
