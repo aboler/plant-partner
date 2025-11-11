@@ -1,4 +1,4 @@
-#include "adc_lightDiode.h"
+#include "adc.h"
 
 // Initialize ADC Unit 1
 adc_oneshot_unit_handle_t adc_oneshot_unit1_init(){
@@ -11,16 +11,20 @@ adc_oneshot_unit_handle_t adc_oneshot_unit1_init(){
 }
 
 // Configure ADC Channel 0
-void adc_oneshot_channel_config(adc_oneshot_unit_handle_t handle){
+void adc_oneshot_channel_config(bool component, adc_oneshot_unit_handle_t handle){
     adc_oneshot_chan_cfg_t config = {
         .atten = ADC_ATTEN,
         .bitwidth = ADC_BITWIDTH_DEFAULT,
     };
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC1_CHAN0, &config));
+    
+    if (component == LIGHT)
+        ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_CHANNEL_0, &config)); // pin vp
+    else // component == MOISTURE
+        ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_CHANNEL_3, &config)); // pin vn
 }
 
 // Initialize ADC Calibration
-bool adc_calibration_init(adc_unit_t unit, adc_channel_t channel, adc_atten_t atten, adc_cali_handle_t *out_handle)
+bool adc_calibration_init(adc_unit_t unit, adc_atten_t atten, adc_cali_handle_t *out_handle)
 {
     // Check if configuration is actually valid
     adc_cali_handle_t handle = NULL;
@@ -45,9 +49,12 @@ bool adc_calibration_init(adc_unit_t unit, adc_channel_t channel, adc_atten_t at
 }
 
 // Read in ADC Data from specified handle, channel, and store data while error checking
-void adc_read(adc_oneshot_unit_handle_t handle, adc_channel_t channel, int *raw)
+void adc_read(bool component, adc_oneshot_unit_handle_t handle, int *raw)
 {
-    ESP_ERROR_CHECK(adc_oneshot_read(handle, channel, raw));
+    if (component == LIGHT)
+        ESP_ERROR_CHECK(adc_oneshot_read(handle, ADC_CHANNEL_0, raw));    
+    else // component == MOISTURE
+        ESP_ERROR_CHECK(adc_oneshot_read(handle, ADC_CHANNEL_3, raw)); 
 }
 
 // Convert raw ADC data to voltage with calibration handle
