@@ -35,20 +35,8 @@ app.use(bodyParser.json());
 app.use(express.json());
 dotenv.config();
 
-const HTTP_SERVER_PORT = process.env.HTTP_SERVER_PORT || 3000;
 const PORT = process.env.PORT || 8000; //change to our desired port or if desired port changes
 const MONGOURL = process.env.MONGO_URL || 'mongodb://localhost:27017/SensorDatabase';
-
-//HTTP Server Setup
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello from Node.js HTTP server!\n');
-});
-
-server.listen(HTTP_SERVER_PORT, "localhost", () => {
-    console.log(`HTTP Server running at port ${HTTP_SERVER_PORT}`);
-});
 
 // MongoDB Connection
 
