@@ -26,25 +26,25 @@ class MyApp extends StatelessWidget {
 
 // const String baseUrl = 'http://10.136.159.184:8000/api/sensor/fetchSensors';
 // const String baseUrl = 'http://10.136.117.191:8000/sensors/fetchSensors';
-const String baseUrl = 'http://10.136.117.191:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://10.136.85.227:8000/plants/getPlantByName/Sunflower';
 
 //GET API request
-Future<void> dataBackend() async {
+Future<dynamic> dataBackend() async {
   //todo: port forwarding this is the wireless wifi ip lan address
   final resp = await http.get(Uri.parse(baseUrl));
 
   if (resp.statusCode == 200)
   {
-    final data = json.encode(resp.body);
+    final data = json.decode(resp.body);
     print('received data: $data');
     //received data: "[{\"_id\":\"68fed1313fbfd4545947b6df\",\"name\":\"MoistureSensor\",\"time\":10,\"value\":25,\"__v\":0}]"
     //from the debug console
-
+    return data;
   }
   else {
     print('failed to load data: ${resp.statusCode}');
   }
-
+  
 
 
 }

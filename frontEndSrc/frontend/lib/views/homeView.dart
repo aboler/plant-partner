@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/post.dart';
 import 'package:frontend/services/remote_service.dart';
@@ -10,10 +12,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  Post? posts;
+  List<dynamic>? posts;
   //api response is loaded or not
   var isLoaded = false;
-
+  String plantName = '';
+  String sunflower= '';
   @override
   void initState() {
     super.initState();
@@ -23,13 +26,18 @@ class _HomeViewState extends State<HomeView> {
   }
 
   getData() async {
-    posts = await RemoteService().fetchDataFromBackend();
+    posts = await RemoteService().getPlant();
+    print(posts);
     if (posts != null) {
-      isLoaded = true;
+      plantName = jsonEncode(posts);
+      print(plantName);
+      print('converted to string');
+      setState(() {
+        isLoaded = true;
+      });
     }
   }
   
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +47,9 @@ class _HomeViewState extends State<HomeView> {
       ),
       backgroundColor: const Color.fromARGB(255, 255, 248, 237),
       body: Visibility(
-        visible: true,
-        child: Text(posts!.plantName),
+        visible: isLoaded,
+        child: Text(plantName),
+        replacement: CircularProgressIndicator(),
         // child: ListView.builder(
         //   itemCount: 1,
         //   itemBuilder: (context, index) {
@@ -48,6 +57,8 @@ class _HomeViewState extends State<HomeView> {
         //   },
         // ),
       ),
+      
+      
       // body: Center(
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.center,
