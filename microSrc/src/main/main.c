@@ -43,17 +43,16 @@ void app_main(void)
     adc_cali_handle_t moisture_cali_adc1_handle = NULL;
     bool moisture_calibration_successful = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &moisture_cali_adc1_handle);
 
-    // Configure LEDs
-    // initialize_interrupts();
+    // Configure LEDs and inputs
+    // initialize_interrupts(); // Put if want input interrupts but you'll have ot uncomment stuff in gpio
     configure_IO(OUTPUT, INTERNAL_BLUE_LED_GPIO);
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     configure_IO(INPUT, SWITCH0_GPIO);
     configure_IO(INPUT, SWITCH1_GPIO);
     configure_IO(INPUT, SWITCH2_GPIO);
 
-    // Configure PWM and set to 30/256
-    //pwm_pump_init();
-    //modify_pump_duty_cycle(30);
+    // Configure PWM
+    pwm_pump_init();
 
     while (1)
     {
@@ -84,7 +83,6 @@ void app_main(void)
                 else if (voltage < LED_THRESHOLD) 
                 {
                     // Turn on Internal and External LEDs
-                    set_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
                     set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
@@ -97,7 +95,6 @@ void app_main(void)
                 else if (voltage >= LED_THRESHOLD)
                 {
                     // Turn off Internal and External LEDs
-                    clear_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
                     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
@@ -137,16 +134,22 @@ void app_main(void)
             switch1 = currentSwitchLevel;
             vTaskDelay(pdMS_TO_TICKS(200));
         }
-        // currentSwitchLevel = (bool)gpio_get_level(SWITCH2_GPIO);
-        // if(currentSwitchLevel != switch2)
-        // {
-        //     toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
-        //     toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-        //     switch2 = currentSwitchLevel;
-        //     vTaskDelay(pdMS_TO_TICKS(200));
-        // }
+        currentSwitchLevel = (bool)gpio_get_level(SWITCH2_GPIO);
+        if(currentSwitchLevel != switch2)
+        {
+            if (currentSwitchLevel)
+                modify_pump_duty_cycle(30);
+            else
+                modify_pump_duty_cycle(0);
 
-        
-        //vTaskDelay(pdMS_TO_TICKS(1000));
+            switch2 = currentSwitchLevel;
+            vTaskDelay(pdMS_TO_TICKS(200));
+        }
+        else
+        {
+            ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", plant_data.lightData, plant_data.waterData);
+            vTaskDelay(pdMS_TO_TICKS(500));
+        }
+
     }
 }
