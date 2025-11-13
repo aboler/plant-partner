@@ -32,14 +32,14 @@ void app_main(void)
     switch0 = switch1 = switch2 = false;
 
     // Initialize ADC Unit 1 Channel 0
-    //adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
+    // adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
 
     // Configure ADC Channel 0
-    //adc_oneshot_channel_config(LIGHT, adc1_handle);
+    // adc_oneshot_channel_config(LIGHT, adc1_handle);
 
     // ADC1 CH0 Calibration Init
-    //adc_cali_handle_t adc1_cali_chan0_handle = NULL;
-    //bool do_calibration1_chan0 = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &adc1_cali_chan0_handle);
+    // adc_cali_handle_t adc1_cali_chan0_handle = NULL;
+    // bool do_calibration1_chan0 = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &adc1_cali_chan0_handle);
 
     // Configure LEDs
     // initialize_interrupts();
@@ -56,11 +56,15 @@ void app_main(void)
     while (1)
     {
         bool currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
+        // ESP_LOGI(TAG, "Level: %d", currentSwitchLevel);
+        // vTaskDelay(pdMS_TO_TICKS(1000));
+        
         if(currentSwitchLevel != switch0)
         {
             toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
             toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
             switch0 = currentSwitchLevel;
+            vTaskDelay(pdMS_TO_TICKS(200));
         }
         currentSwitchLevel = (bool)gpio_get_level(SWITCH1_GPIO);
         if(currentSwitchLevel != switch1)
@@ -68,6 +72,7 @@ void app_main(void)
             toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
             toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
             switch1 = currentSwitchLevel;
+            vTaskDelay(pdMS_TO_TICKS(200));
         }
         currentSwitchLevel = (bool)gpio_get_level(SWITCH2_GPIO);
         if(currentSwitchLevel != switch2)
@@ -75,16 +80,17 @@ void app_main(void)
             toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
             toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
             switch2 = currentSwitchLevel;
+            vTaskDelay(pdMS_TO_TICKS(200));
         }
 
         // // Read raw data in from ADC
         // adc_read(LIGHT, adc1_handle, &adc_raw);
-        // ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_CHANNEL_0, adc_raw);
+        // ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_LIGHT_CHANNEL, adc_raw);
 
         // // If calibration is enabled, convert raw data to voltage
         // if (do_calibration1_chan0) {
         //     adc_rawToVoltage(adc1_cali_chan0_handle, adc_raw, &voltage);
-        //     ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC_CHANNEL_0, voltage);
+        //     ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC_LIGHT_CHANNEL, voltage);
         // }
         
         // // Error handling for voltage reading
@@ -115,6 +121,6 @@ void app_main(void)
         //     // Print statement to confirm LEDs are off
         //     ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV above threshold", voltage);
         // }
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        //vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

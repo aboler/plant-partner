@@ -5,9 +5,11 @@
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
 
-#define ADC_ATTEN    ADC_ATTEN_DB_12
-#define LIGHT        true
-#define MOISTURE     false
+#define ADC_ATTEN               ADC_ATTEN_DB_12
+#define ADC_LIGHT_CHANNEL       ADC_CHANNEL_0
+#define ADC_MOISTURE_CHANNEL    ADC_CHANNEL_3
+#define LIGHT                   true
+#define MOISTURE                false
 
 // ADC Initialization and Configuration Functions
 adc_oneshot_unit_handle_t adc_oneshot_unit1_init();
