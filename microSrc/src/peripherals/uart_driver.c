@@ -1,17 +1,18 @@
 #include "uart_driver.h"
+#include <string.h>
 
 static const char *UART_TAG = "uart_driver";
 
 void uart_init(const uart_port_t uartPort)
 {
     // Install UART Driver
-    ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, 0, 0, NULL, 0));
+    ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
 
     // Setup UART Port Configuration
     uart_config_t uart_config = {
         .baud_rate = UART_BAUD_RATE,
         .data_bits = UART_DATA_8_BITS,
-        .parity = UART_PARITY_DISABLE,
+        .parity    = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
     };
@@ -20,17 +21,18 @@ void uart_init(const uart_port_t uartPort)
     // Set ESP Pins for respective UART Port
     switch (uartPort)
     {
-    case UART_NUM_0:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_RX_PIN, UART0_TX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+    case UART_PORT0:
+        /* uart_set_pin signature: (uart_num, tx_io_num, rx_io_num, rts_io_num, cts_io_num) */
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
         break;
-    case UART_NUM_1:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_RX_PIN, UART1_TX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
+    case UART_PORT1:
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_TX_PIN, UART1_RX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
         break;
-    case UART_NUM_2:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_RX_PIN, UART2_TX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
+    case UART_PORT2:
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
         break;
     default:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_RX_PIN, UART0_TX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
         break;
     }
     
@@ -43,7 +45,7 @@ void uart_kill(const uart_port_t uartPort)
     }
 }
 
-uart_error_t uart_write_bytes_blocking(const uart_port_t uartPort, const uint8_t *data, uint8_t numBytes)
+uart_error_t uart_write_bytes_blocking(const uart_port_t uartPort, const void *data, size_t numBytes)
 {
     // Check if requested driver is initialized
     if (!uart_is_driver_installed(uartPort)) {
@@ -51,7 +53,15 @@ uart_error_t uart_write_bytes_blocking(const uart_port_t uartPort, const uint8_t
         return UART_ERROR_DRIVER_NOT_INSTALLED;
     }
 
-    // Send data
+    // Send data - Check if data pointer is NULL or if numBytes is 0
+    if (data == NULL) {
+        ESP_LOGE(UART_TAG, "write: data pointer is NULL");
+        return UART_ERROR_WRITE_FAILED;
+    }
+    if (numBytes == 0) {
+        numBytes = strlen((const char *)data);
+    }
+
     int written = uart_write_bytes(uartPort, (const char *)data, numBytes);
     if (written < 0) {
         return UART_ERROR_WRITE_FAILED;
@@ -63,7 +73,27 @@ uart_error_t uart_write_bytes_blocking(const uart_port_t uartPort, const uint8_t
     return UART_ERROR_NONE;
 }
 
-uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, uint8_t *buf)
+uart_error_t uart_write_string(const uart_port_t uartPort, const char *s)
+{
+    // Check if string is empty then write
+    if (s == NULL){
+        return UART_ERROR_WRITE_FAILED;
+    }
+    return uart_write_bytes_blocking(uartPort, s, strlen(s));
+}
+
+uart_error_t uart_write_int(const uart_port_t uartPort, int v)
+{
+    // Convert integer to ASCII string and send
+    char buf[32];
+    int n = snprintf(buf, sizeof(buf), "%d\n", v);
+    if (n < 0){
+        return UART_ERROR_WRITE_FAILED;
+    } 
+    return uart_write_bytes_blocking(uartPort, buf, (size_t)n);
+}
+
+uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf)
 {
     // Check if requested driver is initialized
     if (!uart_is_driver_installed(uartPort)) {
@@ -91,37 +121,37 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, uint8_t *buf)
 
 // This code is NOT finished but is meant for rs485 communication specifically
 
-esp_err_t uart_rs485_init(const uart_port_t uartPort)
-{
-    // Install driver with ring buffers for RS485
-    uart_config_t uart_config = {
-        .baud_rate = baud_rate,
-        .data_bits = UART_DATA_8_BITS,
-        .parity = UART_PARITY_DISABLE,
-        .stop_bits = UART_STOP_BITS_1,
-        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
-        .rx_flow_ctrl_thresh = 0,
-    };
+// esp_err_t uart_rs485_init(const uart_port_t uartPort)
+// {
+//     // Install driver with ring buffers for RS485
+//     uart_config_t uart_config = {
+//         .baud_rate = UART_BAUD_RATE,
+//         .data_bits = UART_DATA_8_BITS,
+//         .parity    = UART_PARITY_DISABLE,
+//         .stop_bits = UART_STOP_BITS_1,
+//         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+//         .rx_flow_ctrl_thresh = 0,
+//     };
 
-    ESP_ERROR_CHECK(uart_param_config(uartPort, &uart_config));
-    ESP_ERROR_CHECK(uart_set_pin(uartPort, tx_io_num, rx_io_num, rts_io_num, cts_io_num));
+//     ESP_ERROR_CHECK(uart_param_config(uartPort, &uart_config));
+//     ESP_ERROR_CHECK(uart_set_pin(uartPort, tx_io_num, rx_io_num, rts_io_num, cts_io_num));
 
-    // Install driver: give both rx and tx buffers to allow background TX
-    ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
+//     // Install driver: give both rx and tx buffers to allow background TX
+//     ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
 
-    // Enable RS485 half duplex mode so driver controls RTS for DE/RE pin
-    ESP_ERROR_CHECK(uart_set_mode(uartPort, UART_MODE_RS485_HALF_DUPLEX));
+//     // Enable RS485 half duplex mode so driver controls RTS for DE/RE pin
+//     ESP_ERROR_CHECK(uart_set_mode(uartPort, UART_MODE_RS485_HALF_DUPLEX));
 
-    return ESP_OK;
-}
+//     return ESP_OK;
+// }
 
-esp_err_t uart_rs485_write(const uart_port_t uartPort, const uint8_t *data)
-{
-    int written = uart_write_bytes_blocking(uartPort, data);
-    return (written >= 0) ? ESP_OK : ESP_FAIL;
-}
+// esp_err_t uart_rs485_write(const uart_port_t uartPort, const void *data, size_t numBytes)
+// {
+//     int written = uart_write_bytes_blocking(uartPort, data, numBytes);
+//     return (written >= 0) ? ESP_OK : ESP_FAIL;
+// }
 
-int uart_rs485_read(const uart_port_t uartPort, uint8_t *buf)
-{
-    return uart_read_bytes_blocking(uartPort, buf, maxlen, ticks_to_wait);
-}
+// int uart_rs485_read(const uart_port_t uartPort, void *buf)
+// {
+//     return uart_read_bytes_blocking(uartPort, buf);
+// }
