@@ -9,6 +9,7 @@
 #define SWITCH0_GPIO           GPIO_NUM_35
 #define SWITCH1_GPIO           GPIO_NUM_32
 #define SWITCH2_GPIO           GPIO_NUM_33
+#define SWITCH3_GPIO           GPIO_NUM_25
 #define OUTPUT                 true
 #define INPUT                  false
 

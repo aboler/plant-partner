@@ -28,8 +28,8 @@ void app_main(void)
     // Declare variables for ADC raw data and voltage
     int adc_raw;
     int voltage;
-    bool switch0, switch1, switch2;
-    switch0 = switch1 = switch2 = false;
+    bool switch0, switch1, switch2, switch3;
+    switch0 = switch1 = switch2 = switch3 = false;
 
     // Initialize ADC for photoresistor
     adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
@@ -50,6 +50,7 @@ void app_main(void)
     configure_IO(INPUT, SWITCH0_GPIO);
     configure_IO(INPUT, SWITCH1_GPIO);
     configure_IO(INPUT, SWITCH2_GPIO);
+    configure_IO(INPUT, SWITCH3_GPIO);
 
     // Configure PWM
     pwm_pump_init();
@@ -132,7 +133,6 @@ void app_main(void)
             }
             
             switch1 = currentSwitchLevel;
-            vTaskDelay(pdMS_TO_TICKS(200));
         }
         currentSwitchLevel = (bool)gpio_get_level(SWITCH2_GPIO);
         if(currentSwitchLevel != switch2)
@@ -143,13 +143,16 @@ void app_main(void)
                 modify_pump_duty_cycle(0);
 
             switch2 = currentSwitchLevel;
-            vTaskDelay(pdMS_TO_TICKS(200));
         }
-        else
+        currentSwitchLevel = (bool)gpio_get_level(SWITCH3_GPIO);
+        if(currentSwitchLevel != switch3)
         {
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", plant_data.lightData, plant_data.waterData);
-            vTaskDelay(pdMS_TO_TICKS(500));
-        }
 
+            switch3 = currentSwitchLevel;
+        }
+        
+            toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+            vTaskDelay(pdMS_TO_TICKS(700));
     }
 }
