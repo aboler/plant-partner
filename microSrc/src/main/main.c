@@ -13,7 +13,7 @@
 #include "../dataTypes/plantData.h"
 
 // Peripherals
-#include "../peripherals/gpio_led.h"
+#include "../peripherals/gpio.h"
 #include "../peripherals/adc.h"
 #include "../peripherals/pwm_pump.h"
 
@@ -138,7 +138,7 @@ void app_main(void)
         if(currentSwitchLevel != switch2)
         {
             if (currentSwitchLevel)
-                modify_pump_duty_cycle(30);
+                modify_pump_duty_cycle(PWM_DUTY_100_PERCENT);
             else
                 modify_pump_duty_cycle(0);
 
