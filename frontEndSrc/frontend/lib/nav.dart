@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:frontend/dashboard_nav.dart';
 import 'package:frontend/views/homeView.dart';
 import 'package:frontend/views/settingsView.dart';
 import 'package:frontend/views/taskView.dart';
@@ -12,44 +11,10 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-  //int selIndex = 0;
-  // List<Widget> widOpt = <Widget>[
-  //   Text('Tasks'),
-  //   Text('Home'),
-  //   Text('Settings'),
-
-  // ];
-
-  // void onItemTap(int index) {
-  //   setState(() {
-  //     selIndex = index;
-  //   });
-  // }
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   //body: Center(child: widOpt.elementAt(selIndex),),
-    //   //body: ListView.builder(itemCount: widOpt.length, itemBuilder: (context, widOptIndex) {Widget widd = widOpt[widOptIndex]},),
-    //   //navbar is a list 0-2
-    //   bottomNavigationBar: BottomNavigationBar(
-    //     items: const <BottomNavigationBarItem>[
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.calendar_month_rounded),
-    //         label: 'Tasks',
-    //       ),
-    //       BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.settings),
-    //         label: 'Settings',
-    //       ),
-    //     ],
-    //     // currentIndex: selIndex,
-    //     // onTap: onItemTap,
-    //   ),
-    // );
-
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,

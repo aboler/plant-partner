@@ -24,7 +24,6 @@ class _DashboardState extends State<Dashboard> {
               //details page, container temp
               return const HomeView();
             }
-
             //main page
             return const TaskView();
           },
