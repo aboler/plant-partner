@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const String baseUrl = 'http://10.136.166.196:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://10.###.###.###:8000/plants/getPlantByName/Sunflower';
 
 //GET API request
 Future<dynamic> dataBackend() async {
