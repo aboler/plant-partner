@@ -9,7 +9,7 @@
 struct plantData
 {
     uint16_t lightData;
-    uint16_t waterData;
+    uint8_t waterData;
     uint16_t nutrientData;
 };
 

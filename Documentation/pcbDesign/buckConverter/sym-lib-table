@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 0)
+  (lib (name "buckConverter-eagle-import")(type "KiCad")(uri "${KIPRJMOD}/buckConverter-eagle-import.kicad_sym")(options "")(descr ""))
+)
