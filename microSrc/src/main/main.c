@@ -66,10 +66,9 @@ void app_main(void)
     // Configure PWM and set to 30/256
     pwm_pump_init();
     modify_pump_duty_cycle(30);
-
+    http_get();
     while (1)
     {
-        http_get();
         // Read raw data in from ADC
         adc_read(LIGHT, adc1_handle, &adc_raw);
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_CHANNEL_0, adc_raw);
