@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,16 +34,11 @@ Future<dynamic> dataBackend() async {
   {
     final data = json.decode(resp.body);
     print('received data: $data');
-    //received data: "[{\"_id\":\"68fed1313fbfd4545947b6df\",\"name\":\"MoistureSensor\",\"time\":10,\"value\":25,\"__v\":0}]"
-    //from the debug console
     return data;
   }
   else {
     print('failed to load data: ${resp.statusCode}');
   }
-  
-
-
 }
 
 //POST API req
