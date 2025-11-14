@@ -24,9 +24,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// const String baseUrl = 'http://10.136.159.184:8000/api/sensor/fetchSensors';
-// const String baseUrl = 'http://10.136.117.191:8000/sensors/fetchSensors';
-const String baseUrl = 'http://10.136.85.227:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://10.136.166.196:8000/plants/getPlantByName/Sunflower';
 
 //GET API request
 Future<dynamic> dataBackend() async {

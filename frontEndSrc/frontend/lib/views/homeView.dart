@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/post.dart';
+import 'package:frontend/plant.dart';
 import 'package:frontend/services/remote_service.dart';
 
 class HomeView extends StatefulWidget {

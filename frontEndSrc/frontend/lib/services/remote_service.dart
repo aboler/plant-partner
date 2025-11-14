@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:frontend/post.dart';
+import 'package:frontend/plant.dart';
 import 'dart:convert';
 
 const String baseUrl = 'http://10.136.85.227:8000/plants/getPlantByName/Sunflower';
