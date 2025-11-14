@@ -20,7 +20,7 @@
 #include "lwip/dns.h"
 
 
-#define ESP_WIFI_SSID     "Aspen"
+#define ESP_WIFI_SSID     "Fernando"
 #define ESP_WIFI_PASS     "esp32wifi"
 #define EXAMPLE_ESP_MAXIMUM_RETRY  4
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_WPA2_PSK

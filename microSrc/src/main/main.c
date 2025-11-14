@@ -17,13 +17,33 @@
 #include "../peripherals/adc.h"
 #include "../peripherals/pwm_pump.h"
 #include "../wifi/wifi.h"
+#include "../http/http.h"
+
+
+
+
+
+static esp_err_t nvs_init(){
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+      ESP_ERROR_CHECK(nvs_flash_erase());
+      ret = nvs_flash_init();
+    }
+    return ret;
+}
+
+
+
+//all Networking depends on nvs_init()
 
 void app_main(void)
 {
     // Debug Tag
     const static char *TAG = "DEBUG";
-
+    ESP_ERROR_CHECK(nvs_init());
     // Initialize plant structure data with test values
+    start_wifi();
+    //http_get();
     struct plantData plant_data = {0, 0, 0};
 
     // Declare arrays for ADC raw data and voltage

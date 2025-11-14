@@ -1,28 +1,14 @@
 #include "wifi.h"
+#define WEB_SERVER "httpbin.org"
+#define WEB_PORT "80"
+#define WEB_PATH "/get"
 
-static const uint32_t  sleep_time_ms = 5000;
-
-#define WEBHOST
-#define WEB_PORT
-#define WEB_PATH = "/"
-
-
-#define RXBuffer 64
+static const char *TAG = "example";
 
 static const char *REQUEST = "GET " WEB_PATH " HTTP/1.0\r\n"
-    "Host: "WEB_HOST":"WEB_PORT"\r\n"
+    "Host: "WEB_SERVER":"WEB_PORT"\r\n"
     "User-Agent: esp-idf/1.0 esp32\r\n"
     "\r\n";
-
-
-#define CONNECTION_TIMEOUT_SEC // basic delay
-#define SOCKET_TIMEOUT //delay 5 seconds
-
-
-static const char *TAG = "http_request"
-
-
-
 
 
 static void http_get_task(void *pvParameters)
@@ -113,9 +99,7 @@ static void http_get_task(void *pvParameters)
 
 
 
-
-
-void http_init(){
-    start_wifi();
-
+void http_get(void)
+{
+    xTaskCreate(&http_get_task, "http_get_task", 4096, NULL, 5, NULL);
 }
