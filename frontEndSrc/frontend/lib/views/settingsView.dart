@@ -10,6 +10,7 @@ class SettingsView extends StatelessWidget {
         backgroundColor: Colors.lightGreen,
         title: const Text("Settings"),
       ),
+      backgroundColor: Colors.amber.shade50,
     );
   }
 }

@@ -22,7 +22,6 @@ class AddPlantView extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                //tood: add save logic later
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.lightGreen),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/plant.dart';
 import 'package:frontend/services/remote_service.dart';
@@ -12,32 +10,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<dynamic>? posts;
-  //api response is loaded or not
-  var isLoaded = false;
-  String plantName = '';
-  String sunflower= '';
+  Plant? plant;
+  bool isLoaded = false;
+
   @override
   void initState() {
     super.initState();
-
-    //fetch data from api
-    getData();
+    loadPlant();
   }
 
-  getData() async {
-    posts = await RemoteService().getPlant();
-    print(posts);
-    if (posts != null) {
-      plantName = jsonEncode(posts);
-      print(plantName);
-      print('converted to string');
-      setState(() {
-        isLoaded = true;
-      });
-    }
+  //fetch latest plant data from backend
+  loadPlant() async {
+    setState(() => isLoaded = false); //show loading spinner again
+    plant = await RemoteService().getPlant();
+    setState(() => isLoaded = true);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,78 +34,120 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Colors.lightGreen,
       ),
       backgroundColor: const Color.fromARGB(255, 255, 248, 237),
-      body: Visibility(
-        visible: isLoaded,
-        child: Text(plantName),
-        replacement: CircularProgressIndicator(),
-        // child: ListView.builder(
-        //   itemCount: 1,
-        //   itemBuilder: (context, index) {
-        //     return Container(child: Text(posts!.plantName));
-        //   },
-        // ),
+
+      body: Center(
+        child: !isLoaded
+            ? const CircularProgressIndicator()
+            : plant == null
+                ? const Text("No plant data available")
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PlantCard(plant: plant!),
+                      const SizedBox(height: 20),
+
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          loadPlant();
+                        },
+                        icon: const Icon(Icons.refresh),
+                        label: const Text("Refresh Data"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.lightGreen,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
       ),
-      
-      
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       const Text(
-      //         "No Plants Currently",
-      //         style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-      //       ),
-      //       const SizedBox(height: 24),
-      //       ElevatedButton.icon(
-      //         onPressed: () {
-      //           Navigator.pushNamed(context, '/addPlant');
-      //         },
-      //         icon: const Icon(Icons.add),
-      //         label: const Text("Add New Plant"),
-      //         style: ElevatedButton.styleFrom(
-      //           backgroundColor: Colors.lightGreen,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
 
-// class HomeView extends StatelessWidget {
-//   const HomeView({super.key});
+class PlantCard extends StatelessWidget {
+  final Plant plant;
+  const PlantCard({super.key, required this.plant});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Home'),
-//         backgroundColor: Colors.lightGreen,
-//       ),
-//       backgroundColor: const Color.fromARGB(255, 255, 248, 237),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             const Text(
-//               "No Plants Currently",
-//               style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-//             ),
-//             const SizedBox(height: 24),
-//             ElevatedButton.icon(
-//               onPressed: () {
-//                 Navigator.pushNamed(context, '/addPlant');
-//               },
-//               icon: const Icon(Icons.add),
-//               label: const Text("Add New Plant"),
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: Colors.lightGreen,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      margin: const EdgeInsets.all(18),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Center(
+              child: Icon(
+                Icons.local_florist,
+                size: 80,
+                color: Colors.green.shade600,
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            Center(
+              child: Text(
+                plant.plantName,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+            InfoRow(label: "Soil Moisture", value: "${plant.soilMoisture}"),
+            InfoRow(label: "Light Intensity", value: "${plant.lightIntensity}"),
+            const Divider(),
+            InfoRow(label: "Nitrogen (N)", value: "${plant.nLevel}"),
+            InfoRow(label: "Phosphorus (P)", value: "${plant.pLevel}"),
+            InfoRow(label: "Potassium (K)", value: "${plant.kLevel}"),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class InfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const InfoRow({
+    super.key,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.green.shade700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
