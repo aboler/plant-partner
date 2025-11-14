@@ -3,32 +3,23 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/plant.dart';
 import 'dart:convert';
 
-const String baseUrl = 'http://10.136.85.227:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://10.136.166.196:8000/plants/getPlantByName/Sunflower';
 
-class RemoteService
-{
-  Future<List<dynamic>?> getPlant() async {
-  //todo: port forwarding this is the wireless wifi ip lan address
-  var resp = await http.get(Uri.parse(baseUrl));
+class RemoteService {
+  Future<Plant?> getPlant() async {
+    final resp = await http.get(Uri.parse(baseUrl));
 
-  if (resp.statusCode == 200)
-  {
-    print('made it thru');
-    var dataString = resp.body;
-    List<dynamic> dataMap = json.decode(dataString);
-    print(dataMap);
-    //var plantInfo = Post.fromJson(dataMap);
+    if (resp.statusCode == 200) {
+      print('made it thru');
+      final List data = json.decode(resp.body);
 
-    print('yipppp');
-    //received data: "[{\"_id\":\"68fed1313fbfd4545947b6df\",\"name\":\"MoistureSensor\",\"time\":10,\"value\":25,\"__v\":0}]"
-    //from the debug console
-    
-    //Post post = postFromJson(dataString);
-    print('hhh');
-    return dataMap;
+      if (data.isNotEmpty) {
+        return Plant.fromJson(data[0]); // since list contains one plant
+      }
+    } else {
+      print('failed: ${resp.statusCode}');
+    }
+
+    return null;
   }
-  else {
-    print('failed to load data: ${resp.statusCode}');
-  }
-}
 }
