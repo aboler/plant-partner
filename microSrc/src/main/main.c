@@ -43,7 +43,6 @@ void app_main(void)
     ESP_ERROR_CHECK(nvs_init());
     // Initialize plant structure data with test values
     start_wifi();
-    //http_get();
     struct plantData plant_data = {0, 0, 0};
 
     // Declare arrays for ADC raw data and voltage
@@ -70,8 +69,7 @@ void app_main(void)
 
     while (1)
     {
-        start_wifi();
-
+        http_get();
         // Read raw data in from ADC
         adc_read(LIGHT, adc1_handle, &adc_raw);
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_CHANNEL_0, adc_raw);
