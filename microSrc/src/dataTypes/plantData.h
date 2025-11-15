@@ -13,4 +13,13 @@ struct plantData
     uint16_t nutrientData;
 };
 
+struct plantDataUpdate
+{   char* plantName;
+    float soilMoisture;
+    float lightIntensity;
+    float nLevel;
+    float pLevel;
+    float kLevel;
+};
+
 #endif

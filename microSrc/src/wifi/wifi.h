@@ -18,8 +18,13 @@
 #include "lwip/sys.h"
 #include "lwip/netdb.h"
 #include "lwip/dns.h"
+#include <sys/param.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include "esp_system.h"
 
-
+#include "esp_http_client.h"
+#include "esp_tls.h"
 #define ESP_WIFI_SSID     "Fernando"
 #define ESP_WIFI_PASS     "esp32wifi"
 #define EXAMPLE_ESP_MAXIMUM_RETRY  4

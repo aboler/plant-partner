@@ -44,7 +44,7 @@ void app_main(void)
     // Initialize plant structure data with test values
     start_wifi();
     struct plantData plant_data = {0, 0, 0};
-
+    struct plantDataUpdate plant_data_v1 = {"LeBron",3.0,3.0,3.0,3.0,3.0};
     // Declare arrays for ADC raw data and voltage
     int adc_raw;
     int voltage;
@@ -66,7 +66,6 @@ void app_main(void)
     // Configure PWM and set to 30/256
     pwm_pump_init();
     modify_pump_duty_cycle(30);
-    http_get();
     while (1)
     {
         // Read raw data in from ADC

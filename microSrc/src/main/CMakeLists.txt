@@ -15,6 +15,12 @@ idf_component_register(
         esp_http_server
         nvs_flash
         freertos 
+        lwip
+        esp_system
+        esp_http_client
+        esp_event
+        esp-tls
+        
 
     INCLUDE_DIRS 
         "../peripherals"
