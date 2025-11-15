@@ -71,10 +71,13 @@ All sensor readings are to be logged in a database and displayed on a mobile app
 
 - ``Documentation`` : directory containing relevant project documentation
   - ``Circuits`` : directory containing relevant circuits created during development
+  - ``Class Submissions`` : directory containing a file with the link to the Google Drive folder containing all of our report work/submissions
+  - ``Contributions`` : directory containing all members' timesheet records
+  - ``Datasheets`` : directory containing schematics to reference for our current materials being used
   - ``Diagrams`` : directory containing relevant diagrams created during development
   - ``Materials`` : directory containing documentation related to materials, such as which items were purchased and from where
-  - ``Research`` : directory containing research collected during the project, such as hwo to set up a coding environment for the ESP32
-  - ``TimeSheets`` : directory containing all members' timesheet records
+  - ``Research`` : directory containing research collected during the project, such as how to set up a coding environment for the ESP32
+  - ``pcbDesign`` : directory containing work dones towards designing/building our project's PCB
 
 ## Current Bugs:
 
