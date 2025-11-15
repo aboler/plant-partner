@@ -71,7 +71,7 @@ All sensor readings are to be logged in a database and displayed on a mobile app
 
 - ``Documentation`` : directory containing relevant project documentation
   - ``Circuits`` : directory containing relevant circuits created during development
-  - ``Class Submissions`` : directory containing a file with the link to the Google Drive folder containing all of our report work/submissions
+  - ``ClassSubmissions`` : directory containing a file with the link to the Google Drive folder containing all of our report work/submissions
   - ``Contributions`` : directory containing all members' timesheet records
   - ``Datasheets`` : directory containing schematics to reference for our current materials being used
   - ``Diagrams`` : directory containing relevant diagrams created during development
