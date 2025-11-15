@@ -167,7 +167,7 @@ void uart_read_rs485(){
         0x01,       // Device ID
         0x03,       // Function code: Read Holding Registers
         0x00, 0x00, // Start address: 0x0000
-        0x00, 0x07, // Number of registers: 0x0000 - 0x0007 (7 registers)
+        0x00, 0x07, // Number of registers: 0x0000 - 0x0007 (8 registers)
         0x04, 0x08  // CRC16 (LSB/MSB)
     };
 
