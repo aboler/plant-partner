@@ -20,7 +20,7 @@
 #include "../http/http.h"
 
 
-
+static struct plantDataUpdate pv1 = {"Sunflower",1.1,1.2,1.3,1.4,1.5};
 
 
 static esp_err_t nvs_init(){
@@ -32,19 +32,36 @@ static esp_err_t nvs_init(){
     return ret;
 }
 
+const static char *TAG = "DEBUG";
+
+void http_task(void *pv) {
+    
+    struct plantDataUpdate *plant = (struct plantDataUpdate *) pv;
+    esp_http_client_handle_t client = http_configure_handle();
+    http_put_plant_data(client,plant);
+    while (1) {
+        ESP_LOGI(TAG, "HTTP request...");
+        esp_err_t err = esp_http_client_perform(client);
+        ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
+}
+
 
 
 //all Networking depends on nvs_init()
 
 void app_main(void)
 {
+
+   
     // Debug Tag
-    const static char *TAG = "DEBUG";
+    
     ESP_ERROR_CHECK(nvs_init());
     // Initialize plant structure data with test values
     start_wifi();
     struct plantData plant_data = {0, 0, 0};
-    struct plantDataUpdate plant_data_v1 = {"LeBron",3.0,3.0,3.0,3.0,3.0};
+    xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
     // Declare arrays for ADC raw data and voltage
     int adc_raw;
     int voltage;
@@ -66,8 +83,9 @@ void app_main(void)
     // Configure PWM and set to 30/256
     pwm_pump_init();
     modify_pump_duty_cycle(30);
+  
     while (1)
-    {
+    {   
         // Read raw data in from ADC
         adc_read(LIGHT, adc1_handle, &adc_raw);
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_CHANNEL_0, adc_raw);

@@ -1,14 +1,19 @@
 #include "../dataTypes/plantData.h"
 #include "../wifi/wifi.h"  
-#define WEB_SERVER "0.0.0.0"
+#define WEB_SERVER "172.20.10.2"
 #define WEB_PORT "8000"
 #define WEB_PUT_PATH "/plants/updatePlantByName/Sunflower"
-#define JSON_BUFFER_SIZE 256
+#define JSON_BUFFER_SIZE 1024
 static const char *TAG = "http_client";
             
 
 static const char *JSON_TEMPLATE =
-    "{\"plantName\":\"%s\",\"soilMoisture\":\"%f\",\"lightIntensity\":\"%f\",\"nLevel\":\"%f\",\"pLevel\":\"%f\",\"kLevel\":\"%f\"}";
+     "{\"plantName\":\"%s\","
+    "\"soilMoisture\":%f,"
+    "\"lightIntensity\":%f,"
+    "\"nLevel\":%f,"
+    "\"pLevel\":%f,"
+    "\"kLevel\":%f}";
 
 
 
@@ -115,10 +120,7 @@ static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 // TODO: make it so that host and path are set to some default site
 esp_http_client_handle_t http_configure_handle(){
         esp_http_client_config_t config = {
-        .host = NULL,
-        .path = NULL,
-        .port = 8000,
-        .query = NULL,
+        .url = "http://172.20.10.2:8000/plants/updatePlantByName/Sunflower",
         .event_handler = _http_event_handler,
         .user_data = local_response_buffer,        // Pass address of local buffer to get response
         .disable_auto_redirect = true,
@@ -185,18 +187,10 @@ void http_put_plant_data(esp_http_client_handle_t client, struct plantDataUpdate
     );
 
     //route to the correct website and correct formast
-    esp_http_client_set_url(client, "http://" WEB_SERVER ":" WEB_PORT WEB_PUT_PATH);
+    //esp_http_client_set_url(client, "http://" WEB_SERVER ":" WEB_PORT WEB_PUT_PATH);
     esp_http_client_set_method(client, HTTP_METHOD_PUT);
     esp_http_client_set_header(client, "Content-Type", "application/json");
     esp_http_client_set_post_field(client, json_buffer, json_len);
-    esp_err_t err = esp_http_client_perform(client);
-    if (err == ESP_OK) {
-        ESP_LOGI(TAG, "HTTP PUT Status = %d, content_length = %"PRId64,
-                esp_http_client_get_status_code(client),
-                esp_http_client_get_content_length(client));
-    } else {
-        ESP_LOGE(TAG, "HTTP PUT request failed: %s", esp_err_to_name(err));
-    }
     
      
 }  
