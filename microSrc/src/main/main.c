@@ -16,16 +16,55 @@
 #include "../peripherals/gpio.h"
 #include "../peripherals/adc.h"
 #include "../peripherals/pwm_pump.h"
+#include "../wifi/wifi.h"
+#include "../http/http.h"
+
+
+static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
+
+
+static esp_err_t nvs_init(){
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+      ESP_ERROR_CHECK(nvs_flash_erase());
+      ret = nvs_flash_init();
+    }
+    return ret;
+}
+
+const static char *TAG = "DEBUG";
+
+void http_task(void *pv) {
+    
+    struct plantDataUpdate *plant = (struct plantDataUpdate *) pv;
+    esp_http_client_handle_t client = http_configure_handle();
+    http_put_plant_data(client,plant);
+    while (1) {
+        ESP_LOGI(TAG, "HTTP request...");
+        esp_err_t err = esp_http_client_perform(client);
+        ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
+}
+
+
+
+//all Networking depends on nvs_init()
 
 void app_main(void)
 {
+
+   
     // Debug Tag
-    const static char *TAG = "DEBUG";
-
+    
+    ESP_ERROR_CHECK(nvs_init());
     // Initialize plant structure data with test values
-    struct plantData plant_data = {0, 0, 0, 0, 0};
 
-    // Declare variables for ADC raw data and voltage
+    start_wifi();
+    struct plantData plant_data = {0, 0, 0, 0, 0};
+    xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
+  
+    // Declare variables
     int adc_raw;
     int voltage;
     bool switch0, switch1, switch2, switch3;
