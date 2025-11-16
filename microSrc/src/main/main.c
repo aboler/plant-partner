@@ -82,8 +82,8 @@ void app_main(void)
     // Declare variables
     int adc_raw;
     int voltage;
-    bool switch0, switch1, switch2, switch3;
-    switch0 = switch1 = switch2 = switch3 = false;
+    bool switch0, switch1, switch2, switch3,switch4;
+    switch0 = switch1 = switch2 = switch3 = switch4 = false;
 
     // Initialize ADC for photoresistor
     adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
@@ -105,6 +105,7 @@ void app_main(void)
     configure_IO(INPUT, SWITCH1_GPIO);
     configure_IO(INPUT, SWITCH2_GPIO);
     configure_IO(INPUT, SWITCH3_GPIO);
+    configure_IO(INPUT,SWITCH4_GPIO);
 
     // Configure PWM
     pwm_pump_init();
@@ -222,7 +223,16 @@ void app_main(void)
             switch3 = currentSwitchLevel;
         }
         
+        currentSwitchLevel = (bool)gpio_get_level(SWITCH4_GPIO);
+        if(currentSwitchLevel != switch4){
+            start_wifi();
+            switch4 = currentSwitchLevel;
+        }
+
             toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
-            vTaskDelay(pdMS_TO_TICKS(700));
+            vTaskDelay(pdMS_TO_TICKS(700));   
     }
+
+    
+
 }
