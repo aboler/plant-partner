@@ -12,6 +12,10 @@ Plant Partner repo. for CEN4907c
   - Allows PR's to be made for adding to dev so group members can review code made
 - Add reports for any changes/development work done in a day in main branch
   - Make reports in Documentation/Reports in relevant timesheet
+ 
+## Meeting Times
+
+- Meet weekly for ~15 minutes after every client meeting to ensure we're staying on track
 
 ## Completed Work
 
