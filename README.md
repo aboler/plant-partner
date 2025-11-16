@@ -19,6 +19,14 @@ Plant Partner repo. for CEN4907c
 
 ## Completed Work
 
+### Hardware Release
+
+Please see ```Documentation/Diagrams```, ```Documentation/Circuits```, and ```Documentation/pcbDesign``` for current hardware designed, built, and used for testing
+
+### Software Release
+
+To run do...
+
 ### Pre-Alpha Build
 
 - Ability to control GPIO Pins w/ ESP32.
@@ -108,6 +116,4 @@ The sensor readings can be reported to the database and displayed on a mobile ap
 ## Current Bugs:
 
 The system is in a development state with only base-level functionality implemented. No bugs reported
-
-## How to run:
 
