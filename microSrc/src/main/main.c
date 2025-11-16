@@ -23,7 +23,7 @@ void app_main(void)
     const static char *TAG = "DEBUG";
 
     // Initialize plant structure data with test values
-    struct plantData plant_data = {0, 0, 0};
+    struct plantData plant_data = {0, 0, 0, 0, 0};
 
     // Declare variables for ADC raw data and voltage
     int adc_raw;
@@ -137,6 +137,8 @@ void app_main(void)
         currentSwitchLevel = (bool)gpio_get_level(SWITCH2_GPIO);
         if(currentSwitchLevel != switch2)
         {
+            // Toggle power of water motor
+
             if (currentSwitchLevel)
                 modify_pump_duty_cycle(PWM_DUTY_100_PERCENT);
             else
@@ -147,6 +149,8 @@ void app_main(void)
         currentSwitchLevel = (bool)gpio_get_level(SWITCH3_GPIO);
         if(currentSwitchLevel != switch3)
         {
+            // TBD: Send wifi post
+            
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", plant_data.lightData, plant_data.waterData);
 
             switch3 = currentSwitchLevel;
