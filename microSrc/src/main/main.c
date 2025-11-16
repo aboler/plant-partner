@@ -20,7 +20,7 @@
 #include "../http/http.h"
 
 
-static volatile struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
+static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
 
 
 static esp_err_t nvs_init(){
@@ -64,13 +64,13 @@ void app_main(void)
     // Initialize plant structure data with test values
 
     start_wifi();
-    volatile struct plantData plant_data = {0, 0, 0, 0, 0};
+    struct plantData plant_data = {0, 0, 0, 0, 0};
     //redundant for testing/prototype
 
     //Instantiate handle for sending put requests.
-    volatile struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
+    struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
     //For inputting data
-    volatile struct plantDataUpdate* p_ptr = &p;
+    struct plantDataUpdate* p_ptr = &p;
 
     esp_http_client_handle_t client = http_configure_handle();
     http_put_plant_data(client,p_ptr);
@@ -179,12 +179,12 @@ void app_main(void)
             // If calibration is enabled, convert raw data to a moisture value
             if (moisture_calibration_successful) 
             {
-                voltage = 100 * (2600 - adc_raw)/2600;
+                voltage = adc_raw;
                 //adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
                 if(voltage < 65)
-                    ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d percent", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                    ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
                 else
-                    ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d percent", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                    ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
             
                 // Update value
                 plant_data.waterData = voltage;
