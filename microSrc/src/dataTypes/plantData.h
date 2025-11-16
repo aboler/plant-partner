@@ -9,7 +9,7 @@
 struct plantData
 {
     uint16_t lightData;
-    uint8_t waterData; // Rough % of wetness
+    uint16_t waterData; // Rough % of wetness
     uint16_t nitrogenData;
     uint16_t phosphorusData;
     uint16_t potassiumData;

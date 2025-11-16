@@ -34,7 +34,10 @@ static esp_err_t nvs_init(){
 
 const static char *TAG = "DEBUG";
 
-void http_task(void *pv) {
+
+//Uncommenting RTOS stuff will produce test updates
+
+/*void http_task(void *pv) {
     
     struct plantDataUpdate *plant = (struct plantDataUpdate *) pv;
     esp_http_client_handle_t client = http_configure_handle();
@@ -45,7 +48,7 @@ void http_task(void *pv) {
         ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
-}
+}*/
 
 
 
@@ -62,7 +65,19 @@ void app_main(void)
 
     start_wifi();
     struct plantData plant_data = {0, 0, 0, 0, 0};
-    xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
+    //redundant for testing/prototype
+
+    //Instantiate handle for sending put requests.
+    struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
+    //For inputting data
+    struct plantDataUpdate* p_ptr = &p;
+
+    esp_http_client_handle_t client = http_configure_handle();
+    http_put_plant_data(client,p_ptr);
+
+
+    //TO:DO mutex stuff maybe
+    //xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
   
     // Declare variables
     int adc_raw;
@@ -127,7 +142,8 @@ void app_main(void)
 
                     // Store data into plant structure
                     plant_data.lightData = voltage;
-
+                    //Temporary redundant stor
+                    p_ptr->lightIntensity = (float)voltage;
                     // Print LED Status and Voltage level as ESP log
                     ESP_LOGI(TAG, "LEDs ON: Voltage %d mV is below threshold", plant_data.lightData);
                 }
@@ -139,6 +155,9 @@ void app_main(void)
 
                     // Store data into plant structure
                     plant_data.lightData = voltage;
+                    
+                    //Temporary Redundant Storage for Plant Put test
+                    p_ptr->lightIntensity = (float)voltage;
 
                     // Print statement to confirm LEDs are off
                     ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV is above threshold", plant_data.lightData);
@@ -160,15 +179,17 @@ void app_main(void)
             // If calibration is enabled, convert raw data to a moisture value
             if (moisture_calibration_successful) 
             {
-                voltage = 100 * (2600 - adc_raw)/2600;
+                voltage = adc_raw;
                 //adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
                 if(voltage < 65)
-                    ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d percent", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                    ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
                 else
-                    ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d percent", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                    ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
             
                 // Update value
                 plant_data.waterData = voltage;
+                //Temp redundant update 
+                p_ptr->soilMoisture = (float)voltage;
             }
             
             switch1 = currentSwitchLevel;
@@ -190,12 +211,21 @@ void app_main(void)
         {
             // TBD: Send wifi post
             
+            
+            http_put_plant_data(client,p_ptr);
+            ESP_LOGI(TAG, "HTTP request...");
+            esp_err_t err = esp_http_client_perform(client);
+            ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", plant_data.lightData, plant_data.waterData);
 
             switch3 = currentSwitchLevel;
         }
-        
+
             toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
-            vTaskDelay(pdMS_TO_TICKS(700));
+            vTaskDelay(pdMS_TO_TICKS(700));   
     }
+
+    
+
 }

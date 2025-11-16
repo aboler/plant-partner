@@ -123,7 +123,7 @@ static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 // TODO: make it so that host and path are set to some default site
 esp_http_client_handle_t http_configure_handle(){
         esp_http_client_config_t config = {
-        .url = "http://172.20.10.3:8000/plants/updatePlantByName/Sunflower",
+        .url = "http://172.20.10.7:8000/plants/updatePlantByName/Sunflower",
         .event_handler = _http_event_handler,
         .user_data = local_response_buffer,        // Pass address of local buffer to get response
         .disable_auto_redirect = true,
