@@ -12,6 +12,10 @@ Plant Partner repo. for CEN4907c
   - Allows PR's to be made for adding to dev so group members can review code made
 - Add reports for any changes/development work done in a day in main branch
   - Make reports in Documentation/Reports in relevant timesheet
+ 
+## Meeting Times
+
+- Meet weekly for ~15 minutes after every client meeting to ensure we're staying on track
 
 ## Completed Work
 
@@ -51,8 +55,9 @@ Plant Partner repo. for CEN4907c
   - Allows new plant data to be sent to the database 
 - Created a test plant on the database
 - Connected application and database so application can receive and display plant data to the Home tab
-- Created a update button that allows applciation to display newly updated data from the database
+- Created a update button that allows application to display newly updated data from the database
 - Beginnings of a PCB to replace external wiring has been started and posted to the repository
+- Migrate database to the cloud via MongoDB atlas to allow for easier testing
 
 ## Project Architecture
 
