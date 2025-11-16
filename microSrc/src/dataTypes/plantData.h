@@ -15,11 +15,11 @@ struct plantData
 
 struct plantDataUpdate
 {   char* plantName;
-    float soilMoisture;
-    float lightIntensity;
-    float nLevel;
-    float pLevel;
-    float kLevel;
+    uint8_t soilMoisture;
+    uint16_t lightIntensity;
+    uint16_t nLevel;
+    uint16_t kLevel;
+    uint16_t pLevel;
 };
 
 #endif

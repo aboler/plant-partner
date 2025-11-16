@@ -3,7 +3,8 @@
 #define WEB_SERVER "172.20.10.2"
 #define WEB_PORT "8000"
 #define WEB_PUT_PATH "/plants/updatePlantByName/Sunflower"
-#define JSON_BUFFER_SIZE 1024
+#define JSON_BUFFER_SIZE 2048
+#define IP "172.20.10.3"
 static const char *TAG = "http_client";
             
 
@@ -120,7 +121,7 @@ static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 // TODO: make it so that host and path are set to some default site
 esp_http_client_handle_t http_configure_handle(){
         esp_http_client_config_t config = {
-        .url = "http://172.20.10.2:8000/plants/updatePlantByName/Sunflower",
+        .url = "http://"IP":8000/plants/updatePlantByName/Sunflower",
         .event_handler = _http_event_handler,
         .user_data = local_response_buffer,        // Pass address of local buffer to get response
         .disable_auto_redirect = true,
@@ -194,6 +195,7 @@ void http_put_plant_data(esp_http_client_handle_t client, struct plantDataUpdate
     
      
 }  
+
 
 
 

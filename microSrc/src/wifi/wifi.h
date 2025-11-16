@@ -25,8 +25,8 @@
 
 #include "esp_http_client.h"
 #include "esp_tls.h"
-#define ESP_WIFI_SSID     "NCimino"
-#define ESP_WIFI_PASS     "ReaperPlayer"
+#define ESP_WIFI_SSID     "Fernando"
+#define ESP_WIFI_PASS     "esp32wifi"
 #define EXAMPLE_ESP_MAXIMUM_RETRY  4
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_WPA2_PSK
 #define WIFI_CONNECTED_BIT BIT0
