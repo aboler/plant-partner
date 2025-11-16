@@ -10,15 +10,15 @@ static const char *TAG = "http_client";
 
 static const char *JSON_TEMPLATE =
      "{\"plantName\":\"%s\","
-    "\"soilMoisture\":%f,"
-    "\"lightIntensity\":%f,"
-    "\"nLevel\":%f,"
-    "\"pLevel\":%f,"
-    "\"kLevel\":%f}";
+    "\"soilMoisture\":%i,"
+    "\"lightIntensity\":%i,"
+    "\"nLevel\":%i,"
+    "\"pLevel\":%i,"
+    "\"kLevel\":%i}";
 
 
 
-#define MAX_HTTP_OUTPUT_BUFFER 512
+#define MAX_HTTP_OUTPUT_BUFFER 2048
 static char local_response_buffer[MAX_HTTP_OUTPUT_BUFFER + 1] = {0};
 
 
@@ -111,6 +111,8 @@ static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
             esp_http_client_set_header(evt->client, "Accept", "text/html");
             esp_http_client_set_redirection(evt->client);
             break;
+        default:
+            break;
     }
     return ESP_OK;
 }
@@ -121,7 +123,7 @@ static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 // TODO: make it so that host and path are set to some default site
 esp_http_client_handle_t http_configure_handle(){
         esp_http_client_config_t config = {
-        .url = "http://"IP":8000/plants/updatePlantByName/Sunflower",
+        .url = "http://172.20.10.3:8000/plants/updatePlantByName/Sunflower",
         .event_handler = _http_event_handler,
         .user_data = local_response_buffer,        // Pass address of local buffer to get response
         .disable_auto_redirect = true,
@@ -195,7 +197,6 @@ void http_put_plant_data(esp_http_client_handle_t client, struct plantDataUpdate
     
      
 }  
-
 
 
 

@@ -20,7 +20,7 @@
 #include "../http/http.h"
 
 
-static struct plantDataUpdate pv1 = {"Sunflower",9,7,5,3,4};
+static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
 
 
 static esp_err_t nvs_init(){
