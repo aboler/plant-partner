@@ -18,9 +18,9 @@ void adc_oneshot_channel_config(bool component, adc_oneshot_unit_handle_t handle
     };
     
     if (component == LIGHT)
-        ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_CHANNEL_0, &config)); // pin vp
+        ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_LIGHT_CHANNEL, &config)); // pin vp
     else // component == MOISTURE
-        ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_CHANNEL_3, &config)); // pin vn
+        ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ADC_MOISTURE_CHANNEL, &config)); // pin vn
 }
 
 // Initialize ADC Calibration
@@ -52,9 +52,9 @@ bool adc_calibration_init(adc_unit_t unit, adc_atten_t atten, adc_cali_handle_t 
 void adc_read(bool component, adc_oneshot_unit_handle_t handle, int *raw)
 {
     if (component == LIGHT)
-        ESP_ERROR_CHECK(adc_oneshot_read(handle, ADC_CHANNEL_0, raw));    
+        ESP_ERROR_CHECK(adc_oneshot_read(handle, ADC_LIGHT_CHANNEL, raw));    
     else // component == MOISTURE
-        ESP_ERROR_CHECK(adc_oneshot_read(handle, ADC_CHANNEL_3, raw)); 
+        ESP_ERROR_CHECK(adc_oneshot_read(handle, ADC_MOISTURE_CHANNEL, raw)); 
 }
 
 // Convert raw ADC data to voltage with calibration handle

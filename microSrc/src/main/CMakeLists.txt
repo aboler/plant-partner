@@ -2,12 +2,14 @@ idf_component_register(
     SRCS 
         "main.c" 
         "../peripherals/adc.c" 
-        "../peripherals/gpio_led.c" 
-        "../peripherals/pwm_pump.c" 
+        "../peripherals/gpio.c" 
+        "../peripherals/pwm_pump.c"
+        "../peripherals/uart_driver.c"
         "../wifi/wifi.c" 
         "../http/http.c"
 
     PRIV_REQUIRES 
+        spi_flash
         esp_driver_gpio
         esp_adc
         esp_driver_ledc
@@ -20,6 +22,7 @@ idf_component_register(
         esp_http_client
         esp_event
         esp-tls
+        esp_driver_uart
         
 
     INCLUDE_DIRS 

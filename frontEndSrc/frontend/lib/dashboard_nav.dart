@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/navPages/dashView.dart';
-import 'package:frontend/navPages/taskView.dart';
+import 'package:frontend/views/homeView.dart';
+import 'package:frontend/views/taskView.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -22,9 +22,8 @@ class _DashboardState extends State<Dashboard> {
           builder: (BuildContext context) {
             if (settings.name == '') {
               //details page, container temp
-              return const DashView();
+              return const HomeView();
             }
-
             //main page
             return const TaskView();
           },
