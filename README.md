@@ -15,6 +15,8 @@ Plant Partner repo. for CEN4907c
 
 ## Completed Work
 
+### Pre-Alpha Build
+
 - Ability to control GPIO Pins w/ ESP32.
   - i.e. controlling an external light source
   - Existing interfaces that allow modular control for project's purposes
@@ -22,7 +24,9 @@ Plant Partner repo. for CEN4907c
   - i.e. reading in value from photoresistor
   - Existing interfaces that allow modular control for project's purposes
 - Developed basic structure to collect plant data from sensors
-- Breadboard implementation of one of our hardware/software
+  - 3 uint16_t variables for collecting light, moisture, and nutrient data 
+- Breadboard implementation of our hardware/software
+  - External photoresistor/LED circuit 
 - Frontend initial skeleton set up for mobile Android app interface
   - Configured Flutter environment and Android Emulator
   - Built a persistent bottom navigation bar (Tasks, Home, Settings)
@@ -33,12 +37,28 @@ Plant Partner repo. for CEN4907c
   - Created Backend App source code with an API via Express.JS that allows for communication with the backend server and database
   - Organized the source code into folders for function controllers, JSON data models, and CRUD routes for easy addition of new functionality
 
+### Prototype Build
+
+- Ability to configure input GPIO Pins w/ ESP32
+- Ability to generate a PWM signal
+  - i.e. controlling a water pump omtor 
+- Modularized ADC data acquisition
+  - Allows for configuration for both photoresistor and mositure sensor
+- Modified breadboard implementation
+  - Developed switch circuit to determine when to sample connected sensors/actuate components
+  - e.g. water pump control, photoresistor and moisture sensing, LED actuation
+- Ability to connect ESP32 to Wi-Fi
+  - Allows new plant data to be sent to the database 
+- Created a test plant on the database
+- Connected application and database so application can receive and display plant data to the Home tab
+- Created a update button that allows applciation to display newly updated data from the database
+- Beginnings of a PCB to replace external wiring has been started and posted to the repository
 
 ## Project Architecture
 
-The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is only configured to interact with a photoresistor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, this only involves an external LED.
+The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is configure to interact with a photoresistor and moisture sensor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, an external switch circuit is set up to control sensor sampling and component actuation. Switch0 is responsible for sampling the photoresistor and updating the LED if its detected to be too dark, Switch1 samples the moisture sensor, Switch2 actuates the water pump motor, and Switch3 posts plant data to the database to mimic receiving commands from the application.
 
-All sensor readings are to be logged in a database and displayed on a mobile application, providing users with remote monitoring and control capabilities. This aspect is still in development, so currently their interactions have not been implemented.
+The sensor readings can be reported to the database and displayed on a mobile application, providing users with remote monitoring. To update the data shown on the application, users must press the update button available in the Home tab. In the future, commands will be able to be sent and received from the application. However, this aspect is still in development and has not been implemented.
 
 ### File Structure Summary
 
@@ -46,7 +66,8 @@ All sensor readings are to be logged in a database and displayed on a mobile app
   - ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
     - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
     - ``dataTypes`` : contains code defining common data types created for the project, like plantData
-    - ``peripherals`` : code for modularizing intercations with certain peripheral systems, like ADC and GPIO
+    - ``peripherals`` : code for modularizing intercations with certain peripheral systems, like ADC, GPIO, and PWM
+    - ``wifi`` : code for implementing wifi communication in the esp32
   - ``submodules`` : directory containing other repositories utilized within the main code
     - ``esp-idf`` : submodule containing examples and ESP32 interfaces in c
 
@@ -82,3 +103,6 @@ All sensor readings are to be logged in a database and displayed on a mobile app
 ## Current Bugs:
 
 The system is in a development state with only base-level functionality implemented. No bugs reported
+
+## How to run:
+
