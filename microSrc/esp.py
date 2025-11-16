@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS_DIR = os.path.join(ROOT, "scripts")
 IDF_DIR = os.path.join(ROOT, "submodules", "esp-idf")
 INSTALL_FLAG = os.path.join(SCRIPTS_DIR, ".idf_install_done")
-PROJECT_DIR = os.path.join(ROOT, "src")  # Project folder containing CMakeLists.txt
+PROJECT_DIR = os.path.join(ROOT, "src")  
 
 # Run a shell command
 def run_cmd(cmd, shell=True):
@@ -60,18 +60,23 @@ def run_idf(command, port=None):
 
     # Prepare commands depending on OS
     if system == "Windows":
-        # Setup export.bat and run idf.py
         export_file = os.path.join(IDF_DIR, "export.bat")
-        idf = os.path.join(IDF_DIR, "tools", "idf.py")
 
-        # If port specified, include in command
+        # Build the command sequence for Windows
+        cmd_parts = [
+            f'cd /d "{PROJECT_DIR}"',
+            f'call "{export_file}"',
+        ]
+
+        # Run idf.py directly (it's on PATH after export.bat)
         if port:
-            cmd = f'cd "{PROJECT_DIR}" && "{export_file}" && "{idf}" -p {port} {command} "monitor"'
+            cmd_parts.append(f'idf.py -p {port} {command} monitor')
         else:
-            cmd = f'cd "{PROJECT_DIR}" && "{export_file}" && "{idf}" {command}'
+            cmd_parts.append(f'idf.py {command}')
 
-        # Run command in cmd.exe
-        run_cmd(f'cmd.exe /c {cmd}')
+        full_cmd = " & ".join(cmd_parts)
+        run_cmd(f'cmd.exe /c "{full_cmd}"')
+
 
     else:
         # Setup export.sh and run idf.py
@@ -107,7 +112,8 @@ def main():
             # Flash automatically runs build so only need to call flash
             run_idf("flash", port=args.port)
         else:
-            print("[esp.py] No port provided, skipping flash and monitor")
+            print("[esp.py] No port provided, building but skipping flash and monitor")
+            run_idf("build")
     else:
         # If parameter provided, run specified action
         if args.action == "build":
