@@ -46,8 +46,6 @@ In Powershell or a Linux terminal preferably:
    - You may need to use python3 instead of python
    - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
 
-
-
 ### Pre-Alpha Build
 
 - Ability to control GPIO Pins w/ ESP32.
