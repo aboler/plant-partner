@@ -121,6 +121,22 @@ The sensor readings can be reported to the database and displayed on a mobile ap
   - ``Materials`` : directory containing documentation related to materials, such as which items were purchased and from where
   - ``Research`` : directory containing research collected during the project, such as how to set up a coding environment for the ESP32
   - ``pcbDesign`` : directory containing work dones towards designing/building our project's PCB
+ 
+## How to Use esp.py
+PORT: This is USB port that the ESP-32 is connected to. For Windows, it should be COM3 or something similar. For Ubuntu, it should be /dev/ttyUSB0 or something similar. Be aware, that if the Port is not automatically detected (usually Windows) you may have to install a driver being Silicon Labs CP210x or FTDI.
+
+- Default: ```python esp.py -p PORT```
+  - This will run the necessary setup scripts to install the ESP-IDF dependencies then build, flash, and monitor the ESP-32 at PORT
+- Build: ```python esp.py build```
+  - This will only build the current code under microSrc/src
+- Flash: ```python esp.py flash -p PORT```
+  - This will build and flash the current code under microSrc/src onto the ESP-32 at the connected Port
+- Monitor: ```python esp.py monitor -p PORT```
+  - This will monitor the ESP-32 at the connected Port and fill the terminal with any outputs from the ESP-32
+- Clean: ```python esp.py clean```
+  - This will delete any build artifacts
+
+N.B. You may have to use python3 instead of python
 
 ## Current Bugs:
 
