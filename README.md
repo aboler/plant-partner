@@ -46,6 +46,13 @@ In Powershell or a Linux terminal preferably:
    - You may need to use python3 instead of python
    - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
 
+For Backend + Database:
+1. Navigate to ```backEndSrc/```
+2. Start up the backend server by running ```npm start```, server will be running once these messages are displayed on the terminal
+   - "Connected to MongoDB"
+   - "Server running on port 8000"
+
+
 ### Pre-Alpha Build
 
 - Ability to control GPIO Pins w/ ESP32.
