@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS_DIR = os.path.join(ROOT, "scripts")
 IDF_DIR = os.path.join(ROOT, "submodules", "esp-idf")
 INSTALL_FLAG = os.path.join(SCRIPTS_DIR, ".idf_install_done")
-PROJECT_DIR = os.path.join(ROOT, "src")  # Project folder containing CMakeLists.txt
+PROJECT_DIR = os.path.join(ROOT, "src")  
 
 # Run a shell command
 def run_cmd(cmd, shell=True):
@@ -60,29 +60,40 @@ def run_idf(command, port=None):
 
     # Prepare commands depending on OS
     if system == "Windows":
-        # Setup export.bat and run idf.py
+        # Setup export.bat and run idf.py (export.bat sets env variables which allows idf.py to run)
         export_file = os.path.join(IDF_DIR, "export.bat")
-        idf = os.path.join(IDF_DIR, "tools", "idf.py")
 
-        # If port specified, include in command
-        if port:
-            cmd = f'cd "{PROJECT_DIR}" && "{export_file}" && "{idf}" -p {port} {command} "monitor"'
+        # Check for monitor command then if port was provided
+        if command == "monitor":
+            if not port:
+                print("[esp.py] Monitor requires -p PORT argument")
+                sys.exit(1)
+            cmd = f'cd /d "{PROJECT_DIR}" & call "{export_file}" & idf.py -p {port} monitor'
+        elif port:
+            cmd = f'cd /d "{PROJECT_DIR}" & call "{export_file}" & idf.py -p {port} {command}'
         else:
-            cmd = f'cd "{PROJECT_DIR}" && "{export_file}" && "{idf}" {command}'
+            cmd = f'cd /d "{PROJECT_DIR}" & call "{export_file}" & idf.py {command}'
+
 
         # Run command in cmd.exe
-        run_cmd(f'cmd.exe /c {cmd}')
+        run_cmd(f'cmd.exe /c "{cmd}"')
 
     else:
         # Setup export.sh and run idf.py
         export_file = os.path.join(IDF_DIR, "export.sh")
         idf = os.path.join(IDF_DIR, "tools", "idf.py")
 
-        # If port specified, include in command
-        if port:
-            cmd = f'cd "{PROJECT_DIR}" && source "{export_file}" && "{idf}" -p {port} {command} "monitor"'
+        # Check for monitor command then if port was provided
+        if command == "monitor":
+            if not port:
+                print("[esp.py] Monitor requires -p PORT argument")
+                sys.exit(1)
+            cmd = f'cd "{PROJECT_DIR}" && source "{export_file}" && "{idf}" -p {port} monitor'
+        elif port:
+            cmd = f'cd "{PROJECT_DIR}" && source "{export_file}" && "{idf}" -p {port} {command}'
         else:
             cmd = f'cd "{PROJECT_DIR}" && source "{export_file}" && "{idf}" {command}'
+
         
         # Run command in bash
         run_cmd(f'bash -c "{cmd}"')
@@ -106,20 +117,28 @@ def main():
         if args.port:
             # Flash automatically runs build so only need to call flash
             run_idf("flash", port=args.port)
+            run_idf("monitor", port=args.port)
         else:
-            print("[esp.py] No port provided, skipping flash and monitor")
+            print("[esp.py] No port provided, building but skipping flash and monitor")
+            run_idf("build")
     else:
-        # If parameter provided, run specified action
+        # Build only
         if args.action == "build":
             run_idf("build")
+
+        # Clean
         elif args.action == "clean":
             run_idf("clean")
+
+        # Build & Flash
         elif args.action == "flash":
             if not args.port:
                 print("[esp.py] Flash requires -p PORT argument")
                 sys.exit(1)
             # This will build and flash
             run_idf("flash", port=args.port)
+
+        # Monitor only
         elif args.action == "monitor":
             if not args.port:
                 print("[esp.py] Monitor requires -p PORT argument")
