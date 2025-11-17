@@ -24,14 +24,28 @@ Plant Partner repo. for CEN4907c
 Please see ```Documentation/Diagrams```, ```Documentation/Circuits```, and ```Documentation/pcbDesign``` for current hardware designed, built, and used for testing
 
 ### Software Release
-In Powershell or a Linux terminal preferably:
+For ESP32 (in VSCode):
 1. Run ```git clone recurse-submodules git@github.com:aboler/plant-partner.git```
    - This will clone the base plant-partner and esp-idf Github repositories using ssh
-2. Run ```cd microSrc```
-3. Connect an ESP-32 into computer
-4. Setup ESP-IDF and flash ESP-32 by running ```python esp.py -p PORT```
-    - You may need to use python3 instead of python
-    - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
+2. Download the ESP-IDF Extension
+3. After you install the extension, the  should appear in the VS Code Activity bar (left side set of icons). When you click the Espressif icon, you can see a list of basic commands provided by this extension.
+4. From the command list, select Configure ESP-IDF Extension or press F1 and type “Configure ESP-IDF Extension”. After, choose the ESP-IDF: Configure ESP-IDF Extension option.
+5. Choose Express. Select Github for the download server.
+6. For “Select ESP-IDF version” select “Find ESP-IDF in your system”
+7. For “Enter ESP-IDF directory (IDF_PATH):” click the folder icon and within the Github Repository select /plant-partner/microSrc/submodules/esp-idf
+8. For “Enter ESP-IDF Tools directory (IDF_TOOLS_PATH):” select the default location or wherever you prefer
+   - Make sure that IDF_TOOLS_PATH had no spaces and is not in the Github Repo
+9. If your operating system is MacOS/Linux, choose the system Python executable to create ESP-IDF virtual environment inside ESP-IDF Tools and install ESP-IDF Python package there
+10. Click Install
+11. If everything is installed correctly, you will see a message that all settings have been configured
+
+In Powershell or a Linux terminal preferably:
+1. Run ```cd microSrc```
+2. Connect an ESP-32 into computer
+3. Setup ESP-IDF and flash ESP-32 by running ```python esp.py -p PORT```
+   - You may need to use python3 instead of python
+   - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
+
 
 
 ### Pre-Alpha Build
