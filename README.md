@@ -32,6 +32,10 @@ In Powershell or a Linux terminal preferably:
 4. Setup ESP-IDF and flash ESP-32 by running ```python esp.py -p PORT```
     - You may need to use python3 instead of python
     - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
+5. Run ```cd ...```, then ```cd backEndSrc```
+6. Start up the backend server by running ```npm start```, server will be running once these messages are display on the terminal
+    - "Connected to MongoDB"
+    - "Server running on port 8000"
 
 
 ### Pre-Alpha Build
