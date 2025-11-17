@@ -24,8 +24,15 @@ Plant Partner repo. for CEN4907c
 Please see ```Documentation/Diagrams```, ```Documentation/Circuits```, and ```Documentation/pcbDesign``` for current hardware designed, built, and used for testing
 
 ### Software Release
+In Powershell or a Linux terminal preferably:
+1. Run ```git clone recurse-submodules git@github.com:aboler/plant-partner.git```
+   - This will clone the base plant-partner and esp-idf Github repositories using ssh
+2. Run ```cd microSrc```
+3. Connect an ESP-32 into computer
+4. Setup ESP-IDF and flash ESP-32 by running ```python esp.py -p PORT```
+    - You may need to use python3 instead of python
+    - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
 
-To run do...
 
 ### Pre-Alpha Build
 
@@ -76,6 +83,7 @@ The sensor readings can be reported to the database and displayed on a mobile ap
 ### File Structure Summary
 
 - ``microsrc`` : directory containing relevant ESP32 code
+  - ``scripts`` : directory containing scripts necessary for setting up ESP-IDF dependencies and environment for device
   - ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
     - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
     - ``dataTypes`` : contains code defining common data types created for the project, like plantData
@@ -83,6 +91,7 @@ The sensor readings can be reported to the database and displayed on a mobile ap
     - ``wifi`` : code for implementing wifi communication in the esp32
   - ``submodules`` : directory containing other repositories utilized within the main code
     - ``esp-idf`` : submodule containing examples and ESP32 interfaces in c
+  - ``esp.py`` : Python script which can setup, build, flash, and/or monitor ESP-32
 
 - ``backEndSrc`` : directory containing relevant backend code
   - ``controller`` : directory containing code for controllers that implement backend API CRUD functions for the server
