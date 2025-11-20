@@ -1,5 +1,5 @@
 #include "../dataTypes/plantData.h"
-#include "../wifi/wifi.h"  
+#include "http.h"  
 #define WEB_SERVER "172.20.10.2"
 #define WEB_PORT "8000"
 #define WEB_PUT_PATH "/plants/updatePlantByName/Sunflower"
