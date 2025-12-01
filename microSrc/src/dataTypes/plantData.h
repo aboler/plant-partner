@@ -17,7 +17,7 @@ struct plantData
 
 struct plantDataUpdate
 {   char* plantName;
-    uint8_t soilMoisture;
+    uint16_t soilMoisture;
     uint16_t lightIntensity;
     uint16_t nLevel;
     uint16_t kLevel;
