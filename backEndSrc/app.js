@@ -36,7 +36,7 @@ app.use(express.json());
 dotenv.config();
 
 const PORT = process.env.PORT || 8000; //change to our desired port or if desired port changes
-const MONGOURL = process.env.MONGO_URL || 'mongodb://localhost:27017/SensorDatabase';
+const MONGOURL = process.env.MONGO_URL || 'mongodb+srv://ncimino1_db_user:BKC89YKbMscuwW8A@plantpartnercluster.mfa1ope.mongodb.net/SensorDatabase?retryWrites=true&w=majority';
 
 // MongoDB Connection
 

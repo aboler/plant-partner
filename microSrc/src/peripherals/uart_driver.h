@@ -11,13 +11,14 @@
 #include "driver/gpio.h"
 #include "freertos/task.h"
 
-#define UART_BAUD_RATE      115200
-#define UART_RX_BUFFER_SIZE 2048
-#define UART_TX_BUFFER_SIZE 2048
-#define UART_TICKS_TO_WAIT  pdMS_TO_TICKS(1000)
-#define UART_RX_MAX_LENGTH  256
+#define UART_BAUD_RATE       115200
+#define UART_RS485_BAUD_RATE 9600
+#define UART_RX_BUFFER_SIZE  2048
+#define UART_TX_BUFFER_SIZE  2048
+#define UART_TICKS_TO_WAIT   pdMS_TO_TICKS(1000)
+#define UART_RX_MAX_LENGTH   256
 
-// NOTE: This is for USB-UART connections - Do not touch unless you DO NOT want ESP_LOG functionality //
+// NOTE UART_PORT0: This is for USB-UART connections - Do not touch unless you DO NOT want ESP_LOG functionality //
 #define UART_PORT0      UART_NUM_0
 #define UART0_RX_PIN    GPIO_NUM_3
 #define UART0_TX_PIN    GPIO_NUM_1
@@ -33,6 +34,8 @@
 #define UART2_TX_PIN    GPIO_NUM_17
 #define UART2_RTS_PIN   GPIO_NUM_7
 #define UART2_CTS_PIN   GPIO_NUM_6
+
+#define RS485_DE_RE_PIN GPIO_NUM_21  // Pin to control RS485 Driver Enable/~Receiver Enable
 
 // Typedef for UART function ouput
 typedef enum uart_error_t{
@@ -54,9 +57,10 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf);
 uart_error_t uart_write_string(const uart_port_t uartPort, const char *s);
 uart_error_t uart_write_int(const uart_port_t uartPort, int v);
 
-// // RS485 (half duplex) Specific helpers 
-// esp_err_t uart_rs485_init(const uart_port_t uartPort);
-// esp_err_t uart_rs485_write(const uart_port_t uartPort, const void *data, size_t numBytes);
-// int uart_rs485_read(const uart_port_t uartPort, void *buf);
+// // RS485 Specific helpers 
+void uart_rs485_init(const uart_port_t uartPort);
+void uart_rs485_set_transmit_mode();
+void uart_rs485_set_receive_mode();
+void uart_read_rs485();
 
 #endif // UART_DRIVER_H

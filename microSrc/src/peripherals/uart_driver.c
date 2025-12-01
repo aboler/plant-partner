@@ -22,7 +22,6 @@ void uart_init(const uart_port_t uartPort)
     switch (uartPort)
     {
     case UART_PORT0:
-        /* uart_set_pin signature: (uart_num, tx_io_num, rx_io_num, rts_io_num, cts_io_num) */
         ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
         break;
     case UART_PORT1:
@@ -119,39 +118,95 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf)
     return UART_ERROR_NONE;
 }
 
-// This code is NOT finished but is meant for rs485 communication specifically
+// This code is NOT finished but is meant for rs485 communication specifically //
 
-// esp_err_t uart_rs485_init(const uart_port_t uartPort)
-// {
-//     // Install driver with ring buffers for RS485
-//     uart_config_t uart_config = {
-//         .baud_rate = UART_BAUD_RATE,
-//         .data_bits = UART_DATA_8_BITS,
-//         .parity    = UART_PARITY_DISABLE,
-//         .stop_bits = UART_STOP_BITS_1,
-//         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
-//         .rx_flow_ctrl_thresh = 0,
-//     };
+void uart_rs485_init(const uart_port_t uartPort)
+{
+    // Install UART Driver: Only Receiving Buffer
+    ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, 0, 0, NULL, 0));
 
-//     ESP_ERROR_CHECK(uart_param_config(uartPort, &uart_config));
-//     ESP_ERROR_CHECK(uart_set_pin(uartPort, tx_io_num, rx_io_num, rts_io_num, cts_io_num));
+    // UART Port Configuration for RS485
+    uart_config_t uart_config = {
+        .baud_rate = UART_RS485_BAUD_RATE,
+        .data_bits = UART_DATA_8_BITS,
+        .parity    = UART_PARITY_EVEN,
+        .stop_bits = UART_STOP_BITS_1,
+        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+    };
+    ESP_ERROR_CHECK(uart_param_config(uartPort, &uart_config));
 
-//     // Install driver: give both rx and tx buffers to allow background TX
-//     ESP_ERROR_CHECK(uart_driver_install(uartPort, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
+    // Set ESP Pins for respective UART Port
+    switch (uartPort)
+    {
+    case UART_PORT0:
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+        break;
+    case UART_PORT1:
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_TX_PIN, UART1_RX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
+        break;
+    case UART_PORT2:
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
+        break;
+    default:
+        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+        break;
+    }
 
-//     // Enable RS485 half duplex mode so driver controls RTS for DE/RE pin
-//     ESP_ERROR_CHECK(uart_set_mode(uartPort, UART_MODE_RS485_HALF_DUPLEX));
+    // Initialize DE/RE Pin Control to Receive Mode (Low) - Transmit Mode is High
+    gpio_reset_pin(RS485_DE_RE_PIN);
+    gpio_set_direction(RS485_DE_RE_PIN, GPIO_MODE_OUTPUT);
+    gpio_set_level(RS485_DE_RE_PIN, 0);
 
-//     return ESP_OK;
-// }
+}
 
-// esp_err_t uart_rs485_write(const uart_port_t uartPort, const void *data, size_t numBytes)
-// {
-//     int written = uart_write_bytes_blocking(uartPort, data, numBytes);
-//     return (written >= 0) ? ESP_OK : ESP_FAIL;
-// }
+void uart_read_rs485(){
+    const char *TAG = "MODBUS";
 
-// int uart_rs485_read(const uart_port_t uartPort, void *buf)
-// {
-//     return uart_read_bytes_blocking(uartPort, buf);
-// }
+    // Request Frame for RS485 Modbus Communication
+    uint8_t modbus_request[] = {
+        0x01,       // Device ID
+        0x03,       // Function code: Read Holding Registers
+        0x00, 0x00, // Start address: 0x0000
+        0x00, 0x07, // Number of registers: 0x0000 - 0x0007 (8 registers)
+        0x04, 0x08  // CRC16 (LSB/MSB)
+    };
+
+    uint8_t rx_buf[256];
+    memset(rx_buf, 0, sizeof(rx_buf));
+
+    // Enable Transmit Mode
+    uart_rs485_set_transmit_mode();
+    vTaskDelay(pdMS_TO_TICKS(2));
+
+    // Send Inquiry Frame
+    uart_write_bytes(UART_PORT1, (const char *)modbus_request, sizeof(modbus_request));
+    uart_wait_tx_done(UART_PORT1, pdMS_TO_TICKS(100));
+
+    // Switch back to Receive Mode
+    uart_rs485_set_receive_mode();
+
+    // Read Response
+    int len = uart_read_bytes(UART_PORT1, rx_buf, sizeof(rx_buf), pdMS_TO_TICKS(200));
+
+    // If no bytes received, log warning
+    if (len > 0)
+    {
+        ESP_LOGI(TAG, "Received %d bytes:", len);
+        for (int i = 0; i < len; i++)
+            ESP_LOGI(TAG, "%02X ", rx_buf[i]);
+    }
+    else
+    {
+        ESP_LOGW(TAG, "No response");
+    }
+}
+
+void uart_rs485_set_transmit_mode()
+{
+    gpio_set_level(RS485_DE_RE_PIN, 1);
+}
+void uart_rs485_set_receive_mode()
+{
+    gpio_set_level(RS485_DE_RE_PIN, 0);
+}
+
