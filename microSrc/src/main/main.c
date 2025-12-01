@@ -189,7 +189,7 @@ void app_main(void)
                 // Update value
                 plant_data.waterData = voltage;
                 //Temp redundant update 
-                p_ptr->soilMoisture = (float)voltage;
+                p_ptr->soilMoisture = voltage;
             }
             
             switch1 = currentSwitchLevel;
