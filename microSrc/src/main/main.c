@@ -19,9 +19,7 @@
 #include "../wifi/wifi.h"
 #include "../http/http.h"
 
-
-static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
-
+//static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
 
 static esp_err_t nvs_init(){
     esp_err_t ret = nvs_flash_init();
@@ -50,35 +48,10 @@ const static char *TAG = "DEBUG";
     }
 }*/
 
-
-
 //all Networking depends on nvs_init()
 
 void app_main(void)
 {
-
-   
-    // Debug Tag
-    
-    ESP_ERROR_CHECK(nvs_init());
-    // Initialize plant structure data with test values
-
-    start_wifi();
-    struct plantData plant_data = {0, 0, 0, 0, 0};
-    //redundant for testing/prototype
-
-    //Instantiate handle for sending put requests.
-    struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
-    //For inputting data
-    struct plantDataUpdate* p_ptr = &p;
-
-    esp_http_client_handle_t client = http_configure_handle();
-    http_put_plant_data(client,p_ptr);
-
-
-    //TO:DO mutex stuff maybe
-    //xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
-  
     // Declare variables
     int adc_raw, voltage;
     bool switch0, switch1, switch2, switch3;
@@ -87,11 +60,30 @@ void app_main(void)
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
+    bool light_calibration_successful, moisture_calibration_successful;
+
+    struct plantData plant_data = {0, 0, 0, 0, 0};
+    struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
+    struct plantDataUpdate* p_ptr = &p;
+
+    esp_http_client_handle_t client;
+   
+    // Debug Tag
+    ESP_ERROR_CHECK(nvs_init());
+
+    start_wifi();
+
+    client = http_configure_handle();
+    http_put_plant_data(client,p_ptr);
+
+
+    //TO:DO mutex stuff maybe
+    //xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
 
 
     // Initialize ADC for photoresistor and moisture sensor
-    bool light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
-    bool moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
+    light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
+    moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
     // Configure LEDs and inputs
     // initialize_interrupts(); // Put if want input interrupts but you'll have to uncomment stuff in gpio
