@@ -54,7 +54,7 @@ void app_main(void)
 {
     // Declare variables
     int adc_raw, voltage;
-    bool switch0, switch1, switch2, switch3;
+    bool currentSwitchLevel, switch0, switch1, switch2, switch3;
     switch0 = switch1 = switch2 = switch3 = false;
 
     adc_oneshot_unit_handle_t adc1_handle;
@@ -62,8 +62,7 @@ void app_main(void)
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
     bool light_calibration_successful, moisture_calibration_successful;
 
-    struct plantData plant_data = {0, 0, 0, 0, 0};
-    struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
+    struct plantDataUpdate p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantDataUpdate* p_ptr = &p;
 
     esp_http_client_handle_t client;
@@ -99,9 +98,7 @@ void app_main(void)
 
     while (1)
     {
-        bool currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
-        // ESP_LOGI(TAG, "Level: %d", currentSwitchLevel);
-        // vTaskDelay(pdMS_TO_TICKS(1000));
+        currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
         
         if(currentSwitchLevel != switch0)
         {
@@ -109,13 +106,11 @@ void app_main(void)
 
             // Read raw data in from ADC
             adc_read(LIGHT, adc1_handle, &adc_raw);
-            //ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_LIGHT_CHANNEL, adc_raw);
 
             // If calibration is enabled, convert raw data to voltage
             if (light_calibration_successful) 
             {
                 adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
-                ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC_LIGHT_CHANNEL, voltage);
             
                 // Error handling for voltage reading
                 if (voltage < 0) 
@@ -129,11 +124,10 @@ void app_main(void)
                     set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
-                    plant_data.lightData = voltage;
-                    //Temporary redundant stor
                     p_ptr->lightIntensity = (float)voltage;
+
                     // Print LED Status and Voltage level as ESP log
-                    ESP_LOGI(TAG, "LEDs ON: Voltage %d mV is below threshold", plant_data.lightData);
+                    ESP_LOGI(TAG, "LEDs ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
                 }
                 // If voltage above or equal to threshold, turn LEDs off
                 else if (voltage >= LED_THRESHOLD)
@@ -142,13 +136,10 @@ void app_main(void)
                     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
-                    plant_data.lightData = voltage;
-                    
-                    //Temporary Redundant Storage for Plant Put test
                     p_ptr->lightIntensity = (float)voltage;
 
                     // Print statement to confirm LEDs are off
-                    ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV is above threshold", plant_data.lightData);
+                    ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
                 }
             }
 
@@ -175,8 +166,6 @@ void app_main(void)
                     ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
             
                 // Update value
-                plant_data.waterData = voltage;
-                //Temp redundant update 
                 p_ptr->soilMoisture = voltage;
             }
             
@@ -199,13 +188,12 @@ void app_main(void)
         {
             // TBD: Send wifi post
             
-            
             http_put_plant_data(client,p_ptr);
             ESP_LOGI(TAG, "HTTP request...");
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
 
-            ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", plant_data.lightData, plant_data.waterData);
+            ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
 
             switch3 = currentSwitchLevel;
         }
