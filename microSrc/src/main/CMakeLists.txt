@@ -2,6 +2,7 @@ idf_component_register(
     SRCS 
         "main.c" 
         "../peripherals/adc.c" 
+        "../peripherals/blinky.c" 
         "../peripherals/gpio.c" 
         "../peripherals/pwm_pump.c"
         "../peripherals/uart_driver.c"
