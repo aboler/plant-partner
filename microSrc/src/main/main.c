@@ -80,25 +80,21 @@ void app_main(void)
     //xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
   
     // Declare variables
-    int adc_raw;
-    int voltage;
+    int adc_raw, voltage;
     bool switch0, switch1, switch2, switch3;
     switch0 = switch1 = switch2 = switch3 = false;
 
-    // Initialize ADC for photoresistor
-    adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
-    adc_oneshot_channel_config(LIGHT, adc1_handle);
-    adc_cali_handle_t light_cali_adc1_handle = NULL;
-    bool light_calibration_successful = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &light_cali_adc1_handle);
+    adc_oneshot_unit_handle_t adc1_handle;
+    adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
+    light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
 
-    // Initialize ADC for moisture sensor
-    //adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
-    adc_oneshot_channel_config(MOISTURE, adc1_handle);
-    adc_cali_handle_t moisture_cali_adc1_handle = NULL;
-    bool moisture_calibration_successful = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &moisture_cali_adc1_handle);
+
+    // Initialize ADC for photoresistor and moisture sensor
+    bool light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
+    bool moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
     // Configure LEDs and inputs
-    // initialize_interrupts(); // Put if want input interrupts but you'll have ot uncomment stuff in gpio
+    // initialize_interrupts(); // Put if want input interrupts but you'll have to uncomment stuff in gpio
     configure_IO(OUTPUT, INTERNAL_BLUE_LED_GPIO);
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     configure_IO(INPUT, SWITCH0_GPIO);
