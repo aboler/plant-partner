@@ -6,7 +6,7 @@
 // Temporary structure for plant data for what could be recorded from sensors
 // May add more/adjust data types as we investigate sensors more
 
-struct plantDataUpdate
+struct plantData
 {   char* plantName;
     uint16_t soilMoisture;
     uint16_t lightIntensity;

@@ -20,7 +20,7 @@
 #include "../http/http.h"
 #include "../wifi/wifi.h"
 
-//static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
+//static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
 
 static esp_err_t nvs_init(){
     esp_err_t ret = nvs_flash_init();
@@ -38,7 +38,7 @@ const static char *TAG = "DEBUG";
 
 /*void http_task(void *pv) {
     
-    struct plantDataUpdate *plant = (struct plantDataUpdate *) pv;
+    struct plantData *plant = (struct plantData *) pv;
     esp_http_client_handle_t client = http_configure_handle();
     http_put_plant_data(client,plant);
     while (1) {
@@ -63,8 +63,8 @@ void app_main(void)
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
     bool light_calibration_successful, moisture_calibration_successful;
 
-    struct plantDataUpdate p = {"Sunflower", 1, 2, 3, 4, 5};
-    struct plantDataUpdate* p_ptr = &p;
+    struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
+    struct plantData* p_ptr = &p;
 
     esp_http_client_handle_t client;
    
