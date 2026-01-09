@@ -13,11 +13,12 @@
 #include "../dataTypes/plantData.h"
 
 // Peripherals
-#include "../peripherals/gpio.h"
 #include "../peripherals/adc.h"
+#include "../peripherals/gpio.h"
+#include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
-#include "../wifi/wifi.h"
 #include "../http/http.h"
+#include "../wifi/wifi.h"
 
 //static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
 
@@ -86,7 +87,7 @@ void app_main(void)
 
     // Configure LEDs and inputs
     // initialize_interrupts(); // Put if want input interrupts but you'll have to uncomment stuff in gpio
-    configure_IO(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+    heartbeat_init();
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     configure_IO(INPUT, SWITCH0_GPIO);
     configure_IO(INPUT, SWITCH1_GPIO);
@@ -117,29 +118,29 @@ void app_main(void)
                 {
                     ESP_LOGW(TAG, "Invalid voltage reading: %d mV", voltage);
                 }
-                // If voltage below threshold, turn LEDs on
+                // If voltage below threshold, turn LED on
                 else if (voltage < LED_THRESHOLD) 
                 {
-                    // Turn on Internal and External LEDs
+                    // Turn on External LED
                     set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
                     p_ptr->lightIntensity = (float)voltage;
 
                     // Print LED Status and Voltage level as ESP log
-                    ESP_LOGI(TAG, "LEDs ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
+                    ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
                 }
                 // If voltage above or equal to threshold, turn LEDs off
                 else if (voltage >= LED_THRESHOLD)
                 {
-                    // Turn off Internal and External LEDs
+                    // Turn off External LED
                     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
                     p_ptr->lightIntensity = (float)voltage;
 
-                    // Print statement to confirm LEDs are off
-                    ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
+                    // Print statement to confirm LED are off
+                    ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
                 }
             }
 
@@ -197,8 +198,6 @@ void app_main(void)
 
             switch3 = currentSwitchLevel;
         }
-
-            toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
             vTaskDelay(pdMS_TO_TICKS(700));   
     }
 

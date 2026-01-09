@@ -1,0 +1,1 @@
+void heartbeat_init();
