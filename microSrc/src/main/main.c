@@ -86,7 +86,6 @@ void app_main(void)
     moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
     // Configure LEDs and inputs
-    // initialize_interrupts(); // Put if want input interrupts but you'll have to uncomment stuff in gpio
     heartbeat_init();
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     configure_IO(INPUT, SWITCH0_GPIO);
