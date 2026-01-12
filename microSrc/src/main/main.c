@@ -138,7 +138,7 @@ void app_main(void)
                     // Store data into plant structure
                     p_ptr->lightIntensity = (float)voltage;
 
-                    // Print statement to confirm LED are off
+                    // Print statement to confirm LED is off
                     ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
                 }
             }
