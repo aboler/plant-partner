@@ -13,15 +13,14 @@
 #include "../dataTypes/plantData.h"
 
 // Peripherals
-#include "../peripherals/gpio.h"
 #include "../peripherals/adc.h"
+#include "../peripherals/gpio.h"
+#include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
-#include "../wifi/wifi.h"
 #include "../http/http.h"
+#include "../wifi/wifi.h"
 
-
-static struct plantDataUpdate pv1 = {"Sunflower",1,2,3,4,5};
-
+//static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
 
 static esp_err_t nvs_init(){
     esp_err_t ret = nvs_flash_init();
@@ -39,7 +38,7 @@ const static char *TAG = "DEBUG";
 
 /*void http_task(void *pv) {
     
-    struct plantDataUpdate *plant = (struct plantDataUpdate *) pv;
+    struct plantData *plant = (struct plantData *) pv;
     esp_http_client_handle_t client = http_configure_handle();
     http_put_plant_data(client,plant);
     while (1) {
@@ -50,56 +49,44 @@ const static char *TAG = "DEBUG";
     }
 }*/
 
-
-
 //all Networking depends on nvs_init()
 
 void app_main(void)
 {
+    // Declare variables
+    int adc_raw, voltage;
+    bool currentSwitchLevel, switch0, switch1, switch2, switch3;
+    switch0 = switch1 = switch2 = switch3 = false;
 
+    adc_oneshot_unit_handle_t adc1_handle;
+    adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
+    light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
+    bool light_calibration_successful, moisture_calibration_successful;
+
+    struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
+    struct plantData* p_ptr = &p;
+
+    esp_http_client_handle_t client;
    
     // Debug Tag
-    
     ESP_ERROR_CHECK(nvs_init());
-    // Initialize plant structure data with test values
 
     start_wifi();
-    struct plantData plant_data = {0, 0, 0, 0, 0};
-    //redundant for testing/prototype
 
-    //Instantiate handle for sending put requests.
-    struct plantDataUpdate p = {"Sunflower",1,2,3,4,5};
-    //For inputting data
-    struct plantDataUpdate* p_ptr = &p;
-
-    esp_http_client_handle_t client = http_configure_handle();
+    client = http_configure_handle();
     http_put_plant_data(client,p_ptr);
 
 
     //TO:DO mutex stuff maybe
     //xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
-  
-    // Declare variables
-    int adc_raw;
-    int voltage;
-    bool switch0, switch1, switch2, switch3;
-    switch0 = switch1 = switch2 = switch3 = false;
 
-    // Initialize ADC for photoresistor
-    adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
-    adc_oneshot_channel_config(LIGHT, adc1_handle);
-    adc_cali_handle_t light_cali_adc1_handle = NULL;
-    bool light_calibration_successful = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &light_cali_adc1_handle);
 
-    // Initialize ADC for moisture sensor
-    //adc_oneshot_unit_handle_t adc1_handle = adc_oneshot_unit1_init();
-    adc_oneshot_channel_config(MOISTURE, adc1_handle);
-    adc_cali_handle_t moisture_cali_adc1_handle = NULL;
-    bool moisture_calibration_successful = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN, &moisture_cali_adc1_handle);
+    // Initialize ADC for photoresistor and moisture sensor
+    light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
+    moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
     // Configure LEDs and inputs
-    // initialize_interrupts(); // Put if want input interrupts but you'll have ot uncomment stuff in gpio
-    configure_IO(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+    heartbeat_init();
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     configure_IO(INPUT, SWITCH0_GPIO);
     configure_IO(INPUT, SWITCH1_GPIO);
@@ -111,9 +98,7 @@ void app_main(void)
 
     while (1)
     {
-        bool currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
-        // ESP_LOGI(TAG, "Level: %d", currentSwitchLevel);
-        // vTaskDelay(pdMS_TO_TICKS(1000));
+        currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
         
         if(currentSwitchLevel != switch0)
         {
@@ -121,46 +106,40 @@ void app_main(void)
 
             // Read raw data in from ADC
             adc_read(LIGHT, adc1_handle, &adc_raw);
-            //ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, ADC_LIGHT_CHANNEL, adc_raw);
 
             // If calibration is enabled, convert raw data to voltage
             if (light_calibration_successful) 
             {
                 adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
-                ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, ADC_LIGHT_CHANNEL, voltage);
             
                 // Error handling for voltage reading
                 if (voltage < 0) 
                 {
                     ESP_LOGW(TAG, "Invalid voltage reading: %d mV", voltage);
                 }
-                // If voltage below threshold, turn LEDs on
+                // If voltage below threshold, turn LED on
                 else if (voltage < LED_THRESHOLD) 
                 {
-                    // Turn on Internal and External LEDs
+                    // Turn on External LED
                     set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
-                    plant_data.lightData = voltage;
-                    //Temporary redundant stor
                     p_ptr->lightIntensity = (float)voltage;
+
                     // Print LED Status and Voltage level as ESP log
-                    ESP_LOGI(TAG, "LEDs ON: Voltage %d mV is below threshold", plant_data.lightData);
+                    ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
                 }
                 // If voltage above or equal to threshold, turn LEDs off
                 else if (voltage >= LED_THRESHOLD)
                 {
-                    // Turn off Internal and External LEDs
+                    // Turn off External LED
                     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
                     // Store data into plant structure
-                    plant_data.lightData = voltage;
-                    
-                    //Temporary Redundant Storage for Plant Put test
                     p_ptr->lightIntensity = (float)voltage;
 
-                    // Print statement to confirm LEDs are off
-                    ESP_LOGI(TAG, "LEDs OFF: Voltage %d mV is above threshold", plant_data.lightData);
+                    // Print statement to confirm LED is off
+                    ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
                 }
             }
 
@@ -187,8 +166,6 @@ void app_main(void)
                     ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
             
                 // Update value
-                plant_data.waterData = voltage;
-                //Temp redundant update 
                 p_ptr->soilMoisture = voltage;
             }
             
@@ -211,18 +188,15 @@ void app_main(void)
         {
             // TBD: Send wifi post
             
-            
             http_put_plant_data(client,p_ptr);
             ESP_LOGI(TAG, "HTTP request...");
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
 
-            ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", plant_data.lightData, plant_data.waterData);
+            ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
 
             switch3 = currentSwitchLevel;
         }
-
-            toggle_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
             vTaskDelay(pdMS_TO_TICKS(700));   
     }
 
