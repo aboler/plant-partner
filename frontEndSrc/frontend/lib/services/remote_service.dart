@@ -3,7 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/plant.dart';
 import 'dart:convert';
 
-const String baseUrl = 'http://10.###.###.###:8000/plants/getPlantByName/Sunflower';
+//const String baseUrl = 'http://10.###.###.###:8000/plants/getPlantByName/Sunflower';
+//const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://172.20.10.7:8000/plants/getPlantByName/Sunflower';
 class RemoteService {
   Future<Plant?> getPlant() async {
     final resp = await http.get(Uri.parse(baseUrl));
