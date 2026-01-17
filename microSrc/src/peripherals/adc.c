@@ -18,7 +18,7 @@ void adc_rawToVoltage(adc_cali_handle_t handle, int raw, int *voltage)
 }
 
 // Initialize ADC calibration for converting raw ADC data to voltage
-static bool adc_calibration_initP(adc_cali_handle_t *calibration_handle)
+static bool adc_calibration_init(adc_cali_handle_t *calibration_handle)
 {
     // Confirm if configuration valid
     esp_err_t ret = ESP_FAIL;
@@ -74,5 +74,5 @@ bool adc_init(adc_oneshot_unit_handle_t *unit_handle, bool component, adc_cali_h
     // Configure channel for specific component
     adc_configure_component_channel(component, unit_handle);
 
-    return adc_calibration_initP(calibration_handle);
+    return adc_calibration_init(calibration_handle);
 }
