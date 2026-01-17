@@ -95,7 +95,7 @@ void app_main(void)
 
     while (1)
     {
-        // STAND IN: Represents receiving database signal modifying state of auto. scheduling
+        // STAND IN: Represents auto. scheduling signal being received
         currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
         
         if(currentSwitchLevel != switch0)
@@ -153,7 +153,6 @@ void app_main(void)
                         modify_pump_duty_cycle(PWM_DUTY_100_PERCENT);
                         vTaskDelay(pdMS_TO_TICKS(800));   
                         modify_pump_duty_cycle(0);
-
                     }
                 }
             }
@@ -171,7 +170,7 @@ void app_main(void)
             switch0 = currentSwitchLevel;
         }  
 
-        // All other CPU to function
+        // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));
     }
 }
