@@ -56,7 +56,6 @@ void app_main(void)
     // Declare variables
     int adc_raw, voltage;
     bool currentSwitchLevel, switch0;
-    switch0 = false;
 
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
@@ -90,6 +89,9 @@ void app_main(void)
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     configure_IO(INPUT, SWITCH0_GPIO);
 
+    clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+    switch0 = (bool)gpio_get_level(SWITCH0_GPIO);
+
     // Configure PWM
     pwm_pump_init();
 
@@ -112,7 +114,7 @@ void app_main(void)
                 }
                 else
                 {
-                    p_ptr->lightIntensity = (float)voltage;
+                    p_ptr->lightIntensity = voltage;
 
                     if (voltage < LED_THRESHOLD)
                     {
@@ -141,7 +143,7 @@ void app_main(void)
                 }
                 else
                 {
-                    p_ptr->soilMoisture = (float)voltage;
+                    p_ptr->soilMoisture = voltage;
 
                     if(voltage < 100)
                         ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
