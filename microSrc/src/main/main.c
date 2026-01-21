@@ -92,8 +92,9 @@ void app_main(void)
     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
     switch0 = (bool)gpio_get_level(SWITCH0_GPIO);
 
-    // Configure PWM
-    pwm_pump_init();
+    // Configure PWMs
+    pwm_pump_init(WATER);
+    pwm_pump_init(FERTLIZER);
 
     while (1)
     {
@@ -152,14 +153,18 @@ void app_main(void)
                         ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
 
                         // Actuate water pump
-                        modify_pump_duty_cycle(PWM_DUTY_100_PERCENT);
+                        modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
                         vTaskDelay(pdMS_TO_TICKS(800));   
-                        modify_pump_duty_cycle(0);
+                        modify_pump_duty_cycle(WATER, 0);
                     }
                 }
             }
 
             // 3. Assess and store nutrient data
+            // Actuate fertilizer pump
+            modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+            vTaskDelay(pdMS_TO_TICKS(800));   
+            modify_pump_duty_cycle(FERTLIZER, 0);
 
             // 4. Send data to database
             http_put_plant_data(client,p_ptr);
