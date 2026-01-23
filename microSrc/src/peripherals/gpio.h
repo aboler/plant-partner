@@ -3,7 +3,7 @@
 
 #include "driver/gpio.h"
 
-#define LED_THRESHOLD          650
+#define LED_THRESHOLD          1250  // Voltage threshold in mV for LED control
 #define EXTERNAL_LED_GPIO      GPIO_NUM_14
 #define INTERNAL_BLUE_LED_GPIO GPIO_NUM_2
 #define SWITCH0_GPIO           GPIO_NUM_35
