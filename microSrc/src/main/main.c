@@ -55,7 +55,7 @@ void app_main(void)
 {
     // Declare variables
     int adc_raw, voltage;
-    bool currentSwitchLevel, switch0;
+    bool current_switch_level, switch0;
 
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
@@ -99,9 +99,9 @@ void app_main(void)
     while (1)
     {
         // STAND IN: Represents auto. scheduling signal being received
-        currentSwitchLevel = (bool)gpio_get_level(SWITCH0_GPIO);
+        current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
         
-        if(currentSwitchLevel != switch0)
+        if(current_switch_level != switch0)
         {
             // 1. Assess and store light if configured
             if(light_calibration_successful)
@@ -174,7 +174,7 @@ void app_main(void)
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
 
             // 5. Update switch value
-            switch0 = currentSwitchLevel;
+            switch0 = current_switch_level;
         }  
 
         // Must be at end of while loop, allows other CPU to activate
