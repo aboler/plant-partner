@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { set } from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import route from "./routes/sensorRoute.js";
@@ -8,24 +8,38 @@ import cors from "cors";
 import mqtt from "mqtt";
 import http from "http";
 
-// MQTT Broker Setup
+// MQTT Client Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
-const mqttClient = mqtt.connect(MQTT_BROKER_URL);
 
-mqttClient.on('connect', () => {
-    console.log('Connected to MQTT Broker');
-    mqttClient.subscribe('sensors/updates', (err) => {
-        if (!err) {
-            console.log('Subscribed to sensors/updates topic');
-        } else {
-            console.error('Subscription error:', err);
-        }
-    });
+const client = mqtt.connect(MQTT_BROKER_URL, {
+    clientId: 'backend_server_' + Math.random().toString(16).substr(2, 8),
+    clean: true,
+    connectTimeout: 4000,
 });
 
-mqttClient.on('message', (topic, message) => {
-    console.log(`Received message on topic ${topic}: ${message.toString()}`);
-    // Here you can add logic to process the message and update the database if needed
+const topic = 'sensors/updates';
+
+client.on('connect', () => {
+    console.log('MQTT Client Connected');
+});
+
+function publishControlMessage(message) {
+    client.publish(topic, message, { qos: 0, retain: false }, (error) => {
+        if (error) {
+            console.error('Publish error:', error);
+        } else {
+            console.log(`Control Message "${message}" published to topic "${topic}"`);
+        }
+    });
+}
+
+setTimeout(() => {
+    publishControlMessage('TURN_ON');
+    client.end();
+}, 5000);
+
+client.on('error', (error) => {
+    console.error('MQTT Client Error:', error);
 });
 
 // Backend Server Setup
