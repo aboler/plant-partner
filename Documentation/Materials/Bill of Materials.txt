@@ -25,6 +25,7 @@ Documentation links: https://www.micros.com.pl/mediaserver/info-orrgl5539.pdf
 RS485-UART Transceiver:
 https://www.amazon.com/Transceiver-Featuring-Instrument-Communication-Development/dp/B00NIOLNAG/ref=sr_1_5?dib=eyJ2IjoiMSJ9.nTk8vnAL6V4xfy7s_tIez72rCzK3JwCWSpJCxqyiUEZsGJ9rK0bhmbKUgFgBXmFVzSOPhkrGecMtefl3FPyU6b5y3DbZmwsk18GuHc8mMHDqxCzLnhplX9ydE30dcg1ckiVq2wP9yBJ4Dcw__GAQkKms9l0tFgU7WPkZVhLIaiUjR28OBYAgHXTv-mSesxZg5zjX5ulmPqf8BrYX4Q65_6LVvW_8QY0NJqsC-XO_NJA._Pm98F95ytK2AYTl679z2o7Vvz4u17IBF0m0DfgDf3g&dib_tag=se&keywords=rs485+transceiver&qid=1761337331&sr=8-5
 Communication Protocol: Takes in RS485 from NPK Sensor and turns it to UART
+Documentation Links: https://www.flywing-tech.com/blog/max485-ic-rs-485-communication-driver-pinout-datasheet-applications/ 
 
 ______________________________________
 Pump Circuit:
