@@ -55,12 +55,12 @@ void app_main(void)
 {
     // Declare variables
     int adc_raw, voltage;
-    bool current_switch_level, switch0;
+    bool auto_care_on, light_calibration_successful, moisture_calibration_successful, current_switch_level, switch0;
+    auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
 
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
-    bool light_calibration_successful, moisture_calibration_successful;
 
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData* p_ptr = &p;
@@ -116,18 +116,6 @@ void app_main(void)
                 else
                 {
                     p_ptr->lightIntensity = voltage;
-
-                    if (voltage < LED_THRESHOLD)
-                    {
-                        set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                        ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
-                    }
-                    else
-                    {
-                        clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                        ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
-                    }
-
                 }
 
             }
@@ -145,35 +133,56 @@ void app_main(void)
                 else
                 {
                     p_ptr->soilMoisture = voltage;
-
-                    if(voltage < 100)
-                        ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
-                    else
-                    {
-                        ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
-
-                        // Actuate water pump
-                        modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
-                        vTaskDelay(pdMS_TO_TICKS(800));   
-                        modify_pump_duty_cycle(WATER, 0);
-                    }
                 }
             }
 
             // 3. Assess and store nutrient data
-            // Actuate fertilizer pump
-            modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-            vTaskDelay(pdMS_TO_TICKS(800));   
-            modify_pump_duty_cycle(FERTLIZER, 0);
+            
 
-            // 4. Send data to database
+
+            // 4. Actuate if auto_schedule is on AND if needed
+            if (auto_care_on)
+            {
+                // Light
+                if (p_ptr->lightIntensity < LED_THRESHOLD)
+                {
+                    set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+                    ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
+                }
+                else
+                {
+                    clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+                    ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
+                }
+
+                // Moisture
+                if(p_ptr->soilMoisture < 100)
+                    ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                else
+                {
+                    ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+
+                    // Actuate water pump
+                    modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
+                    vTaskDelay(pdMS_TO_TICKS(800));   
+                    modify_pump_duty_cycle(WATER, 0);
+                }
+
+                // Fertilizer
+                // TBD: PUT THIS IN IF STATEMENT LIKE ^^ TO REACT BASED ON READINGS
+                modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+                vTaskDelay(pdMS_TO_TICKS(800));   
+                modify_pump_duty_cycle(FERTLIZER, 0);
+            }
+
+            // 5. Send data to database
             http_put_plant_data(client,p_ptr);
             ESP_LOGI(TAG, "HTTP request...");
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
 
-            // 5. Update switch value
+            // 6. Update switch value
             switch0 = current_switch_level;
         }  
 
