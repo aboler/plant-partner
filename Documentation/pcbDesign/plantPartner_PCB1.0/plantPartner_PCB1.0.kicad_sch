@@ -4158,6 +4158,16 @@
 		)
 		(uuid "960892a4-ef4f-45f5-9f4c-aa08910a1a3d")
 	)
+	(text "Double Check resistor and capacitor values since Schematic is 12V not 5V\n"
+		(exclude_from_sim no)
+		(at 197.104 81.534 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "d2a3fa03-4da0-4f9a-914b-2154b7344203")
+	)
 	(junction
 		(at 50.8 53.34)
 		(diameter 0)
