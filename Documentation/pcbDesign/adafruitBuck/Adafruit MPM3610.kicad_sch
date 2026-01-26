@@ -2,10 +2,10 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
-	(uuid "434b672c-d2e6-48a8-9782-502e33fb6b5c")
+	(uuid "d8402897-33ac-47c9-a77a-f7e046be1a3f")
 	(paper "User" 303.962 217.322)
 	(lib_symbols
-		(symbol "buckConverter-eagle-import:3.3V"
+		(symbol "Adafruit MPM3610-eagle-import:3.3V"
 			(power)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -109,7 +109,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:CAP_CERAMIC0805-NOOUTLINE"
+		(symbol "Adafruit MPM3610-eagle-import:CAP_CERAMIC0805-NOOUTLINE"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -129,7 +129,7 @@
 					)
 				)
 			)
-			(property "Footprint" "buckConverter:0805-NO"
+			(property "Footprint" "Adafruit MPM3610:0805-NO"
 				(at 0 0 0)
 				(effects
 					(font
@@ -250,7 +250,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:FIDUCIAL_1MM"
+		(symbol "Adafruit MPM3610-eagle-import:FIDUCIAL_1MM"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -272,7 +272,7 @@
 					(hide yes)
 				)
 			)
-			(property "Footprint" "buckConverter:FIDUCIAL_1MM"
+			(property "Footprint" "Adafruit MPM3610:FIDUCIAL_1MM"
 				(at 0 0 0)
 				(effects
 					(font
@@ -346,7 +346,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:FRAME_A4"
+		(symbol "Adafruit MPM3610-eagle-import:FRAME_A4"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1533,7 +1533,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:GND"
+		(symbol "Adafruit MPM3610-eagle-import:GND"
 			(power)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1625,7 +1625,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:HEADER-1X4ROUND"
+		(symbol "Adafruit MPM3610-eagle-import:HEADER-1X4ROUND"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1647,7 +1647,7 @@
 					(justify left bottom)
 				)
 			)
-			(property "Footprint" "buckConverter:1X04_ROUND"
+			(property "Footprint" "Adafruit MPM3610:1X04_ROUND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1806,7 +1806,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:MOUNTINGHOLE2.5"
+		(symbol "Adafruit MPM3610-eagle-import:MOUNTINGHOLE2.5"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1828,7 +1828,7 @@
 					(hide yes)
 				)
 			)
-			(property "Footprint" "buckConverter:MOUNTINGHOLE_2.5_PLATED"
+			(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_2.5_PLATED"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1889,7 +1889,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:MPM3610"
+		(symbol "Adafruit MPM3610-eagle-import:MPM3610"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1911,7 +1911,7 @@
 					(hide yes)
 				)
 			)
-			(property "Footprint" "buckConverter:MPM3610"
+			(property "Footprint" "Adafruit MPM3610:MPM3610"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2303,7 +2303,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:RESISTOR_0603_NOOUT"
+		(symbol "Adafruit MPM3610-eagle-import:RESISTOR_0603_NOOUT"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2325,7 +2325,7 @@
 					)
 				)
 			)
-			(property "Footprint" "buckConverter:0603-NO"
+			(property "Footprint" "Adafruit MPM3610:0603-NO"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2448,7 +2448,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "buckConverter-eagle-import:VIN"
+		(symbol "Adafruit MPM3610-eagle-import:VIN"
 			(power)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2554,22 +2554,22 @@
 		)
 	)
 	(junction
+		(at 132.08 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "164c9a83-9385-4375-a780-23bb924e4430")
+	)
+	(junction
 		(at 106.68 76.2)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "48c00118-eb72-4664-8a37-c0b39a2c5d25")
+		(uuid "370c4154-5ddb-492c-b4b6-4a427fd0ed9a")
 	)
 	(junction
 		(at 132.08 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b2805cb8-7cbb-4761-ad92-1a4d88aa632f")
-	)
-	(junction
-		(at 132.08 53.34)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c059f128-ef2f-4cb0-8572-3f8d7a2000d6")
+		(uuid "707ad04a-0348-4415-ae8f-8b13930e84c7")
 	)
 	(wire
 		(pts
@@ -2579,117 +2579,7 @@
 			(width 0.1524)
 			(type solid)
 		)
-		(uuid "01df99b9-4485-434a-a8e5-e29dbac03a6d")
-	)
-	(wire
-		(pts
-			(xy 142.24 129.54) (xy 142.24 124.46)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "0ee6034e-cb83-4674-8ddd-8b29217e99e9")
-	)
-	(wire
-		(pts
-			(xy 91.44 58.42) (xy 78.74 58.42)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "300d215f-c10c-44d7-86f0-bdac7cfcd23a")
-	)
-	(wire
-		(pts
-			(xy 132.08 43.18) (xy 132.08 53.34)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "345d0bc8-a33a-4e3b-a05c-775de108b8df")
-	)
-	(wire
-		(pts
-			(xy 68.58 63.5) (xy 68.58 66.04)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "354705b1-c007-42a3-ac2d-dcbc1e0dcec0")
-	)
-	(wire
-		(pts
-			(xy 111.76 76.2) (xy 106.68 76.2)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "3560bae3-8d73-4701-9281-691416c736d7")
-	)
-	(wire
-		(pts
-			(xy 83.82 43.18) (xy 83.82 53.34)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "3af56846-4379-43b5-b839-8ef79bef416e")
-	)
-	(wire
-		(pts
-			(xy 127 63.5) (xy 132.08 63.5)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "5374c314-f9ce-4a86-9e5f-1b66406abca7")
-	)
-	(wire
-		(pts
-			(xy 152.4 124.46) (xy 142.24 124.46)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "56196507-9c27-4ca2-bd38-e321c8a412c6")
-	)
-	(wire
-		(pts
-			(xy 91.44 66.04) (xy 78.74 66.04)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "6aa9693e-7f74-4717-bc52-a2b87a26995c")
-	)
-	(wire
-		(pts
-			(xy 139.7 129.54) (xy 139.7 121.92)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "73433b9c-b0da-4c54-bc2a-0787013d580f")
-	)
-	(wire
-		(pts
-			(xy 134.62 129.54) (xy 134.62 132.08)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "965a2b09-e4ca-498e-8988-2b1adeacd39f")
+		(uuid "003d6962-7a4b-4064-8031-fed27eb46518")
 	)
 	(wire
 		(pts
@@ -2699,47 +2589,7 @@
 			(width 0.1524)
 			(type solid)
 		)
-		(uuid "9d8b8804-341c-441a-91af-825ddd2c1454")
-	)
-	(wire
-		(pts
-			(xy 68.58 50.8) (xy 68.58 55.88)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "a0a59ca2-3310-4c1a-8ab8-ac7a87318409")
-	)
-	(wire
-		(pts
-			(xy 78.74 48.26) (xy 78.74 43.18)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "a3baa94b-afb0-4c4b-8bbe-7dc5f7eebd91")
-	)
-	(wire
-		(pts
-			(xy 147.32 55.88) (xy 147.32 50.8)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "ab1f8124-282c-4a28-ace9-af6657d8f09c")
-	)
-	(wire
-		(pts
-			(xy 147.32 63.5) (xy 147.32 66.04)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "b3ccc92d-9516-4d64-bb9a-e0ba87fe0348")
+		(uuid "00f26f8e-338b-4d2c-84da-5627c4fccc41")
 	)
 	(wire
 		(pts
@@ -2749,7 +2599,97 @@
 			(width 0.1524)
 			(type solid)
 		)
-		(uuid "cd51dd0a-cada-4d75-8683-e0a6bc5b9261")
+		(uuid "081e1560-0e7f-4c41-9ed5-b9626671b89f")
+	)
+	(wire
+		(pts
+			(xy 139.7 129.54) (xy 139.7 121.92)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "1eafb605-1645-4ef6-b64b-23e070b11b60")
+	)
+	(wire
+		(pts
+			(xy 91.44 58.42) (xy 78.74 58.42)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "220cff73-a3eb-4572-8ac0-842ec65f9186")
+	)
+	(wire
+		(pts
+			(xy 147.32 55.88) (xy 147.32 50.8)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "30186cad-e483-4efc-92e7-da5f6bb7cd73")
+	)
+	(wire
+		(pts
+			(xy 132.08 43.18) (xy 132.08 53.34)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "4391ccf1-2813-489b-bd1e-ebe50856290b")
+	)
+	(wire
+		(pts
+			(xy 91.44 66.04) (xy 78.74 66.04)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "48524433-c7c9-4608-b7aa-5325603fb4b8")
+	)
+	(wire
+		(pts
+			(xy 68.58 50.8) (xy 68.58 55.88)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "4a5b5cb3-a5c2-496b-a013-fa0f9ee905a7")
+	)
+	(wire
+		(pts
+			(xy 147.32 63.5) (xy 147.32 66.04)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "66d1a090-299e-456e-8f28-90efb82a2d8d")
+	)
+	(wire
+		(pts
+			(xy 142.24 129.54) (xy 142.24 124.46)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "7404082d-73fb-4d18-80e6-3f652a21ca16")
+	)
+	(wire
+		(pts
+			(xy 68.58 63.5) (xy 68.58 66.04)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "7f45576c-75e9-45e8-a3ec-df6ab41890a5")
 	)
 	(wire
 		(pts
@@ -2759,7 +2699,47 @@
 			(width 0.1524)
 			(type solid)
 		)
-		(uuid "e0a682ce-70f8-43c2-b7fe-dda42977518d")
+		(uuid "80ec5f4d-02e9-4bf7-b407-90e45f0659ec")
+	)
+	(wire
+		(pts
+			(xy 83.82 43.18) (xy 83.82 53.34)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "87e2476a-64a3-4fdf-bfd6-b017f8080775")
+	)
+	(wire
+		(pts
+			(xy 78.74 48.26) (xy 78.74 43.18)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "a8cdddba-8ec2-47e5-9124-8c5e84e81e33")
+	)
+	(wire
+		(pts
+			(xy 127 63.5) (xy 132.08 63.5)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "c0f8f008-d46c-49da-b4e3-a43051947d6c")
+	)
+	(wire
+		(pts
+			(xy 152.4 124.46) (xy 142.24 124.46)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "c7ed55a7-4a86-4402-b24b-b134c8ce43b5")
 	)
 	(wire
 		(pts
@@ -2769,27 +2749,27 @@
 			(width 0.1524)
 			(type solid)
 		)
-		(uuid "fc409683-0f57-450f-a29a-6a47f18a1a0a")
+		(uuid "ec1c2bf2-7ca8-4ba5-a71e-d7236e5824ff")
 	)
-	(label "EN"
-		(at 83.82 58.42 0)
-		(effects
-			(font
-				(size 1.2446 1.2446)
-			)
-			(justify left bottom)
+	(wire
+		(pts
+			(xy 134.62 129.54) (xy 134.62 132.08)
 		)
-		(uuid "1cea0c61-6fe5-4404-9cc6-36ae0d3f5616")
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "ee3dadb1-4e5b-4d4d-9507-317bfc3d542e")
 	)
-	(label "EN"
-		(at 147.32 124.46 0)
-		(effects
-			(font
-				(size 1.2446 1.2446)
-			)
-			(justify left bottom)
+	(wire
+		(pts
+			(xy 111.76 76.2) (xy 106.68 76.2)
 		)
-		(uuid "96665dfe-50a5-43fe-8e03-db5e68a1b54d")
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "fb9f4a64-ea9c-4fa2-b53a-cd3b45feb388")
 	)
 	(label "SW"
 		(at 81.28 66.04 0)
@@ -2799,7 +2779,17 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a6ebfaf6-6046-4a72-94fc-6ddce0b54fe6")
+		(uuid "1bffd932-19b5-499b-83de-3102008214bc")
+	)
+	(label "EN"
+		(at 147.32 124.46 0)
+		(effects
+			(font
+				(size 1.2446 1.2446)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ff2e01c-50cd-4417-983e-c9c175799ac4")
 	)
 	(label "FB"
 		(at 127 63.5 0)
@@ -2809,7 +2799,17 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b00d1ac8-f74d-43af-a2db-ae0b12c34961")
+		(uuid "4c3d1539-e25f-4f85-ab58-7773d9d52509")
+	)
+	(label "EN"
+		(at 83.82 58.42 0)
+		(effects
+			(font
+				(size 1.2446 1.2446)
+			)
+			(justify left bottom)
+		)
+		(uuid "f4c51a13-e0d0-4847-8685-00b7b20b9b0c")
 	)
 	(global_label "VCC"
 		(shape bidirectional)
@@ -2821,7 +2821,7 @@
 			)
 			(justify left)
 		)
-		(uuid "9f9febff-981e-4ec9-b8d4-2fe2e5032813")
+		(uuid "3fd3373b-e087-4e99-bb5d-e28a5ee2ab9b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 133.1798 50.8 0)
 			(effects
@@ -2834,398 +2834,14 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:VIN")
-		(at 142.24 116.84 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "17f092a5-1ab4-4abb-8913-29206ea766d0")
-		(property "Reference" "#U$6"
-			(at 142.24 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VIN"
-			(at 140.716 115.824 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 142.24 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 142.24 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 142.24 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "11726e84-8adb-4d7c-85b3-3a24a8eacd55")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:GND")
-		(at 132.08 76.2 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1c619727-d116-4a80-bed2-6bb655edff60")
-		(property "Reference" "#U$5"
-			(at 132.08 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 130.556 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 132.08 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 132.08 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 132.08 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3ac64c5f-bafb-42b5-ba55-d5784bc0dc5b")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:GND")
-		(at 68.58 68.58 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1f37950b-7632-49bf-871b-48eaad3a686f")
-		(property "Reference" "#U$3"
-			(at 68.58 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 67.056 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 68.58 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 68.58 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 68.58 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "956f7a58-a1bd-48df-b649-a4eecbfb4dc0")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:MPM3610")
-		(at 109.22 58.42 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "22c8b420-e4bb-4c6c-9069-f8460ca55c47")
-		(property "Reference" "IC1"
-			(at 96.52 73.66 0)
-			(effects
-				(font
-					(size 1.778 1.5113)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "MPM3610"
-			(at 109.22 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "buckConverter:MPM3610"
-			(at 109.22 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 109.22 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 109.22 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "16"
-			(uuid "a2068091-bfa8-453a-a3be-19d2711fb61d")
-		)
-		(pin "17"
-			(uuid "ff1e7f70-063d-4215-8d31-7832795f3a2b")
-		)
-		(pin "18"
-			(uuid "b3215a60-19fa-4d05-9acb-1d9f92ca0886")
-		)
-		(pin "4"
-			(uuid "89cebec6-f719-4533-9aac-5bfd64558fb8")
-		)
-		(pin "5"
-			(uuid "e31736e3-a90b-42ba-b5cc-234d1fe283ea")
-		)
-		(pin "6"
-			(uuid "ebb03c16-eb28-4810-8456-97ff9907b606")
-		)
-		(pin "11"
-			(uuid "6d44e520-b17d-446a-ab55-567c0fd301a2")
-		)
-		(pin "3"
-			(uuid "9c6e3989-cb72-470a-b2b1-a131b1473ffe")
-		)
-		(pin "12"
-			(uuid "bcbd60e5-ed1b-47d9-a36c-6520de8531be")
-		)
-		(pin "13"
-			(uuid "24925d43-d0c9-4e3c-8e12-7d5834a71720")
-		)
-		(pin "14"
-			(uuid "edc5f19e-ad3f-4380-94a1-25b4160d9ae3")
-		)
-		(pin "2"
-			(uuid "fd265b8c-6a71-4c2d-9cf2-2982b751f747")
-		)
-		(pin "7"
-			(uuid "1c09ba53-b4bd-42a5-8000-a6227af04fa1")
-		)
-		(pin "8"
-			(uuid "2c0f3d48-e5a8-4f3d-9e0a-2d55e748c420")
-		)
-		(pin "9"
-			(uuid "0626786c-c770-4d9f-9554-de606093bed9")
-		)
-		(pin "1"
-			(uuid "30ad8221-1d68-4f50-96c0-3f1d850e9c5a")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "IC1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:HEADER-1X4ROUND")
-		(at 137.16 132.08 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3fe3724b-9efb-4601-99ed-8cc63312eda8")
-		(property "Reference" "JP1"
-			(at 145.415 125.73 0)
-			(effects
-				(font
-					(size 1.778 1.5113)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "HEADER-1X4ROUND"
-			(at 129.54 125.73 0)
-			(effects
-				(font
-					(size 1.778 1.5113)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "buckConverter:1X04_ROUND"
-			(at 137.16 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 137.16 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bf42fbd7-01c2-40fc-b4fc-7b5b2bfd63ae")
-		)
-		(pin "2"
-			(uuid "8debcab4-4329-41f1-a0b9-e2a13e3a5127")
-		)
-		(pin "3"
-			(uuid "354946da-63f3-4dca-9347-932dac8d4bfe")
-		)
-		(pin "4"
-			(uuid "98ffd15c-dece-4776-93f1-3608bb2daf6e")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "JP1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:RESISTOR_0603_NOOUT")
+		(lib_id "Adafruit MPM3610-eagle-import:RESISTOR_0603_NOOUT")
 		(at 132.08 58.42 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "45de9154-825e-4e89-b69e-b2cdcbcfe939")
+		(uuid "05fe71e6-291f-4011-bb7e-ccff30a15348")
 		(property "Reference" "R2"
 			(at 134.62 58.42 0)
 			(effects
@@ -3244,7 +2860,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-NO"
+		(property "Footprint" "Adafruit MPM3610:0603-NO"
 			(at 132.08 58.42 0)
 			(effects
 				(font
@@ -3272,14 +2888,14 @@
 			)
 		)
 		(pin "1"
-			(uuid "d708d95e-9830-45de-9169-20fa4b6199b0")
+			(uuid "8fecaeee-1019-4e43-849b-7c98c9f532e5")
 		)
 		(pin "2"
-			(uuid "3b301d9a-13ff-4c8a-b008-d522d27a45bf")
+			(uuid "ed232186-9ced-4905-a227-2e90f30ee75a")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "R2")
 					(unit 1)
 				)
@@ -3287,14 +2903,14 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:RESISTOR_0603_NOOUT")
+		(lib_id "Adafruit MPM3610-eagle-import:RESISTOR_0603_NOOUT")
 		(at 78.74 53.34 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4ee6aaea-7be8-41db-85cc-9a3101d0ba0d")
+		(uuid "0b101deb-1683-4488-87ca-e81ed9f412fe")
 		(property "Reference" "R1"
 			(at 81.28 53.34 0)
 			(effects
@@ -3313,7 +2929,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-NO"
+		(property "Footprint" "Adafruit MPM3610:0603-NO"
 			(at 78.74 53.34 0)
 			(effects
 				(font
@@ -3341,14 +2957,14 @@
 			)
 		)
 		(pin "1"
-			(uuid "f6de22bd-dd48-469c-9be6-ad81315719db")
+			(uuid "9edf1058-adee-4435-ab38-67e041890025")
 		)
 		(pin "2"
-			(uuid "04e38c28-0d05-413b-befe-4f3fa9df295a")
+			(uuid "c3ffd084-1367-4642-938c-eb5503263fdf")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "R1")
 					(unit 1)
 				)
@@ -3356,16 +2972,16 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:VIN")
-		(at 83.82 40.64 0)
-		(unit 1)
+		(lib_id "Adafruit MPM3610-eagle-import:FRAME_A4")
+		(at 152.4 195.58 0)
+		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5d7f2567-82f0-4b7f-87e2-7bf5de00e0d4")
-		(property "Reference" "#U$14"
-			(at 83.82 40.64 0)
+		(uuid "1217d211-40c9-4e7c-8aa7-d964c177a3ef")
+		(property "Reference" "#FRAME1"
+			(at 152.4 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3373,17 +2989,17 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "VIN"
-			(at 82.296 39.624 0)
+		(property "Value" "FRAME_A4"
+			(at 152.4 195.58 0)
 			(effects
 				(font
-					(size 1.27 1.0795)
+					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(hide yes)
 			)
 		)
 		(property "Footprint" ""
-			(at 83.82 40.64 0)
+			(at 152.4 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3392,7 +3008,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 83.82 40.64 0)
+			(at 152.4 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3401,7 +3017,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 83.82 40.64 0)
+			(at 152.4 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3409,27 +3025,24 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "c81d402a-9aba-4bfd-b086-4aedc3869ac6")
-		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$14")
-					(unit 1)
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#FRAME1")
+					(unit 2)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:VIN")
+		(lib_id "Adafruit MPM3610-eagle-import:VIN")
 		(at 68.58 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "71a88220-8caf-4023-9ce0-0f9210a66cb7")
+		(uuid "1c69c6ff-bd3b-4a93-a2a2-ef1a6aeada87")
 		(property "Reference" "#U$4"
 			(at 68.58 48.26 0)
 			(effects
@@ -3476,11 +3089,11 @@
 			)
 		)
 		(pin "1"
-			(uuid "645f2dea-1e3a-4f58-a601-52b1c5d6a874")
+			(uuid "28238bb8-8c80-4904-83fa-7aa1d34d4b48")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "#U$4")
 					(unit 1)
 				)
@@ -3488,534 +3101,14 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:GND")
-		(at 134.62 134.62 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7990f5c4-99d5-417d-8884-c4e32f9f4102")
-		(property "Reference" "#U$8"
-			(at 134.62 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 133.096 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 134.62 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 134.62 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 134.62 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "81d24be0-b627-4063-9ff0-ee426f162c45")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:3.3V")
-		(at 137.16 116.84 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7a581010-48c8-41ca-81c3-183cc328e9da")
-		(property "Reference" "#U$7"
-			(at 137.16 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "3.3V"
-			(at 135.636 115.824 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 137.16 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 137.16 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7a8ce38a-9947-4aa9-b555-b27936293f02")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:FRAME_A4")
-		(at 152.4 195.58 0)
-		(unit 2)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "90fc851b-df2a-413a-96e0-57a7fb9cffbc")
-		(property "Reference" "#FRAME1"
-			(at 152.4 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "FRAME_A4"
-			(at 152.4 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 152.4 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 152.4 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 152.4 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#FRAME1")
-					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:3.3V")
-		(at 147.32 48.26 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9ba3d0d1-5c6d-41a9-8473-804fe88bd151")
-		(property "Reference" "#U$2"
-			(at 147.32 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "3.3V"
-			(at 145.796 47.244 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 147.32 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 147.32 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a8e9bd73-86e3-44bb-96fe-df490eb42315")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:CAP_CERAMIC0805-NOOUTLINE")
-		(at 147.32 60.96 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ae124812-46cf-4c35-af45-50d8faf06a5e")
-		(property "Reference" "C1"
-			(at 145.03 59.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "22uF"
-			(at 149.62 59.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "buckConverter:0805-NO"
-			(at 147.32 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 147.32 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d6d70638-9b14-4d89-a295-653477e86b57")
-		)
-		(pin "2"
-			(uuid "b70ceb4f-a53a-432e-8d76-a268b25619af")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "C1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:VIN")
-		(at 78.74 40.64 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b9c007ce-79fe-4b95-aa31-23d8f73cde59")
-		(property "Reference" "#U$12"
-			(at 78.74 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VIN"
-			(at 77.216 39.624 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 78.74 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 78.74 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 78.74 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "75c00009-5eec-409d-a4a7-ffe390374455")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:MOUNTINGHOLE2.5")
-		(at 261.62 157.48 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c2205336-36cb-4604-9160-c85c4f7321a5")
-		(property "Reference" "U$9"
-			(at 261.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "MOUNTINGHOLE2.5"
-			(at 261.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_2.5_PLATED"
-			(at 261.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 261.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 261.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "U$9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:FIDUCIAL_1MM")
-		(at 269.24 157.48 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ca902392-7819-4520-9a53-faeca9a5bb33")
-		(property "Reference" "FID1"
-			(at 269.24 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "FIDUCIAL_1MM"
-			(at 269.24 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "buckConverter:FIDUCIAL_1MM"
-			(at 269.24 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 269.24 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 269.24 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "FID1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:3.3V")
+		(lib_id "Adafruit MPM3610-eagle-import:3.3V")
 		(at 132.08 40.64 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ce5287f0-8033-4ce0-b1ba-6ece633bf69f")
+		(uuid "38895c8c-7f79-4139-a9f1-81d2acecf7fb")
 		(property "Reference" "#U$15"
 			(at 132.08 40.64 0)
 			(effects
@@ -4062,11 +3155,11 @@
 			)
 		)
 		(pin "1"
-			(uuid "96876a85-3495-4e49-9078-2bf6a33433d8")
+			(uuid "083d6e9f-80b0-48ae-a60a-25e155809e50")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "#U$15")
 					(unit 1)
 				)
@@ -4074,14 +3167,615 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:GND")
+		(lib_id "Adafruit MPM3610-eagle-import:GND")
+		(at 134.62 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3b16ca18-8f95-42a3-a32d-51517c8f996f")
+		(property "Reference" "#U$8"
+			(at 134.62 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 133.096 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 134.62 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 134.62 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "007226cf-7404-4074-af51-366fd740e928")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:GND")
+		(at 147.32 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4d987f56-2e75-4120-ab29-be7dfe29ae9e")
+		(property "Reference" "#U$1"
+			(at 147.32 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 145.796 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 147.32 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 147.32 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e92bc8de-1e7a-4656-af6f-8104061eb888")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:CAP_CERAMIC0805-NOOUTLINE")
+		(at 147.32 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "53e1339b-ab79-4cf6-b30c-9b79a0d9c5da")
+		(property "Reference" "C1"
+			(at 145.03 59.71 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22uF"
+			(at 149.62 59.71 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Adafruit MPM3610:0805-NO"
+			(at 147.32 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 147.32 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a7e9c4ef-8c49-4fb4-99a4-162076236c7f")
+		)
+		(pin "2"
+			(uuid "74159e07-4c1a-4172-9a95-65e32a684e02")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:FIDUCIAL_1MM")
+		(at 269.24 157.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5f2d5db0-ad54-47c6-a7b9-42c954e43176")
+		(property "Reference" "FID1"
+			(at 269.24 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "FIDUCIAL_1MM"
+			(at 269.24 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Adafruit MPM3610:FIDUCIAL_1MM"
+			(at 269.24 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 269.24 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 269.24 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "FID1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:VIN")
+		(at 142.24 116.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "66b9edb0-08ac-4334-bf97-e0bb2c32c14e")
+		(property "Reference" "#U$6"
+			(at 142.24 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VIN"
+			(at 140.716 115.824 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 142.24 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.24 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 142.24 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "148caacc-cee4-472f-889f-9418533e07ce")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:GND")
+		(at 68.58 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8120805b-1abe-47ba-9c65-756d82d7fc77")
+		(property "Reference" "#U$3"
+			(at 68.58 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 67.056 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 68.58 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 68.58 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 68.58 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cf657581-e556-4912-b2cc-86ac76fbd92a")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:GND")
+		(at 132.08 76.2 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "82f35101-39ac-4337-a3f7-9b4a2e676abf")
+		(property "Reference" "#U$5"
+			(at 132.08 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 130.556 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 132.08 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 132.08 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6f7df597-22bc-46f5-ac95-24b1b6664bf9")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:VIN")
+		(at 83.82 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "87cf0302-e410-4c47-ad15-137c41a1df8b")
+		(property "Reference" "#U$14"
+			(at 83.82 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VIN"
+			(at 82.296 39.624 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.82 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 83.82 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8a3c03f0-1f20-445d-80c0-5633820ff631")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:HEADER-1X4ROUND")
+		(at 137.16 132.08 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "89776e75-6f54-45d0-8398-423b6b4c2cf9")
+		(property "Reference" "JP1"
+			(at 145.415 125.73 0)
+			(effects
+				(font
+					(size 1.778 1.5113)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "HEADER-1X4ROUND"
+			(at 129.54 125.73 0)
+			(effects
+				(font
+					(size 1.778 1.5113)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "Adafruit MPM3610:1X04_ROUND"
+			(at 137.16 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 137.16 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "28bf99c6-d2c9-439a-b53e-6ce10a169cd1")
+		)
+		(pin "2"
+			(uuid "ad383777-f766-4d8a-9655-b83afa303dc5")
+		)
+		(pin "3"
+			(uuid "8fc59e39-3c52-4ebb-a4a0-662ddc16cf35")
+		)
+		(pin "4"
+			(uuid "ef07adf0-4f5c-41d6-9bcc-5c82b13141f8")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "JP1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:GND")
 		(at 106.68 78.74 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d8f9976b-2c69-4dfa-9697-5d308a1ffa4f")
+		(uuid "89ea91ae-bde2-40c3-bd72-6eb235a48cd0")
 		(property "Reference" "#U$13"
 			(at 106.68 78.74 0)
 			(effects
@@ -4128,11 +3822,11 @@
 			)
 		)
 		(pin "1"
-			(uuid "77c5ab1e-7158-4612-82bf-f8eacdbdf50d")
+			(uuid "5b52f5c9-e222-4e16-b0ed-7e181dc4403c")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "#U$13")
 					(unit 1)
 				)
@@ -4140,81 +3834,14 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:CAP_CERAMIC0805-NOOUTLINE")
-		(at 68.58 60.96 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "df45b635-d923-4113-838e-29dab3627777")
-		(property "Reference" "C2"
-			(at 66.29 59.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "22uF"
-			(at 70.88 59.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "buckConverter:0805-NO"
-			(at 68.58 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 68.58 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 68.58 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b00c59a4-d7c1-4f7b-8d2f-75a55683b3c0")
-		)
-		(pin "2"
-			(uuid "94eebd6b-44ec-4f49-beff-99b72a7b141d")
-		)
-		(instances
-			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "buckConverter-eagle-import:FRAME_A4")
+		(lib_id "Adafruit MPM3610-eagle-import:FRAME_A4")
 		(at 17.78 198.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e0339d74-7a0e-48e1-943a-a03ab22f428a")
+		(uuid "9530e712-7870-417e-943d-43c26a6e50e2")
 		(property "Reference" "#FRAME1"
 			(at 17.78 198.12 0)
 			(effects
@@ -4262,7 +3889,7 @@
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "#FRAME1")
 					(unit 1)
 				)
@@ -4270,16 +3897,16 @@
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:GND")
-		(at 147.32 68.58 0)
+		(lib_id "Adafruit MPM3610-eagle-import:3.3V")
+		(at 137.16 116.84 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "fb642e0a-10b7-4284-8cca-e71282f129ac")
-		(property "Reference" "#U$1"
-			(at 147.32 68.58 0)
+		(uuid "9aadc849-ea8b-48e4-929a-69211e4b1acb")
+		(property "Reference" "#U$7"
+			(at 137.16 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4287,8 +3914,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 145.796 71.12 0)
+		(property "Value" "3.3V"
+			(at 135.636 115.824 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -4297,7 +3924,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 68.58 0)
+			(at 137.16 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4306,7 +3933,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 68.58 0)
+			(at 137.16 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4315,7 +3942,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 147.32 68.58 0)
+			(at 137.16 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4324,26 +3951,26 @@
 			)
 		)
 		(pin "1"
-			(uuid "d9cb294b-a810-456a-a52b-0fe40597a9d3")
+			(uuid "685e46a7-cdbb-473c-a62b-6073175616a1")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
-					(reference "#U$1")
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$7")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "buckConverter-eagle-import:RESISTOR_0603_NOOUT")
+		(lib_id "Adafruit MPM3610-eagle-import:RESISTOR_0603_NOOUT")
 		(at 132.08 68.58 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "fe00a27f-6a01-4e5d-ba5d-d4d53e311a8a")
+		(uuid "a216011a-1ec0-4d2c-b34e-efb0797a78a1")
 		(property "Reference" "R3"
 			(at 134.62 68.58 0)
 			(effects
@@ -4362,7 +3989,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-NO"
+		(property "Footprint" "Adafruit MPM3610:0603-NO"
 			(at 132.08 68.58 0)
 			(effects
 				(font
@@ -4390,15 +4017,388 @@
 			)
 		)
 		(pin "1"
-			(uuid "41860f01-e0eb-42cf-b183-ee10f47d3b54")
+			(uuid "d9b5a924-1bc6-4498-8c34-30711489e6e6")
 		)
 		(pin "2"
-			(uuid "284c8807-9914-4845-a98d-b887d1f14778")
+			(uuid "e11453f1-149d-468f-abbf-92ab73a45fd7")
 		)
 		(instances
 			(project ""
-				(path "/434b672c-d2e6-48a8-9782-502e33fb6b5c"
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
 					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:MPM3610")
+		(at 109.22 58.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "af809ecd-be64-4cb9-aaa8-c8115ac31cd5")
+		(property "Reference" "IC1"
+			(at 96.52 73.66 0)
+			(effects
+				(font
+					(size 1.778 1.5113)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "MPM3610"
+			(at 109.22 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Adafruit MPM3610:MPM3610"
+			(at 109.22 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 109.22 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "16"
+			(uuid "07e87bce-b8d5-4106-9199-4b8647eee393")
+		)
+		(pin "17"
+			(uuid "9f2227a5-9377-4735-b128-93e6b1a179fa")
+		)
+		(pin "18"
+			(uuid "16445c34-97de-4010-81a0-25f5496c6f62")
+		)
+		(pin "4"
+			(uuid "121f5a96-e4e0-4fa4-9382-d33d7ed3da8f")
+		)
+		(pin "5"
+			(uuid "ae9b2671-1d1d-4d68-891e-7be09d9c7ecf")
+		)
+		(pin "6"
+			(uuid "fbc43d6a-32b5-460f-abd9-465fb8c9f04f")
+		)
+		(pin "11"
+			(uuid "d75ff5c2-56ec-4900-b64b-91394dd65cae")
+		)
+		(pin "3"
+			(uuid "bcfb76af-b1fe-4ac1-a0ed-a23ee9cf1561")
+		)
+		(pin "12"
+			(uuid "cf727637-a087-4df5-a04f-d3945937316d")
+		)
+		(pin "13"
+			(uuid "c72d705b-f9fb-422d-9843-4971d1d05aa1")
+		)
+		(pin "14"
+			(uuid "002ab972-02cf-44a6-81bb-7a8fd5d0e71d")
+		)
+		(pin "2"
+			(uuid "e5da90cd-b631-40c8-996b-5a2d23cfd05b")
+		)
+		(pin "7"
+			(uuid "97efe368-7261-4e7f-b379-0f4ab2bc660f")
+		)
+		(pin "8"
+			(uuid "fc577bfa-25c6-4e6d-9987-4e34f7893cc3")
+		)
+		(pin "9"
+			(uuid "2c1451b2-5190-47bb-a74a-102fd668a092")
+		)
+		(pin "1"
+			(uuid "30b6087f-fe53-45dc-a024-d3996cfe7a8f")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "IC1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:CAP_CERAMIC0805-NOOUTLINE")
+		(at 68.58 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b419debf-0b73-4cb9-a085-a5a9c8ec58fa")
+		(property "Reference" "C2"
+			(at 66.29 59.71 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22uF"
+			(at 70.88 59.71 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Adafruit MPM3610:0805-NO"
+			(at 68.58 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 68.58 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 68.58 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "34bfcedb-3c67-49f0-a190-fb21031cfef7")
+		)
+		(pin "2"
+			(uuid "858a488f-e07a-43ba-af85-c835d36b814c")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:MOUNTINGHOLE2.5")
+		(at 261.62 157.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b8088a2a-1e08-43e4-b286-774f4a231c56")
+		(property "Reference" "U$9"
+			(at 261.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "MOUNTINGHOLE2.5"
+			(at 261.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_2.5_PLATED"
+			(at 261.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 261.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "U$9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:VIN")
+		(at 78.74 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c000df3d-9e9b-48f4-9289-650a1b2042bf")
+		(property "Reference" "#U$12"
+			(at 78.74 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VIN"
+			(at 77.216 39.624 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 78.74 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 78.74 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 78.74 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "be220131-a35b-472f-8020-88e34666d0c4")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Adafruit MPM3610-eagle-import:3.3V")
+		(at 147.32 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e31a90ad-1e9c-4dcc-ae42-68c236783fcc")
+		(property "Reference" "#U$2"
+			(at 147.32 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3.3V"
+			(at 145.796 47.244 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" ""
+			(at 147.32 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 147.32 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4acc15a6-44af-4304-ba86-37eac4367ddd")
+		)
+		(instances
+			(project ""
+				(path "/d8402897-33ac-47c9-a77a-f7e046be1a3f"
+					(reference "#U$2")
 					(unit 1)
 				)
 			)

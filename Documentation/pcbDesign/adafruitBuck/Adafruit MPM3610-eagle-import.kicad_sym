@@ -126,7 +126,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-MINI"
+		(property "Footprint" "Adafruit MPM3610:0603-MINI"
 			(at 0 0 0)
 			(effects
 				(font
@@ -267,7 +267,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-NO"
+		(property "Footprint" "Adafruit MPM3610:0603-NO"
 			(at 0 0 0)
 			(effects
 				(font
@@ -408,7 +408,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0805-NO"
+		(property "Footprint" "Adafruit MPM3610:0805-NO"
 			(at 0 0 0)
 			(effects
 				(font
@@ -549,7 +549,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0805_NOTHERMALS"
+		(property "Footprint" "Adafruit MPM3610:0805_NOTHERMALS"
 			(at 0 0 0)
 			(effects
 				(font
@@ -690,7 +690,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0805_10MGAP"
+		(property "Footprint" "Adafruit MPM3610:0805_10MGAP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -831,7 +831,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0402"
+		(property "Footprint" "Adafruit MPM3610:_0402"
 			(at 0 0 0)
 			(effects
 				(font
@@ -972,7 +972,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0402MP"
+		(property "Footprint" "Adafruit MPM3610:_0402MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1113,7 +1113,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0603"
+		(property "Footprint" "Adafruit MPM3610:_0603"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1254,7 +1254,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0603MP"
+		(property "Footprint" "Adafruit MPM3610:_0603MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1395,7 +1395,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0805"
+		(property "Footprint" "Adafruit MPM3610:_0805"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1536,7 +1536,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0805MP"
+		(property "Footprint" "Adafruit MPM3610:_0805MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1677,7 +1677,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_1206"
+		(property "Footprint" "Adafruit MPM3610:_1206"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1818,7 +1818,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_1206MP"
+		(property "Footprint" "Adafruit MPM3610:_1206MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -1961,7 +1961,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:FIDUCIAL-1X2.5"
+		(property "Footprint" "Adafruit MPM3610:FIDUCIAL-1X2.5"
 			(at 0 0 0)
 			(effects
 				(font
@@ -2057,7 +2057,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:PASS-ROUND"
+		(property "Footprint" "Adafruit MPM3610:PASS-ROUND"
 			(at 0 0 0)
 			(effects
 				(font
@@ -2153,7 +2153,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:FIDUCIAL_0.5MM"
+		(property "Footprint" "Adafruit MPM3610:FIDUCIAL_0.5MM"
 			(at 0 0 0)
 			(effects
 				(font
@@ -2249,7 +2249,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:FIDUCIAL_1MM"
+		(property "Footprint" "Adafruit MPM3610:FIDUCIAL_1MM"
 			(at 0 0 0)
 			(effects
 				(font
@@ -3624,7 +3624,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "buckConverter:1X04_OVAL"
+		(property "Footprint" "Adafruit MPM3610:1X04_OVAL"
 			(at 0 0 0)
 			(effects
 				(font
@@ -3805,7 +3805,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "buckConverter:1X04_1.0MM"
+		(property "Footprint" "Adafruit MPM3610:1X04_1.0MM"
 			(at 0 0 0)
 			(effects
 				(font
@@ -3986,7 +3986,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "buckConverter:1X04_ROUND_76"
+		(property "Footprint" "Adafruit MPM3610:1X04_ROUND_76"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4167,7 +4167,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "buckConverter:1X04_ROUND"
+		(property "Footprint" "Adafruit MPM3610:1X04_ROUND"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4348,7 +4348,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "buckConverter:1X04_SMT"
+		(property "Footprint" "Adafruit MPM3610:1X04_SMT"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4529,7 +4529,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "buckConverter:1X04_SMT_FLAT"
+		(property "Footprint" "Adafruit MPM3610:1X04_SMT_FLAT"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4710,7 +4710,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_3.0_PLATED_VIAS"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_3.0_PLATED_VIAS"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4793,7 +4793,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_1.0_PLATED"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_1.0_PLATED"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4876,7 +4876,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_2.0_PLATED"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_2.0_PLATED"
 			(at 0 0 0)
 			(effects
 				(font
@@ -4959,7 +4959,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_2.5_PLATED"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_2.5_PLATED"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5042,7 +5042,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_2.5_NPH"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_2.5_NPH"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5125,7 +5125,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_2.5_PLATED_THICK"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_2.5_PLATED_THICK"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5208,7 +5208,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_3.0_PLATED"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_3.0_PLATED"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5291,7 +5291,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_3.0_PLATED_SQUAREVIAS"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_3.0_PLATED_SQUAREVIAS"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5374,7 +5374,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_3.0_PLATEDTHIN"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_3.0_PLATEDTHIN"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5457,7 +5457,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MOUNTINGHOLE_3.0_NPH"
+		(property "Footprint" "Adafruit MPM3610:MOUNTINGHOLE_3.0_NPH"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5540,7 +5540,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "buckConverter:MPM3610"
+		(property "Footprint" "Adafruit MPM3610:MPM3610"
 			(at 0 0 0)
 			(effects
 				(font
@@ -5954,7 +5954,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-MINI"
+		(property "Footprint" "Adafruit MPM3610:0603-MINI"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6099,7 +6099,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0805_10MGAP"
+		(property "Footprint" "Adafruit MPM3610:0805_10MGAP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6244,7 +6244,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0805-NO"
+		(property "Footprint" "Adafruit MPM3610:0805-NO"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6389,7 +6389,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0805_NOTHERMALS"
+		(property "Footprint" "Adafruit MPM3610:0805_NOTHERMALS"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6534,7 +6534,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:2012"
+		(property "Footprint" "Adafruit MPM3610:2012"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6679,7 +6679,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:2512"
+		(property "Footprint" "Adafruit MPM3610:2512"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6824,7 +6824,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0402"
+		(property "Footprint" "Adafruit MPM3610:_0402"
 			(at 0 0 0)
 			(effects
 				(font
@@ -6969,7 +6969,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0402MP"
+		(property "Footprint" "Adafruit MPM3610:_0402MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7114,7 +7114,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0603"
+		(property "Footprint" "Adafruit MPM3610:_0603"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7259,7 +7259,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0603MP"
+		(property "Footprint" "Adafruit MPM3610:_0603MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7404,7 +7404,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:0603-NO"
+		(property "Footprint" "Adafruit MPM3610:0603-NO"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7549,7 +7549,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0805"
+		(property "Footprint" "Adafruit MPM3610:_0805"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7694,7 +7694,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_0805MP"
+		(property "Footprint" "Adafruit MPM3610:_0805MP"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7839,7 +7839,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_1206"
+		(property "Footprint" "Adafruit MPM3610:_1206"
 			(at 0 0 0)
 			(effects
 				(font
@@ -7984,7 +7984,7 @@
 				)
 			)
 		)
-		(property "Footprint" "buckConverter:_1206MP"
+		(property "Footprint" "Adafruit MPM3610:_1206MP"
 			(at 0 0 0)
 			(effects
 				(font
