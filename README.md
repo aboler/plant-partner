@@ -1,6 +1,6 @@
 # plant-partner
 
-Plant Partner repo. for CEN4907c
+Plant Partner repo. for CEN4908c
 
 - **Contributors**: Nicholas Cimino, Aspen Boler, Sabrina Luu, Carter Kreis, Fernando Amado-Pupo
 - [Project link](https://github.com/users/aboler/projects/1)
