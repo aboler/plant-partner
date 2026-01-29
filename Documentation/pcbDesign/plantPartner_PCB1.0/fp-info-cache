@@ -1,4 +1,4 @@
-26398229850118369
+26401769269406467
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -71959,6 +71959,13 @@ DIL08
 0
 8
 8
+MyCustomFootprints
+MODULE_ESP32_DEVKIT_V1
+
+
+0
+30
+30
 MyCustomFootprints
 MPM3610
 
