@@ -1,68 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/plant.dart';
+import 'package:frontend/services/remote_service.dart';
 
-class TaskView extends StatelessWidget {
+class TaskView extends StatefulWidget {
   const TaskView({super.key});
+
+  @override
+  State<TaskView> createState() => _TaskViewState();
+}
+
+class _TaskViewState extends State<TaskView> {
+  Plant? plant;
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadPlant();
+  }
+
+  Future<void> loadPlant() async {
+    plant = await RemoteService().getPlant();
+    setState(() => loading = false);
+  }
+
+  Future<void> toggleAuto(bool value) async {
+    setState(() => loading = true);
+    await RemoteService().setAutoSchedule(value);
+    await loadPlant();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          value ? "Auto scheduling enabled" : "Auto scheduling disabled",
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
-        title: const Text("Schedule"),
+        title: const Text("Scheduling"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: loadPlant,
+          ),
+        ],
       ),
       backgroundColor: Colors.amber.shade50,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Tasks",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 10),
-
-            // placeholder until tasks are implemented
-            Card(
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(16),
-                child: Text(
-                  "No scheduled tasks yet.\nUse the button below to create one.",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-
-            const Spacer(),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("schedule task ui coming in beta build"),
+      body: loading
+          ? const Center(child: CircularProgressIndicator())
+          : plant == null
+              ? const Center(child: Text("No plant data"))
+              : Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            "Automation",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 12),
+                          SwitchListTile(
+                            title: const Text("Enable Auto Scheduling"),
+                            value: plant!.autoSchedule,
+                            onChanged: toggleAuto,
+                          ),
+                        ],
+                      ),
                     ),
-                  );
-                },
-                icon: const Icon(Icons.add),
-                label: const Text("Schedule New Task"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightGreen,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
                   ),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

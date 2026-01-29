@@ -23,14 +23,16 @@ class RemoteService {
 
     return null;
   }
-}
 
-Future<bool> setAutoSchedule(bool enabled) async {
-  final resp = await http.put(
-    Uri.parse('$baseUrl/autoSchedule'),
-    headers: {'Content-Type': 'application/json'},
-    body: jsonEncode({'autoSchedule': enabled}),
-  );
+  Future<bool> setAutoSchedule(bool enabled) async {
+    final resp = await http.put(
+      Uri.parse(
+        //placeholder name for now
+          'http://172.20.10.7:8000/plants/updateAutoSchedule/Sunflower'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'autoSchedule': enabled}),
+    );
 
-  return resp.statusCode == 200;
+    return resp.statusCode == 200;
+  }
 }
