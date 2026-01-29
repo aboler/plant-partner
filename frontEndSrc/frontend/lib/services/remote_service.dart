@@ -24,3 +24,13 @@ class RemoteService {
     return null;
   }
 }
+
+Future<bool> setAutoSchedule(bool enabled) async {
+  final resp = await http.put(
+    Uri.parse('$baseUrl/autoSchedule'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({'autoSchedule': enabled}),
+  );
+
+  return resp.statusCode == 200;
+}
