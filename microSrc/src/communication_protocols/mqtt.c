@@ -17,6 +17,9 @@
 
 static const char *TAG = "mqtt_example";
 static  esp_mqtt_client_handle_t client = NULL;
+static char rx_buffer[256];
+static volatile bool mqtt_rx_ready;
+
 static void log_error_if_nonzero(const char *message, int error_code)
 {
     if (error_code != 0) {
@@ -44,7 +47,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     switch ((esp_mqtt_event_id_t)event_id) {
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
-
+        mqtt_subscribe("plant_partner/control",0);
         break;
 
     case MQTT_EVENT_DISCONNECTED:
@@ -53,7 +56,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
     case MQTT_EVENT_SUBSCRIBED:
         ESP_LOGI(TAG, "MQTT_EVENT_SUBSCRIBED, msg_id=%d, return code=0x%02x ", event->msg_id, (uint8_t)*event->data);
-        msg_id = esp_mqtt_client_publish(client, "topic/qos0", "data", 0, 0, 0);
+        msg_id = mqtt_publish();
         ESP_LOGI(TAG, "sent publish successful, msg_id=%d", msg_id);
         break;
 
@@ -67,9 +70,14 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
     //triggered any time  a message arrives on a subscribed topic
     case MQTT_EVENT_DATA:
-        ESP_LOGI(TAG, "MQTT_EVENT_DATA");
-        printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
-        printf("DATA=%.*s\r\n", event->data_len, event->data);
+        int len = event->data_len;
+        if (len >= sizeof(rx_buffer)) {
+            len = sizeof(rx_buffer) - 1;
+        }
+
+        memcpy(rx_buffer, event->data, len);
+       rx_buffer[len] = '\0';
+        mqtt_rx_ready = true;
         break;
 
     case MQTT_EVENT_ERROR:
@@ -132,4 +140,17 @@ int mqtt_subscribe(const char *topic, int qos)
         topic,
         qos
     );
+}
+
+bool mqtt_poll(char *out, int out_len)
+{
+    if (!mqtt_rx_ready) {
+        return false;
+    }
+
+    strncpy(out, rx_buffer, out_len - 1);
+    out[out_len - 1] = '\0';
+
+    mqtt_rx_ready = false;
+    return true;
 }
