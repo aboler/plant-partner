@@ -130,9 +130,6 @@ int mqtt_subscribe(const char *topic, const char *payload, int qos)
     return esp_mqtt_client_subscribe(
         client,
         topic,
-        payload,
-        0,      // auto strlen
-        qos,
-        0       // retain = false
+        qos
     );
 }
