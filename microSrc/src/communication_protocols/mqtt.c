@@ -56,8 +56,6 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
     case MQTT_EVENT_SUBSCRIBED:
         ESP_LOGI(TAG, "MQTT_EVENT_SUBSCRIBED, msg_id=%d, return code=0x%02x ", event->msg_id, (uint8_t)*event->data);
-        msg_id = mqtt_publish();
-        ESP_LOGI(TAG, "sent publish successful, msg_id=%d", msg_id);
         break;
 
     case MQTT_EVENT_UNSUBSCRIBED:
@@ -69,7 +67,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         break;
 
     //triggered any time  a message arrives on a subscribed topic
-    case MQTT_EVENT_DATA:
+    case MQTT_EVENT_DATA: {
         int len = event->data_len;
         if (len >= sizeof(rx_buffer)) {
             len = sizeof(rx_buffer) - 1;
@@ -79,6 +77,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
        rx_buffer[len] = '\0';
         mqtt_rx_ready = true;
         break;
+    }
 
     case MQTT_EVENT_ERROR:
         ESP_LOGI(TAG, "MQTT_EVENT_ERROR");
