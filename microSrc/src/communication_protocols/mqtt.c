@@ -120,7 +120,7 @@ int mqtt_publish(const char *topic, const char *payload, int qos)
     );
 }
 
-int mqtt_subscribe(const char *topic, const char *payload, int qos)
+int mqtt_subscribe(const char *topic, int qos)
 {
     if (client == NULL) {
         ESP_LOGE(TAG, "MQTT client not initialized");
