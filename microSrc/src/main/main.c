@@ -71,7 +71,7 @@ void app_main(void)
     ESP_ERROR_CHECK(nvs_init());
 
     start_wifi();
-
+    
     client = http_configure_handle();
     http_put_plant_data(client,p_ptr);
 
