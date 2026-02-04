@@ -17,10 +17,17 @@
 #include "../peripherals/gpio.h"
 #include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
-#include "../http/http.h"
+#include "../communication_protocols/http.h"
 #include "../wifi/wifi.h"
+#include "../communication_protocols/mqtt_proto.h"
 
 //static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
+
+//this configuration for testing purposes
+#define MQTT_ON
+#ifdef MQTT_ON
+char messageBuffer[256]
+#endif
 
 static esp_err_t nvs_init(){
     esp_err_t ret = nvs_flash_init();
@@ -52,7 +59,24 @@ const static char *TAG = "DEBUG";
 // all Networking depends on nvs_init()
 
 void app_main(void)
-{
+{  
+    //Used by all
+    ESP_ERROR_CHECK(nvs_init());
+    
+
+    start_wifi();
+    
+
+    //MQTT Style
+    #ifdef MQTT_ON
+
+    #else
+    
+    esp_http_client_handle_t client;
+    client = http_configure_handle();
+    http_put_plant_data(client,p_ptr);
+
+    #endif 
     // Declare variables
     int adc_raw, voltage;
     bool auto_care_on, light_calibration_successful, moisture_calibration_successful, current_switch_level, switch0;
@@ -65,15 +89,7 @@ void app_main(void)
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData* p_ptr = &p;
 
-    esp_http_client_handle_t client;
-   
-    // Debug Tag
-    ESP_ERROR_CHECK(nvs_init());
 
-    start_wifi();
-    
-    client = http_configure_handle();
-    http_put_plant_data(client,p_ptr);
 
 
     // TO:DO mutex stuff maybe
@@ -174,14 +190,15 @@ void app_main(void)
                 vTaskDelay(pdMS_TO_TICKS(800));   
                 modify_pump_duty_cycle(FERTLIZER, 0);
             }
-
+            
+            #ifndef MQTT_ON
             // 5. Send data to database
             http_put_plant_data(client,p_ptr);
             ESP_LOGI(TAG, "HTTP request...");
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
-
+            #endif
             // 6. Update switch value
             switch0 = current_switch_level;
         }  
