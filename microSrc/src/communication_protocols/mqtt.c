@@ -168,7 +168,29 @@ static void mqtt_init(void){
 
 bool mqtt_connect(void){
     mqtt_init();
-
+    
+    const int timeout_ms = 30000;
+    const int poll_interval_ms = 100;
+    int elapsed_ms = 0;
+    
+    // Wait for acknowledgment with timeout
+    while(elapsed_ms < timeout_ms) {
+        if(mqtt_poll_from(messageBuffer, msgSize, "plant_partner/ack")) {
+            ESP_LOGI(TAG, "MQTT connection acknowledged");
+            return true;
+        }
+        
+        // Publish ack request
+        mqtt_publish("plant_partner/ack", "ack", 0);
+        
+        // Wait before next poll
+        vTaskDelay(pdMS_TO_TICKS(poll_interval_ms));
+        elapsed_ms += poll_interval_ms;
+    }
+    
+    // Timeout occurred
+    ESP_LOGE(TAG, "MQTT connection timeout - no acknowledgment received");
+    return false;
 }
 
 int mqtt_publish(const char *topic, const char *payload, int qos)
