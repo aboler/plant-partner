@@ -146,7 +146,6 @@ bool mqtt_poll_from(char* out, int out_len, const char* topic)
     return false;
 }
 
-char*
 
 
 static void mqtt_app_start(void)
