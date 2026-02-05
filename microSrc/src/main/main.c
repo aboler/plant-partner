@@ -72,11 +72,13 @@ void app_main(void)
 
     //MQTT Style
     #ifdef MQTT_ON
-    mqtt_connect();
-    //wait until ack knowledge
-
-    while(!mqtt_poll_from(messageBuffer,msgSize,"plant_partner/ack"))
-    mqtt_publish("plant_partner/ack","ack",0);
+        if (!mqtt_connect()) {
+        ESP_LOGE(TAG, "MQTT connection failed!");
+        // Handle failure - maybe restart or enter error state
+        return;
+    }
+    
+    ESP_LOGI(TAG, "MQTT connected successfully!");
     #else
     
     esp_http_client_handle_t client;
