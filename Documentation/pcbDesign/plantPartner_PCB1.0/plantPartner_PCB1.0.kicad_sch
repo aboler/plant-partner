@@ -5888,6 +5888,16 @@
 		)
 		(uuid "960892a4-ef4f-45f5-9f4c-aa08910a1a3d")
 	)
+	(text "Your work on the night of the alpha build got overwritten. \nGo through git commits and grab Excel doc with times and message"
+		(exclude_from_sim no)
+		(at 339.09 106.934 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "a14509c2-2744-4719-9b4c-94e0edd43332")
+	)
 	(text "Route PCB"
 		(exclude_from_sim no)
 		(at 337.566 85.598 0)
