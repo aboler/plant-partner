@@ -175,7 +175,7 @@ bool mqtt_connect(void){
     
     // Wait for acknowledgment with timeout
     while(elapsed_ms < timeout_ms) {
-        if(mqtt_poll_from(messageBuffer, msgSize, "plant_partner/ack")) {
+        if(mqtt_poll_from(rx_buffer, 256, "plant_partner/ack")) {
             ESP_LOGI(TAG, "MQTT connection acknowledged");
             return true;
         }
