@@ -18,6 +18,7 @@
 static const char *TAG = "mqtt_example";
 static  esp_mqtt_client_handle_t client = NULL;
 static char rx_buffer[256];
+static char rx_topic[64];
 static volatile bool mqtt_rx_ready;
 
 static void log_error_if_nonzero(const char *message, int error_code)
@@ -47,7 +48,8 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     switch ((esp_mqtt_event_id_t)event_id) {
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
-        mqtt_subscribe("plant_partner/control",0);
+        //subscribes to all under plant_partner
+        mqtt_subscribe("plant_partner/#",0);
         break;
 
     case MQTT_EVENT_DISCONNECTED:
@@ -68,14 +70,26 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
     //triggered any time  a message arrives on a subscribed topic
     case MQTT_EVENT_DATA: {
+        //identify current topic
+        int topic_len = event->topic_len;
+        if (topic_len >= sizeof(rx_topic)) {
+        topic_len = sizeof(rx_topic) - 1;
+        }
+        //memcpy does not look for null terminator
+        memcpy(rx_topic, event->topic, topic_len);
+        //add null terminator to string
+        rx_topic[topic_len] = '\0';
+
+
         int len = event->data_len;
+        //trim off
         if (len >= sizeof(rx_buffer)) {
             len = sizeof(rx_buffer) - 1;
         }
-
+        //copy onto rx buffer len elements from data
         memcpy(rx_buffer, event->data, len);
        rx_buffer[len] = '\0';
-        mqtt_rx_ready = true;
+       mqtt_rx_ready = true;
         break;
     }
 
@@ -97,6 +111,41 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     }
 }
 
+bool mqtt_poll(char *out, int out_len)
+{
+    if (!mqtt_rx_ready) {
+        return false;
+    }
+
+    strncpy(out, rx_buffer, out_len - 1);
+    out[out_len - 1] = '\0';
+
+    mqtt_rx_ready = false;
+    return true;
+}
+
+bool mqtt_poll_from(char* out, int out_len, const char* topic)
+{
+    if (!mqtt_rx_ready) {
+        return false;
+    }
+    
+    //check origin/topic of message
+    if (strcmp(rx_topic, topic) == 0) {
+        // Topic matches - copy the message
+        strncpy(out, rx_buffer, out_len - 1);
+        out[out_len - 1] = '\0';
+        
+        mqtt_rx_ready = false;
+        return true;
+    }
+    
+    return false;
+}
+
+char*
+
+
 static void mqtt_app_start(void)
 {   
     //use your computer's ip
@@ -110,6 +159,16 @@ static void mqtt_app_start(void)
     esp_mqtt_client_start(client);
 }
 
+static void mqtt_init(void){
+    mqtt_app_start();
+}
+
+
+bool mqtt_connect(void){
+    mqtt_init();
+
+}
+
 int mqtt_publish(const char *topic, const char *payload, int qos)
 {
     if (client == NULL) {
@@ -121,9 +180,9 @@ int mqtt_publish(const char *topic, const char *payload, int qos)
         client,
         topic,
         payload,
-        0,      // auto strlen
+        0,      
         qos,
-        0       // retain = false
+        0       
     );
 }
 
@@ -141,15 +200,3 @@ int mqtt_subscribe(const char *topic, int qos)
     );
 }
 
-bool mqtt_poll(char *out, int out_len)
-{
-    if (!mqtt_rx_ready) {
-        return false;
-    }
-
-    strncpy(out, rx_buffer, out_len - 1);
-    out[out_len - 1] = '\0';
-
-    mqtt_rx_ready = false;
-    return true;
-}
