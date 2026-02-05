@@ -28,8 +28,8 @@
 #ifdef MQTT_ON
 #define msgSize 256
 #define topicName 64
-char messageBuffer[msgSize]
-char topic[topicName]
+char messageBuffer[msgSize];
+char topic[topicName];
 #endif
 
 static esp_err_t nvs_init(){
