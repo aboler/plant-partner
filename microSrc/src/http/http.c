@@ -138,7 +138,7 @@ static void end_http_session(esp_http_client_handle_t client){
     esp_http_client_cleanup(client);
 }
 
-void http_put_plant_one_shot(struct plantDataUpdate* p){
+void http_put_plant_one_shot(struct plantData* p){
 
 
     esp_http_client_handle_t client = http_configure_handle();
@@ -175,7 +175,7 @@ void http_put_plant_one_shot(struct plantDataUpdate* p){
 
 
 
-void http_put_plant_data(esp_http_client_handle_t client, struct plantDataUpdate* p){
+void http_put_plant_data(esp_http_client_handle_t client, struct plantData* p){
     //initialize request template
     char json_buffer[JSON_BUFFER_SIZE];
 

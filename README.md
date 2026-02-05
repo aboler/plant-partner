@@ -1,6 +1,6 @@
 # plant-partner
 
-Plant Partner repo. for CEN4907c
+Plant Partner repo. for CEN4908c
 
 - **Contributors**: Nicholas Cimino, Aspen Boler, Sabrina Luu, Carter Kreis, Fernando Amado-Pupo
 - [Project link](https://github.com/users/aboler/projects/1)
@@ -106,6 +106,22 @@ In Bash or Powershell
 - Created a update button that allows application to display newly updated data from the database
 - Beginnings of a PCB to replace external wiring has been started and posted to the repository
 - Migrate database to the cloud via MongoDB atlas to allow for easier testing
+
+### Alpha Build
+
+- General clean up/organization in the code
+- Modified ADC to be initialized through one function
+- Modified main microcontroller loop to activate from one signal (currently a switch)
+  - Reads all sensors
+  - Activates actuators if needed
+  - Sends data to database over Wi-Fi
+- Created more permanent physical set up
+  - Liquid tanks
+  - Motor pumps in liquid tanks with elongated wires
+  - Central cup to act as a pot
+  - External carrying mechanism to more easily keep everything together
+  - Smaller external circuit board
+  - DAD program to act as switch, external LED, and proof that fertilizer motor activates when needed
 
 ## Project Architecture
 
