@@ -26,7 +26,10 @@
 //this configuration for testing purposes
 #define MQTT_ON
 #ifdef MQTT_ON
-char messageBuffer[256]
+#define msgSize 256
+#define topicName 64
+char messageBuffer[msgSize]
+char topic[topicName]
 #endif
 
 static esp_err_t nvs_init(){
@@ -69,7 +72,11 @@ void app_main(void)
 
     //MQTT Style
     #ifdef MQTT_ON
+    mqtt_connect();
+    //wait until ack knowledge
 
+    while(!mqtt_poll_from(messageBuffer,msgSize,"plant_partner/ack"))
+    mqtt_publish("plant_partner/ack","ack",0);
     #else
     
     esp_http_client_handle_t client;
@@ -190,7 +197,9 @@ void app_main(void)
                 vTaskDelay(pdMS_TO_TICKS(800));   
                 modify_pump_duty_cycle(FERTLIZER, 0);
             }
-            
+
+
+            //HTTP Protocol
             #ifndef MQTT_ON
             // 5. Send data to database
             http_put_plant_data(client,p_ptr);
