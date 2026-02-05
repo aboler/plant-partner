@@ -111,6 +111,9 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     }
 }
 
+
+//out is a buffer mqtt message is passed into
+//out len is length of buffer we create
 bool mqtt_poll(char *out, int out_len)
 {
     if (!mqtt_rx_ready) {
