@@ -122,7 +122,6 @@ static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 
 // TODO: make it so that host and path are set to some default site
 esp_http_client_handle_t http_configure_handle(){
-        // Plase do this char[60] = "http://";
         esp_http_client_config_t config = {
         .url = "http://" IP ":8000/plants/updatePlantByName/Sunflower",
         .event_handler = _http_event_handler,
