@@ -61,6 +61,22 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ),
                       ),
+
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          loadPlant();
+                        },
+                        icon: const Icon(Icons.sensors),
+                        label: const Text("Sample"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.lightGreen,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
       ),
