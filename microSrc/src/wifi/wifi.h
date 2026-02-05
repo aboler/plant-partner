@@ -1,5 +1,10 @@
 #ifndef WIFI_H
 #define WIFI_H
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include <inttypes.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -22,11 +27,17 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "esp_system.h"
-
 #include "esp_http_client.h"
 #include "esp_tls.h"
-#define ESP_WIFI_SSID     "Aspen"
-#define ESP_WIFI_PASS     "esp32wifi"
+
+//MQTT additions
+#include "mqtt_client.h"
+
+
+
+
+#define ESP_WIFI_SSID     "SpectrumSetup-84"
+#define ESP_WIFI_PASS     "lightsquirrel484"
 #define EXAMPLE_ESP_MAXIMUM_RETRY  4
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_WPA2_PSK
 #define WIFI_CONNECTED_BIT BIT0
