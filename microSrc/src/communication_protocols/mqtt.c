@@ -20,6 +20,14 @@ static char rx_buffer[256];
 static char rx_topic[64];
 static volatile bool mqtt_rx_ready;
 
+static void log_error_if_nonzero(const char *message, int error_code)
+{
+    if (error_code != 0)
+    {
+        ESP_LOGE(TAG, "Last error %s: 0x%x", message, error_code);
+    }
+}
+
 /*
  * @brief Event handler registered to receive MQTT events
  *
@@ -113,7 +121,7 @@ void mqtt_app_start(void)
     // use your computer's ip
     // using Mosquitto
     esp_mqtt_client_config_t mqtt_cfg = {
-        .broker.address.uri = "mqtt://192.168.1.242:1883"};
+        .broker.address.uri = URI};
     client = esp_mqtt_client_init(&mqtt_cfg);
     /* The last argument may be used to pass data to the event handler, in this example mqtt_event_handler */
     esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
