@@ -25,12 +25,6 @@
 
 // this configuration for testing purposes
 #define MQTT_ON
-#ifdef MQTT_ON
-#define msgSize 256
-#define topicName 64
-char messageBuffer[msgSize];
-char topic[topicName];
-#endif
 
 static esp_err_t nvs_init()
 {
@@ -68,26 +62,8 @@ void app_main(void)
     ESP_ERROR_CHECK(nvs_init());
 
     start_wifi();
-
-// MQTT Style
-#ifdef MQTT_ON
     mqtt_app_start();
-    while (1)
-    {
-        if (mqtt_check_buffer_ready())
-        {
-            ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
-        }
-        vTaskDelay(pdMS_TO_TICKS(5000));
-    }
 
-#else
-
-    esp_http_client_handle_t client;
-    client = http_configure_handle();
-    http_put_plant_data(client, p_ptr);
-
-#endif
     // Declare variables
     int adc_raw, voltage;
     bool auto_care_on, light_calibration_successful, moisture_calibration_successful, current_switch_level, switch0;
@@ -97,8 +73,15 @@ void app_main(void)
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
 
+    char messageBuffer[msgSize];
+    char topic[topicName];
+
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData *p_ptr = &p;
+
+    esp_http_client_handle_t client;
+    client = http_configure_handle();
+    http_put_plant_data(client, p_ptr);
 
     // TO:DO mutex stuff maybe
     // xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
@@ -124,8 +107,11 @@ void app_main(void)
         // STAND IN: Represents auto. scheduling signal being received
         current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
 
-        if (current_switch_level != switch0)
+        // TEST
+        if (mqtt_check_buffer_ready())
         {
+            ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
+        
             // 1. Assess and store light if configured
             if (light_calibration_successful)
             {
@@ -195,8 +181,6 @@ void app_main(void)
                 modify_pump_duty_cycle(FERTLIZER, 0);
             }
 
-// HTTP Protocol
-#ifndef MQTT_ON
             // 5. Send data to database
             http_put_plant_data(client, p_ptr);
             ESP_LOGI(TAG, "HTTP request...");
@@ -204,11 +188,9 @@ void app_main(void)
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
 
-#else
 
-#endif
             // 6. Update switch value
-            switch0 = current_switch_level;
+            //switch0 = current_switch_level;
         }
 
         // Must be at end of while loop, allows other CPU to activate
