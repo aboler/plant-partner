@@ -78,7 +78,7 @@ void app_main(void)
         {
             ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
         }
-        vTaskDelay(pdMS_TO_TICKS(5000))
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }
 
 #else

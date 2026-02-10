@@ -5,7 +5,7 @@
 
 #define MQTT_TOPICS "plant_partner/#"
 #define QOS 0
-#define URI "mqtt://192.168.1.242:1883" // CHANGE IP !!!
+#define URI "mqtt://172.20.10.8:1883" // CHANGE IP !!!
 
 void mqtt_app_start(void);
 bool mqtt_check_buffer_ready(void);
