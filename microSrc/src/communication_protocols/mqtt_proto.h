@@ -2,9 +2,13 @@
 #define MQTT_PROTO_H
 #include "wifi.h"
 #include "mqtt_client.h"
-int mqtt_subscribe(const char *topic, int qos);
-int mqtt_publish(const char *topic, const char *payload, int qos);
-bool mqtt_connect(void);
-bool mqtt_poll(char *out, int out_len);
-bool mqtt_poll_from(char* out, int out_len, const char* topic);
+
+#define MQTT_TOPICS "plant_partner/#"
+#define QOS 0
+
+void mqtt_app_start(void);
+bool mqtt_check_buffer_ready(void);
+const char *read_data(void);
+const char *read_topic(void);
+
 #endif

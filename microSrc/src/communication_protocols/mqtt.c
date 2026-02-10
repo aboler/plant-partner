@@ -12,21 +12,13 @@
    CONDITIONS OF ANY KIND, either express or implied.
 */
 
-
 #include "mqtt_proto.h"
 
 static const char *TAG = "mqtt_example";
-static  esp_mqtt_client_handle_t client = NULL;
+static esp_mqtt_client_handle_t client = NULL;
 static char rx_buffer[256];
 static char rx_topic[64];
 static volatile bool mqtt_rx_ready;
-
-static void log_error_if_nonzero(const char *message, int error_code)
-{
-    if (error_code != 0) {
-        ESP_LOGE(TAG, "Last error %s: 0x%x", message, error_code);
-    }
-}
 
 /*
  * @brief Event handler registered to receive MQTT events
@@ -40,16 +32,18 @@ static void log_error_if_nonzero(const char *message, int error_code)
  */
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
 {
-    ESP_LOGD(TAG, "Event dispatched from event loop base=%s, event_id=%" PRIi32 "", base, event_id);
+    ESP_LOGI(TAG, "Event dispatched from event loop base=%s, event_id=%" PRIi32 "", base, event_id);
     esp_mqtt_event_handle_t event = event_data;
 
     int msg_id;
 
-    switch ((esp_mqtt_event_id_t)event_id) {
+    switch ((esp_mqtt_event_id_t)event_id)
+    {
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
-        //subscribes to all under plant_partner
-        mqtt_subscribe("plant_partner/#",0);
+        // subscribes to all under plant_partner
+        // mqtt_subscribe("plant_partner/#",0);
+        msg_id = esp_mqtt_client_subscribe(client, MQTT_TOPICS, QOS);
         break;
 
     case MQTT_EVENT_DISCONNECTED:
@@ -68,38 +62,41 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         ESP_LOGI(TAG, "MQTT_EVENT_PUBLISHED, msg_id=%d", event->msg_id);
         break;
 
-    //triggered any time  a message arrives on a subscribed topic
-    case MQTT_EVENT_DATA: {
-        //identify current topic
+    // triggered any time  a message arrives on a subscribed topic
+    case MQTT_EVENT_DATA:
+    {
+        // identify current topic
         int topic_len = event->topic_len;
-        if (topic_len >= sizeof(rx_topic)) {
-        topic_len = sizeof(rx_topic) - 1;
+        if (topic_len >= sizeof(rx_topic))
+        {
+            topic_len = sizeof(rx_topic) - 1;
         }
-        //memcpy does not look for null terminator
+        // memcpy does not look for null terminator
         memcpy(rx_topic, event->topic, topic_len);
-        //add null terminator to string
+        // add null terminator to string
         rx_topic[topic_len] = '\0';
 
-
         int len = event->data_len;
-        //trim off
-        if (len >= sizeof(rx_buffer)) {
+        // trim off
+        if (len >= sizeof(rx_buffer))
+        {
             len = sizeof(rx_buffer) - 1;
         }
-        //copy onto rx buffer len elements from data
+        // copy onto rx buffer len elements from data
         memcpy(rx_buffer, event->data, len);
-       rx_buffer[len] = '\0';
-       mqtt_rx_ready = true;
+        rx_buffer[len] = '\0';
+        mqtt_rx_ready = true;
         break;
     }
 
     case MQTT_EVENT_ERROR:
         ESP_LOGI(TAG, "MQTT_EVENT_ERROR");
 
-        if (event->error_handle->error_type == MQTT_ERROR_TYPE_TCP_TRANSPORT) {
+        if (event->error_handle->error_type == MQTT_ERROR_TYPE_TCP_TRANSPORT)
+        {
             log_error_if_nonzero("reported from esp-tls", event->error_handle->esp_tls_last_esp_err);
             log_error_if_nonzero("reported from tls stack", event->error_handle->esp_tls_stack_err);
-            log_error_if_nonzero("captured as transport's socket errno",  event->error_handle->esp_transport_sock_errno);
+            log_error_if_nonzero("captured as transport's socket errno", event->error_handle->esp_transport_sock_errno);
             ESP_LOGI(TAG, "Last errno string (%s)", strerror(event->error_handle->esp_transport_sock_errno));
         }
 
@@ -111,116 +108,27 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     }
 }
 
-
-//out is a buffer mqtt message is passed into
-//out len is length of buffer we create
-bool mqtt_poll(char *out, int out_len)
+void mqtt_app_start(void)
 {
-    if (!mqtt_rx_ready) {
-        return false;
-    }
-
-    strncpy(out, rx_buffer, out_len - 1);
-    out[out_len - 1] = '\0';
-
-    mqtt_rx_ready = false;
-    return true;
-}
-
-bool mqtt_poll_from(char* out, int out_len, const char* topic)
-{
-    if (!mqtt_rx_ready) {
-        return false;
-    }
-    
-    //check origin/topic of message
-    if (strcmp(rx_topic, topic) == 0) {
-        // Topic matches - copy the message
-        strncpy(out, rx_buffer, out_len - 1);
-        out[out_len - 1] = '\0';
-        
-        mqtt_rx_ready = false;
-        return true;
-    }
-    
-    return false;
-}
-
-
-
-static void mqtt_app_start(void)
-{   
-    //use your computer's ip
-    //using Mosquitto
+    // use your computer's ip
+    // using Mosquitto
     esp_mqtt_client_config_t mqtt_cfg = {
-        .broker.address.uri = "mqtt://192.168.1.242:1883"
-    };
+        .broker.address.uri = "mqtt://192.168.1.242:1883"};
     client = esp_mqtt_client_init(&mqtt_cfg);
     /* The last argument may be used to pass data to the event handler, in this example mqtt_event_handler */
     esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
     esp_mqtt_client_start(client);
 }
 
-static void mqtt_init(void){
-    mqtt_app_start();
-}
+bool mqtt_check_buffer_ready(void) { return mqtt_rx_ready; }
 
-
-bool mqtt_connect(void){
-    mqtt_init();
-    
-    const int timeout_ms = 30000;
-    const int poll_interval_ms = 100;
-    int elapsed_ms = 0;
-    
-    // Wait for acknowledgment with timeout
-    while(elapsed_ms < timeout_ms) {
-        if(mqtt_poll_from(rx_buffer, 256, "plant_partner/ack")) {
-            ESP_LOGI(TAG, "MQTT connection acknowledged");
-            return true;
-        }
-        
-        // Publish ack request
-        mqtt_publish("plant_partner/ack", "ack", 0);
-        
-        // Wait before next poll
-        vTaskDelay(pdMS_TO_TICKS(poll_interval_ms));
-        elapsed_ms += poll_interval_ms;
-    }
-    
-    // Timeout occurred
-    ESP_LOGE(TAG, "MQTT connection timeout - no acknowledgment received");
-    return false;
-}
-
-int mqtt_publish(const char *topic, const char *payload, int qos)
+const char *read_data(void)
 {
-    if (client == NULL) {
-        ESP_LOGE(TAG, "MQTT client not initialized");
-        return -1;
-    }
-
-    return esp_mqtt_client_publish(
-        client,
-        topic,
-        payload,
-        0,      
-        qos,
-        0       
-    );
+    mqtt_rx_ready = false;
+    return rx_buffer;
 }
 
-int mqtt_subscribe(const char *topic, int qos)
+const char *read_topic(void)
 {
-    if (client == NULL) {
-        ESP_LOGE(TAG, "MQTT client not initialized");
-        return -1;
-    }
-
-    return esp_mqtt_client_subscribe(
-        client,
-        topic,
-        qos
-    );
+    return rx_topic;
 }
-
