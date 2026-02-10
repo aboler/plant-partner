@@ -70,3 +70,22 @@ export const deletePlantByName = async (req, res) => {
         res.status(500).json({ error: 'Failed to delete plant data' });
     }
 };
+
+export const updateAutoScheduleByName = async (req, res) => {
+    try {
+        const name = req.params.name;
+        const { autoSchedule } = req.body;
+
+        const plant = await Plant.findOne({ plantName: name });
+        if (!plant) {
+        return res.status(404).json({ message: "Plant not found" });
+        }
+
+        plant.autoSchedule = !!autoSchedule;
+        await plant.save();
+
+        res.status(200).json(plant);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to update autoSchedule" });
+    }
+};

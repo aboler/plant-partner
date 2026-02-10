@@ -9,6 +9,7 @@
 
 
 #include "wifi.h"
+#include "esp_http_server.h"
 
 
 /* FreeRTOS event group to signal when we are connected*/
@@ -23,6 +24,38 @@ static const char *TAG = "wifi station";
 
 static int s_retry_num = 0;
 
+// testing flutter app to esp32 sampling
+// set bool true when app requests sample
+static httpd_handle_t server = NULL;
+volatile bool sample_requested = false;
+
+static esp_err_t sample_post_handler(httpd_req_t *req)
+{
+    // trying to trigger sample http post
+    sample_requested = true;
+
+    const char *resp_str = "ok";
+    httpd_resp_send(req, resp_str, -1);
+    return 0;
+}
+
+static void start_http_server(void)
+{
+    httpd_config_t config = HTTPD_DEFAULT_CONFIG();
+    config.server_port = 80;
+
+    if (httpd_start(&server, &config) == ESP_OK) {
+        httpd_uri_t sample_uri = {
+            .uri      = "/sample",
+            .method   = HTTP_POST,
+            .handler  = sample_post_handler,
+            .user_ctx = NULL
+        };
+
+        httpd_register_uri_handler(server, &sample_uri);
+        ESP_LOGI("wifi", "http server started, POST /sample");
+    }
+}
 
 static void event_handler(void* arg, esp_event_base_t event_base,
                                 int32_t event_id, void* event_data)
@@ -93,6 +126,8 @@ static void wifi_init_sta(void)
             pdFALSE,
             pdFALSE,
             portMAX_DELAY);
+
+    start_http_server();
 
     /* xEventGroupWaitBits() returns the bits before the call returned, hence we can test which event actually
      * happened. */
