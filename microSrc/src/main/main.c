@@ -156,7 +156,7 @@ void app_main(void)
                 }
 
                 // Moisture
-                if(p_ptr->soilMoisture < 100)
+                if(p_ptr->soilMoisture < 1500)
                     ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
                 else
                 {
