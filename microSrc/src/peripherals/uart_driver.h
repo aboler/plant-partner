@@ -58,7 +58,7 @@ uart_error_t uart_write_string(const uart_port_t uartPort, const char *s);
 uart_error_t uart_write_int(const uart_port_t uartPort, int v);
 
 // // RS485 Specific helpers 
-void uart_rs485_init(const uart_port_t uartPort);
+void uart_rs485_init();
 void uart_rs485_set_transmit_mode();
 void uart_rs485_set_receive_mode();
 void uart_read_rs485();

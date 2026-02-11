@@ -4,6 +4,7 @@ import 'package:frontend/routes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+//main app dev
 void main() {
   runApp(const MyApp());
   dataBackend();
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const String baseUrl = 'http://10.###.###.###:8000/plants/getPlantByName/Sunflower';
+//const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://:8000/plants/getPlantByName/Sunflower';
 
 //GET API request
 Future<dynamic> dataBackend() async {

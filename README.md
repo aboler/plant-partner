@@ -107,6 +107,22 @@ In Bash or Powershell
 - Beginnings of a PCB to replace external wiring has been started and posted to the repository
 - Migrate database to the cloud via MongoDB atlas to allow for easier testing
 
+### Alpha Build
+
+- General clean up/organization in the code
+- Modified ADC to be initialized through one function
+- Modified main microcontroller loop to activate from one signal (currently a switch)
+  - Reads all sensors
+  - Activates actuators if needed
+  - Sends data to database over Wi-Fi
+- Created more permanent physical set up
+  - Liquid tanks
+  - Motor pumps in liquid tanks with elongated wires
+  - Central cup to act as a pot
+  - External carrying mechanism to more easily keep everything together
+  - Smaller external circuit board
+  - DAD program to act as switch, external LED, and proof that fertilizer motor activates when needed
+
 ## Project Architecture
 
 The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is configure to interact with a photoresistor and moisture sensor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, an external switch circuit is set up to control sensor sampling and component actuation. Switch0 is responsible for sampling the photoresistor and updating the LED if its detected to be too dark, Switch1 samples the moisture sensor, Switch2 actuates the water pump motor, and Switch3 posts plant data to the database to mimic receiving commands from the application.

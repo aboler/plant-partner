@@ -16,6 +16,7 @@ Corossion Resistance Capacitive Soil Moisture Sensor:
 https://www.amazon.com/Gikfun-Capacitive-Corrosion-Resistant-Detection/dp/B07H3P1NRM/ref=sr_1_7?dib=eyJ2IjoiMSJ9.VDQmMTvA56NE3sh9LcnMjGEhAQiaewfNTo0PxVwCtq29Ii8afbgCejlHEGuuIRfrhx39ehlSd8USlE3tdkXCoSh2oA86j-EjeAAuAt7JtbyeQTmXbgjiGp_zxhzQDkS2iy4GNIoZXhiKhnBRO5mbzMXGuAwuylKLtjtItgUZN7uRnHHAW7Q5lRwiWPFybeAXKtX2uF5Q4EjYjcqo6lIEVKDqnN17VjX5PwQ-5vjSEwZQX90CH3SsHtOxgpWFYB0I5nLjSLUkDRmiqRFI22620rY2hE8h-rNEVTbfD_gqFJs.5Sm8vHwJWtGTZg6gvDZAGgRHLcr36lMqrNsRrMZUUM8&dib_tag=se&keywords=capacitive+soil+moisture+sensor&qid=1761336977&sr=8-7
 Communication Protocol: Analog to Digital (5V input voltage with output voltage of 0-3V)
 Documentation links: https://www.circuitschools.com/interface-capacitive-soil-moisture-sensor-v1-2-with-arduino-lcd-and-oled/ & https://forum.arduino.cc/t/making-sense-of-moisture-sensor-readings/1382304/17
+Notes: Uses JST-PH connector (the one with clasps) and a Dupont connector (the shielded one that just slides in)
 
 Photoresistor (Ambient Light Sensor):
 https://www.amazon.com/BOJACK-Photoresistance-Sensitive-Resistor-GM5539/dp/B08BKRPBVL/ref=sr_1_5?dib=eyJ2IjoiMSJ9.LgPFXp4DvofHZ_B-T3m5okkHeO94zLew8EMWbbKrS-Xw51JVqviKIkyLabfrm_Zx_vX8Mng9nqDyEywkkWs8kocKZPSYZmcThlILee3TqN7HHH55qdd4qyi4IVlPxlbQNgXSSkeQ77T6TNd-ZAcueeF0Y66A4T8AZOD0B-719xB2n2h-wnbg44kbEkZD3WPOAUlu5H_BuVS37JbybiX7l2gR6X1j6Dn1WAI7iliqq6U.9LUU8NK76lUMdhej7uvDwK1x0b6KMb9UkVQOZxGAlbU&dib_tag=se&keywords=Photoresistor&qid=1761337168&sr=8-5
@@ -25,6 +26,7 @@ Documentation links: https://www.micros.com.pl/mediaserver/info-orrgl5539.pdf
 RS485-UART Transceiver:
 https://www.amazon.com/Transceiver-Featuring-Instrument-Communication-Development/dp/B00NIOLNAG/ref=sr_1_5?dib=eyJ2IjoiMSJ9.nTk8vnAL6V4xfy7s_tIez72rCzK3JwCWSpJCxqyiUEZsGJ9rK0bhmbKUgFgBXmFVzSOPhkrGecMtefl3FPyU6b5y3DbZmwsk18GuHc8mMHDqxCzLnhplX9ydE30dcg1ckiVq2wP9yBJ4Dcw__GAQkKms9l0tFgU7WPkZVhLIaiUjR28OBYAgHXTv-mSesxZg5zjX5ulmPqf8BrYX4Q65_6LVvW_8QY0NJqsC-XO_NJA._Pm98F95ytK2AYTl679z2o7Vvz4u17IBF0m0DfgDf3g&dib_tag=se&keywords=rs485+transceiver&qid=1761337331&sr=8-5
 Communication Protocol: Takes in RS485 from NPK Sensor and turns it to UART
+Documentation Links: https://www.flywing-tech.com/blog/max485-ic-rs-485-communication-driver-pinout-datasheet-applications/ 
 
 ______________________________________
 Pump Circuit:
