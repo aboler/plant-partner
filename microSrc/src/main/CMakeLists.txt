@@ -1,16 +1,17 @@
 idf_component_register(
     SRCS 
         "main.c" 
-        "../communication_protocols/http.c"
         "../peripherals/adc.c" 
         "../peripherals/gpio.c" 
         "../peripherals/heartbeat.c" 
         "../peripherals/pwm_pump.c"
         "../peripherals/uart_driver.c"
-        "../wifi/wifi.c"
-        "../communication_protocols/mqtt.c" 
+        "../peripherals/communication/http.c"
+        "../peripherals/communication/mqtt.c"
+        "../peripherals/communication/wifi.c"
 
     PRIV_REQUIRES 
+        mqtt
         esp_adc
         esp_driver_gpio
         esp_driver_ledc
@@ -18,7 +19,6 @@ idf_component_register(
         esp_event
         esp_http_client
         esp_http_server
-        mqtt
         esp_system
         esp_timer
         esp-tls
@@ -29,7 +29,5 @@ idf_component_register(
         spi_flash        
 
     INCLUDE_DIRS 
-        "../communication_protocols"
         "../peripherals"
-        "../wifi"
 )

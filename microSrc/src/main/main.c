@@ -5,10 +5,6 @@
 // ESP-IDF Libraries
 #include "esp_log.h"
 
-// FreeRTOS
-// #include "freertos/FreeRTOS.h"
-// #include "freertos/task.h"
-
 // Data Types
 #include "../dataTypes/plantData.h"
 
@@ -17,9 +13,9 @@
 #include "../peripherals/gpio.h"
 #include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
-#include "../communication_protocols/http.h"
-#include "../wifi/wifi.h"
-#include "../communication_protocols/mqtt_proto.h"
+#include "../peripherals/communication/http.h"
+#include "../peripherals/communication/mqtt.h"
+#include "../peripherals/communication/wifi.h"
 
 // Debug options utilized for confirming performance
 // static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
@@ -44,15 +40,15 @@ void app_main(void)
 
     // Declare variables
     int adc_raw, voltage;
-    bool auto_care_on, light_calibration_successful, moisture_calibration_successful, current_switch_level, switch0;
+    bool auto_care_on, light_calibration_successful, moisture_calibration_successful;
     auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
 
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
 
-    char messageBuffer[msgSize];
-    char topic[topicName];
+    char messageBuffer[MSG_SIZE];
+    char topic[TOPIC_NAME];
 
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData *p_ptr = &p;

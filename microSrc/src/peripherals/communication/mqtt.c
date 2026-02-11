@@ -1,18 +1,6 @@
-/*
- * SPDX-FileCopyrightText: 2025 Espressif Systems (Shanghai) CO LTD
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-/* MQTT (over TCP) Example
-
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
-
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
-*/
-
-#include "mqtt_proto.h"
+#include "mqtt.h"
+#include "mqtt_client.h"
+#include "wifi.h"
 
 static const char *TAG = "mqtt_example";
 static esp_mqtt_client_handle_t client = NULL;
