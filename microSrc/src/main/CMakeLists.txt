@@ -11,7 +11,6 @@ idf_component_register(
         "../peripherals/communication/wifi.c"
 
     PRIV_REQUIRES 
-        mqtt
         esp_adc
         esp_driver_gpio
         esp_driver_ledc
@@ -24,6 +23,7 @@ idf_component_register(
         esp-tls
         esp_wifi 
         freertos
+        mqtt
         nvs_flash
         spi_flash        
 
