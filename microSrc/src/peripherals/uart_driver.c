@@ -154,10 +154,10 @@ void uart_read_rs485(){
 
     // Request Frame for RS485 Modbus Communication
     uint8_t modbus_request[] = {
-        0x01,       // Device ID
-        0x03,       // Function code: Read Holding Registers
-        0x00, 0x1E, // Start address: 0x001E
-        0x00, 0x03, // Number of registers: 0x0000 - 0x0003
+        0x01,       // Device Address Code
+        0x03,       // Function Code: Read Holding Registers
+        0x00, 0x1E, // Register Start Address: 0x001E
+        0x00, 0x03, // Register Length: 0x0000 - 0x0003
         0x34, 0x0D  // CRC16 (LSB/MSB)
     };
 
