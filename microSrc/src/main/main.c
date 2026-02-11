@@ -6,8 +6,8 @@
 #include "esp_log.h"
 
 // FreeRTOS
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+// #include "freertos/FreeRTOS.h"
+// #include "freertos/task.h"
 
 // Data Types
 #include "../dataTypes/plantData.h"
@@ -21,11 +21,11 @@
 #include "../wifi/wifi.h"
 #include "../communication_protocols/mqtt_proto.h"
 
+// Debug options utilized for confirming performance
 // static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
+const static char *TAG = "DEBUG";
 
-// this configuration for testing purposes
-#define MQTT_ON
-
+// Set up networking (all Networking depends on nvs_init())
 static esp_err_t nvs_init()
 {
     esp_err_t ret = nvs_flash_init();
@@ -37,32 +37,10 @@ static esp_err_t nvs_init()
     return ret;
 }
 
-const static char *TAG = "DEBUG";
-
-// Uncommenting RTOS stuff will produce test updates
-
-/*void http_task(void *pv) {
-
-    struct plantData *plant = (struct plantData *) pv;
-    esp_http_client_handle_t client = http_configure_handle();
-    http_put_plant_data(client,plant);
-    while (1) {
-        ESP_LOGI(TAG, "HTTP request...");
-        esp_err_t err = esp_http_client_perform(client);
-        ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-        vTaskDelay(pdMS_TO_TICKS(5000));
-    }
-}*/
-
-// all Networking depends on nvs_init()
-
 void app_main(void)
 {
     // Used by all
     ESP_ERROR_CHECK(nvs_init());
-
-    start_wifi();
-    mqtt_app_start();
 
     // Declare variables
     int adc_raw, voltage;
@@ -79,24 +57,22 @@ void app_main(void)
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData *p_ptr = &p;
 
+
+    // Start up peripheral communication needed to interface with the database
+    start_wifi();
+    mqtt_app_start();
     esp_http_client_handle_t client;
     client = http_configure_handle();
     http_put_plant_data(client, p_ptr);
-
-    // TO:DO mutex stuff maybe
-    // xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
 
     // Initialize ADC for photoresistor and moisture sensor
     light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
     moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
-    // Configure LEDs and inputs
+    // Configure LEDs
     heartbeat_init();
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
-    configure_IO(INPUT, SWITCH0_GPIO);
-
     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-    switch0 = (bool)gpio_get_level(SWITCH0_GPIO);
 
     // Configure PWMs
     pwm_pump_init(WATER);
@@ -104,10 +80,7 @@ void app_main(void)
 
     while (1)
     {
-        // STAND IN: Represents auto. scheduling signal being received
-        current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
-
-        // TEST
+        // Yield until MQTT sends message
         if (mqtt_check_buffer_ready())
         {
             ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
@@ -187,10 +160,6 @@ void app_main(void)
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
-
-
-            // 6. Update switch value
-            //switch0 = current_switch_level;
         }
 
         // Must be at end of while loop, allows other CPU to activate
