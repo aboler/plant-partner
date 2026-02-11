@@ -40,7 +40,7 @@ void app_main(void)
     ESP_ERROR_CHECK(nvs_init());
 
     // Declare variables
-    uint8_t rx_bufs[11]; 
+    uint8_t rx_buf[11]; 
     int adc_raw, voltage;
     bool auto_care_on, light_cali_successful, moisture_cali_successful, npk_cali_successful;
     auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
@@ -121,7 +121,7 @@ void app_main(void)
             if (npk_cali_successful)
             {
                 //  Test in lab tomorrow
-                uart_read_rs485(rx_bufs);
+                uart_read_rs485(rx_buf);
             }
 
             // 4. Actuate if auto_schedule is on AND if needed
