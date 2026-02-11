@@ -24,7 +24,6 @@ idf_component_register(
         esp-tls
         esp_wifi 
         freertos
-        lwip
         nvs_flash
         spi_flash        
 

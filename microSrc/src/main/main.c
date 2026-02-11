@@ -47,6 +47,7 @@ void app_main(void)
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
 
+    // TBD: Integrate these so they're used with read_topic and read_data
     char messageBuffer[MSG_SIZE];
     char topic[TOPIC_NAME];
 
