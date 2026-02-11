@@ -13,6 +13,7 @@
 #include "../peripherals/gpio.h"
 #include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
+#include "../peripherals/uart_driver.h"
 #include "../peripherals/communication/http.h"
 #include "../peripherals/communication/mqtt.h"
 #include "../peripherals/communication/wifi.h"
@@ -39,8 +40,9 @@ void app_main(void)
     ESP_ERROR_CHECK(nvs_init());
 
     // Declare variables
+    uint8_t rx_bufs[11]; 
     int adc_raw, voltage;
-    bool auto_care_on, light_calibration_successful, moisture_calibration_successful;
+    bool auto_care_on, light_cali_successful, moisture_cali_successful, npk_cali_successful;
     auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
 
     adc_oneshot_unit_handle_t adc1_handle;
@@ -62,9 +64,10 @@ void app_main(void)
     client = http_configure_handle();
     http_put_plant_data(client, p_ptr);
 
-    // Initialize ADC for photoresistor and moisture sensor
-    light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
-    moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
+    // Initialize peripherals for photoresistor, moisture, & NPK sensor
+    light_cali_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
+    moisture_cali_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
+    npk_cali_successful = uart_rs485_init();
 
     // Configure LEDs
     heartbeat_init();
@@ -83,7 +86,7 @@ void app_main(void)
             ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
         
             // 1. Assess and store light if configured
-            if (light_calibration_successful)
+            if (light_cali_successful)
             {
                 adc_read(LIGHT, adc1_handle, &adc_raw);
                 adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
@@ -99,7 +102,7 @@ void app_main(void)
             }
 
             // 2. Assess and store moisture if configured
-            if (moisture_calibration_successful)
+            if (moisture_cali_successful)
             {
                 adc_read(MOISTURE, adc1_handle, &adc_raw);
                 adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
@@ -115,6 +118,11 @@ void app_main(void)
             }
 
             // 3. Assess and store nutrient data
+            if (npk_cali_successful)
+            {
+                //  Test in lab tomorrow
+                uart_read_rs485(rx_bufs);
+            }
 
             // 4. Actuate if auto_schedule is on AND if needed
             if (auto_care_on)

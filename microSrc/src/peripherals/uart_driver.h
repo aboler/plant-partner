@@ -57,10 +57,10 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf);
 uart_error_t uart_write_string(const uart_port_t uartPort, const char *s);
 uart_error_t uart_write_int(const uart_port_t uartPort, int v);
 
-// // RS485 Specific helpers 
-void uart_rs485_init();
+// RS485 Specific helpers 
+bool uart_rs485_init();
 void uart_rs485_set_transmit_mode();
 void uart_rs485_set_receive_mode();
-void uart_read_rs485();
+void uart_read_rs485(uint8_t *rx_buf);
 
 #endif // UART_DRIVER_H

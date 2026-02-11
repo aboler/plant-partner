@@ -21,20 +21,19 @@ void uart_init(const uart_port_t uartPort)
     // Set ESP Pins for respective UART Port
     switch (uartPort)
     {
-    case UART_PORT0:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
-        break;
-    case UART_PORT1:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_TX_PIN, UART1_RX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
-        break;
-    case UART_PORT2:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
-        break;
-    default:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
-        break;
-    }
-    
+        case UART_PORT0:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+            break;
+        case UART_PORT1:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_TX_PIN, UART1_RX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
+            break;
+        case UART_PORT2:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
+            break;
+        default:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+            break;
+    } 
 }
 
 void uart_kill(const uart_port_t uartPort)
@@ -122,7 +121,7 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf)
 // This code is NOT finished but is meant for rs485 communication specifically //
 // --------------------------------------------------------------------------- //
 
-void uart_rs485_init()
+bool uart_rs485_init()
 {
     // RS485 uses UART2 //
 
@@ -147,9 +146,10 @@ void uart_rs485_init()
     gpio_set_direction(RS485_DE_RE_PIN, GPIO_MODE_OUTPUT);
     gpio_set_level(RS485_DE_RE_PIN, 0);
 
+    return true;
 }
 
-void uart_read_rs485(){
+void uart_read_rs485(uint8_t *rx_buf){
     const char *TAG = "MODBUS";
 
     // Request Frame for RS485 Modbus Communication
@@ -161,7 +161,6 @@ void uart_read_rs485(){
         0x34, 0x0D  // CRC16 (LSB/MSB)
     };
 
-    uint8_t rx_buf[256];
     memset(rx_buf, 0, sizeof(rx_buf));
 
     // Enable Transmit Mode
@@ -170,7 +169,7 @@ void uart_read_rs485(){
 
     // Send Inquiry Frame
     uart_write_bytes(UART_PORT2, (const char *)modbus_request, sizeof(modbus_request));
-    uart_wait_tx_done(UART_PORT2, pdMS_TO_TICKS(100));
+    uart_wait_tx_done(UART_PORT2, pdMS_TO_TICKS(150));
 
     // Switch back to Receive Mode
     uart_rs485_set_receive_mode();
