@@ -21,7 +21,6 @@
 #include "../wifi/wifi.h"
 
 //static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
-extern volatile bool sample_requested;
 
 static esp_err_t nvs_init(){
     esp_err_t ret = nvs_flash_init();
@@ -102,9 +101,8 @@ void app_main(void)
         // STAND IN: Represents auto. scheduling signal being received
         current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
         
-        if(current_switch_level != switch0 || sample_requested)
+        if(current_switch_level != switch0)
         {
-            sample_requested = false;
             // 1. Assess and store light if configured
             if(light_calibration_successful)
             {
