@@ -4,13 +4,16 @@ import 'package:frontend/plant.dart';
 import 'package:frontend/task.dart';
 import 'dart:convert';
 
-//const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
-const String baseUrl = 'http://172.20.10.9:8000/plants/getPlantByName/Sunflower';
-const String espUrl = "http://192.168.4.1:80"; // esp ip http.c in microSrc
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
+
+const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
+//const String baseUrl = 'http://172.20.10.9:8000/plants/getPlantByName/Sunflower';
+//const String espUrl = "http://172.20.10.6:80"; // esp ip http.c in microSrc
 
 class RemoteService {
-  //static const String url = "http://10.0.2.2:8000";
-  static const String url = "http://172.20.10.9:8000";
+  static const String url = "http://10.0.2.2:8000";
+  //static const String url = "http://172.20.10.9:8000";
 
   Future<Plant?> getPlant() async {
     final resp = await http.get(Uri.parse(baseUrl));
@@ -29,18 +32,23 @@ class RemoteService {
     return null;
   }
 
-  Future<void> sendSampleVoltage() async {
-  final resp = await http.post(
-    Uri.parse("$espUrl/sample"),
-    headers: {'Content-Type': 'application/json'},
-    body: jsonEncode({'sample': true}),
+  Future<void> mqttPublish() async {
+  final client = MqttServerClient("172.20.10.6", "flutter_client_1");
+  client.port = 1883;
+  client.keepAlivePeriod = 20;
+
+  await client.connect();
+
+  final builder = MqttClientPayloadBuilder();
+  builder.addString("beepo");
+
+  client.publishMessage(
+    "plant_partner/ack",
+    MqttQos.atLeastOnce,
+    builder.payload!,
   );
 
-  if (resp.statusCode == 200) {
-    print('Sample request sent to ESP32');
-  } else {
-    print('ESP32 sample failed: ${resp.statusCode}');
-  }
+  client.disconnect();
 }
 
   Future<bool> setAutoSchedule(bool enabled) async {

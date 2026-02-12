@@ -26,10 +26,6 @@ class _HomeViewState extends State<HomeView> {
     setState(() => isLoaded = true);
   }
 
-  samplePlant() async {
-    await RemoteService().sendSampleVoltage();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
 
                       ElevatedButton.icon(
                         onPressed: () {
-                          samplePlant();
+                          mqttPublish();
                         },
                         icon: const Icon(Icons.sensors),
                         label: const Text("Sample"),
