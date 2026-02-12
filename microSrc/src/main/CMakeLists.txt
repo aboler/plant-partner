@@ -1,13 +1,14 @@
 idf_component_register(
     SRCS 
         "main.c" 
-        "../http/http.c"
         "../peripherals/adc.c" 
         "../peripherals/gpio.c" 
         "../peripherals/heartbeat.c" 
         "../peripherals/pwm_pump.c"
         "../peripherals/uart_driver.c"
-        "../wifi/wifi.c" 
+        "../peripherals/communication/http.c"
+        "../peripherals/communication/mqtt.c"
+        "../peripherals/communication/wifi.c"
 
     PRIV_REQUIRES 
         esp_adc
@@ -22,12 +23,10 @@ idf_component_register(
         esp-tls
         esp_wifi 
         freertos
-        lwip
+        mqtt
         nvs_flash
         spi_flash        
 
     INCLUDE_DIRS 
-        "../http"
         "../peripherals"
-        "../wifi"
 )
