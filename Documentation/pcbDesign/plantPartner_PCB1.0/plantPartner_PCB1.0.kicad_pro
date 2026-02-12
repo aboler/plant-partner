@@ -51,8 +51,27 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
+      "drc_exclusions": [
+        [
+          "unconnected_items|109605000|96235000|F.Cu|4|32fe49b7-2bf2-49e6-858e-c937e21d04b6|3b7cb2b5-77f0-4229-a956-1296825f02b3",
+          "Unrelated Relays"
+        ],
+        [
+          "unconnected_items|190465000|85125000|F.Cu|4|83910dde-d199-49b4-9f58-06658aef816e|2873f0d9-51b5-4df7-b0ec-d6e31bc12e58",
+          "Unrelated Relays"
+        ],
+        [
+          "unconnected_items|83305000|104900000|F.Cu|4|a3a7a6fb-f1cb-40d8-9108-3412b99952fc|612bcb0b-4715-4687-9b62-75662b26b677",
+          "Unrelated Relays"
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -180,7 +199,9 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -207,7 +228,12 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -458,7 +484,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.18,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,

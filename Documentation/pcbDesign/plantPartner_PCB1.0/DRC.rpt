@@ -1,0 +1,304 @@
+** Drc report for plantPartner_PCB1.0.kicad_pcb **
+** Created on 2026-02-11T19:00:50-0500 **
+
+** Found 71 DRC violations **
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(168.0500 mm, 109.5700 mm): Pad 7 [+5V] of IC1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(168.0500 mm, 108.7200 mm): Pad 8 [+5V] of IC1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(168.0500 mm, 107.8700 mm): Pad 9 [+5V] of IC1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(165.1500 mm, 107.8700 mm): Pad 4 [GND] of IC1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(165.1500 mm, 108.7200 mm): Pad 5 [GND] of IC1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(165.1500 mm, 109.5700 mm): Pad 6 [GND] of IC1 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(196.4800 mm, 110.4000 mm): Pad 2 [GND] of R24 on F.Cu
+    @(197.1200 mm, 110.4000 mm): Pad 1 [/ADC_LIGHT_SENSOR] of R24 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(90.0550 mm, 68.8300 mm): Pad 2 [Net-(D1-A)] of R8 on F.Cu
+    @(90.0550 mm, 69.4700 mm): Pad 1 [+5V] of R8 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(88.6550 mm, 69.5750 mm): Pad 2 [GND] of C4 on F.Cu
+    @(89.2950 mm, 69.5750 mm): Pad 1 [+5V] of C4 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(89.2750 mm, 68.8500 mm): Pad 2 [Net-(D1-A)] of D1 on F.Cu
+    @(88.6350 mm, 68.8500 mm): Pad 1 [GND] of D1 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(169.0900 mm, 107.5600 mm): Pad 1 [+5V] of C1 on F.Cu
+    @(169.0900 mm, 106.9200 mm): Pad 2 [GND] of C1 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(195.8000 mm, 91.0200 mm): Pad 1 [+5V] of R19 on F.Cu
+    @(195.8000 mm, 90.3800 mm): Pad 2 [Net-(R19-Pad2)] of R19 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(166.4000 mm, 90.6000 mm): Pad 1 [GND] of D11 on F.Cu
+    @(166.4000 mm, 91.2400 mm): Pad 2 [Net-(D11-A)] of D11 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(100.4050 mm, 106.0000 mm): Pad 1 [GND] of D3 on F.Cu
+    @(101.0450 mm, 106.0000 mm): Pad 2 [Net-(D3-A)] of D3 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(109.6050 mm, 96.2350 mm): Pad 1 [/H] of R13 on F.Cu
+    @(109.6050 mm, 96.8750 mm): Pad 2 [Net-(R13-Pad2)] of R13 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(157.2650 mm, 90.5000 mm): Pad 1 [Net-(D10-A)] of R22 on F.Cu
+    @(157.9050 mm, 90.5000 mm): Pad 2 [/EXTERNAL LED] of R22 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(190.6100 mm, 95.8300 mm): Pad 1 [GND] of D5 on F.Cu
+    @(190.6100 mm, 96.4700 mm): Pad 2 [Net-(D5-A)] of D5 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(97.0888 mm, 73.1800 mm): Pad 1 [+5V] of R5 on F.Cu
+    @(97.0888 mm, 72.5400 mm): Pad 2 [/DE] of R5 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(96.3888 mm, 73.1850 mm): Pad 1 [+5V] of R6 on F.Cu
+    @(96.3888 mm, 72.5450 mm): Pad 2 [/DE] of R6 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(87.6388 mm, 73.4350 mm): Pad 1 [/B] of R11 on F.Cu
+    @(87.6388 mm, 72.7950 mm): Pad 2 [/A] of R11 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(101.7300 mm, 99.4000 mm): Pad 1 [Net-(R14-Pad2)] of R15 on F.Cu
+    @(102.3700 mm, 99.4000 mm): Pad 2 [Net-(Q1-B)] of R15 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(96.4888 mm, 70.4500 mm): Pad 1 [+5V] of R7 on F.Cu
+    @(96.4888 mm, 71.0900 mm): Pad 2 [/DI] of R7 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(155.3700 mm, 60.5250 mm): Pad 1 [Net-(U3-RX2)] of R23 on F.Cu
+    @(155.3700 mm, 59.8850 mm): Pad 2 [/RO] of R23 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(105.9800 mm, 101.7000 mm): Pad 1 [GND] of D2 on F.Cu
+    @(105.3400 mm, 101.7000 mm): Pad 2 [Net-(D2-A)] of D2 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(185.6600 mm, 90.6950 mm): Pad 1 [GND] of D6 on F.Cu
+    @(185.0200 mm, 90.6950 mm): Pad 2 [Net-(D6-A)] of D6 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(87.6888 mm, 74.1950 mm): Pad 1 [/B] of R9 on F.Cu
+    @(87.6888 mm, 74.8350 mm): Pad 2 [GND] of R9 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(86.8888 mm, 73.4350 mm): Pad 1 [+5V] of R10 on F.Cu
+    @(86.8888 mm, 72.7950 mm): Pad 2 [/A] of R10 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(164.2100 mm, 104.9000 mm): Pad 1 [/FB] of R3 on F.Cu
+    @(163.5700 mm, 104.9000 mm): Pad 2 [GND] of R3 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(195.7500 mm, 96.1350 mm): Pad 1 [/H] of R18 on F.Cu
+    @(195.7500 mm, 96.7750 mm): Pad 2 [Net-(R18-Pad2)] of R18 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(96.2888 mm, 74.3950 mm): Pad 1 [+5V] of R4 on F.Cu
+    @(96.2888 mm, 75.0350 mm): Pad 2 [/RO] of R4 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(166.5200 mm, 104.1700 mm): Pad 1 [+12V] of R1 on F.Cu
+    @(165.8800 mm, 104.1700 mm): Pad 2 [/EN] of R1 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(100.3800 mm, 105.1300 mm): Pad 1 [Net-(D4-K)] of R16 on F.Cu
+    @(101.0200 mm, 105.1300 mm): Pad 2 [Net-(D3-A)] of R16 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(191.3500 mm, 95.8350 mm): Pad 1 [+5V] of R17 on F.Cu
+    @(191.3500 mm, 96.4750 mm): Pad 2 [Net-(D5-A)] of R17 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(157.9000 mm, 91.2000 mm): Pad 1 [GND] of D10 on F.Cu
+    @(157.2600 mm, 91.2000 mm): Pad 2 [Net-(D10-A)] of D10 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(194.9600 mm, 90.3800 mm): Pad 1 [Net-(R19-Pad2)] of R20 on F.Cu
+    @(194.9600 mm, 91.0200 mm): Pad 2 [Net-(Q2-B)] of R20 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(167.3000 mm, 90.6000 mm): Pad 1 [+5V] of R26 on F.Cu
+    @(167.3000 mm, 91.2400 mm): Pad 2 [Net-(D11-A)] of R26 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(185.6550 mm, 89.9850 mm): Pad 1 [Net-(D7-K)] of R21 on F.Cu
+    @(185.0150 mm, 89.9850 mm): Pad 2 [Net-(D6-A)] of R21 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(163.7250 mm, 105.8200 mm): Pad 1 [+5V] of R2 on F.Cu
+    @(164.3650 mm, 105.8200 mm): Pad 2 [/FB] of R2 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(103.9250 mm, 99.4000 mm): Pad 1 [+5V] of R14 on F.Cu
+    @(103.2850 mm, 99.4000 mm): Pad 2 [Net-(R14-Pad2)] of R14 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(105.9750 mm, 101.0000 mm): Pad 1 [+5V] of R12 on F.Cu
+    @(105.3350 mm, 101.0000 mm): Pad 2 [Net-(D2-A)] of R12 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(164.0900 mm, 106.6700 mm): Pad 1 [+12V] of C2 on F.Cu
+    @(164.0900 mm, 107.3100 mm): Pad 2 [GND] of C2 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Default'; error
+    @(89.2950 mm, 70.3250 mm): Pad 1 [+5V] of C3 on F.Cu
+    @(88.6550 mm, 70.3250 mm): Pad 2 [GND] of C3 on F.Cu
+[shorting_items]: Items shorting two nets (nets  and +5V)
+    Local override; error
+    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(168.0500 mm, 108.7200 mm): Pad 8 [+5V] of IC1 on F.Cu
+[shorting_items]: Items shorting two nets (nets  and +5V)
+    Local override; error
+    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(168.0500 mm, 107.8700 mm): Pad 9 [+5V] of IC1 on F.Cu
+[shorting_items]: Items shorting two nets (nets  and GND)
+    Local override; error
+    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(165.1500 mm, 107.8700 mm): Pad 4 [GND] of IC1 on F.Cu
+[shorting_items]: Items shorting two nets (nets  and GND)
+    Local override; error
+    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(165.1500 mm, 108.7200 mm): Pad 5 [GND] of IC1 on F.Cu
+[shorting_items]: Items shorting two nets (nets  and GND)
+    Local override; error
+    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
+    @(165.1500 mm, 109.5700 mm): Pad 6 [GND] of IC1 on F.Cu
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(86.6888 mm, 72.1150 mm): Reference field of R10
+    @(87.6888 mm, 72.1150 mm): Reference field of R11
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(189.6500 mm, 90.7850 mm): Footprint text of D7 (K)
+    @(189.7300 mm, 90.5850 mm): Segment of Q2 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(165.1000 mm, 104.9700 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(165.1000 mm, 109.9700 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(168.1000 mm, 104.9700 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(109.4770 mm, 96.8700 mm): Circle of U1 on F.Silkscreen
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0600 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(66.4000 mm, 70.1000 mm): PCB text 'NPK VCC' on F.Silkscreen
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.3000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(66.4000 mm, 70.1000 mm): PCB text 'NPK VCC' on F.Silkscreen
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0600 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(83.4000 mm, 78.3000 mm): PCB text 'MAX485 VCC' on F.Silkscreen
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.3000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(83.4000 mm, 78.3000 mm): PCB text 'MAX485 VCC' on F.Silkscreen
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(102.0050 mm, 106.0000 mm): Reference field of D3
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(110.7050 mm, 96.6000 mm): Reference field of R13
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0500 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(87.6888 mm, 72.1150 mm): Reference field of R11
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(87.6888 mm, 72.1150 mm): Reference field of R11
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.3201 mm)
+    Rule: board setup constraints silk text height; warning
+    @(91.9355 mm, 73.3691 mm): Reference field of U2
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(102.1050 mm, 98.7000 mm): Reference field of R15
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(105.7050 mm, 102.4000 mm): Reference field of D2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0500 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(87.0888 mm, 74.5150 mm): Reference field of R9
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(87.0888 mm, 74.5150 mm): Reference field of R9
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0500 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(86.6888 mm, 72.1150 mm): Reference field of R10
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(86.6888 mm, 72.1150 mm): Reference field of R10
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(102.2050 mm, 105.1000 mm): Reference field of R16
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(103.6600 mm, 98.7000 mm): Reference field of R14
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(105.7050 mm, 100.3000 mm): Reference field of R12
+
+** Found 8 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(157.9000 mm, 91.2000 mm): Pad 1 [GND] of D10 on F.Cu
+    @(152.6150 mm, 93.2600 mm): PTH pad 8 [GND] of J20
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.6100 mm, 95.8300 mm): Pad 1 [GND] of D5 on F.Cu
+    @(197.4900 mm, 100.1100 mm): PTH pad 2 [GND] of J12
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(94.7550 mm, 73.7500 mm): Pad 2 [/DE] of U2 on F.Cu
+    @(94.8200 mm, 72.5450 mm): Track [/DE] on F.Cu, length 0.0919 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.4650 mm, 63.7825 mm): Track [/COM] on B.Cu, length 21.3425 mm
+    @(96.8200 mm, 98.2150 mm): Track [/COM] on B.Cu, length 0.9687 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(108.3610 mm, 96.2350 mm): Track [/H] on F.Cu, length 1.2440 mm
+    @(198.1350 mm, 93.7500 mm): Track [/H] on F.Cu, length 3.3729 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(74.8375 mm, 104.9000 mm): Track [/NC] on F.Cu, length 8.4675 mm
+    @(186.7500 mm, 73.2100 mm): PTH pad NC [/NC] of K2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.2850 mm, 91.3000 mm): Track [+5V] on B.Cu, length 9.9207 mm
+    @(108.2350 mm, 83.1000 mm): Track [+5V] on F.Cu, length 2.5400 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.0500 mm, 107.8700 mm): Pad 9 [+5V] of IC1 on F.Cu
+    @(162.2900 mm, 105.8200 mm): Track [+5V] on F.Cu, length 1.4350 mm
+
+** Found 0 Footprint errors **
+
+** End of Report **

@@ -6819,7 +6819,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 257.81) (xy 72.39 257.81)
+			(xy 64.77 252.73) (xy 72.39 252.73)
 		)
 		(stroke
 			(width 0)
@@ -6847,6 +6847,16 @@
 			(type default)
 		)
 		(uuid "339b6dd4-ba48-4c89-8380-4128b2d89620")
+	)
+	(wire
+		(pts
+			(xy 49.53 269.24) (xy 72.39 269.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34de67ea-072d-4b16-9bb9-3539dce7f529")
 	)
 	(wire
 		(pts
@@ -7181,7 +7191,7 @@
 	)
 	(wire
 		(pts
-			(xy 53.34 260.35) (xy 72.39 260.35)
+			(xy 53.34 255.27) (xy 72.39 255.27)
 		)
 		(stroke
 			(width 0)
@@ -7664,6 +7674,16 @@
 	)
 	(wire
 		(pts
+			(xy 53.34 266.7) (xy 72.39 266.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b637b2d-4070-4b5a-ac5f-d0f27677795f")
+	)
+	(wire
+		(pts
 			(xy 30.48 53.34) (xy 30.48 55.88)
 		)
 		(stroke
@@ -7865,7 +7885,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 262.89) (xy 72.39 262.89)
+			(xy 49.53 257.81) (xy 72.39 257.81)
 		)
 		(stroke
 			(width 0)
@@ -9490,7 +9510,7 @@
 		(uuid "0a08b1e8-18b5-4257-8fb2-d1b9c0234d89")
 	)
 	(label "ADC_MOISTURE_SENSOR"
-		(at 49.53 262.89 0)
+		(at 49.53 257.81 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9600,7 +9620,7 @@
 		(uuid "2d5cbfee-12a6-4232-8cde-338262129079")
 	)
 	(label "ESP_EN"
-		(at 64.77 257.81 0)
+		(at 64.77 252.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10109,6 +10129,16 @@
 		)
 		(uuid "a124f7e1-0914-41a4-8471-155fdaf054a7")
 	)
+	(label "ADC_LIGHT_SENSOR"
+		(at 53.34 266.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a1c97b07-c218-41af-8a96-1d030350bf9f")
+	)
 	(label "DC+"
 		(at 137.16 143.51 180)
 		(effects
@@ -10130,7 +10160,7 @@
 		(uuid "a616e890-950c-4be4-8fb4-7b3483936830")
 	)
 	(label "ADC_LIGHT_SENSOR"
-		(at 53.34 260.35 0)
+		(at 53.34 255.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10478,6 +10508,16 @@
 			(justify left bottom)
 		)
 		(uuid "f4e0e9b0-6cca-4acc-a634-7b9db23ce560")
+	)
+	(label "ADC_MOISTURE_SENSOR"
+		(at 49.53 269.24 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f599205b-39c1-4495-bd03-1090657c1014")
 	)
 	(label "ESP_3.3V"
 		(at 86.36 167.64 180)
@@ -14139,6 +14179,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 78.74 85.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5ee084e0-fc66-4f21-b445-9d572c3842ea")
+		(property "Reference" "#PWR068"
+			(at 78.74 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V"
+			(at 78.74 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 78.74 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 78.74 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 78.74 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "03ef29f2-eea5-4841-bfad-8c55637139cc")
+		)
+		(instances
+			(project "plantPartner_PCB1.0"
+				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
+					(reference "#PWR068")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:D")
 		(at 201.93 64.77 270)
 		(unit 1)
@@ -16545,6 +16650,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 71.12 119.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "930ccaa0-0d3d-4c06-b97b-bbc37e24952e")
+		(property "Reference" "#PWR013"
+			(at 71.12 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V"
+			(at 71.12 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 71.12 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "60055c27-e4c2-4331-ada8-19419bd5ed2b")
+		)
+		(instances
+			(project "plantPartner_PCB1.0"
+				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
+					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 52.07 128.27 0)
 		(unit 1)
@@ -17199,6 +17369,74 @@
 			(project "plantPartner_PCB1.0"
 				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
 					(reference "#PWR047")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 77.47 269.24 0)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9f73da01-a5ba-4ece-bf43-1fe8017725d7")
+		(property "Reference" "J29"
+			(at 77.47 263.652 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 77.47 272.542 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 77.47 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 77.47 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 77.47 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "53992998-cc48-45a6-81eb-b37139e03ef7")
+		)
+		(pin "1"
+			(uuid "a6d1a268-71d4-4481-be02-c6a25e8e45c5")
+		)
+		(instances
+			(project "plantPartner_PCB1.0"
+				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
+					(reference "J29")
 					(unit 1)
 				)
 			)
@@ -18036,72 +18274,6 @@
 			(project ""
 				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
 					(reference "#PWR055")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+12V")
-		(at 71.12 119.38 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b99caec9-3e0d-4f6c-9914-ff4d4dd16a91")
-		(property "Reference" "#PWR013"
-			(at 71.12 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 69.088 115.824 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 71.12 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 71.12 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 71.12 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "511cc1cf-e59b-46fc-bae9-765a4b7c2798")
-		)
-		(instances
-			(project "plantPartner_PCB1.0"
-				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
-					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -21037,7 +21209,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
-		(at 77.47 260.35 0)
+		(at 77.47 255.27 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21045,7 +21217,7 @@
 		(dnp no)
 		(uuid "f6842446-3d8a-45ed-8777-7157d2c35420")
 		(property "Reference" "J25"
-			(at 75.692 254.508 0)
+			(at 75.692 249.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21054,7 +21226,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03"
-			(at 71.628 265.938 0)
+			(at 71.628 260.858 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21063,7 +21235,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
-			(at 77.47 260.35 0)
+			(at 77.47 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21072,7 +21244,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 77.47 260.35 0)
+			(at 77.47 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21081,7 +21253,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 77.47 260.35 0)
+			(at 77.47 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21167,72 +21339,6 @@
 			(project ""
 				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
 					(reference "#PWR021")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+12V")
-		(at 78.74 85.09 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fbc21655-b539-44c2-9ba2-8b20428c9c07")
-		(property "Reference" "#PWR018"
-			(at 78.74 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 76.708 81.534 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 78.74 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 78.74 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 78.74 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "74e45352-1ea9-4ef9-af71-fe8c91de3d22")
-		)
-		(instances
-			(project "plantPartner_PCB1.0"
-				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
-					(reference "#PWR018")
 					(unit 1)
 				)
 			)
