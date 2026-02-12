@@ -3,13 +3,15 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/plant.dart';
 import 'package:frontend/task.dart';
 import 'dart:convert';
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
 
-//const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
-const String baseUrl = 'http://:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
+//const String baseUrl = 'http://:8000/plants/getPlantByName/Sunflower';
 
 class RemoteService {
-  //static const String url = "http://10.0.2.2:8000";
-  static const String url = "http://:8000";
+  static const String url = "http://10.0.2.2:8000";
+  //static const String url = "http://:8000";
 
   Future<Plant?> getPlant() async {
     final resp = await http.get(Uri.parse(baseUrl));
@@ -27,6 +29,25 @@ class RemoteService {
 
     return null;
   }
+
+  Future<void> mqttPublish() async {
+  final client = MqttServerClient("192.168.1.50", "flutter_client_1");
+  client.port = 1883;
+  client.keepAlivePeriod = 20;
+
+  await client.connect();
+
+  final builder = MqttClientPayloadBuilder();
+  builder.addString("beepo");
+
+  client.publishMessage(
+    "plant_partner/ack",
+    MqttQos.atLeastOnce,
+    builder.payload!,
+  );
+
+  client.disconnect();
+}
 
   Future<bool> setAutoSchedule(bool enabled) async {
     final resp = await http.put(

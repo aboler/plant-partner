@@ -64,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
 
                       ElevatedButton.icon(
                         onPressed: () {
-                          loadPlant();
+                          mqttPublish();
                         },
                         icon: const Icon(Icons.sensors),
                         label: const Text("Sample"),
