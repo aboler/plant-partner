@@ -32,8 +32,8 @@
 #define UART_PORT2      UART_NUM_2
 #define UART2_RX_PIN    GPIO_NUM_16
 #define UART2_TX_PIN    GPIO_NUM_17
-#define UART2_RTS_PIN   GPIO_NUM_7
-#define UART2_CTS_PIN   GPIO_NUM_6
+#define UART2_RTS_PIN   GPIO_NUM_18
+#define UART2_CTS_PIN   GPIO_NUM_5
 
 #define RS485_DE_RE_PIN GPIO_NUM_21  // Pin to control RS485 Driver Enable/~Receiver Enable
 
