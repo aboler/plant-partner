@@ -5909,16 +5909,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Route PCB\n"
-		(exclude_from_sim no)
-		(at 337.82 92.964 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "1b43aedf-4ad8-45b8-999d-45c346c8fb1c")
-	)
 	(text "Buck Converter (12V In to 5V Out 1.2A)"
 		(exclude_from_sim no)
 		(at 42.418 67.056 0)
@@ -5969,16 +5959,6 @@
 		)
 		(uuid "5ca95f9b-c5d7-4a6b-a91e-25be877d2893")
 	)
-	(text "Route PCB"
-		(exclude_from_sim no)
-		(at 338.328 95.504 0)
-		(effects
-			(font
-				(size 0.889 0.889)
-			)
-		)
-		(uuid "674dac46-e982-4bce-8bdb-dbcbbd25ff75")
-	)
 	(text "5V Relay - Water Pump\n\n\n"
 		(exclude_from_sim no)
 		(at 132.588 161.798 0)
@@ -6009,17 +5989,7 @@
 		)
 		(uuid "960892a4-ef4f-45f5-9f4c-aa08910a1a3d")
 	)
-	(text "Route PCB\n"
-		(exclude_from_sim no)
-		(at 337.312 89.916 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-		)
-		(uuid "ec6e489e-2977-498b-b3f3-03505072e07f")
-	)
-	(text "Route PCB"
+	(text "Route PCB\nFind best SMDs for Resistors, LEDs, and Capacitors"
 		(exclude_from_sim no)
 		(at 337.566 85.598 0)
 		(effects
@@ -16741,7 +16711,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 53.0352 132.08 0)
 			(effects
 				(font
@@ -18801,7 +18771,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0201_0603Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 69.342 125.73 90)
 			(effects
 				(font

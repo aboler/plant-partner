@@ -64,7 +64,7 @@
           "Unrelated Relays"
         ],
         [
-          "unconnected_items|190465000|85125000|F.Cu|4|83910dde-d199-49b4-9f58-06658aef816e|2873f0d9-51b5-4df7-b0ec-d6e31bc12e58",
+          "unconnected_items|190465000|85125000|F.Cu|4|e50271df-4095-42c1-8951-646a9e8b187c|990c1a21-cb90-4564-8efb-9ed6b77d6e71",
           "Unrelated Relays"
         ],
         [
@@ -252,7 +252,24 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "multiple_net_names|1371600|1460500|549ecc7c-e3eb-45f9-9915-bb19624587b7|48f01cfc-fa0a-4c05-9927-e3a10f910859|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Will properly label on PCB"
+      ],
+      [
+        "multiple_net_names|241300|1041400|0ecff9af-d8c8-4ac1-8192-fe941fb90dc0|14a3024b-e126-45c1-9883-126ef9ba721d|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Handled on PCB and function as DE/~RE anyways"
+      ],
+      [
+        "multiple_net_names|279400|520700|d65f2e9d-9f22-471c-956b-6e14ae264f29|2e644a9b-3f9e-4a81-9df6-1355cf484d67|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Not an issue"
+      ],
+      [
+        "multiple_net_names|825500|292100|8eb60db2-0427-4771-a5d4-7f5a80b20be7|09da90c8-312a-4368-aba0-b72d28eda76d|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Okay if OUT is 5V"
+      ]
+    ],
     "meta": {
       "version": 0
     },
