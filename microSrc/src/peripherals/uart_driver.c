@@ -149,7 +149,7 @@ bool uart_rs485_init()
     return true;
 }
 
-void uart_read_rs485(uint8_t *rx_buf){
+void uart_read_rs485(){
     const char *TAG = "MODBUS";
 
     // Request Frame for RS485 Modbus Communication
@@ -161,6 +161,7 @@ void uart_read_rs485(uint8_t *rx_buf){
         0x34, 0x0D  // CRC16 (LSB/MSB)
     };
 
+    uint8_t rx_buf[256];
     memset(rx_buf, 0, sizeof(rx_buf));
 
     // Enable Transmit Mode
@@ -169,7 +170,7 @@ void uart_read_rs485(uint8_t *rx_buf){
 
     // Send Inquiry Frame
     uart_write_bytes(UART_PORT2, (const char *)modbus_request, sizeof(modbus_request));
-    uart_wait_tx_done(UART_PORT2, pdMS_TO_TICKS(150));
+    uart_wait_tx_done(UART_PORT2, pdMS_TO_TICKS(100));
 
     // Switch back to Receive Mode
     uart_rs485_set_receive_mode();
@@ -209,4 +210,3 @@ void uart_rs485_set_receive_mode()
 {
     gpio_set_level(RS485_DE_RE_PIN, 0);
 }
-
