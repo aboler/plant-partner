@@ -36,11 +36,17 @@ static esp_err_t nvs_init()
 
 void app_main(void)
 {
+    // TEMPORARY; REMOVE WHEN FEEL GOOD ABOUT TEST
+    bool current_switch_level, switch0;
+    configure_IO(INPUT, SWITCH0_GPIO);
+    switch0 = (bool)gpio_get_level(SWITCH0_GPIO);
+    // END OF TEMPORARY
+
+
     // Used by all
     ESP_ERROR_CHECK(nvs_init());
 
     // Declare variables
-    uint8_t rx_buf[11]; 
     int adc_raw, voltage;
     bool auto_care_on, light_cali_successful, moisture_cali_successful, npk_cali_successful;
     auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
@@ -80,8 +86,11 @@ void app_main(void)
 
     while (1)
     {
+        // TEMPORARY; REMOVE WHEN FEEL GOOD ABOUT TEST
+        current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
+
         // Yield until MQTT sends message
-        if (mqtt_check_buffer_ready())
+        if ((current_switch_level != switch0) | mqtt_check_buffer_ready())
         {
             ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
         
@@ -121,7 +130,7 @@ void app_main(void)
             if (npk_cali_successful)
             {
                 //  Test in lab tomorrow
-                uart_read_rs485(rx_buf);
+                uart_read_rs485();
             }
 
             // 4. Actuate if auto_schedule is on AND if needed
@@ -165,6 +174,9 @@ void app_main(void)
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+
+            // TEMPORARY; REMOVE WHEN FEEL GOOD ABOUT TEST
+            switch0 = current_switch_level;
         }
 
         // Must be at end of while loop, allows other CPU to activate
