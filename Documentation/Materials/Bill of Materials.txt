@@ -2,7 +2,6 @@
 Plant Partner 
 Bill of Materials Draft
 
-
 ______________________________________
 uController: ESP32Wroom: https://www.alibaba.com/product-detail/esp32-dev-kit-c-devkitc-v4_1600232911068.html
 https://www.amazon.com/ESP-WROOM-32-Development-Microcontroller-Integrated-Compatible/dp/B08D5ZD528?th=1
@@ -48,6 +47,10 @@ https://www.alibaba.com/product-detail/Factory-Price-OEM-FCC-RoHS-Power_16005559
 Buck Converter down to 	5 V:
 https://www.adafruit.com/product/4739
 Documentation: Schematic file is in Documentation/Datasheets and the KiCad Project for it is in pcbDesign/buckConverter
+
+LED Lamp 5V:
+https://www.amazon.com/dp/B084ZNG43H?ref=ppx_yo2ov_dt_b_fed_asin_title
+
 
 ______________________________________
 Container:
