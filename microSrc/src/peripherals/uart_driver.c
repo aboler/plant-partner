@@ -125,21 +125,22 @@ bool uart_rs485_init()
 {
     // RS485 uses UART2 //
 
-    // Install UART Driver: Only Receiving Buffer
-    ESP_ERROR_CHECK(uart_driver_install(UART_PORT2, UART_RX_BUFFER_SIZE, 0, 0, NULL, 0));
-
     // UART Port Configuration for RS485
     uart_config_t uart_config = {
         .baud_rate = UART_RS485_BAUD_RATE,
         .data_bits = UART_DATA_8_BITS,
-        .parity    = UART_PARITY_EVEN,
+        .parity    = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+        .source_clk = UART_SCLK_APB,
     };
     ESP_ERROR_CHECK(uart_param_config(UART_PORT2, &uart_config));
 
     // Set ESP Pins for UART2 (RS485)
     ESP_ERROR_CHECK(uart_set_pin(UART_PORT2, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
+
+    // Install UART Driver: Only Receiving Buffer
+    ESP_ERROR_CHECK(uart_driver_install(UART_PORT2, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
 
     // Initialize DE/RE Pin Control to Receive Mode (Low) - Transmit Mode is High
     gpio_reset_pin(RS485_DE_RE_PIN);
