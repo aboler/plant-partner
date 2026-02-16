@@ -85,16 +85,16 @@ void app_main(void)
 
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
+            // Toggle autocare enable command
             if (strcmp(topic, "plant_partner/act_tog_en") == 0)
             {
-                // Toggle autocare enable command
                 auto_care_on = !auto_care_on;
 
                 ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
             }
+            // Sample command
             else if (strcmp(topic, "plant_partner/ack") == 0)
             {
-                // Sample command
                 // 1. Assess and store light if configured
                 if (light_calibration_successful)
                 {
