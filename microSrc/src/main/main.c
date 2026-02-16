@@ -13,6 +13,7 @@
 #include "../peripherals/gpio.h"
 #include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
+#include "../peripherals/uart_driver.h"
 #include "../peripherals/communication/http.h"
 #include "../peripherals/communication/mqtt.h"
 #include "../peripherals/communication/wifi.h"
@@ -35,12 +36,19 @@ static esp_err_t nvs_init()
 
 void app_main(void)
 {
+    // TEMPORARY; REMOVE WHEN FEEL GOOD ABOUT TEST
+    bool current_switch_level, switch0;
+    configure_IO(INPUT, SWITCH0_GPIO);
+    switch0 = (bool)gpio_get_level(SWITCH0_GPIO);
+    // END OF TEMPORARY
+
+
     // Used by all
     ESP_ERROR_CHECK(nvs_init());
 
     // Declare variables
     int adc_raw, voltage;
-    bool auto_care_on, light_calibration_successful, moisture_calibration_successful;
+    bool auto_care_on, light_cali_successful, moisture_cali_successful, npk_cali_successful;
     auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
 
     adc_oneshot_unit_handle_t adc1_handle;
@@ -62,9 +70,10 @@ void app_main(void)
     client = http_configure_handle();
     http_put_plant_data(client, p_ptr);
 
-    // Initialize ADC for photoresistor and moisture sensor
-    light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
-    moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
+    // Initialize peripherals for photoresistor, moisture, & NPK sensor
+    light_cali_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
+    moisture_cali_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
+    npk_cali_successful = uart_rs485_init();
 
     // Configure LEDs
     heartbeat_init();
@@ -77,13 +86,16 @@ void app_main(void)
 
     while (1)
     {
+        // TEMPORARY; REMOVE WHEN FEEL GOOD ABOUT TEST
+        current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
+
         // Yield until MQTT sends message
-        if (mqtt_check_buffer_ready())
+        if ((current_switch_level != switch0) | mqtt_check_buffer_ready())
         {
             ESP_LOGI("main", "Topic: %s, Data: %s", read_topic(), read_data());
         
             // 1. Assess and store light if configured
-            if (light_calibration_successful)
+            if (light_cali_successful)
             {
                 adc_read(LIGHT, adc1_handle, &adc_raw);
                 adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
@@ -99,7 +111,7 @@ void app_main(void)
             }
 
             // 2. Assess and store moisture if configured
-            if (moisture_calibration_successful)
+            if (moisture_cali_successful)
             {
                 adc_read(MOISTURE, adc1_handle, &adc_raw);
                 adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
@@ -115,6 +127,11 @@ void app_main(void)
             }
 
             // 3. Assess and store nutrient data
+            if (npk_cali_successful)
+            {
+                //  Test in lab tomorrow
+                uart_read_rs485();
+            }
 
             // 4. Actuate if auto_schedule is on AND if needed
             if (auto_care_on)
@@ -157,6 +174,9 @@ void app_main(void)
             esp_err_t err = esp_http_client_perform(client);
             ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+
+            // TEMPORARY; REMOVE WHEN FEEL GOOD ABOUT TEST
+            switch0 = current_switch_level;
         }
 
         // Must be at end of while loop, allows other CPU to activate

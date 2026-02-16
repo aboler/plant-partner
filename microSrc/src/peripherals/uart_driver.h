@@ -32,8 +32,8 @@
 #define UART_PORT2      UART_NUM_2
 #define UART2_RX_PIN    GPIO_NUM_16
 #define UART2_TX_PIN    GPIO_NUM_17
-#define UART2_RTS_PIN   GPIO_NUM_7
-#define UART2_CTS_PIN   GPIO_NUM_6
+#define UART2_RTS_PIN   UART_PIN_NO_CHANGE 
+#define UART2_CTS_PIN   UART_PIN_NO_CHANGE 
 
 #define RS485_DE_RE_PIN GPIO_NUM_21  // Pin to control RS485 Driver Enable/~Receiver Enable
 
@@ -57,8 +57,8 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf);
 uart_error_t uart_write_string(const uart_port_t uartPort, const char *s);
 uart_error_t uart_write_int(const uart_port_t uartPort, int v);
 
-// // RS485 Specific helpers 
-void uart_rs485_init();
+// RS485 Specific helpers 
+bool uart_rs485_init();
 void uart_rs485_set_transmit_mode();
 void uart_rs485_set_receive_mode();
 void uart_read_rs485();

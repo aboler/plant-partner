@@ -21,20 +21,19 @@ void uart_init(const uart_port_t uartPort)
     // Set ESP Pins for respective UART Port
     switch (uartPort)
     {
-    case UART_PORT0:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
-        break;
-    case UART_PORT1:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_TX_PIN, UART1_RX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
-        break;
-    case UART_PORT2:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
-        break;
-    default:
-        ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
-        break;
-    }
-    
+        case UART_PORT0:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+            break;
+        case UART_PORT1:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART1_TX_PIN, UART1_RX_PIN, UART1_RTS_PIN, UART1_CTS_PIN));
+            break;
+        case UART_PORT2:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
+            break;
+        default:
+            ESP_ERROR_CHECK(uart_set_pin(uartPort, UART0_TX_PIN, UART0_RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+            break;
+    } 
 }
 
 void uart_kill(const uart_port_t uartPort)
@@ -122,31 +121,33 @@ uart_error_t uart_read_bytes_blocking(const uart_port_t uartPort, void *buf)
 // This code is NOT finished but is meant for rs485 communication specifically //
 // --------------------------------------------------------------------------- //
 
-void uart_rs485_init()
+bool uart_rs485_init()
 {
     // RS485 uses UART2 //
-
-    // Install UART Driver: Only Receiving Buffer
-    ESP_ERROR_CHECK(uart_driver_install(UART_PORT2, UART_RX_BUFFER_SIZE, 0, 0, NULL, 0));
 
     // UART Port Configuration for RS485
     uart_config_t uart_config = {
         .baud_rate = UART_RS485_BAUD_RATE,
         .data_bits = UART_DATA_8_BITS,
-        .parity    = UART_PARITY_EVEN,
+        .parity    = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+        .source_clk = UART_SCLK_APB,
     };
     ESP_ERROR_CHECK(uart_param_config(UART_PORT2, &uart_config));
 
     // Set ESP Pins for UART2 (RS485)
     ESP_ERROR_CHECK(uart_set_pin(UART_PORT2, UART2_TX_PIN, UART2_RX_PIN, UART2_RTS_PIN, UART2_CTS_PIN));
 
+    // Install UART Driver: Only Receiving Buffer
+    ESP_ERROR_CHECK(uart_driver_install(UART_PORT2, UART_RX_BUFFER_SIZE, UART_TX_BUFFER_SIZE, 0, NULL, 0));
+
     // Initialize DE/RE Pin Control to Receive Mode (Low) - Transmit Mode is High
     gpio_reset_pin(RS485_DE_RE_PIN);
     gpio_set_direction(RS485_DE_RE_PIN, GPIO_MODE_OUTPUT);
     gpio_set_level(RS485_DE_RE_PIN, 0);
 
+    return true;
 }
 
 void uart_read_rs485(){
@@ -154,10 +155,10 @@ void uart_read_rs485(){
 
     // Request Frame for RS485 Modbus Communication
     uint8_t modbus_request[] = {
-        0x01,       // Device ID
-        0x03,       // Function code: Read Holding Registers
-        0x00, 0x1E, // Start address: 0x001E
-        0x00, 0x03, // Number of registers: 0x0000 - 0x0003
+        0x01,       // Device Address Code
+        0x03,       // Function Code: Read Holding Registers
+        0x00, 0x1E, // Register Start Address: 0x001E
+        0x00, 0x03, // Register Length: 0x0000 - 0x0003
         0x34, 0x0D  // CRC16 (LSB/MSB)
     };
 
@@ -210,4 +211,3 @@ void uart_rs485_set_receive_mode()
 {
     gpio_set_level(RS485_DE_RE_PIN, 0);
 }
-
