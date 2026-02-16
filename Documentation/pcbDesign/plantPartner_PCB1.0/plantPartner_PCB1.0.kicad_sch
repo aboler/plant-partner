@@ -6238,9 +6238,9 @@
 		)
 		(uuid "3d63abcf-cd56-409c-b285-56ab4c64a4b5")
 	)
-	(text "5V Relay - Fertilizer Pump\n\n\n"
+	(text "5V Relay - Fertilizer Pump\n"
 		(exclude_from_sim no)
-		(at 134.366 87.376 0)
+		(at 134.62 83.82 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -6268,15 +6268,15 @@
 		)
 		(uuid "8a377b3c-77cc-4038-a680-3802b8f88949")
 	)
-	(text "Run Electrical Rules Checker and make sure Schematic Passes.\n"
+	(text "MOSFET Lamp Circuit"
 		(exclude_from_sim no)
-		(at 249.174 237.744 0)
+		(at 325.628 48.514 0)
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1.905 1.905)
 			)
 		)
-		(uuid "957fc265-c77f-451e-9d20-69062648d78b")
+		(uuid "91570047-2d28-4ab8-af5d-de277872305b")
 	)
 	(text "MAX485 RS485 Transceiver\n"
 		(exclude_from_sim no)
@@ -6287,16 +6287,6 @@
 			)
 		)
 		(uuid "960892a4-ef4f-45f5-9f4c-aa08910a1a3d")
-	)
-	(text "Route PCB\nFind best SMDs for Resistors, LEDs, and Capacitors"
-		(exclude_from_sim no)
-		(at 247.142 221.488 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-		)
-		(uuid "eebb4add-720c-424c-a7a1-74f76a6f77b2")
 	)
 	(text "Heartbeat LED"
 		(exclude_from_sim no)
@@ -7444,6 +7434,17 @@
 		)
 		(uuid "4f627f72-c091-4529-b105-9977ecebfc13")
 	)
+	(polyline
+		(pts
+			(xy 342.9 12.7) (xy 342.9 50.8)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+			(color 0 0 0 1)
+		)
+		(uuid "51675d12-d62f-49b8-b561-62355983337b")
+	)
 	(wire
 		(pts
 			(xy 77.47 205.74) (xy 92.71 205.74)
@@ -7846,6 +7847,17 @@
 			(type default)
 		)
 		(uuid "711b9713-bc6b-4de3-a792-c038d2ec02c8")
+	)
+	(polyline
+		(pts
+			(xy 342.9 50.8) (xy 276.225 50.8)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+			(color 0 0 0 1)
+		)
+		(uuid "7120da0f-e07b-43d2-bce7-4d21ded17da0")
 	)
 	(wire
 		(pts
@@ -8437,16 +8449,6 @@
 			(type default)
 		)
 		(uuid "9a01c1b8-fe55-440c-add0-64dedb12df1f")
-	)
-	(wire
-		(pts
-			(xy 38.1 44.45) (xy 39.37 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9ae080b1-1a8e-4fe6-8296-e133ac74059d")
 	)
 	(wire
 		(pts
@@ -9194,6 +9196,16 @@
 	)
 	(wire
 		(pts
+			(xy 35.56 41.91) (xy 39.37 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6d58178-ea94-48d5-afae-66eef76eae11")
+	)
+	(wire
+		(pts
 			(xy 20.32 261.62) (xy 35.56 261.62)
 		)
 		(stroke
@@ -9241,16 +9253,6 @@
 			(type default)
 		)
 		(uuid "d8d34208-473a-4f6d-a4ee-39791a000669")
-	)
-	(wire
-		(pts
-			(xy 38.1 36.83) (xy 39.37 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d8febcce-f741-4fb5-980e-73ed08bfffa8")
 	)
 	(wire
 		(pts
@@ -9592,16 +9594,6 @@
 			(type default)
 		)
 		(uuid "f454c4b3-bf3d-488b-ab7e-e24715709d26")
-	)
-	(wire
-		(pts
-			(xy 38.1 41.91) (xy 39.37 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4b0dfc7-f443-4a25-bb9b-78e4a45cf499")
 	)
 	(polyline
 		(pts
@@ -10673,6 +10665,16 @@
 			(justify right bottom)
 		)
 		(uuid "bed40583-a0e3-4c35-a75f-3219ac322194")
+	)
+	(label "SW"
+		(at 35.56 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c2780e27-dffe-4841-a4b9-834d4319b2ee")
 	)
 	(label "COM"
 		(at 238.76 132.08 0)
@@ -13174,72 +13176,6 @@
 	)
 	(symbol
 		(lib_id "power:+12V")
-		(at 74.93 26.67 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "38ecc76f-b464-4100-9624-b986461f3fa4")
-		(property "Reference" "#PWR035"
-			(at 71.12 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 77.47 26.67 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 74.93 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 74.93 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 74.93 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fcfe88b4-a699-4e67-8fb5-c4b280950494")
-		)
-		(instances
-			(project "plantPartner_PCB1.0"
-				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
-					(reference "#PWR035")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+12V")
 		(at 144.78 218.44 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -14621,72 +14557,6 @@
 			(project "plantPartner_PCB1.0"
 				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
 					(reference "#PWR061")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 38.1 44.45 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "57911f1e-ff88-4e3c-b844-c47103c27874")
-		(property "Reference" "#PWR059"
-			(at 31.75 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 35.306 44.45 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 38.1 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "be55844d-df6a-4958-a05c-1e35e9c2634d")
-		)
-		(instances
-			(project "plantPartner_PCB1.0"
-				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
-					(reference "#PWR059")
 					(unit 1)
 				)
 			)
@@ -18271,72 +18141,6 @@
 			(project ""
 				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
 					(reference "#PWR04")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 38.1 41.91 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ab0335a5-ac85-4a5e-a253-cb1d85a84d82")
-		(property "Reference" "#PWR058"
-			(at 31.75 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 35.306 41.91 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 38.1 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0bef8856-ccc1-4ff7-a6ac-3b0dd76195c1")
-		)
-		(instances
-			(project "plantPartner_PCB1.0"
-				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
-					(reference "#PWR058")
 					(unit 1)
 				)
 			)
@@ -21930,72 +21734,6 @@
 			(project ""
 				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
 					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 38.1 36.83 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f598f138-48ac-4ced-af60-86133efa6570")
-		(property "Reference" "#PWR057"
-			(at 31.75 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 35.306 36.83 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 38.1 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "eb26e390-6e69-4f07-95ed-dac810466a7b")
-		)
-		(instances
-			(project ""
-				(path "/d847e792-0b52-40d2-ab70-4b75cb25c129"
-					(reference "#PWR057")
 					(unit 1)
 				)
 			)
