@@ -6,6 +6,9 @@ import 'dart:convert';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
+
 const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
 //const String baseUrl = 'http://:8000/plants/getPlantByName/Sunflower';
 
@@ -38,16 +41,16 @@ class RemoteService {
     await client.connect();
 
     final builder = MqttClientPayloadBuilder();
-    builder.addString("working");
+    builder.addString("Triggering all sensors");
 
     client.publishMessage(
       "plant_partner/act_tog_en",
       MqttQos.atLeastOnce,
       builder.payload!,
-      );
+    );
 
     client.disconnect();
-  }
+}
 
   Future<bool> setAutoSchedule(bool enabled) async {
     final resp = await http.put(

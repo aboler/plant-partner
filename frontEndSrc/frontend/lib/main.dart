@@ -4,7 +4,6 @@ import 'package:frontend/routes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-//main app dev
 void main() {
   runApp(const MyApp());
 }
@@ -27,7 +26,6 @@ class MyApp extends StatelessWidget {
 Future<dynamic> dataBackend() async {}
 
 //POST API req
-//dynamic bcus it can be any data
 Future<dynamic> createPost(String api) async{}
 
 //PUT API req

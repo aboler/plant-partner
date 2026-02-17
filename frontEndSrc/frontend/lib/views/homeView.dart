@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Home', style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.lightGreen,
       ),
       backgroundColor: const Color.fromARGB(255, 255, 248, 237),
@@ -57,6 +57,7 @@ class _HomeViewState extends State<HomeView> {
                         icon: const Icon(Icons.refresh),
                         label: const Text("Refresh Data"),
                         style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
                           backgroundColor: Colors.lightGreen,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 12),
@@ -69,10 +70,12 @@ class _HomeViewState extends State<HomeView> {
                       ElevatedButton.icon(
                         onPressed: () {
                           triggerAllSensors();
+                          loadPlant();
                         },
                         icon: const Icon(Icons.sensors),
                         label: const Text("Sample"),
                         style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
                           backgroundColor: Colors.green,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 12),
