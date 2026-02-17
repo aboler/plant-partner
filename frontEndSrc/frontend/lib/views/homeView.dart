@@ -26,6 +26,10 @@ class _HomeViewState extends State<HomeView> {
     setState(() => isLoaded = true);
   }
 
+  triggerAllSensors() async {
+    await RemoteService().triggerAllSensors();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,12 +68,12 @@ class _HomeViewState extends State<HomeView> {
 
                       ElevatedButton.icon(
                         onPressed: () {
-                          mqttPublish();
+                          triggerAllSensors();
                         },
                         icon: const Icon(Icons.sensors),
                         label: const Text("Sample"),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightGreen,
+                          backgroundColor: Colors.green,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 12),
                           shape: RoundedRectangleBorder(

@@ -30,24 +30,24 @@ class RemoteService {
     return null;
   }
 
-  Future<void> mqttPublish() async {
-  final client = MqttServerClient("192.168.1.50", "flutter_client_1");
-  client.port = 1883;
-  client.keepAlivePeriod = 20;
+  Future<void> triggerAllSensors() async {
+    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    client.port = 1883;
+    client.keepAlivePeriod = 20;
 
-  await client.connect();
+    await client.connect();
 
-  final builder = MqttClientPayloadBuilder();
-  builder.addString("beepo");
+    final builder = MqttClientPayloadBuilder();
+    builder.addString("working");
 
-  client.publishMessage(
-    "plant_partner/ack",
-    MqttQos.atLeastOnce,
-    builder.payload!,
-  );
+    client.publishMessage(
+      "plant_partner/act_tog_en",
+      MqttQos.atLeastOnce,
+      builder.payload!,
+      );
 
-  client.disconnect();
-}
+    client.disconnect();
+  }
 
   Future<bool> setAutoSchedule(bool enabled) async {
     final resp = await http.put(
