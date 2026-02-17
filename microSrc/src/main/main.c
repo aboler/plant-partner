@@ -88,7 +88,10 @@ void app_main(void)
             // Toggle autocare enable command
             if (strcmp(topic, "plant_partner/act_tog_en") == 0)
             {
-                auto_care_on = !auto_care_on;
+                if (strcmp(message, "Autocare enabled") == 0)
+                    auto_care_on = true;
+                else    
+                    auto_care_on = false;
 
                 ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
             }
