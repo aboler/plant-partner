@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import route from "./routes/sensorRoute.js";
 import router from "./routes/plantRoute.js";
+import taskRouter from "./routes/taskRoute.js";
 import cors from "cors";
 import mqtt from "mqtt";
 import http from "http";
@@ -51,3 +52,4 @@ mongoose.connect(MONGOURL).then(() => {
 
 app.use("/sensors", route);
 app.use("/plants", router);
+app.use("/tasks", taskRouter);
