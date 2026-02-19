@@ -6218,16 +6218,6 @@
 		)
 		(uuid "2493e2bc-387d-4a47-bb73-932c1439f437")
 	)
-	(text "Move Buck Caps to 0603 for 22uF\n"
-		(exclude_from_sim no)
-		(at 320.802 96.774 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "290eed52-0572-45a1-ba72-b53d7d838c25")
-	)
 	(text "ESP-32 WROOM DEVKIT V1\n\n"
 		(exclude_from_sim no)
 		(at 34.798 282.448 0)
@@ -6247,26 +6237,6 @@
 			)
 		)
 		(uuid "3d63abcf-cd56-409c-b285-56ab4c64a4b5")
-	)
-	(text "R3, R13, R18 will probably need to be 0603"
-		(exclude_from_sim no)
-		(at 317.5 110.744 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "3d81335d-8829-4ec1-847d-6c9ead7c5c7d")
-	)
-	(text "LEDs will probably also need to be 0603 and are under Optoelectronics"
-		(exclude_from_sim no)
-		(at 321.818 104.648 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "425486e7-5b24-4184-ae43-f0b80b4ce538")
 	)
 	(text "5V Relay - Fertilizer Pump\n"
 		(exclude_from_sim no)
@@ -12750,7 +12720,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 84.582 45.72 90)
 			(effects
 				(font
@@ -13719,7 +13689,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 71.12 135.89 0)
 			(effects
 				(font
@@ -14338,7 +14308,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 187.96 142.24 0)
 			(effects
 				(font
@@ -14620,7 +14590,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 187.96 67.31 0)
 			(effects
 				(font
@@ -16516,7 +16486,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 140.97 120.65 0)
 			(effects
 				(font
@@ -16668,7 +16638,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 154.432 110.49 90)
 			(effects
 				(font
@@ -17816,7 +17786,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 101.6 252.73 0)
 			(effects
 				(font
@@ -19206,7 +19176,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 96.52 25.7048 0)
 			(effects
 				(font
@@ -19857,7 +19827,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 27.94 25.0952 0)
 			(effects
 				(font
@@ -20235,7 +20205,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 260.35 176.53 0)
 			(effects
 				(font
@@ -20382,7 +20352,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 154.432 35.56 90)
 			(effects
 				(font
@@ -20451,7 +20421,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 140.97 45.72 0)
 			(effects
 				(font
