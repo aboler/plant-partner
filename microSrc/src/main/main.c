@@ -121,7 +121,7 @@ void app_main(void)
                         }
                     }
 
-                    ESP_LOGI(TAG, "Water toggled: %d", p_ptr->lightIntensity);
+                    ESP_LOGI(TAG, "Water toggled: %d", p_ptr->soilMoisture);
 
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
@@ -169,7 +169,7 @@ void app_main(void)
                     vTaskDelay(pdMS_TO_TICKS(800));
                     modify_pump_duty_cycle(FERTLIZER, 0);
 
-                    ESP_LOGI(TAG, "Ferlizer toggled: %d", p_ptr->lightIntensity);
+                    ESP_LOGI(TAG, "Fertilizer toggled:");
                 }
                 // Otherwise do default action 
                 else
