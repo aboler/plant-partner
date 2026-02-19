@@ -22,7 +22,6 @@ class _TaskViewState extends State<TaskView> {
   }
 
   Future<void> loadData() async {
-    // loads plant + tasks so the page has everything it needs
     plant = await RemoteService().getPlant();
     tasks = await RemoteService().getTasks();
 
@@ -40,7 +39,7 @@ class _TaskViewState extends State<TaskView> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          value ? "Auto scheduling enabled" : "Auto scheduling disabled",
+          value ? "Autocare enabled" : "Autocare disabled",
         ),
       ),
     );
@@ -110,7 +109,7 @@ class _TaskViewState extends State<TaskView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
-        title: const Text("Schedule"),
+        title: const Text("Care Schedule", style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -136,16 +135,10 @@ class _TaskViewState extends State<TaskView> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Text(
-                                "Task",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              
                               const SizedBox(height: 12),
                               SwitchListTile(
-                                title: const Text("Enable Auto Scheduling"),
+                                title: const Text("Enable Autocare"),
                                 value: plant!.autoSchedule,
                                 onChanged: toggleAuto,
                               ),
@@ -190,6 +183,9 @@ class _TaskViewState extends State<TaskView> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.lightGreen),
                           onPressed: addTaskDialog,
                           child: const Text("Add New Task"),
                         ),
