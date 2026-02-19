@@ -60,15 +60,15 @@
       ],
       "drc_exclusions": [
         [
-          "unconnected_items|109605000|96235000|F.Cu|4|f1781744-deb0-4881-94c4-36c5ba61c0f5|3b7cb2b5-77f0-4229-a956-1296825f02b3",
+          "unconnected_items|110250000|96235000|F.Cu|4|f1781744-deb0-4881-94c4-36c5ba61c0f5|3b7cb2b5-77f0-4229-a956-1296825f02b3",
+          "Unrelated Relays\\"
+        ],
+        [
+          "unconnected_items|83305000|104900000|F.Cu|4|a3a7a6fb-f1cb-40d8-9108-3412b99952fc|b5ae7df7-20ef-41a1-8ce1-c188cf2e095e",
           "Unrelated Relays"
         ],
         [
-          "unconnected_items|83305000|104900000|F.Cu|4|a3a7a6fb-f1cb-40d8-9108-3412b99952fc|40429c06-90ad-418c-9fa4-db8ca7e31c19",
-          "Unrelated Relays"
-        ],
-        [
-          "unconnected_items|97505000|98900000|F.Cu|4|2873f0d9-51b5-4df7-b0ec-d6e31bc12e58|93ba4ba1-c32c-4346-beeb-874c657c880c",
+          "unconnected_items|97505000|98900000|F.Cu|4|990c1a21-cb90-4564-8efb-9ed6b77d6e71|93ba4ba1-c32c-4346-beeb-874c657c880c",
           "Unrelated Relays"
         ]
       ],
@@ -567,7 +567,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "GerberDrillFiles/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",

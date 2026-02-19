@@ -1,63 +1,19 @@
 ** Drc report for plantPartner_PCB1.0.kicad_pcb **
-** Created on 2026-02-12T19:22:19-0500 **
+** Created on 2026-02-17T11:13:51-0500 **
 
-** Found 37 DRC violations **
-[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
-    Rule: board setup solder mask min width; error
-    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(168.0500 mm, 109.5700 mm): Pad 7 [+5V] of IC1 on F.Cu
-[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
-    Rule: board setup solder mask min width; error
-    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(168.0500 mm, 108.7200 mm): Pad 8 [+5V] of IC1 on F.Cu
-[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
-    Rule: board setup solder mask min width; error
-    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(168.0500 mm, 107.8700 mm): Pad 9 [+5V] of IC1 on F.Cu
-[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
-    Rule: board setup solder mask min width; error
-    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(165.1500 mm, 107.8700 mm): Pad 4 [GND] of IC1 on F.Cu
-[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
-    Rule: board setup solder mask min width; error
-    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(165.1500 mm, 108.7200 mm): Pad 5 [GND] of IC1 on F.Cu
-[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
-    Rule: board setup solder mask min width; error
-    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(165.1500 mm, 109.5700 mm): Pad 6 [GND] of IC1 on F.Cu
-[shorting_items]: Items shorting two nets (nets  and +5V)
-    Local override; error
-    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(168.0500 mm, 107.8700 mm): Pad 9 [+5V] of IC1 on F.Cu
-[shorting_items]: Items shorting two nets (nets  and +5V)
-    Local override; error
-    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(168.0500 mm, 109.5700 mm): Pad 7 [+5V] of IC1 on F.Cu
-[shorting_items]: Items shorting two nets (nets  and +5V)
-    Local override; error
-    @(167.8762 mm, 107.8938 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(168.0500 mm, 108.7200 mm): Pad 8 [+5V] of IC1 on F.Cu
-[shorting_items]: Items shorting two nets (nets  and GND)
-    Local override; error
-    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(165.1500 mm, 109.5700 mm): Pad 6 [GND] of IC1 on F.Cu
-[shorting_items]: Items shorting two nets (nets  and GND)
-    Local override; error
-    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(165.1500 mm, 107.8700 mm): Pad 4 [GND] of IC1 on F.Cu
-[shorting_items]: Items shorting two nets (nets  and GND)
-    Local override; error
-    @(165.9262 mm, 109.7462 mm): Polygon [<no net>] of IC1 on F.Cu
-    @(165.1500 mm, 108.7200 mm): Pad 5 [GND] of IC1 on F.Cu
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(189.6500 mm, 90.7850 mm): Footprint text of D7 (K)
-    @(189.7300 mm, 90.5850 mm): Segment of Q2 on F.Silkscreen
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(86.6888 mm, 72.1150 mm): Reference field of R10
-    @(87.6888 mm, 72.1150 mm): Reference field of R11
+** Found 9 DRC violations **
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(182.1500 mm, 55.1100 mm): Rectangle on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(65.6050 mm, 87.8000 mm): Rectangle on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(182.1500 mm, 55.1100 mm): Rectangle on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(65.6050 mm, 87.8000 mm): Rectangle on B.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(165.1000 mm, 104.9700 mm): Segment of IC1 on F.Silkscreen
@@ -67,84 +23,55 @@
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(168.1000 mm, 104.9700 mm): Segment of IC1 on F.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
+[lib_footprint_mismatch]: Footprint 'MPM3610' does not match copy in library 'MPM3610'.
     Local override; warning
-    @(109.4770 mm, 96.8700 mm): Circle of U1 on F.Silkscreen
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(130.1000 mm, 94.9000 mm): PCB text 'ESP_EN LS  MS' on F.Silkscreen
-[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0600 mm)
-    Rule: board setup constraints silk text thickness; warning
-    @(66.4000 mm, 70.1000 mm): PCB text 'NPK VCC' on F.Silkscreen
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.3000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(66.4000 mm, 70.1000 mm): PCB text 'NPK VCC' on F.Silkscreen
-[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0600 mm)
-    Rule: board setup constraints silk text thickness; warning
-    @(83.4000 mm, 78.3000 mm): PCB text 'MAX485 VCC' on F.Silkscreen
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.3000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(83.4000 mm, 78.3000 mm): PCB text 'MAX485 VCC' on F.Silkscreen
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(102.0050 mm, 106.0000 mm): Reference field of D3
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(110.7050 mm, 96.6000 mm): Reference field of R13
-[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0500 mm)
-    Rule: board setup constraints silk text thickness; warning
-    @(87.6888 mm, 72.1150 mm): Reference field of R11
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(87.6888 mm, 72.1150 mm): Reference field of R11
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.3201 mm)
-    Rule: board setup constraints silk text height; warning
-    @(91.9355 mm, 73.3691 mm): Reference field of U2
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(102.1050 mm, 98.7000 mm): Reference field of R15
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(105.7050 mm, 102.4000 mm): Reference field of D2
-[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0500 mm)
-    Rule: board setup constraints silk text thickness; warning
-    @(87.0888 mm, 74.5150 mm): Reference field of R9
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(87.0888 mm, 74.5150 mm): Reference field of R9
-[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.0800 mm; actual 0.0500 mm)
-    Rule: board setup constraints silk text thickness; warning
-    @(86.6888 mm, 72.1150 mm): Reference field of R10
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.4000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(86.6888 mm, 72.1150 mm): Reference field of R10
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(102.2050 mm, 105.1000 mm): Reference field of R16
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(103.6600 mm, 98.7000 mm): Reference field of R14
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(105.7050 mm, 100.3000 mm): Reference field of R12
+    @(166.6000 mm, 107.4700 mm): Footprint IC1
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1500 mm; actual 0.1247 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(190.3250 mm, 95.8300 mm): Track [GND] on F.Cu, length 3.6416 mm
+    @(190.6100 mm, 95.8300 mm): Track [GND] on F.Cu, length 0.2850 mm
 
 ** Found 3 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error (excluded)
-    @(190.4650 mm, 85.1250 mm): Track [/COM] on B.Cu, length 3.2315 mm
     @(96.8200 mm, 98.2150 mm): Track [/COM] on B.Cu, length 0.9687 mm
+    @(192.7500 mm, 74.6500 mm): Track [/COM] on B.Cu, length 12.7600 mm
     Unrelated Relays
 [unconnected_items]: Missing connection between items
     Local override; error (excluded)
-    @(108.3610 mm, 96.2350 mm): Track [/H] on F.Cu, length 1.2440 mm
+    @(110.2500 mm, 96.2350 mm): Track [/H] on F.Cu, length 1.8890 mm
     @(198.1350 mm, 93.7500 mm): Track [/H] on F.Cu, length 3.3729 mm
-    Unrelated Relays
+    Unrelated Relays\
 [unconnected_items]: Missing connection between items
     Local override; error (excluded)
     @(74.8375 mm, 104.9000 mm): Track [/NC] on F.Cu, length 8.4675 mm
-    @(186.7500 mm, 73.2100 mm): PTH pad NC [/NC] of K2
+    @(186.7500 mm, 71.9200 mm): Track [/NC] on F.Cu, length 1.2900 mm
     Unrelated Relays
 
-** Found 0 Footprint errors **
+** Found 7 Footprint errors **
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(68.3000 mm, 56.7500 mm): Footprint REF**
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(206.9000 mm, 56.1500 mm): Footprint REF**
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(207.2500 mm, 114.2500 mm): Footprint REF**
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(68.3000 mm, 56.7500 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(206.9000 mm, 56.1500 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(207.2500 mm, 114.2500 mm): Footprint REF**
 
 ** End of Report **
