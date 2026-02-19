@@ -98,81 +98,158 @@ void app_main(void)
             // Sample command
             else if (strcmp(topic, "plant_partner/ack") == 0)
             {
-                // 1. Assess and store light if configured
-                if (light_calibration_successful)
+                // If want to just control water
+                if(strcmp(message, "water") == 0)
                 {
-                    adc_read(LIGHT, adc1_handle, &adc_raw);
-                    adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+                    modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
+                    vTaskDelay(pdMS_TO_TICKS(800));
+                    modify_pump_duty_cycle(WATER, 0);
 
-                    if (voltage < 0)
+                    // Update measured value
+                    if (moisture_calibration_successful)
                     {
-                        ESP_LOGW(TAG, "Invalid light reading", voltage);
+                        adc_read(WATER, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid moisture reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->soilMoisture = voltage;
+                        }
                     }
-                    else
-                    {
-                        p_ptr->lightIntensity = voltage;
-                    }
+
+                    ESP_LOGI(TAG, "Water toggled: %d", p_ptr->lightIntensity);
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    esp_err_t err = esp_http_client_perform(client);
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }
 
-                // 2. Assess and store moisture if configured
-                if (moisture_calibration_successful)
+                // If want to just control light
+                else if(strcmp(message, "light") == 0)
                 {
-                    adc_read(MOISTURE, adc1_handle, &adc_raw);
-                    adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+                    toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
-                    if (voltage < 0)
+                    // Update measured value
+                    if (light_calibration_successful)
                     {
-                        ESP_LOGW(TAG, "Invalid moisture reading", voltage);
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid light reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->lightIntensity = voltage;
+                        }
                     }
-                    else
-                    {
-                        p_ptr->soilMoisture = voltage;
-                    }
+
+                    ESP_LOGI(TAG, "LED toggled: %d", p_ptr->lightIntensity);
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    esp_err_t err = esp_http_client_perform(client);
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }
 
-                // 3. Assess and store nutrient data
-
-                // 4. Actuate if auto_schedule is on AND if needed
-                if (auto_care_on)
+                // If want to just control fertilizer
+                else if(strcmp(message, "nutrients") == 0)
                 {
-                    // Light
-                    if (p_ptr->lightIntensity < LED_THRESHOLD)
-                    {
-                        set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                        ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
-                    }
-                    else
-                    {
-                        clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                        ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
-                    }
-
-                    // Moisture
-                    if(p_ptr->soilMoisture < 1500)
-                        ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
-                    else
-                    {
-                        ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
-
-                        // Actuate water pump
-                        modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
-                        vTaskDelay(pdMS_TO_TICKS(800));
-                        modify_pump_duty_cycle(WATER, 0);
-                    }
-
-                    // Fertilizer
-                    // TBD: PUT THIS IN IF STATEMENT LIKE ^^ TO REACT BASED ON READINGS
                     modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
                     vTaskDelay(pdMS_TO_TICKS(800));
                     modify_pump_duty_cycle(FERTLIZER, 0);
-                }
 
-                // 5. Send data to database
-                http_put_plant_data(client, p_ptr);
-                ESP_LOGI(TAG, "HTTP request...");
-                esp_err_t err = esp_http_client_perform(client);
-                ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+                    ESP_LOGI(TAG, "Ferlizer toggled: %d", p_ptr->lightIntensity);
+                }
+                // Otherwise do default action 
+                else
+                {
+                    // 1. Assess and store light if configured
+                    if (light_calibration_successful)
+                    {
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid light reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->lightIntensity = voltage;
+                        }
+                    }
+
+                    // 2. Assess and store moisture if configured
+                    if (moisture_calibration_successful)
+                    {
+                        adc_read(MOISTURE, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid moisture reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->soilMoisture = voltage;
+                        }
+                    }
+
+                    // 3. Assess and store nutrient data
+
+                    // 4. Actuate if auto_schedule is on AND if needed
+                    if (auto_care_on)
+                    {
+                        // Light
+                        if (p_ptr->lightIntensity < LED_THRESHOLD)
+                        {
+                            set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+                            ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
+                        }
+                        else
+                        {
+                            clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+                            ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
+                        }
+
+                        // Moisture
+                        if(p_ptr->soilMoisture < 1500)
+                            ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                        else
+                        {
+                            ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+
+                            // Actuate water pump
+                            modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
+                            vTaskDelay(pdMS_TO_TICKS(800));
+                            modify_pump_duty_cycle(WATER, 0);
+                        }
+
+                        // Fertilizer
+                        // TBD: PUT THIS IN IF STATEMENT LIKE ^^ TO REACT BASED ON READINGS
+                        modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+                        vTaskDelay(pdMS_TO_TICKS(800));
+                        modify_pump_duty_cycle(FERTLIZER, 0);
+                    }
+
+                    // 5. Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    esp_err_t err = esp_http_client_perform(client);
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+                }    
             }
         }
 
