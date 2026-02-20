@@ -13,15 +13,13 @@ import mqtt from "mqtt";
 async function readControlVar(client) {
     const taskCursor = Task.find().cursor();
     for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {      
-        console.log(t.type);
         if(t.status == 'pending') {
-            client.publish('plant_partner/ack', t.type, (err) => {
-                if(!err) {
-                    console.log('Successful Actuation Request');
-                } else {
-                    console.log('ERROR: Missed Actuation Request');
-                } 
-            });
+            try {
+                client.publish('plant_partner/ack', t.type);
+                console.log('Successful Actuation Request');
+            } catch (err) {
+                console.log('ERROR: Missed Actuation Request');
+            }
         } 
         try {
             await t.deleteOne();
@@ -30,13 +28,12 @@ async function readControlVar(client) {
             console.log('ERROR: Task NOT deleted');
         }
     }
-    client.publish('plant_partner/ack', 'default', (err) => {
-        if(!err) {
-            console.log('Successful Default Request');
-        } else {
-            console.log('ERROR: Unsuccessful Default Request')
-        }
-    });
+    try {
+        client.publish('plant_partner/ack', 'default');
+        console.log('Successful Default Request');
+    } catch (err) {
+        console.log('ERROR: Unsuccessful Default Request');
+    }
 }
 
 // MQTT Broker Setup
