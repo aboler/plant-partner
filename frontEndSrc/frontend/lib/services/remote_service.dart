@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/plant.dart';
 import 'package:frontend/task.dart';
 import 'dart:convert';
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
 
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
@@ -39,10 +41,48 @@ class RemoteService {
     await client.connect();
 
     final builder = MqttClientPayloadBuilder();
-    builder.addString("Triggering all sensors");
+    builder.addString("");
 
     client.publishMessage(
-      "plant_partner/act_tog_en",
+      "plant_partner/ack",
+      MqttQos.atLeastOnce,
+      builder.payload!,
+    );
+
+    client.disconnect();
+}
+
+Future<void> lightMode() async {
+    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    client.port = 1883;
+    client.keepAlivePeriod = 20;
+
+    await client.connect();
+
+    final builder = MqttClientPayloadBuilder();
+    builder.addString("light");
+
+    client.publishMessage(
+      "plant_partner/ack",
+      MqttQos.atLeastOnce,
+      builder.payload!,
+    );
+
+    client.disconnect();
+}
+
+static Future<void> triggerSensor(String sensor) async {
+    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    client.port = 1883;
+    client.keepAlivePeriod = 20;
+
+    await client.connect();
+
+    final builder = MqttClientPayloadBuilder();
+    builder.addString("$sensor");
+
+    client.publishMessage(
+      "plant_partner/ack",
       MqttQos.atLeastOnce,
       builder.payload!,
     );
@@ -51,6 +91,27 @@ class RemoteService {
 }
 
   Future<bool> setAutoSchedule(bool enabled) async {
+    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    client.port = 1883;
+    client.keepAlivePeriod = 20;
+
+    await client.connect();
+
+    final builder = MqttClientPayloadBuilder();
+    if (enabled) {
+      builder.addString("Autocare enabled");
+    } else {
+      builder.addString("Autocare disabled");
+    }
+
+    client.publishMessage(
+      "plant_partner/act_tog_en",
+      MqttQos.atLeastOnce,
+      builder.payload!,
+    );
+
+    client.disconnect();
+
     final resp = await http.put(
       Uri.parse("$url/plants/updateAutoSchedule/Sunflower"),
       headers: {'Content-Type': 'application/json'},

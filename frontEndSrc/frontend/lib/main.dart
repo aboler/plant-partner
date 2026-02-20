@@ -17,6 +17,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: appRoutes,
       home: Nav(),
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+          ),
+          )
+        )
+      )
       
     );
   }
