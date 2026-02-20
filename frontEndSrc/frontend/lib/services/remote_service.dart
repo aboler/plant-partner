@@ -41,7 +41,7 @@ class RemoteService {
     await client.connect();
 
     final builder = MqttClientPayloadBuilder();
-    builder.addString("Triggering all sensors");
+    builder.addString("");
 
     client.publishMessage(
       "plant_partner/ack",
