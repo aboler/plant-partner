@@ -84,7 +84,7 @@ void app_main(void)
     pwm_pump_init(FERTLIZER);
 
     while (1)
-    {
+    { 
         // Yield until MQTT sends message
         if (mqtt_check_buffer_ready())
         {
@@ -189,9 +189,10 @@ void app_main(void)
                 esp_err_t err = esp_http_client_perform(client);
                 ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                 ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+            
             }
+            #endif
         }
-        #endif
         // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));
     }
