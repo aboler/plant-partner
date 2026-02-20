@@ -33,6 +33,9 @@ static void event_handler(void* arg, esp_event_base_t event_base,
         else 
         {
             xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
+            #ifdef DEBUG_MODE_WIFI
+            clear_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+        #endif
         }
         ESP_LOGI(TAG,"connect to the AP fail");
     } 
@@ -41,8 +44,11 @@ static void event_handler(void* arg, esp_event_base_t event_base,
         ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
         ESP_LOGI(TAG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
         s_retry_num = 0;
+
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
+        #ifdef DEBUG_MODE_WIFI
         set_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+        #endif
     }
 }
 
