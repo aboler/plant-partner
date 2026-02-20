@@ -6208,16 +6208,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Extended Parts:\n- MPM3610 (JLCPB)\n- SRD-05VDC (JLCPCB)\n- EL357N-G (DigiKey)\n- 1N400x is expensive AF\n- Look for Pin Headers, Screw Terminals, Barrel Jack\n- Buy More ESP32 DEV KIT V1s"
-		(exclude_from_sim no)
-		(at 320.294 100.33 0)
-		(effects
-			(font
-				(size 1.75 1.75)
-			)
-		)
-		(uuid "09a99340-3e09-4fe9-8619-e56fe121d5f4")
-	)
 	(text "Buck Converter (12V In to 5V Out 1.2A)"
 		(exclude_from_sim no)
 		(at 42.418 67.056 0)
@@ -6297,6 +6287,16 @@
 			)
 		)
 		(uuid "960892a4-ef4f-45f5-9f4c-aa08910a1a3d")
+	)
+	(text "Terminal Blocks Needed:\n2 Pin - 2 * 5 = 10\n3 Pin - 2 * 5 = 10\n4 Pin - 1 * 5 = 5"
+		(exclude_from_sim no)
+		(at 303.276 64.516 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+		)
+		(uuid "df47424f-69ba-476b-b875-bbc98664b1c0")
 	)
 	(text "Heartbeat LED"
 		(exclude_from_sim no)
@@ -13278,7 +13278,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MPT-0,5-3-2.54_1x03_P2.54mm_Horizontal"
 			(at 247.65 134.62 0)
 			(effects
 				(font
@@ -14245,7 +14245,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MPT-0,5-3-2.54_1x03_P2.54mm_Horizontal"
 			(at 247.65 59.69 0)
 			(effects
 				(font
@@ -14735,7 +14735,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1N400x"
+		(property "Value" "1N4148W"
 			(at 204.47 66.0399 90)
 			(effects
 				(font
@@ -14744,7 +14744,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_A-405_P7.62mm_Horizontal"
+		(property "Footprint" "Diode_SMD:D_SOD-123"
 			(at 201.93 64.77 0)
 			(effects
 				(font
@@ -16786,7 +16786,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-4-5.08_1x04_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MPT-0,5-4-2.54_1x04_P2.54mm_Horizontal"
 			(at 105.41 85.09 0)
 			(effects
 				(font
@@ -19051,7 +19051,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MPT-0,5-2-2.54_1x02_P2.54mm_Horizontal"
 			(at 180.34 180.34 0)
 			(effects
 				(font
@@ -19475,7 +19475,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MPT-0,5-2-2.54_1x02_P2.54mm_Horizontal"
 			(at 306.07 21.59 0)
 			(effects
 				(font
@@ -21550,7 +21550,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1N400x"
+		(property "Value" "1N4148W"
 			(at 204.47 140.9699 90)
 			(effects
 				(font
@@ -21559,7 +21559,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_A-405_P7.62mm_Horizontal"
+		(property "Footprint" "Diode_SMD:D_SOD-123"
 			(at 201.93 139.7 0)
 			(effects
 				(font
