@@ -8,19 +8,14 @@ import taskRouter from "./routes/taskRoute.js";
 import Task from "./model/taskModel.js";
 import cors from "cors";
 import mqtt from "mqtt";
-import http from "http";
-
-// MQTT Broker Setup
-//const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
-//const mqttClient = mqtt.connect(MQTT_BROKER_URL);
 
 //Functions for reading control variables 
 async function readControlVar(client) {
     const taskCursor = Task.find().cursor();
-    for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {
-        
+    for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {      
+        console.log(t.type);
         if(t.status == 'pending') {
-            client.publish('plant_partner/act_tog_en', 'activate', (err) => {
+            client.publish('plant_partner/ack', t.type, (err) => {
                 if(!err) {
                     console.log('Successful Actuation Request');
                 } else {
@@ -35,44 +30,29 @@ async function readControlVar(client) {
             console.log('ERROR: Task NOT deleted');
         }
     }
+    client.publish('plant_partner/ack', 'default', (err) => {
+        if(!err) {
+            console.log('Successful Default Request');
+        } else {
+            console.log('ERROR: Unsuccessful Default Request')
+        }
+    });
 }
 
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
-const SAMPLE_INTERVAL_MS = 5000; // 5 seconds
-const ACT_INTERVAL_MS = 10000; // 10 seconds
+//const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
+const ACT_INTERVAL_MS = 60000; // 60 seconds, 1 minute
 
 mqttClient.on('connect', () => {
-    console.log('Connected to MQTT Broker');
 
-
-    setInterval(() => {
-        mqttClient.publish('plant_partner/ack', 'sample', (err) => {
-            if(!err) {
-                console.log('Successful Sampling Request');
-            } else {
-                console.log('ERROR: Missed Sampling Request');
-            }
-        });
-    }, SAMPLE_INTERVAL_MS);
-
+    //tasks and data recording 
     setInterval(() => {
         readControlVar(mqttClient);
     }, ACT_INTERVAL_MS);
     
 });
-
-//mqttClient.on('connect', () => {
-//    console.log('Connected to MQTT Broker');
-//    mqttClient.subscribe('sensors/updates', (err) => {
-//        if (!err) {
-//            console.log('Subscribed to sensors/updates topic');
-//        } else {
-//            console.error('Subscription error:', err);
-//        }
-//    });
-//});
 
 mqttClient.on('message', (topic, message) => {
     console.log(`Received message on topic ${topic}: ${message.toString()}`);
