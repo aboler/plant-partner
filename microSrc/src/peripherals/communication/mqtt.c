@@ -125,3 +125,26 @@ const char *read_topic(void)
 {
     return rx_topic;
 }
+
+
+int publish_mqtt(const char *topic, const char *message)
+{
+    if (client == NULL)
+    {
+        ESP_LOGE(TAG, "MQTT client not initialized");
+        return -1;
+    }
+
+    int msg_id = esp_mqtt_client_publish(client, topic, message, 0, 0, 0);
+    
+    if (msg_id < 0)
+    {
+        ESP_LOGE(TAG, "Failed to publish to topic: %s", topic);
+    }
+    else
+    {
+        ESP_LOGI(TAG, "Published to %s: %s (msg_id=%d)", topic, message, msg_id);
+    }
+    
+    return msg_id;
+}

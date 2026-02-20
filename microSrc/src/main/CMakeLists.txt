@@ -9,6 +9,7 @@ idf_component_register(
         "../peripherals/communication/http.c"
         "../peripherals/communication/mqtt.c"
         "../peripherals/communication/wifi.c"
+         "../peripherals/communication/ota.c"
 
     PRIV_REQUIRES 
         esp_adc
@@ -26,7 +27,7 @@ idf_component_register(
         mqtt
         nvs_flash
         spi_flash        
-
+        app_update
     INCLUDE_DIRS 
         "../peripherals"
 )

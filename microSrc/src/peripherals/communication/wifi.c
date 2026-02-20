@@ -1,6 +1,10 @@
 #include "wifi.h"
 #include "mqtt_client.h"
 
+#ifdef DEBUG_MODE_WIFI
+#include "../gpio.h"
+#endif
+
 /* FreeRTOS event group to signal when we are connected*
  * The event group allows multiple bits for each event, but we only care about two events:
  *      - we are connected to the AP with an IP
@@ -38,6 +42,7 @@ static void event_handler(void* arg, esp_event_base_t event_base,
         ESP_LOGI(TAG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
         s_retry_num = 0;
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
+        set_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
     }
 }
 
@@ -109,7 +114,13 @@ static void wifi_init_sta(void)
 }
 
 void start_wifi(void)
-{
+{   
+    #ifdef DEBUG_MODE_WIFI
+    //configure led for status
+    configure_IO(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+    clear_activeHigh_LED(OUTPUT, INTERNAL_BLUE_LED_GPIO);
+    ESP_LOGI(TAG, "The WIFI is currently in debug mode, to deactivate change the wifi.h file");
+    #endif
     //Initialize NVS
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) 

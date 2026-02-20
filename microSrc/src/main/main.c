@@ -20,6 +20,14 @@
 
 // Debug options utilized for confirming performance
 // static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
+
+#define DEBUG_MODE_MAIN
+
+//Test suites if Debug_Mode is flashed
+#ifdef DEBUG_MODE_MAIN
+    #define MQTT_CONNECTION_SUITE
+#endif
+
 const static char *TAG = "DEBUG";
 
 // Set up networking (all Networking depends on nvs_init())
@@ -36,8 +44,6 @@ static esp_err_t nvs_init()
 
 void app_main(void)
 {
-    // Used by all
-    ESP_ERROR_CHECK(nvs_init());
 
     // Declare variables
     int adc_raw, voltage;
@@ -66,7 +72,10 @@ void app_main(void)
     moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
     // Configure LEDs
+    #ifndef DEBUG_MODE_MAIN
     heartbeat_init();
+    #endif
+
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
@@ -85,6 +94,16 @@ void app_main(void)
 
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
+            #ifdef MQTT_CONNECTION_SUITE
+            if (strcmp(topic,"plant_partner/ack"))
+            {
+                publish_mqtt(topic,"ack_from_esp32")
+            }
+            
+            #endif
+
+
+            #ifndef DEBUG_MODE_MAIN
             // Toggle autocare enable command
             if (strcmp(topic, "plant_partner/act_tog_en") == 0)
             {
@@ -172,7 +191,7 @@ void app_main(void)
                 ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
             }
         }
-
+        #endif
         // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));
     }
