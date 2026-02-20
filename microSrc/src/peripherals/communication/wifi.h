@@ -22,7 +22,7 @@ void start_wifi();
 
 
 #ifdef DEBUG_MODE_WIFI
-bool wifi_on;
+//bool wifi_on;
 #endif
 
 #endif
