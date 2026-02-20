@@ -4,8 +4,8 @@
 #include "driver/gpio.h"
 #include "driver/ledc.h"
 
-#define PWM_WATER_MOTOR_PIN         GPIO_NUM_12
-#define PWM_FERTILIZER_MOTOR_PIN    GPIO_NUM_13
+#define PWM_WATER_MOTOR_PIN         GPIO_NUM_23
+#define PWM_FERTILIZER_MOTOR_PIN    GPIO_NUM_32
 #define PWM_TIMER                   LEDC_TIMER_0
 #define PWM_MODE                    LEDC_LOW_SPEED_MODE
 #define PWM_WATER_CHANNEL           LEDC_CHANNEL_0
