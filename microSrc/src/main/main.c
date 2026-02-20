@@ -95,9 +95,9 @@ void app_main(void)
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
             #ifdef MQTT_CONNECTION_SUITE
-            if (strcmp(topic,"plant_partner/ack"))
+            if (strcmp(topic,"plant_partner/ack") == 0)
             {
-                publish_mqtt(topic,"ack_from_esp32")
+                publish_mqtt(topic,"ack_from_esp32");
             }
             
             #endif
