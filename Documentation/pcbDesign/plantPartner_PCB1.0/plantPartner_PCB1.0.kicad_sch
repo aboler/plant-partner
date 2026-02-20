@@ -6208,6 +6208,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "Extended Parts:\n- MPM3610 (JLCPB)\n- SRD-05VDC (JLCPCB)\n- EL357N-G (DigiKey)\n- 1N400x is expensive AF\n- Look for Pin Headers, Screw Terminals, Barrel Jack\n- Buy More ESP32 DEV KIT V1s"
+		(exclude_from_sim no)
+		(at 320.294 100.33 0)
+		(effects
+			(font
+				(size 1.75 1.75)
+			)
+		)
+		(uuid "09a99340-3e09-4fe9-8619-e56fe121d5f4")
+	)
 	(text "Buck Converter (12V In to 5V Out 1.2A)"
 		(exclude_from_sim no)
 		(at 42.418 67.056 0)

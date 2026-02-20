@@ -60,15 +60,15 @@
       ],
       "drc_exclusions": [
         [
-          "unconnected_items|100265000|105850000|F.Cu|4|a3a7a6fb-f1cb-40d8-9108-3412b99952fc|612bcb0b-4715-4687-9b62-75662b26b677",
+          "unconnected_items|100265000|105850000|F.Cu|4|a3a7a6fb-f1cb-40d8-9108-3412b99952fc|40429c06-90ad-418c-9fa4-db8ca7e31c19",
           "Unrelated Relays"
         ],
         [
-          "unconnected_items|114465000|99850000|F.Cu|4|990c1a21-cb90-4564-8efb-9ed6b77d6e71|35911403-dc48-4a50-9088-b1f405cbe5d9",
+          "unconnected_items|114465000|99850000|F.Cu|4|2873f0d9-51b5-4df7-b0ec-d6e31bc12e58|93ba4ba1-c32c-4346-beeb-874c657c880c",
           "Unrelated Relays"
         ],
         [
-          "unconnected_items|127650000|96680000|F.Cu|4|f1781744-deb0-4881-94c4-36c5ba61c0f5|9455c05f-e8ef-408f-afb7-d0b304f4bc65",
+          "unconnected_items|127650000|96680000|F.Cu|4|6a05b198-8750-42fe-a0b1-6141932f8ee2|27e81f09-9661-4b31-9277-489c7222c528",
           "Unrelated Relays"
         ]
       ],
