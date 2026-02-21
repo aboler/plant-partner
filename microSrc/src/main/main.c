@@ -21,6 +21,20 @@
 // Debug options utilized for confirming performance
 // static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
 
+#define TOPIC_BACKEND_ACK "plant_partner/ack_back"
+#define TOPIC_ESP32_ACK   "plant_partner/ack_esp32"
+#define TOPIC_BACKEND_TOGGLE_AUTO_CARE "plant_partner/act_tog_en"
+#define TOPIC_BACKEND_ADC_COMMAND "plant_partner/adc_command"
+#define TOPIC_BACKEND_REQUEST_DATA "plant_partner/data_command"
+#define TOPIC_ESP32_DATA          "plant_partner/esp32_status"
+#define TOPIC_ESP32_AUTOCARE_ACTIVE "plant_partner/esp32_autocare_active"
+#define TOPIC_ESP32_CURRENT_ACTION "plant_partner/current_state"
+
+
+
+
+
+
 #define DEBUG_MODE_MAIN
 
 //Test suites if Debug_Mode is flashed
@@ -82,7 +96,7 @@ void app_main(void)
     // Configure PWMs
     pwm_pump_init(WATER);
     pwm_pump_init(FERTLIZER);
-
+    bool connected = 0;
     while (1)
     { 
         // Yield until MQTT sends message
@@ -95,11 +109,110 @@ void app_main(void)
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
             #ifdef MQTT_CONNECTION_SUITE
-            if (strcmp(topic,"plant_partner/ack") == 0)
+            // handshake
+            if(!connected)
             {
-                publish_mqtt(topic,"ack_from_esp32");
+                if (strcmp(topic, TOPIC_BACKEND_ACK) == 0)
+                {
+                    ESP_LOGI(TAG, "Backend ACK received - establishing connection");
+                    publish_mqtt(TOPIC_ESP32_ACK, "ack_from_esp32");
+                    connected = 1;
+                    ESP_LOGI(TAG, "Connection established - ESP32 ready for commands");
+                }
             }
             
+            // check connected then check commands
+            if(connected)
+            {
+                // toggle auto-care mode
+                if (strcmp(topic, TOPIC_BACKEND_TOGGLE_AUTO_CARE) == 0)
+                {
+                    auto_care_on = !auto_care_on;
+                    ESP_LOGI(TAG, "Auto-care toggled to: %s", auto_care_on ? "ENABLED" : "DISABLED");
+                    
+                    // publish status back to backend
+                    char status_msg[32];
+                    snprintf(status_msg, sizeof(status_msg), "auto_care:%d", auto_care_on);
+                    publish_mqtt(TOPIC_ESP32_AUTOCARE_ACTIVE, status_msg);
+                }
+                
+                // ADC sensor reading command
+                else if (strcmp(topic, TOPIC_BACKEND_ADC_COMMAND) == 0)
+                {
+                    ESP_LOGI(TAG, "ADC command received - reading sensors");
+                    char status_msg[32];
+                    snprintf(status_msg, sizeof(status_msg), "ADC READING...,");
+                    publish_mqtt(TOPIC_ESP32_CURRENT_ACTION, status_msg);
+                    // read light sensor
+                    if (light_calibration_successful)
+                    {
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+                        
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid light reading: %d mV", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->lightIntensity = voltage;
+                            ESP_LOGI(TAG, "Light sensor: %d mV (raw: %d)", voltage, adc_raw);
+                        }
+                    }
+                    else
+                    {
+                        ESP_LOGW(TAG, "Light sensor not calibrated - skipping");
+                    }
+
+                    // read moisture sensor
+                    if (moisture_calibration_successful)
+                    {
+                        adc_read(MOISTURE, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+                        
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid moisture reading: %d mV", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->soilMoisture = voltage;
+                            ESP_LOGI(TAG, "Moisture sensor: %d mV (raw: %d)", voltage, adc_raw);
+                            
+                            // interpret moisture level
+                            if (voltage < 1500)
+                            {
+                                ESP_LOGI(TAG, "Soil status: WET");
+                            }
+                            else
+                            {
+                                ESP_LOGI(TAG, "Soil status: DRY");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ESP_LOGW(TAG, "Moisture sensor not calibrated - skipping");
+                    }
+                    
+                    ESP_LOGI(TAG, "ADC reading complete");
+                }
+                
+                // data request command - confirm state via MQTT
+                else if (strcmp(topic, TOPIC_BACKEND_REQUEST_DATA) == 0)
+                {
+                    ESP_LOGI(TAG, "Data request received - confirming current state");
+                    
+                    // send s message back  MQTT
+                    char confirmation_msg[64];
+                    snprintf(confirmation_msg, sizeof(confirmation_msg), 
+                             "state_confirmed:auto_%s", auto_care_on ? "on" : "off");
+                    publish_mqtt(TOPIC_ESP32_DATA, confirmation_msg);
+                    
+                    ESP_LOGI(TAG, "State confirmation sent: auto-care is %s", 
+                             auto_care_on ? "ENABLED" : "DISABLED");
+                }
+            }
             #endif
 
 
