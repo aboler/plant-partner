@@ -141,7 +141,7 @@ void app_main(void)
                 {
                     ESP_LOGI(TAG, "ADC command received - reading sensors");
                     char status_msg[32];
-                    snprintf(status_msg, sizeof(status_msg), "ADC READING...,");
+                    snprintf(status_msg, sizeof(status_msg), "ADC READING...");
                     publish_mqtt(TOPIC_ESP32_CURRENT_ACTION, status_msg);
                     // read light sensor
                     if (light_calibration_successful)
@@ -152,11 +152,15 @@ void app_main(void)
                         if (voltage < 0)
                         {
                             ESP_LOGW(TAG, "Invalid light reading: %d mV", voltage);
+                            snprintf(status_msg, sizeof(status_msg), "FAILED READ!");
+                            publish_mqtt(TOPIC_ESP32_CURRENT_ACTION, status_msg);
                         }
                         else
                         {
                             p_ptr->lightIntensity = voltage;
                             ESP_LOGI(TAG, "Light sensor: %d mV (raw: %d)", voltage, adc_raw);
+                            snprintf(status_msg, sizeof(status_msg), "GOOD READ!");
+                            publish_mqtt(TOPIC_ESP32_CURRENT_ACTION, status_msg);
                         }
                     }
                     else
