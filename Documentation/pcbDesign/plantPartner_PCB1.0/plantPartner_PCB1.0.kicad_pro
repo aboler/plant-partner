@@ -64,7 +64,7 @@
           "Unrelated Relays"
         ],
         [
-          "unconnected_items|127650000|96680000|F.Cu|4|6a05b198-8750-42fe-a0b1-6141932f8ee2|27e81f09-9661-4b31-9277-489c7222c528",
+          "unconnected_items|127650000|96680000|F.Cu|4|6a05b198-8750-42fe-a0b1-6141932f8ee2|9455c05f-e8ef-408f-afb7-d0b304f4bc65",
           "Unrelated Relays"
         ],
         [
@@ -268,6 +268,30 @@
       [
         "multiple_net_names|825500|292100|8eb60db2-0427-4771-a5d4-7f5a80b20be7|09da90c8-312a-4368-aba0-b72d28eda76d|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
         "Okay if OUT is 5V"
+      ],
+      [
+        "pin_not_connected|393700|368300|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_not_connected|393700|444500|3a6268f8-da91-4ba2-b584-7fdfbb38282c|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_not_connected|749300|266700|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_not_driven|393700|368300|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_to_pin|1968500|1143000|a08b893e-46b1-4578-8394-a58780788707|0eac8366-76d1-407a-9789-a6552e5c5f7e|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Intentional connection and followed from official 5V Relay schematic "
+      ],
+      [
+        "power_pin_not_driven|749300|266700|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
       ]
     ],
     "meta": {
