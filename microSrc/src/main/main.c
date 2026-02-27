@@ -102,7 +102,7 @@ void app_main(void)
                 if(strcmp(message, "water") == 0)
                 {
                     modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
-                    vTaskDelay(pdMS_TO_TICKS(400));
+                    vTaskDelay(pdMS_TO_TICKS(300));
                     modify_pump_duty_cycle(WATER, 0);
 
                     // Update measured value
@@ -166,7 +166,7 @@ void app_main(void)
                 else if(strcmp(message, "nutrients") == 0)
                 {
                     modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                    vTaskDelay(pdMS_TO_TICKS(400));
+                    vTaskDelay(pdMS_TO_TICKS(300));
                     modify_pump_duty_cycle(FERTLIZER, 0);
 
                     ESP_LOGI(TAG, "Fertilizer toggled:");
@@ -232,14 +232,14 @@ void app_main(void)
 
                             // Actuate water pump
                             modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
-                            vTaskDelay(pdMS_TO_TICKS(400));
+                            vTaskDelay(pdMS_TO_TICKS(300));
                             modify_pump_duty_cycle(WATER, 0);
                         }
 
                         // Fertilizer
                         // TBD: PUT THIS IN IF STATEMENT LIKE ^^ TO REACT BASED ON READINGS
                         modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                        vTaskDelay(pdMS_TO_TICKS(400));
+                        vTaskDelay(pdMS_TO_TICKS(300));
                         modify_pump_duty_cycle(FERTLIZER, 0);
                     }
 
