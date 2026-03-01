@@ -145,14 +145,13 @@ In Bash or Powershell
 
 ## Project Architecture
 
-The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is configure to interact with a photoresistor and moisture sensor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, an external switch circuit is set up to control sensor sampling and component actuation. Switch0 is responsible for sampling the photoresistor and updating the LED if its detected to be too dark, Switch1 samples the moisture sensor, Switch2 actuates the water pump motor, and Switch3 posts plant data to the database to mimic receiving commands from the application.
+The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, the microcontroller waits until it receives particular messages through an MQTT client. Depending on the message it can do the following: 1) toggle if autocare is enabled or disabled, 2) samples sensors, communicate data to the app., and actuate (if autocare on), 3) actuate a specific actuator (i.e. LED, water pump, fertilizer pump). These messages are currently being sent from the application while the sensor data is being communicated to the database.
 
-The sensor readings can be reported to the database and displayed on a mobile application, providing users with remote monitoring. To update the data shown on the application, users must press the update button available in the Home tab. In the future, commands will be able to be sent and received from the application. However, this aspect is still in development and has not been implemented.
+The sensor readings can be reported to the database and displayed on a mobile application, providing users with remote monitoring. To update the data shown on the application, users must press the update button available in the Home tab. Additionally, there's a scheduling tab available where the autocare feature can be toggled as well as three actuator specific buttons for directly affecting specific devices.
 
 ### File Structure Summary
 
 - ``microsrc`` : directory containing relevant ESP32 code
-
   - ``scripts`` : directory containing scripts necessary for setting up ESP-IDF dependencies and environment for device
   - ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
     - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
@@ -187,14 +186,15 @@ The sensor readings can be reported to the database and displayed on a mobile ap
     - `services/`: directory for backend communication modules
       - `remote_service.dart`: handles HTTP requests to the backend
     - `plant.dart`: types data model used to decode JSON plant objects from the database
-- ``Documentation`` : directory containing relevant project documentation
 
+- ``Documentation`` : directory containing relevant project documentation
   - ``Circuits`` : directory containing relevant circuits created during development
   - ``ClassSubmissions`` : directory containing a file with the link to the Google Drive folder containing all of our report work/submissions
   - ``Contributions`` : directory containing all members' timesheet records
   - ``Datasheets`` : directory containing schematics to reference for our current materials being used
   - ``Diagrams`` : directory containing relevant diagrams created during development
   - ``Materials`` : directory containing documentation related to materials, such as which items were purchased and from where
+  - ``Mosquitto`` : directory containing configuration files needed to successfully run mosquitto with our program
   - ``Research`` : directory containing research collected during the project, such as how to set up a coding environment for the ESP32
   - ``pcbDesign`` : directory containing work dones towards designing/building our project's PCB
 
