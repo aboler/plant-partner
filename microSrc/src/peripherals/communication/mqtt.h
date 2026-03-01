@@ -1,6 +1,8 @@
 #ifndef MQTT_PROTO_H
 #define MQTT_PROTO_H
 
+#include <stdbool.h>
+
 #define MQTT_TOPICS "plant_partner/#"
 #define MSG_SIZE    256
 #define QOS         0
