@@ -123,6 +123,26 @@ In Bash or Powershell
   - Smaller external circuit board
   - DAD program to act as switch, external LED, and proof that fertilizer motor activates when needed
 
+### Beta Build
+
+- Integrated MQTT messages to be sent from database/app. to initiate microcontroller main loop
+  - ```plant_partner/act_tog_en```: toggle autocare enable
+  - "plant_partner/ack"
+    - w/ ```water``` msg.: actuate water pump, read moisture sensor, then report back data to the app.
+    - w/ ```light``` msg.: toggle external LED, read photoresistor, then report back data to the app.
+    - w/ ```nutrients``` msg.: actuate fertilizer pump
+    - no message: read all of the sensors then report the data to the app.
+      - If autocare enabled, then also actuate sensors based on if data requires it
+- Finished and ordered PCB
+- Soldered temporary physical board
+- Instantiated and connected rough physical set up assembled in alpha build
+- Added additional user features in the application:
+  - Ability to toggle autocare and sync it with the microcontroller
+  - button for actuating specific actuators
+- Developed MQTT message functionality in the database
+  - Time-based sample commands
+  - Ability for specific actuation 
+
 ## Project Architecture
 
 The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is configure to interact with a photoresistor and moisture sensor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, an external switch circuit is set up to control sensor sampling and component actuation. Switch0 is responsible for sampling the photoresistor and updating the LED if its detected to be too dark, Switch1 samples the moisture sensor, Switch2 actuates the water pump motor, and Switch3 posts plant data to the database to mimic receiving commands from the application.
