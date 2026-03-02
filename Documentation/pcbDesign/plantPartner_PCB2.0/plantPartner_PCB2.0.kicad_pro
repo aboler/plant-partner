@@ -226,7 +226,28 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "pin_not_connected|393700|330200|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
+        "Intentional DC"
+      ],
+      [
+        "pin_not_connected|393700|406400|3a6268f8-da91-4ba2-b584-7fdfbb38282c|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
+        "Intentional DC"
+      ],
+      [
+        "pin_not_connected|749300|228600|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
+        "Intentional DC"
+      ],
+      [
+        "pin_not_driven|393700|330200|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
+        "Intentional DC"
+      ],
+      [
+        "power_pin_not_driven|749300|228600|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
+        "Intentional DC"
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -494,7 +515,7 @@
       "svg": "",
       "vrml": ""
     },
-    "page_layout_descr_file": ""
+    "page_layout_descr_file": "plantPartner_PCB2.0"
   },
   "schematic": {
     "annotate_start_num": 0,
