@@ -53,7 +53,7 @@ class RemoteService {
 }
 
 Future<void> lightMode() async {
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    final client = MqttServerClient("127.0.0.1", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -72,7 +72,7 @@ Future<void> lightMode() async {
 }
 
 static Future<void> triggerSensor(String sensor) async {
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    final client = MqttServerClient("127.0.0.1", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -91,7 +91,7 @@ static Future<void> triggerSensor(String sensor) async {
 }
 
   Future<bool> setAutoSchedule(bool enabled) async {
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    final client = MqttServerClient("127.0.0.1", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
