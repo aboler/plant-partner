@@ -5,23 +5,51 @@ import bodyParser from "body-parser";
 import route from "./routes/sensorRoute.js";
 import router from "./routes/plantRoute.js";
 import taskRouter from "./routes/taskRoute.js";
+import Task from "./model/taskModel.js";
 import cors from "cors";
 import mqtt from "mqtt";
-import http from "http";
+
+//Functions for reading control variables 
+async function readControlVar(client) {
+    const taskCursor = Task.find().cursor();
+    for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {      
+        if(t.status == 'pending') {
+            try {
+                client.publish('plant_partner/ack', t.type);
+                console.log('Successful Actuation Request');
+            } catch (err) {
+                console.log('ERROR: Missed Actuation Request');
+            }
+        } 
+        try {
+            await t.deleteOne();
+            console.log('Task deleted');
+        } catch (err) {
+            console.log('ERROR: Task NOT deleted');
+        }
+    }
+    try {
+        client.publish('plant_partner/ack', 'default');
+        console.log('Successful Default Request');
+    } catch (err) {
+        console.log('ERROR: Unsuccessful Default Request');
+    }
+}
+//
 
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
+//const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
+const ACT_INTERVAL_MS = 60000; // 60 seconds, 1 minute
 
 mqttClient.on('connect', () => {
-    console.log('Connected to MQTT Broker');
-    mqttClient.subscribe('sensors/updates', (err) => {
-        if (!err) {
-            console.log('Subscribed to sensors/updates topic');
-        } else {
-            console.error('Subscription error:', err);
-        }
-    });
+
+    //tasks and data recording 
+    setInterval(() => {
+        readControlVar(mqttClient);
+    }, ACT_INTERVAL_MS);
+    
 });
 
 mqttClient.on('message', (topic, message) => {
