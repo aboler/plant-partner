@@ -127,7 +127,7 @@ void app_main(void)
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    for(int i = 0; i < 5; i++)
+                    for(uint8_t try_count = 0; try_count < 5; try_count++)
                     {
                         err = esp_http_client_perform(client);
 
@@ -164,7 +164,7 @@ void app_main(void)
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    for(int i = 0; i < 5; i++)
+                    for(uint8_t try_count = 0; try_count < 5; try_count++)
                     {
                         err = esp_http_client_perform(client);
 
@@ -259,7 +259,7 @@ void app_main(void)
                     // 5. Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    for(int i = 0; i < 5; i++)
+                    for(uint8_t try_count = 0; try_count < 5; try_count++)
                     {
                         err = esp_http_client_perform(client);
 
