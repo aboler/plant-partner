@@ -18,8 +18,8 @@
 #include "../peripherals/communication/mqtt.h"
 #include "../peripherals/communication/wifi.h"
 
-// Debug options utilized for confirming performance
-// static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
+#define MAX_TRANSMISSION_ATTEMPTS            5
+
 const static char *TAG = "DEBUG";
 
 // Set up networking (all Networking depends on nvs_init())
@@ -127,11 +127,11 @@ void app_main(void)
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    for(uint8_t try_count = 0; try_count < 5; try_count++)
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
                     {
                         err = esp_http_client_perform(client);
 
-                        if (err == 0)
+                        if (err == ESP_OK)
                             break;
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
@@ -164,11 +164,11 @@ void app_main(void)
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    for(uint8_t try_count = 0; try_count < 5; try_count++)
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
                     {
                         err = esp_http_client_perform(client);
 
-                        if (err == 0)
+                        if (err == ESP_OK)
                             break;
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
@@ -176,7 +176,7 @@ void app_main(void)
                 }
 
                 // If want to just control fertilizer
-                else if(strcmp(message, "nutrients") == 0)
+                else if (strcmp(message, "nutrients") == 0)
                 {
                     modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
                     vTaskDelay(pdMS_TO_TICKS(300));
@@ -237,7 +237,7 @@ void app_main(void)
                         }
 
                         // Moisture
-                        if (p_ptr->soilMoisture < 1500)
+                        if (p_ptr->soilMoisture < MOISTURE_THRESHOLD)
                             ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
                         else
                         {
@@ -259,11 +259,11 @@ void app_main(void)
                     // 5. Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    for(uint8_t try_count = 0; try_count < 5; try_count++)
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
                     {
                         err = esp_http_client_perform(client);
 
-                        if (err == 0)
+                        if (err == ESP_OK)
                             break;
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
