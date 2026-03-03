@@ -35,12 +35,13 @@ async function readControlVar(client) {
         console.log('ERROR: Unsuccessful Default Request');
     }
 }
+//
 
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
 //const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
-const ACT_INTERVAL_MS = 30000; // 60 seconds, 1 minute
+const ACT_INTERVAL_MS = 60000; // 60 seconds, 1 minute
 
 mqttClient.on('connect', () => {
 
