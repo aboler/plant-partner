@@ -45,6 +45,7 @@ void app_main(void)
     auto_care_on = false;
     const char *message;
     const char *topic;
+    esp_err_t err;
 
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
@@ -126,7 +127,13 @@ void app_main(void)
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    esp_err_t err = esp_http_client_perform(client);
+                    for(uint8_t try_count = 0; try_count < 5; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == 0)
+                            break;
+                    }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }
@@ -157,7 +164,13 @@ void app_main(void)
                     // Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    esp_err_t err = esp_http_client_perform(client);
+                    for(uint8_t try_count = 0; try_count < 5; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == 0)
+                            break;
+                    }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }
@@ -224,7 +237,7 @@ void app_main(void)
                         }
 
                         // Moisture
-                        if(p_ptr->soilMoisture < 1500)
+                        if (p_ptr->soilMoisture < 1500)
                             ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
                         else
                         {
@@ -246,7 +259,13 @@ void app_main(void)
                     // 5. Send data to database
                     http_put_plant_data(client, p_ptr);
                     ESP_LOGI(TAG, "HTTP request...");
-                    esp_err_t err = esp_http_client_perform(client);
+                    for(uint8_t try_count = 0; try_count < 5; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == 0)
+                            break;
+                    }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }    
