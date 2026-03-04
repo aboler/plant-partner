@@ -1,0 +1,162 @@
+** Drc report for plantPartner_PCB2.0.kicad_pcb **
+** Created on 2026-03-04T14:23:31-0500 **
+
+** Found 42 DRC violations **
+[starved_thermal]: Thermal relief connection to zone incomplete (layer F.Cu; 3 spokes connected to isolated island)
+    Local override; error
+    @(60.7500 mm, 24.0750 mm): Zone [GND] on F.Cu, priority 0
+    @(70.4600 mm, 64.1000 mm): PTH pad 1 [GND] of J11
+[starved_thermal]: Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(60.7500 mm, 24.0750 mm): Zone [GND] on F.Cu, priority 0
+    @(92.6250 mm, 81.2319 mm): Pad 2 [GND] of R27 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.6750 mm, 65.6000 mm): PCB text 'SCL' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.8750 mm, 80.6250 mm): PCB text 'L_Source' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(87.0500 mm, 41.2750 mm): PCB text 'F_Gate' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(87.0000 mm, 50.6000 mm): PCB text 'W_Gate' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.9250 mm, 71.6500 mm): PCB text '+12V' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(74.1750 mm, 59.5000 mm): PCB text 'B' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.2250 mm, 54.4500 mm): PCB text 'DI' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(75.4750 mm, 62.1500 mm): PCB text '+5V' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(87.3250 mm, 45.5000 mm): PCB text 'W_Drain' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.2250 mm, 48.3000 mm): PCB text 'ADC2_6' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.9750 mm, 77.2000 mm): PCB text '+12V' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.4500 mm, 72.0750 mm): PCB text '+5V' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.3000 mm, 69.4750 mm): PCB text 'GND' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.4750 mm, 69.1500 mm): PCB text '+5V' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(98.0250 mm, 38.0000 mm): PCB text 'ESP_3.3V' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(96.0250 mm, 60.5500 mm): PCB text 'MISO' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.3250 mm, 42.4500 mm): PCB text 'EXT LED' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(74.1750 mm, 56.9000 mm): PCB text 'A' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(94.7000 mm, 74.5000 mm): PCB text 'EN' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.1250 mm, 53.3000 mm): PCB text 'ADC2_9' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.8250 mm, 83.1500 mm): PCB text 'L_Gate' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.1250 mm, 64.6500 mm): PCB text 'ADC1_7' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.1250 mm, 50.8000 mm): PCB text 'ADC2_7' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(87.6750 mm, 38.7250 mm): PCB text 'F_Source' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.1750 mm, 62.1500 mm): PCB text 'ADC1_4' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.7750 mm, 63.1000 mm): PCB text 'SDA' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.1250 mm, 45.6500 mm): PCB text 'ADC2_5' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(75.2750 mm, 54.3500 mm): PCB text 'GND' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.4250 mm, 62.1500 mm): PCB text 'RO' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.3750 mm, 59.5000 mm): PCB text 'RE' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.2250 mm, 59.4500 mm): PCB text 'ADC1_5' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.7250 mm, 74.3500 mm): PCB text 'FB' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.8250 mm, 58.1000 mm): PCB text 'SCK' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(87.1750 mm, 36.1750 mm): PCB text 'F_Drain' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.4250 mm, 56.9500 mm): PCB text 'DE' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.4000 mm, 80.5250 mm): PCB text 'Lamp' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(86.0331 mm, 70.6712 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(89.0331 mm, 65.6712 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(89.0331 mm, 70.6712 mm): Segment of IC1 on F.Silkscreen
+[lib_footprint_mismatch]: Footprint 'MPM3610' does not match copy in library 'MPM3610'.
+    Local override; warning
+    @(87.5331 mm, 68.1712 mm): Footprint IC1
+
+** Found 0 unconnected pads **
+
+** Found 7 Footprint errors **
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(127.8250 mm, 26.4000 mm): Footprint REF**
+    @(62.8250 mm, 26.4000 mm): Footprint REF**
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(127.8500 mm, 86.9000 mm): Footprint REF**
+    @(62.8250 mm, 26.4000 mm): Footprint REF**
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(62.8750 mm, 86.9000 mm): Footprint REF**
+    @(62.8250 mm, 26.4000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(62.8250 mm, 26.4000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(127.8250 mm, 26.4000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(127.8500 mm, 86.9000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(62.8750 mm, 86.9000 mm): Footprint REF**
+
+** End of Report **

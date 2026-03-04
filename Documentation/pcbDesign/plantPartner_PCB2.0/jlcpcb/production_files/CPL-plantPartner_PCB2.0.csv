@@ -1,12 +1,14 @@
 Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
 C1,22uF,C_0603_1608Metric,84.641903,-68.633097,-90.0,top
+C10,47uF,C_0805_2012Metric,71.5,-41.525,0.0,top
 C2,22uF,C_0603_1608Metric,86.891903,-71.983097,180.0,top
 C3,10uF,C_0402_1005Metric,77.851509,-60.338105,90.0,top
 C4,0.1uF,C_0402_1005Metric,79.026596,-60.345,90.0,top
-C5,220uF,C_0603_1608Metric,82.184375,-39.181509,90.0,top
-C6,220uF,C_0603_1608Metric,82.05,-48.425,90.0,top
+C5,47uF,C_0805_2012Metric,82.4,-39.475,90.0,top
+C6,47uF,C_0805_2012Metric,82.325,-48.65,90.0,top
 C7,0.1uF,C_0603_1608Metric,75.75,-41.35,180.0,top
 C8,0.1uF,C_0603_1608Metric,77.75,-51.375,180.0,top
+C9,47uF,C_0805_2012Metric,81.05,-51.95,0.0,top
 D1,LED,LED_0603_1608Metric,82.5425,-59.915,0.0,top
 D10,LED,LED_0603_1608Metric,127.025,-37.6,0.0,top
 D2,SS14,D_SMA,72.925,-68.0,0.0,top
@@ -18,8 +20,8 @@ IC1,MPM3610,MPM3610,87.533094,-68.458697,180.0,top
 J1,Conn_01x04,PinHeader_1x04_P2.54mm_Vertical,93.675,-71.39,180.0,top
 J10,Screw_Terminal_01x02,"TerminalBlock_Phoenix_MPT-0,5-2-2.54_1x02_P2.54mm_Horizontal",70.48,-36.93,-90.0,top
 J11,Conn_01x02,PinHeader_1x02_P2.54mm_Vertical,71.73,-64.1,90.0,top
-J12,Conn_01x03,PinHeader_1x03_P2.54mm_Vertical,84.8875,-46.18125,0.0,top
-J13,Conn_01x03,PinHeader_1x03_P2.54mm_Vertical,84.875,-36.91,180.0,top
+J12,Conn_01x03,PinHeader_1x03_P2.54mm_Vertical,85.2625,-46.25625,0.0,top
+J13,Conn_01x03,PinHeader_1x03_P2.54mm_Vertical,85.35,-36.935,180.0,top
 J14,Conn_01x03,PinHeader_1x03_P2.54mm_Vertical,89.722097,-81.337097,0.0,top
 J15,Conn_01x03,PinHeader_1x03_P2.54mm_Vertical,81.925,-69.84,180.0,top
 J16,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,127.4,-71.675,0.0,top
@@ -32,9 +34,9 @@ J21,Conn_01x05,PinHeader_1x05_P2.54mm_Vertical,127.35,-48.96,0.0,top
 J22,Conn_01x04,PinHeader_1x04_P2.54mm_Vertical,65.85,-70.49,0.0,top
 J23,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,127.325,-40.225,180.0,top
 J25,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,93.65,-78.85,0.0,top
-J26,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,88.775,-48.7,180.0,top
-J27,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,88.65,-39.45,180.0,top
-J28,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,94.375,-35.875,0.0,top
+J26,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,89.15,-48.775,180.0,top
+J27,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,89.125,-39.475,180.0,top
+J28,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,94.4,-34.675,0.0,top
 J29,Conn_01x02,PinHeader_1x02_P2.54mm_Vertical,118.53,-79.4,-90.0,top
 J3,Conn_01x04,PinHeader_1x04_P2.54mm_Vertical,73.675,-56.33,180.0,top
 J30,Screw_Terminal_01x02,"TerminalBlock_Phoenix_MPT-0,5-2-2.54_1x02_P2.54mm_Horizontal",98.905,-82.395,0.0,top
@@ -46,7 +48,7 @@ J8,Conn_01x01,PinHeader_1x01_P2.54mm_Vertical,94.4,-43.7,0.0,top
 J9,Screw_Terminal_01x02,"TerminalBlock_Phoenix_MPT-0,5-2-2.54_1x02_P2.54mm_Horizontal",70.5375,-46.36125,-90.0,top
 Q1,AO3400A,SOT-23,80.875,-44.86125,90.0,top
 Q2,AO3400A,SOT-23,80.825,-35.65,90.0,top
-Q4,AO3400A,SOT-23,93.530807,-84.743307,-90.0,top
+Q4,AO3400A,SOT-23,93.55,-86.025,-90.0,top
 R1,100k,R_0402_1005Metric,89.041903,-72.183097,90.0,top
 R10,20k,R_0402_1005Metric,76.075,-54.5,-90.0,top
 R11,120,R_0402_1005Metric,76.075,-56.55,-90.0,top
@@ -60,8 +62,8 @@ R2,100k,R_0402_1005Metric,90.841903,-70.35,0.0,top
 R22,1k,R_0402_1005Metric,129.2,-37.4,-90.0,top
 R23,1k,R_0402_1005Metric,95.75,-49.125,-90.0,top
 R24,1k,R_0402_1005Metric,121.075,-83.175,90.0,top
-R25,100,R_0402_1005Metric,94.075,-81.741881,-90.0,top
-R27,10k,R_0402_1005Metric,92.625,-81.741881,90.0,top
+R25,100,R_0402_1005Metric,94.5,-82.225,-90.0,top
+R27,10k,R_0402_1005Metric,92.5,-82.275,90.0,top
 R3,18k,R_0603_1608Metric,90.441903,-68.25,90.0,top
 R4,10k,R_0402_1005Metric,87.025,-59.01,90.0,top
 R5,10k,R_0402_1005Metric,87.475,-57.2,180.0,top
