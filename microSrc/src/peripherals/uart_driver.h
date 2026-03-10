@@ -35,7 +35,8 @@
 #define UART2_RTS_PIN   GPIO_NUM_7
 #define UART2_CTS_PIN   GPIO_NUM_6
 
-#define RS485_DE_RE_PIN GPIO_NUM_21  // Pin to control RS485 Driver Enable/~Receiver Enable
+// Pin to control RS485 Driver Enable/~Receiver Enable
+#define RS485_DE_RE_PIN GPIO_NUM_21
 
 // Typedef for UART function ouput
 typedef enum uart_error_t{
