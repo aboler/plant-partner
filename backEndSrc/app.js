@@ -6,6 +6,7 @@ import route from "./routes/sensorRoute.js";
 import router from "./routes/plantRoute.js";
 import taskRouter from "./routes/taskRoute.js";
 import Task from "./model/taskModel.js";
+import Plant from "./model/plantModel.js";
 import cors from "cors";
 import mqtt from "mqtt";
 
@@ -45,6 +46,10 @@ const ACT_INTERVAL_MS = 60000; // 60 seconds, 1 minute
 
 mqttClient.on('connect', () => {
 
+    //On startup, send message to micro of current value of autoschedule
+    const currentPlant = Plant.findOne();
+    mqttClient.publish("plant_partner/autocare_startup", currentPlant.autoSchedule.toString());
+
     //tasks and data recording 
     setInterval(() => {
         readControlVar(mqttClient);
@@ -55,6 +60,25 @@ mqttClient.on('connect', () => {
 mqttClient.on('message', (topic, message) => {
     console.log(`Received message on topic ${topic}: ${message.toString()}`);
     // Here you can add logic to process the message and update the database if needed
+
+    switch (topic) {
+        case "plant_partner/auto_en" :
+            //for toggling autocare on esp32
+            mqttClient.publish("plant_partner/act_tog_en", "Autocare enabled");
+            break;
+        case "plant_partner/esp_startup" :
+            //for getting the current autocare status and sending to esp32 on its reset
+            const currentPlant = Plant.findOne();
+            mqttClient.publish("plant_partner/autocare_startup", currentPlant.autoSchedule.toString());
+            break;
+        case "plant_partner/act_compl" :
+            //For passing along messages to frontend when actuation task is completed
+            mqttClient.publish("plant_partner/act_notif", message);
+        default :
+            break;
+
+    }
+
 });
 
 // Backend Server Setup

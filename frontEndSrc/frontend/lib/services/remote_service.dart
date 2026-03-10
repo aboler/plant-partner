@@ -105,7 +105,7 @@ static Future<void> triggerSensor(String sensor) async {
     }
 
     client.publishMessage(
-      "plant_partner/act_tog_en",
+      "plant_partner/auto_en",
       MqttQos.atLeastOnce,
       builder.payload!,
     );
