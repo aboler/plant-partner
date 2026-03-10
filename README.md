@@ -25,7 +25,7 @@ Please see ``Documentation/Diagrams``, ``Documentation/Circuits``, and ``Documen
 
 ### Software Release
 
-For ESP32 (in VSCode):
+<ins>For ESP32 (in VSCode):</ins>
 
 1. Run ``git clone recurse-submodules git@github.com:aboler/plant-partner.git``
    - This will clone the base plant-partner and esp-idf Github repositories using ssh
@@ -49,14 +49,14 @@ In Powershell or a Linux terminal preferably:
    - You may need to use python3 instead of python
    - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
 
-For Backend + Database:
+<ins>For Backend + Database:</ins>
 
 1. Navigate to ``backEndSrc/``
 2. Start up the backend server by running ``npm start``, server will be running once these messages are displayed on the terminal
    - "Connected to MongoDB"
    - "Server running on port 8000"
 
-*For Frontend Application*
+<ins>For Frontend Application:</ins>
 
 In Bash or Powershell
 
@@ -200,7 +200,7 @@ The sensor readings can be reported to the database and displayed on a mobile ap
 
 ## How to Use esp.py
 
-PORT: This is USB port that the ESP-32 is connected to. For Windows, it should be COM3 or something similar. For Ubuntu, it should be /dev/ttyUSB0 or something similar. Be aware, that if the Port is not automatically detected (usually Windows) you may have to install a driver being Silicon Labs CP210x or FTDI.
+PORT: This is USB port that the ESP-32 is connected to. For Windows, it should be COM3 or something similar. For Ubuntu, it should be ``/dev/ttyUSB0`` or something similar. Be aware, that if the Port is not automatically detected (usually Windows) you may have to install a driver being Silicon Labs CP210x or FTDI.
 
 - Default: ``python esp.py -p PORT``
   - This will run the necessary setup scripts to install the ESP-IDF dependencies then build, flash, and monitor the ESP-32 at PORT
