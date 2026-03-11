@@ -176,7 +176,7 @@ void uart_rs485_init()
     gpio_set_level(RS485_DE_RE_PIN, 0);
 }
 
-void uart_rs485_read()
+void uart_rs485_read(struct plantData *plant_ptr)
 {
     const char *TAG = "MODBUS";
 
@@ -268,11 +268,9 @@ void uart_rs485_read()
             uint16_t regK = (rx_buf[7] << 8) | rx_buf[8];
             ESP_LOGI(TAG, "Nitrogen = 0x%04X\nPhosphorus = 0x%04X\nPotassium = 0x%04X", regN, regP, regK);
             
-            // Convert into Decimal Values -> mg/kg
-            int16_t nConverted = (int16_t)regN; // Cast to signed
-            int16_t pConverted = (int16_t)regP;
-            int16_t kConverted = (int16_t)regK;
-            ESP_LOGI(TAG, "Nitrogen = %d mg/kg\nPhosphorus = %d mg/kg\nPotassium = %d mg/kg", nConverted, pConverted, kConverted);
+            plant_ptr->nLevel = regN;
+            plant_ptr->pLevel = regP;
+            plant_ptr->kLevel = regK;
         } 
         else 
         {

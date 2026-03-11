@@ -183,6 +183,10 @@ void app_main(void)
                 // If want to just control fertilizer
                 else if (strcmp(message, "nutrients") == 0)
                 {
+                    ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                    uart_rs485_read(p_ptr);
+                    ESP_LOGI(TAG, "Finished RS485 read ...");
+
                     modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
                     vTaskDelay(pdMS_TO_TICKS(300));
                     modify_pump_duty_cycle(FERTLIZER, 0);
@@ -226,7 +230,7 @@ void app_main(void)
 
                     // 3. Assess and store nutrient data
                     ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
-                    uart_rs485_read();
+                    uart_rs485_read(p_ptr);
                     ESP_LOGI(TAG, "Finished RS485 read ...");
 
                     // 4. Actuate if auto_schedule is on AND if needed
@@ -275,7 +279,8 @@ void app_main(void)
                             break;
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
+                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }    
             }
         }
