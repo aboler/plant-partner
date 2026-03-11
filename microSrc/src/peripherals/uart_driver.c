@@ -266,7 +266,6 @@ void uart_rs485_read(struct plantData *plant_ptr)
             uint16_t regN = (rx_buf[3] << 8) | rx_buf[4];
             uint16_t regP = (rx_buf[5] << 8) | rx_buf[6];
             uint16_t regK = (rx_buf[7] << 8) | rx_buf[8];
-            ESP_LOGI(TAG, "Nitrogen = 0x%04X\nPhosphorus = 0x%04X\nPotassium = 0x%04X", regN, regP, regK);
             
             plant_ptr->nLevel = regN;
             plant_ptr->pLevel = regP;
