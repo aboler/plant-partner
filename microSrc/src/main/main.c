@@ -139,8 +139,10 @@ void app_main(void)
                         if (err == ESP_OK)
                             break;
                     }
+
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
+                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }
 
                 // If want to just control light
@@ -177,21 +179,37 @@ void app_main(void)
                             break;
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
+                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }
 
                 // If want to just control fertilizer
                 else if (strcmp(message, "nutrients") == 0)
                 {
-                    ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
-                    uart_rs485_read(p_ptr);
-                    ESP_LOGI(TAG, "Finished RS485 read ...");
-
                     modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
                     vTaskDelay(pdMS_TO_TICKS(300));
                     modify_pump_duty_cycle(FERTLIZER, 0);
 
-                    ESP_LOGI(TAG, "Fertilizer toggled:");
+                    // Update measured value
+                    ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                    uart_rs485_read(p_ptr);
+                    ESP_LOGI(TAG, "Finished RS485 read ...");
+                    ESP_LOGI(TAG, "Fertilizer toggled: N[%d], P[%d], K[%d]", p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == ESP_OK)
+                            break;
+                    }
+
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
+                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }
                 // Otherwise do default action 
                 else
@@ -240,20 +258,20 @@ void app_main(void)
                         if (p_ptr->lightIntensity < LED_THRESHOLD)
                         {
                             set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                            ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
+                            ESP_LOGI(TAG, "LED ON: Light %d mV is below threshold", p_ptr->lightIntensity);
                         }
                         else
                         {
                             clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                            ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
+                            ESP_LOGI(TAG, "LED OFF: Light %d mV is above threshold", p_ptr->lightIntensity);
                         }
 
                         // Moisture
                         if (p_ptr->soilMoisture < MOISTURE_THRESHOLD)
-                            ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                            ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
                         else
                         {
-                            ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
+                            ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
 
                             // Actuate water pump
                             modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
@@ -262,10 +280,19 @@ void app_main(void)
                         }
 
                         // Fertilizer
-                        // TBD: PUT THIS IN IF STATEMENT LIKE ^^ TO REACT BASED ON READINGS
-                        modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                        vTaskDelay(pdMS_TO_TICKS(300));
-                        modify_pump_duty_cycle(FERTLIZER, 0);
+                        if (p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel < NPK_THRESHOLD)
+                        {
+                            ESP_LOGI(TAG, "LOW NUTRIENTS: Current sum[%d] is < 60", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
+
+                            // Actuate fertilizer pump
+                            modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+                            vTaskDelay(pdMS_TO_TICKS(300));
+                            modify_pump_duty_cycle(FERTLIZER, 0);
+                        }
+                        else
+                        {
+                            ESP_LOGI(TAG, "GOOD NUTRIENTS: Current sum[%d] is >= 60", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
+                        }
                     }
 
                     // 5. Send data to database

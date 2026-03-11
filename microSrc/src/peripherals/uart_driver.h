@@ -12,6 +12,7 @@
 #include "esp_log.h"
 #include "../dataTypes/plantData.h"
 
+#define NPK_THRESHOLD        60  // Sum threshold for fertilizer pump control
 #define UART_BAUD_RATE       115200
 #define UART_RS485_BAUD_RATE 9600
 #define UART_RX_BUFFER_SIZE  2048
