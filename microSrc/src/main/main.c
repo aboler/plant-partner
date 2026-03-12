@@ -78,7 +78,6 @@ void app_main(void)
 
     // Initialize UART for RS485 communication with nutrient sensor
     uart_rs485_init();
-    vTaskDelay(pdMS_TO_TICKS(2000)); // ASPEN: do we need this?
 
     while (1)
     {
