@@ -22,10 +22,14 @@
 const static char *TAG = "DEBUG";
 
 const static char *TOPIC_AUTO_NOTIF = "plant_partner/auto_notif";
+const static char *TOPIC_ACT_COMPLETE = "plant_partner/act_compl";
 const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
 const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare toggled";
 const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
 const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
+const static char *MESSAGE_WATER_DONE = "Water Complete";
+const static char *MESSAGE_LIGHT_DONE = "Light Complete";
+const static char *MESSAGE_NUTRI_DONE = "Nutrients Complete";
 
 
 
@@ -143,6 +147,9 @@ void app_main(void)
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_WATER_DONE);
                 }
 
                 // If want to just control light
@@ -180,6 +187,9 @@ void app_main(void)
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_LIGHT_DONE);
                 }
 
                 // If want to just control fertilizer
@@ -190,6 +200,9 @@ void app_main(void)
                     modify_pump_duty_cycle(FERTLIZER, 0);
 
                     ESP_LOGI(TAG, "Fertilizer toggled:");
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
                 }
                 // Otherwise do default action 
                 else
