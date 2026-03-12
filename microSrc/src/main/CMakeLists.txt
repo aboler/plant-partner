@@ -25,7 +25,7 @@ idf_component_register(
         freertos
         mqtt
         nvs_flash
-        spi_flash        
+        spi_flash   
 
     INCLUDE_DIRS 
         "../peripherals"

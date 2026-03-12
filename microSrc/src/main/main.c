@@ -19,26 +19,22 @@
 #include "../peripherals/communication/wifi.h"
 
 #define MAX_TRANSMISSION_ATTEMPTS            5
-
 const static char *TAG = "DEBUG";
 
-// Set up networking (all Networking depends on nvs_init())
-static esp_err_t nvs_init()
-{
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
-    {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        ret = nvs_flash_init();
-    }
-    return ret;
-}
+const static char *TOPIC_AUTO_NOTIF = "plant_partner/auto_notif";
+const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
+const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare toggled";
+const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
+const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
+
+
+
+
+
+
 
 void app_main(void)
 {
-    // Used by all
-    ESP_ERROR_CHECK(nvs_init());
-
     // Declare variables
     int adc_raw, voltage;
     bool auto_care_on, light_calibration_successful, moisture_calibration_successful;
@@ -75,6 +71,9 @@ void app_main(void)
     pwm_pump_init(WATER);
     pwm_pump_init(FERTLIZER);
 
+
+
+
     while (1)
     {
         // Yield until MQTT sends message
@@ -83,18 +82,26 @@ void app_main(void)
             // Grab MQTT topic and data
             message = read_data();
             topic = read_topic();
-
+            //publish_mqtt("plant_partner/just_looped", "just looped");
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
             // Toggle autocare enable command
-            if (strcmp(topic, "plant_partner/act_tog_en") == 0)
-            {
-                if (strcmp(message, "Autocare enabled") == 0)
-                    auto_care_on = true;
-                else    
-                    auto_care_on = false;
+            if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0)
+            {   
+                //Toggle effect
+                if (strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0){
+                    auto_care_on = !auto_care_on;
 
-                ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
+                    if(auto_care_on == true)
+                        publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
+                    else
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
+                }
+                else{
+                    publish_mqtt(TOPIC_AUTO_NOTIF, "ERROR");
+                }
+
+                //ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);*/
             }
             // Sample command
             else if (strcmp(topic, "plant_partner/ack") == 0)
