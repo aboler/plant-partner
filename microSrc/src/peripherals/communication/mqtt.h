@@ -13,5 +13,5 @@ void mqtt_app_start(void);
 bool mqtt_check_buffer_ready(void);
 const char *read_data(void);
 const char *read_topic(void);
-
+int publish_mqtt(const char *topic, const char *message);
 #endif
