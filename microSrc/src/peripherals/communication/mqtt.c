@@ -7,6 +7,7 @@ static esp_mqtt_client_handle_t client = NULL;
 static char rx_buffer[256];
 static char rx_topic[64];
 static volatile bool mqtt_rx_ready;
+static volatile bool we_connected;
 
 static void log_error_if_nonzero(const char *message, int error_code)
 {
@@ -27,12 +28,12 @@ static void log_error_if_nonzero(const char *message, int error_code)
  * @param event_data The data for the event, esp_mqtt_event_handle_t.
  */
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
-{
+{   we_connected = false;
     ESP_LOGI(TAG, "Event dispatched from event loop base=%s, event_id=%" PRIi32 "", base, event_id);
     esp_mqtt_event_handle_t event = event_data;
 
     int msg_id;
-
+    
     switch ((esp_mqtt_event_id_t)event_id)
     {
         case MQTT_EVENT_CONNECTED:
@@ -40,6 +41,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             // Subscribes to all under plant_partner
             // mqtt_subscribe("plant_partner/#",0);
             msg_id = esp_mqtt_client_subscribe(client, MQTT_TOPICS, QOS);
+            we_connected = true;
             break;
 
         case MQTT_EVENT_DISCONNECTED:
@@ -114,6 +116,7 @@ void mqtt_app_start(void)
 }
 
 bool mqtt_check_buffer_ready(void) { return mqtt_rx_ready; }
+bool check_connection_ready(void) {return we_connected;}
 
 const char *read_data(void)
 {
