@@ -90,20 +90,17 @@ void app_main(void)
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
             // Toggle autocare enable command
-            if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0)
+            if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0 && strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0)
             {   
                 //Toggle effect
-                if (strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0){
                     auto_care_on = !auto_care_on;
 
                     if(auto_care_on == true)
                         publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
                     else
                         publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
-                }
-                else{
-                    publish_mqtt(TOPIC_AUTO_NOTIF, "ERROR");
-                }
+                
+
 
                 //ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);*/
             }
