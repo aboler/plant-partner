@@ -17,6 +17,7 @@
 #include "../peripherals/communication/http.h"
 #include "../peripherals/communication/mqtt.h"
 #include "../peripherals/communication/wifi.h"
+#include "../peripherals/communication/ringbuf.h"
 
 #define MAX_TRANSMISSION_ATTEMPTS            5
 const static char *TAG = "DEBUG";
@@ -286,6 +287,10 @@ void app_main(void)
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }    
+            }
+            else{
+                
+                ESP_LOGI(TAG, "MESSAGE ERROR");
             }
         }
 
