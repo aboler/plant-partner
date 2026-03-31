@@ -51,6 +51,11 @@ class _HomeViewState extends State<HomeView> {
       isSampling = false;
       sampleStatus = success ? "Sampling complete" : "Sampling failed";
     });
+
+    await Future.delayed(Duration(seconds: 5));
+    setState(() {
+      sampleStatus = "";
+    });
   }
 
   Future<void> lightMode() async {
@@ -64,6 +69,11 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       isLighting = false;
       lightStatus = success ? "Light triggered" : "Light trigger failed";
+    });
+
+    await Future.delayed(Duration(seconds: 5));
+    setState(() {
+      lightStatus = "";
     });
   }
 
@@ -93,6 +103,12 @@ class _HomeViewState extends State<HomeView> {
         nutrientStatus = success ? "Nutrients triggered" : "Nutrients trigger failed";
       });
     }
+
+    await Future.delayed(Duration(seconds: 5));
+    setState(() {
+      waterStatus = "";
+      nutrientStatus = "";
+    });
   }
 
   @override
