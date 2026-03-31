@@ -94,8 +94,10 @@ void app_main(void)
             { 
                 if(strcmp(message, "false") == 0)
                     auto_care_on = false;
-                else
+                else if(strcmp(message, "true") == 0)
                     auto_care_on = true;
+                else
+                    auto_care_on = !auto_care_on;
 
                 ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
             }
