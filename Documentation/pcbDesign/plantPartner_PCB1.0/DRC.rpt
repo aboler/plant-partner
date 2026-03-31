@@ -1,0 +1,77 @@
+** Drc report for plantPartner_PCB1.0.kicad_pcb **
+** Created on 2026-02-17T11:13:51-0500 **
+
+** Found 9 DRC violations **
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(182.1500 mm, 55.1100 mm): Rectangle on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(65.6050 mm, 87.8000 mm): Rectangle on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(182.1500 mm, 55.1100 mm): Rectangle on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(65.6050 mm, 87.8000 mm): Rectangle on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(165.1000 mm, 104.9700 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(165.1000 mm, 109.9700 mm): Segment of IC1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(168.1000 mm, 104.9700 mm): Segment of IC1 on F.Silkscreen
+[lib_footprint_mismatch]: Footprint 'MPM3610' does not match copy in library 'MPM3610'.
+    Local override; warning
+    @(166.6000 mm, 107.4700 mm): Footprint IC1
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1500 mm; actual 0.1247 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(190.3250 mm, 95.8300 mm): Track [GND] on F.Cu, length 3.6416 mm
+    @(190.6100 mm, 95.8300 mm): Track [GND] on F.Cu, length 0.2850 mm
+
+** Found 3 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error (excluded)
+    @(96.8200 mm, 98.2150 mm): Track [/COM] on B.Cu, length 0.9687 mm
+    @(192.7500 mm, 74.6500 mm): Track [/COM] on B.Cu, length 12.7600 mm
+    Unrelated Relays
+[unconnected_items]: Missing connection between items
+    Local override; error (excluded)
+    @(110.2500 mm, 96.2350 mm): Track [/H] on F.Cu, length 1.8890 mm
+    @(198.1350 mm, 93.7500 mm): Track [/H] on F.Cu, length 3.3729 mm
+    Unrelated Relays\
+[unconnected_items]: Missing connection between items
+    Local override; error (excluded)
+    @(74.8375 mm, 104.9000 mm): Track [/NC] on F.Cu, length 8.4675 mm
+    @(186.7500 mm, 71.9200 mm): Track [/NC] on F.Cu, length 1.2900 mm
+    Unrelated Relays
+
+** Found 7 Footprint errors **
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(68.3000 mm, 56.7500 mm): Footprint REF**
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(206.9000 mm, 56.1500 mm): Footprint REF**
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(207.2500 mm, 114.2500 mm): Footprint REF**
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(68.3500 mm, 115.0000 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(68.3000 mm, 56.7500 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(206.9000 mm, 56.1500 mm): Footprint REF**
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(207.2500 mm, 114.2500 mm): Footprint REF**
+
+** End of Report **

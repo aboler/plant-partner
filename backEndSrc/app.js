@@ -5,28 +5,92 @@ import bodyParser from "body-parser";
 import route from "./routes/sensorRoute.js";
 import router from "./routes/plantRoute.js";
 import taskRouter from "./routes/taskRoute.js";
+import Task from "./model/taskModel.js";
+import Plant from "./model/plantModel.js";
 import cors from "cors";
 import mqtt from "mqtt";
-import http from "http";
+
+//Functions for reading control variables 
+async function readControlVar(client) {
+    const taskCursor = Task.find().cursor();
+    for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {      
+        if(t.status == 'pending') {
+            try {
+                client.publish('plant_partner/ack', t.type);
+                console.log('Successful Actuation Request');
+            } catch (err) {
+                console.log('ERROR: Missed Actuation Request');
+            }
+        } 
+        try {
+            await t.deleteOne();
+            console.log('Task deleted');
+        } catch (err) {
+            console.log('ERROR: Task NOT deleted');
+        }
+    }
+    try {
+        //client.publish('plant_partner/ack', 'default');
+        //client.publish("plant_partner/act_tog_en", "Autocare toggled");
+        //console.log('Successful Default Request');
+    } catch (err) {
+        console.log('ERROR: Unsuccessful Default Request');
+    }
+}
+//
 
 // MQTT Broker Setup
-const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883';
+const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://test.mosquitto.org:1883' // 'mqtt://localhost:1883';
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
+//const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
+const ACT_INTERVAL_MS = 30000; // 60 seconds, 1 minute
 
-mqttClient.on('connect', () => {
-    console.log('Connected to MQTT Broker');
-    mqttClient.subscribe('sensors/updates', (err) => {
-        if (!err) {
-            console.log('Subscribed to sensors/updates topic');
-        } else {
-            console.error('Subscription error:', err);
-        }
-    });
+mqttClient.on('connect', async () => {
+
+    //On startup, send message to micro of current value of autoschedule 
+    const currentPlant = await Plant.findOne();
+    mqttClient.publish("plant_partner/autocare_startup", String(currentPlant.autoSchedule));
+
+    //subscribe to topics
+    mqttClient.subscribe("plant_partner/auto_en");
+    mqttClient.subscribe("plant_partner/esp_startup");
+    mqttClient.subscribe("plant_partner/auto_notif");
+    mqttClient.subscribe("plant_partner/act_compl");
+
+    //tasks and data recording 
+    setInterval(() => {
+        readControlVar(mqttClient);
+    }, ACT_INTERVAL_MS);
+    
 });
 
-mqttClient.on('message', (topic, message) => {
+mqttClient.on('message', async (topic, message) => {
     console.log(`Received message on topic ${topic}: ${message.toString()}`);
     // Here you can add logic to process the message and update the database if needed
+
+    switch (topic) {
+        case "plant_partner/auto_en" :
+            //for toggling autocare on esp32
+            mqttClient.publish("plant_partner/act_tog_en", "Autocare toggled");
+            break;
+        case "plant_partner/esp_startup" :
+            //for getting the current autocare status and sending to esp32 on its reset
+            const currentPlant = await Plant.findOne();
+            mqttClient.publish("plant_partner/autocare_startup", String(currentPlant.autoSchedule));
+            break;
+        case "plant_partner/act_compl" :
+            //For passing along messages to frontend when actuation task is completed, it could potentailly receive errors if actuation failed
+            mqttClient.publish("plant_partner/act_notif", message);
+            break;
+        case "plant_partner/auto_notif" :
+            console.log("Received message from auto_notif" + message);
+            mqttClient.publish("plant_partner/auto_error_notif", message);
+            break;
+        default :
+            break;
+
+    }
+
 });
 
 // Backend Server Setup

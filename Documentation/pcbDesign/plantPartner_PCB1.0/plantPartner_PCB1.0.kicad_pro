@@ -51,8 +51,27 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
+      "drc_exclusions": [
+        [
+          "unconnected_items|114465000|99850000|F.Cu|4|2873f0d9-51b5-4df7-b0ec-d6e31bc12e58|93ba4ba1-c32c-4346-beeb-874c657c880c",
+          "Unrelated Relays"
+        ],
+        [
+          "unconnected_items|127650000|96680000|F.Cu|4|6a05b198-8750-42fe-a0b1-6141932f8ee2|9455c05f-e8ef-408f-afb7-d0b304f4bc65",
+          "Unrelated Relays"
+        ],
+        [
+          "unconnected_items|203710000|74160000|F.Cu|4|fd080b03-1ef9-4608-af19-eab916be2472|465c712f-d0b8-4aa8-bdc4-da94a320ccc1",
+          "Unrelated Relays"
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -106,7 +125,7 @@
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",
         "track_angle": "error",
-        "track_dangling": "warning",
+        "track_dangling": "error",
         "track_segment_length": "error",
         "track_width": "error",
         "tracks_crossing": "error",
@@ -117,8 +136,8 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
-        "min_connection": 0.0,
+        "min_clearance": 0.15,
+        "min_connection": 0.15,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
         "min_hole_clearance": 0.25,
@@ -130,7 +149,7 @@
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.0,
+        "min_track_width": 0.15,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
         "solder_mask_to_copper_clearance": 0.0,
@@ -180,7 +199,9 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -207,7 +228,12 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -226,7 +252,48 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "multiple_net_names|1371600|1460500|549ecc7c-e3eb-45f9-9915-bb19624587b7|48f01cfc-fa0a-4c05-9927-e3a10f910859|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Will properly label on PCB"
+      ],
+      [
+        "multiple_net_names|241300|1041400|0ecff9af-d8c8-4ac1-8192-fe941fb90dc0|14a3024b-e126-45c1-9883-126ef9ba721d|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Handled on PCB and function as DE/~RE anyways"
+      ],
+      [
+        "multiple_net_names|279400|520700|d65f2e9d-9f22-471c-956b-6e14ae264f29|2e644a9b-3f9e-4a81-9df6-1355cf484d67|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Not an issue"
+      ],
+      [
+        "multiple_net_names|825500|292100|8eb60db2-0427-4771-a5d4-7f5a80b20be7|09da90c8-312a-4368-aba0-b72d28eda76d|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Okay if OUT is 5V"
+      ],
+      [
+        "pin_not_connected|393700|368300|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_not_connected|393700|444500|3a6268f8-da91-4ba2-b584-7fdfbb38282c|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_not_connected|749300|266700|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_not_driven|393700|368300|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ],
+      [
+        "pin_to_pin|1968500|1143000|a08b893e-46b1-4578-8394-a58780788707|0eac8366-76d1-407a-9789-a6552e5c5f7e|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129",
+        "Intentional connection and followed from official 5V Relay schematic "
+      ],
+      [
+        "power_pin_not_driven|749300|266700|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/d847e792-0b52-40d2-ab70-4b75cb25c129|/d847e792-0b52-40d2-ab70-4b75cb25c129|",
+        "Pin not needed"
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -458,7 +525,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.18,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -473,6 +540,34 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "clearance": 0.18,
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR_12V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "via_diameter": 0.6,
+        "via_drill": 0.3
+      },
+      {
+        "clearance": 0.18,
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR_5V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "via_diameter": 0.6,
+        "via_drill": 0.3
       }
     ],
     "meta": {
@@ -480,14 +575,23 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Default",
+        "pattern": "+5V"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "+12V"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "GerberDrillFiles/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",

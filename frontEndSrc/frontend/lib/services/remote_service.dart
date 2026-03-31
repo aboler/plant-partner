@@ -9,11 +9,11 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower';
+const String baseUrl = 'http://127.0.0.1:8000/plants/getPlantByName/Sunflower';
 //const String baseUrl = 'http://:8000/plants/getPlantByName/Sunflower';
 
 class RemoteService {
-  static const String url = "http://10.0.2.2:8000";
+  static const String url = "http://127.0.0.1:8000";
   //static const String url = "http://:8000";
 
   Future<Plant?> getPlant() async {
@@ -109,7 +109,7 @@ static Future<bool> triggerSensor(String sensor) async {
 }
 
   Future<bool> setAutoSchedule(bool enabled) async {
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
+    final client = MqttServerClient("127.0.0.1", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -123,7 +123,7 @@ static Future<bool> triggerSensor(String sensor) async {
     }
 
     client.publishMessage(
-      "plant_partner/act_tog_en",
+      "plant_partner/auto_en",
       MqttQos.atLeastOnce,
       builder.payload!,
     );
@@ -156,6 +156,15 @@ static Future<bool> triggerSensor(String sensor) async {
 
   // creates a new task (start with type="water")
   Future<bool> createTask(String type) async {
+    final client = MqttServerClient("test.mosquitto.org", "flutter_client_1");
+    client.port = 1883;
+    client.keepAlivePeriod = 30000;
+
+    await client.connect();
+
+    client.subscribe('plant_partner/act_notif', MqttQos.atLeastOnce);
+
+
     final resp = await http.post(
       Uri.parse("$url/tasks/createTask"),
       headers: {'Content-Type': 'application/json'},
@@ -168,6 +177,18 @@ static Future<bool> triggerSensor(String sensor) async {
 
     if (resp.statusCode != 200) {
       print('failed createTask: ${resp.statusCode}');
+    }
+
+    try {
+
+      final List<MqttReceivedMessage<MqttMessage?>>? messages = await client.updates!.first;
+
+      final recMess = messages![0].payload as MqttPublishMessage;
+      final pt = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+
+      print('Notification: $pt');
+    } catch (e) {
+      print('Encountered Subscription and Listening Error');
     }
 
     return resp.statusCode == 200;
