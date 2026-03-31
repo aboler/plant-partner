@@ -26,18 +26,13 @@ const static char *TAG = "DEBUG";
 const static char *TOPIC_AUTO_NOTIF = "plant_partner/auto_notif";
 const static char *TOPIC_ACT_COMPLETE = "plant_partner/act_compl";
 const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
+const static char *TOPIC_CHECK_SENSORS = "plant_partner/ack";
 const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare toggled";
 const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
 const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
 const static char *MESSAGE_WATER_DONE = "Water Complete";
 const static char *MESSAGE_LIGHT_DONE = "Light Complete";
 const static char *MESSAGE_NUTRI_DONE = "Nutrients Complete";
-
-
-
-
-
-
 
 void app_main(void)
 {
@@ -88,7 +83,7 @@ void app_main(void)
             // Grab MQTT topic and data
             message = read_data();
             topic = read_topic();
-            //publish_mqtt("plant_partner/just_looped", "just looped");
+
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
             // Toggle autocare enable command
@@ -107,7 +102,7 @@ void app_main(void)
                 //ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);*/
             }
             // Sample command
-            else if (strcmp(topic, "plant_partner/ack") == 0)
+            else if (strcmp(topic, TOPIC_CHECK_SENSORS) == 0)
             {
                 // If want to just control water
                 if(strcmp(message, "water") == 0)
@@ -319,12 +314,12 @@ void app_main(void)
                              p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }    
             }
-            else{
-                
-                ESP_LOGI(TAG, "MESSAGE ERROR");
+            else
+            {
+                ESP_LOGI(TAG, "INVALID TOPIC");
             }
         }
-
+        
         // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));
     }
