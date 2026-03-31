@@ -5,6 +5,7 @@
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
 
+#define MOISTURE_THRESHOLD      1500  // Voltage threshold in mV for water pump control
 #define ADC_UNIT                ADC_UNIT_1
 #define ADC_ATTEN               ADC_ATTEN_DB_12
 #define ADC_BITWIDTH            ADC_BITWIDTH_DEFAULT

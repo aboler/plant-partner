@@ -1,5 +1,5 @@
-﻿CEN3907C 
-Plant Partner 
+﻿CEN4907C 
+Plant-Partner 
 Bill of Materials Draft
 
 ______________________________________
@@ -51,11 +51,13 @@ Documentation: Schematic file is in Documentation/Datasheets and the KiCad Proje
 
 LED Lamp 5V:
 https://www.amazon.com/dp/B084ZNG43H?ref=ppx_yo2ov_dt_b_fed_asin_title
-
-
 ______________________________________
 Container:
+Lamp arm:
+https://www.amazon.com/dp/B01HTIQD5G?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1
 
+Water/Fertilizer containers:
+https://www.amazon.com/dp/B0DZNPPJRY?ref=ppx_yo2ov_dt_b_fed_asin_title
 
 
 

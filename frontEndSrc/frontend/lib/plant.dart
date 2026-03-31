@@ -5,6 +5,7 @@ class Plant {
   final int nLevel;
   final int pLevel;
   final int kLevel;
+  final bool autoSchedule;
 
   Plant({
     required this.plantName,
@@ -13,6 +14,7 @@ class Plant {
     required this.nLevel,
     required this.pLevel,
     required this.kLevel,
+    required this.autoSchedule,
   });
 
   factory Plant.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Plant {
       nLevel: json['nLevel'],
       pLevel: json['pLevel'],
       kLevel: json['kLevel'],
+      autoSchedule: json['autoSchedule'] ?? false,
     );
   }
 }

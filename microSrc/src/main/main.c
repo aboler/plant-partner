@@ -1,13 +1,10 @@
 // Standard C Libraries
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 // ESP-IDF Libraries
 #include "esp_log.h"
-
-// FreeRTOS
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 
 // Data Types
 #include "../dataTypes/plantData.h"
@@ -17,174 +14,316 @@
 #include "../peripherals/gpio.h"
 #include "../peripherals/heartbeat.h"
 #include "../peripherals/pwm_pump.h"
-#include "../http/http.h"
-#include "../wifi/wifi.h"
+#include "../peripherals/communication/http.h"
+#include "../peripherals/communication/mqtt.h"
+#include "../peripherals/communication/wifi.h"
+#include "../peripherals/uart_driver.h"
+#include "../peripherals/communication/ringbuf.h"
 
-//static struct plantData pv1 = {"Sunflower",1,2,3,4,5};
-
-static esp_err_t nvs_init(){
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-      ESP_ERROR_CHECK(nvs_flash_erase());
-      ret = nvs_flash_init();
-    }
-    return ret;
-}
-
+#define MAX_TRANSMISSION_ATTEMPTS            5
 const static char *TAG = "DEBUG";
 
+const static char *TOPIC_AUTO_NOTIF = "plant_partner/auto_notif";
+const static char *TOPIC_ACT_COMPLETE = "plant_partner/act_compl";
+const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
+const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare toggled";
+const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
+const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
+const static char *MESSAGE_WATER_DONE = "Water Complete";
+const static char *MESSAGE_LIGHT_DONE = "Light Complete";
+const static char *MESSAGE_NUTRI_DONE = "Nutrients Complete";
 
-// Uncommenting RTOS stuff will produce test updates
 
-/*void http_task(void *pv) {
-    
-    struct plantData *plant = (struct plantData *) pv;
-    esp_http_client_handle_t client = http_configure_handle();
-    http_put_plant_data(client,plant);
-    while (1) {
-        ESP_LOGI(TAG, "HTTP request...");
-        esp_err_t err = esp_http_client_perform(client);
-        ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-        vTaskDelay(pdMS_TO_TICKS(5000));
-    }
-}*/
 
-// all Networking depends on nvs_init()
+
+
+
 
 void app_main(void)
 {
     // Declare variables
     int adc_raw, voltage;
-    bool auto_care_on, light_calibration_successful, moisture_calibration_successful, current_switch_level, switch0;
-    auto_care_on = true; // TBD: CHANGE THIS ONCE DATABASE SIGNAL CAN BE RECEIVED AND CAN SIGNAL TOGGLING ON AND OFF AUTO CARE
+    bool auto_care_on, light_calibration_successful, moisture_calibration_successful;
+    auto_care_on = false;
+    const char *message;
+    const char *topic;
+    esp_err_t err;
 
     adc_oneshot_unit_handle_t adc1_handle;
     adc_cali_handle_t light_cali_adc1_handle, moisture_cali_adc1_handle;
     light_cali_adc1_handle = moisture_cali_adc1_handle = NULL;
 
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
-    struct plantData* p_ptr = &p;
+    struct plantData *p_ptr = &p;
 
-    esp_http_client_handle_t client;
-   
-    // Debug Tag
-    ESP_ERROR_CHECK(nvs_init());
 
+    // Start up peripheral communication needed to interface with the database
     start_wifi();
-
+    mqtt_app_start();
+    esp_http_client_handle_t client;
     client = http_configure_handle();
-    http_put_plant_data(client,p_ptr);
-
-
-    // TO:DO mutex stuff maybe
-    //xTaskCreate(http_task, "http_task", 8192, &pv1, 5, NULL);
-
+    http_put_plant_data(client, p_ptr);
 
     // Initialize ADC for photoresistor and moisture sensor
     light_calibration_successful = adc_init(&adc1_handle, LIGHT, &light_cali_adc1_handle);
     moisture_calibration_successful = adc_init(&adc1_handle, MOISTURE, &moisture_cali_adc1_handle);
 
-    // Configure LEDs and inputs
+    // Configure LEDs
     heartbeat_init();
     configure_IO(OUTPUT, EXTERNAL_LED_GPIO);
-    configure_IO(INPUT, SWITCH0_GPIO);
-
     clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-    switch0 = (bool)gpio_get_level(SWITCH0_GPIO);
 
     // Configure PWMs
     pwm_pump_init(WATER);
     pwm_pump_init(FERTLIZER);
 
+    // Initialize UART for RS485 communication with nutrient sensor
+    uart_rs485_init();
+
     while (1)
     {
-        // STAND IN: Represents auto. scheduling signal being received
-        current_switch_level = (bool)gpio_get_level(SWITCH0_GPIO);
-        
-        if(current_switch_level != switch0)
+        // Yield until MQTT sends message
+        if (mqtt_check_buffer_ready())
         {
-            // 1. Assess and store light if configured
-            if(light_calibration_successful)
-            {
-                adc_read(LIGHT, adc1_handle, &adc_raw);
-                adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+            // Grab MQTT topic and data
+            message = read_data();
+            topic = read_topic();
+            //publish_mqtt("plant_partner/just_looped", "just looped");
+            ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
-                if (voltage < 0) 
-                {
-                    ESP_LOGW(TAG, "Invalid light reading", voltage);
-                }
-                else
-                {
-                    p_ptr->lightIntensity = voltage;
-                }
+            // Toggle autocare enable command
+            if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0 && strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0)
+            {   
+                //Toggle effect
+                    auto_care_on = !auto_care_on;
 
+                    if(auto_care_on == true)
+                        publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
+                    else
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
+                
+
+
+                //ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);*/
             }
-
-            // 2. Assess and store moisture if configured
-            if(moisture_calibration_successful)
+            // Sample command
+            else if (strcmp(topic, "plant_partner/ack") == 0)
             {
-                adc_read(MOISTURE, adc1_handle, &adc_raw);
-                adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
-
-                if (voltage < 0) 
+                // If want to just control water
+                if(strcmp(message, "water") == 0)
                 {
-                    ESP_LOGW(TAG, "Invalid moisture reading", voltage);
-                }
-                else
-                {
-                    p_ptr->soilMoisture = voltage;
-                }
-            }
-
-            // 3. Assess and store nutrient data
-            
-
-
-            // 4. Actuate if auto_schedule is on AND if needed
-            if (auto_care_on)
-            {
-                // Light
-                if (p_ptr->lightIntensity < LED_THRESHOLD)
-                {
-                    set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                    ESP_LOGI(TAG, "LED ON: Voltage %d mV is below threshold", p_ptr->lightIntensity);
-                }
-                else
-                {
-                    clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
-                    ESP_LOGI(TAG, "LED OFF: Voltage %d mV is above threshold", p_ptr->lightIntensity);
-                }
-
-                // Moisture
-                if(p_ptr->soilMoisture < 100)
-                    ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
-                else
-                {
-                    ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, voltage);
-
-                    // Actuate water pump
                     modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
-                    vTaskDelay(pdMS_TO_TICKS(800));   
+                    vTaskDelay(pdMS_TO_TICKS(300));
                     modify_pump_duty_cycle(WATER, 0);
+
+                    // Update measured value
+                    if (moisture_calibration_successful)
+                    {
+                        adc_read(MOISTURE, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid moisture reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->soilMoisture = voltage;
+                        }
+                    }
+
+                    ESP_LOGI(TAG, "Water toggled: %d", p_ptr->soilMoisture);
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == ESP_OK)
+                            break;
+                    }
+
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_WATER_DONE);
                 }
 
-                // Fertilizer
-                // TBD: PUT THIS IN IF STATEMENT LIKE ^^ TO REACT BASED ON READINGS
-                modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                vTaskDelay(pdMS_TO_TICKS(800));   
-                modify_pump_duty_cycle(FERTLIZER, 0);
+                // If want to just control light
+                else if(strcmp(message, "light") == 0)
+                {
+                    toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+
+                    // Update measured value
+                    if (light_calibration_successful)
+                    {
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid light reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->lightIntensity = voltage;
+                        }
+                    }
+
+                    ESP_LOGI(TAG, "LED toggled: %d", p_ptr->lightIntensity);
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == ESP_OK)
+                            break;
+                    }
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+                }
+
+                // If want to just control fertilizer
+                else if (strcmp(message, "nutrients") == 0)
+                {
+                    modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+                    vTaskDelay(pdMS_TO_TICKS(300));
+                    modify_pump_duty_cycle(FERTLIZER, 0);
+
+                    // Update measured value
+                    ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                    uart_rs485_read(p_ptr);
+                    ESP_LOGI(TAG, "Finished RS485 read ...");
+                    ESP_LOGI(TAG, "Fertilizer toggled: N[%d], P[%d], K[%d]", p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == ESP_OK)
+                            break;
+                    }
+
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
+                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
+                }
+                // Otherwise do default action 
+                else
+                {
+                    // 1. Assess and store light if configured
+                    if (light_calibration_successful)
+                    {
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid light reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->lightIntensity = voltage;
+                        }
+                    }
+
+                    // 2. Assess and store moisture if configured
+                    if (moisture_calibration_successful)
+                    {
+                        adc_read(MOISTURE, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                        {
+                            ESP_LOGW(TAG, "Invalid moisture reading", voltage);
+                        }
+                        else
+                        {
+                            p_ptr->soilMoisture = voltage;
+                        }
+                    }
+
+                    // 3. Assess and store nutrient data
+                    ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                    uart_rs485_read(p_ptr);
+                    ESP_LOGI(TAG, "Finished RS485 read ...");
+
+                    // 4. Actuate if auto_schedule is on AND if needed
+                    if (auto_care_on)
+                    {
+                        // Light
+                        if (p_ptr->lightIntensity < LED_THRESHOLD)
+                        {
+                            set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+                            ESP_LOGI(TAG, "LED ON: Light %d mV is below threshold", p_ptr->lightIntensity);
+                        }
+                        else
+                        {
+                            clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
+                            ESP_LOGI(TAG, "LED OFF: Light %d mV is above threshold", p_ptr->lightIntensity);
+                        }
+
+                        // Moisture
+                        if (p_ptr->soilMoisture < MOISTURE_THRESHOLD)
+                            ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
+                        else
+                        {
+                            ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
+
+                            // Actuate water pump
+                            modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
+                            vTaskDelay(pdMS_TO_TICKS(300));
+                            modify_pump_duty_cycle(WATER, 0);
+                        }
+
+                        // Fertilizer
+                        if (p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel < NPK_THRESHOLD)
+                        {
+                            ESP_LOGI(TAG, "LOW NUTRIENTS: Current sum[%d] is < 60", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
+
+                            // Actuate fertilizer pump
+                            modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+                            vTaskDelay(pdMS_TO_TICKS(300));
+                            modify_pump_duty_cycle(FERTLIZER, 0);
+                        }
+                        else
+                        {
+                            ESP_LOGI(TAG, "GOOD NUTRIENTS: Current sum[%d] is >= 60", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
+                        }
+                    }
+
+                    // 5. Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+
+                        if (err == ESP_OK)
+                            break;
+                    }
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
+                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+                }    
             }
-
-            // 5. Send data to database
-            http_put_plant_data(client,p_ptr);
-            ESP_LOGI(TAG, "HTTP request...");
-            esp_err_t err = esp_http_client_perform(client);
-            ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-            ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
-
-            // 6. Update switch value
-            switch0 = current_switch_level;
-        }  
+            else{
+                
+                ESP_LOGI(TAG, "MESSAGE ERROR");
+            }
+        }
 
         // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));

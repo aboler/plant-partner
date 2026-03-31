@@ -20,18 +20,36 @@ class _HomeViewState extends State<HomeView> {
   }
 
   //fetch latest plant data from backend
-  loadPlant() async {
+  Future<void> loadPlant() async {
     setState(() => isLoaded = false); //show loading spinner again
     plant = await RemoteService().getPlant();
     setState(() => isLoaded = true);
+  }
+
+  triggerAllSensors() async {
+    await RemoteService().triggerAllSensors();
+  }
+
+  lightMode() async {
+    await RemoteService().lightMode();
+  }
+
+  triggerSensor(String sensor) async {
+    await RemoteService.triggerSensor(sensor);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Home', style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.lightGreen,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: loadPlant,
+          ),
+        ],
       ),
       backgroundColor: const Color.fromARGB(255, 255, 248, 237),
 
@@ -42,17 +60,70 @@ class _HomeViewState extends State<HomeView> {
                 ? const Text("No plant data available")
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: <Widget>[
                       PlantCard(plant: plant!),
                       const SizedBox(height: 20),
 
                       ElevatedButton.icon(
                         onPressed: () {
+                          triggerAllSensors();
                           loadPlant();
                         },
-                        icon: const Icon(Icons.refresh),
-                        label: const Text("Refresh Data"),
+                        icon: const Icon(Icons.sensors),
+                        label: const Text("Sample"),
                         style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          triggerSensor("water");
+                        },
+                        icon: const Icon(Icons.water_drop_outlined),
+                        label: const Text("Water"),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.lightBlueAccent,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          lightMode();
+                        },
+                        icon: const Icon(Icons.lightbulb_outline_rounded),
+                        label: const Text("Light"),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Color.fromARGB(255, 251, 226, 145),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          triggerSensor("nutrients");
+                        },
+                        icon: const Icon(Icons.flare_outlined),
+                        label: const Text("Nutrients"),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
                           backgroundColor: Colors.lightGreen,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 12),
@@ -61,6 +132,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ),
                       ),
+                      
                     ],
                   ),
       ),

@@ -7,6 +7,7 @@ const plantSchema = new mongoose.Schema({
     nLevel: { type: Number, required: true },
     pLevel: { type: Number, required: true },
     kLevel: { type: Number, required: true },
+    autoSchedule: { type: Boolean, default: false },
 });
 
 export default mongoose.model("Plant", plantSchema);

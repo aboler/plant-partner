@@ -25,7 +25,7 @@ Please see ``Documentation/Diagrams``, ``Documentation/Circuits``, and ``Documen
 
 ### Software Release
 
-For ESP32 (in VSCode):
+<ins>For ESP32 (in VSCode):</ins>
 
 1. Run ``git clone recurse-submodules git@github.com:aboler/plant-partner.git``
    - This will clone the base plant-partner and esp-idf Github repositories using ssh
@@ -49,14 +49,14 @@ In Powershell or a Linux terminal preferably:
    - You may need to use python3 instead of python
    - PORT will be something like COM3 for Windows and /dev/ttyUSB0 for Ubuntu
 
-For Backend + Database:
+<ins>For Backend + Database:</ins>
 
 1. Navigate to ``backEndSrc/``
 2. Start up the backend server by running ``npm start``, server will be running once these messages are displayed on the terminal
    - "Connected to MongoDB"
    - "Server running on port 8000"
 
-*For Frontend Application*
+<ins>For Frontend Application:</ins>
 
 In Bash or Powershell
 
@@ -107,16 +107,51 @@ In Bash or Powershell
 - Beginnings of a PCB to replace external wiring has been started and posted to the repository
 - Migrate database to the cloud via MongoDB atlas to allow for easier testing
 
+### Alpha Build
+
+- General clean up/organization in the code
+- Modified ADC to be initialized through one function
+- Modified main microcontroller loop to activate from one signal (currently a switch)
+  - Reads all sensors
+  - Activates actuators if needed
+  - Sends data to database over Wi-Fi
+- Created more permanent physical set up
+  - Liquid tanks
+  - Motor pumps in liquid tanks with elongated wires
+  - Central cup to act as a pot
+  - External carrying mechanism to more easily keep everything together
+  - Smaller external circuit board
+  - DAD program to act as switch, external LED, and proof that fertilizer motor activates when needed
+
+### Beta Build
+
+- Integrated MQTT messages to be sent from database/app. to initiate microcontroller main loop
+  - ```plant_partner/act_tog_en```: toggle autocare enable
+  - "plant_partner/ack"
+    - w/ ```water``` msg.: actuate water pump, read moisture sensor, then report back data to the app.
+    - w/ ```light``` msg.: toggle external LED, read photoresistor, then report back data to the app.
+    - w/ ```nutrients``` msg.: actuate fertilizer pump
+    - no message: read all of the sensors then report the data to the app.
+      - If autocare enabled, then also actuate sensors based on if data requires it
+- Finished and ordered PCB
+- Soldered temporary physical board
+- Instantiated and connected rough physical set up assembled in alpha build
+- Added additional user features in the application:
+  - Ability to toggle autocare and sync it with the microcontroller
+  - button for actuating specific actuators
+- Developed MQTT message functionality in the database
+  - Time-based sample commands
+  - Ability for specific actuation 
+
 ## Project Architecture
 
-The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, it is configure to interact with a photoresistor and moisture sensor. The sensor data is then processed to inform and schedule the operation of actuators thus, automating plant care mechanisms. The ESP32 also manages communication with external circuits that drive the systems with these actuators. As of now, an external switch circuit is set up to control sensor sampling and component actuation. Switch0 is responsible for sampling the photoresistor and updating the LED if its detected to be too dark, Switch1 samples the moisture sensor, Switch2 actuates the water pump motor, and Switch3 posts plant data to the database to mimic receiving commands from the application.
+The ESP32 board is set up to interface with sensors to collect real-time environmental and system data. Currently, the microcontroller waits until it receives particular messages through an MQTT client. Depending on the message it can do the following: 1) toggle if autocare is enabled or disabled, 2) samples sensors, communicate data to the app., and actuate (if autocare on), 3) actuate a specific actuator (i.e. LED, water pump, fertilizer pump). These messages are currently being sent from the application while the sensor data is being communicated to the database.
 
-The sensor readings can be reported to the database and displayed on a mobile application, providing users with remote monitoring. To update the data shown on the application, users must press the update button available in the Home tab. In the future, commands will be able to be sent and received from the application. However, this aspect is still in development and has not been implemented.
+The sensor readings can be reported to the database and displayed on a mobile application, providing users with remote monitoring. To update the data shown on the application, users must press the update button available in the Home tab. Additionally, there's a scheduling tab available where the autocare feature can be toggled as well as three actuator specific buttons for directly affecting specific devices.
 
 ### File Structure Summary
 
 - ``microsrc`` : directory containing relevant ESP32 code
-
   - ``scripts`` : directory containing scripts necessary for setting up ESP-IDF dependencies and environment for device
   - ``src`` : directory containing all developed code for the program and a CMakeLists.txt to help compile
     - ``main`` : contains main program for ESP32 and CMakeLists.txt compiling developed code
@@ -151,20 +186,21 @@ The sensor readings can be reported to the database and displayed on a mobile ap
     - `services/`: directory for backend communication modules
       - `remote_service.dart`: handles HTTP requests to the backend
     - `plant.dart`: types data model used to decode JSON plant objects from the database
-- ``Documentation`` : directory containing relevant project documentation
 
+- ``Documentation`` : directory containing relevant project documentation
   - ``Circuits`` : directory containing relevant circuits created during development
   - ``ClassSubmissions`` : directory containing a file with the link to the Google Drive folder containing all of our report work/submissions
   - ``Contributions`` : directory containing all members' timesheet records
   - ``Datasheets`` : directory containing schematics to reference for our current materials being used
   - ``Diagrams`` : directory containing relevant diagrams created during development
   - ``Materials`` : directory containing documentation related to materials, such as which items were purchased and from where
+  - ``Mosquitto`` : directory containing configuration files needed to successfully run mosquitto with our program
   - ``Research`` : directory containing research collected during the project, such as how to set up a coding environment for the ESP32
   - ``pcbDesign`` : directory containing work dones towards designing/building our project's PCB
 
 ## How to Use esp.py
 
-PORT: This is USB port that the ESP-32 is connected to. For Windows, it should be COM3 or something similar. For Ubuntu, it should be /dev/ttyUSB0 or something similar. Be aware, that if the Port is not automatically detected (usually Windows) you may have to install a driver being Silicon Labs CP210x or FTDI.
+PORT: This is USB port that the ESP-32 is connected to. For Windows, it should be COM3 or something similar. For Ubuntu, it should be ``/dev/ttyUSB0`` or something similar. Be aware, that if the Port is not automatically detected (usually Windows) you may have to install a driver being Silicon Labs CP210x or FTDI.
 
 - Default: ``python esp.py -p PORT``
   - This will run the necessary setup scripts to install the ESP-IDF dependencies then build, flash, and monitor the ESP-32 at PORT
