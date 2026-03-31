@@ -138,6 +138,15 @@ static Future<void> triggerSensor(String sensor) async {
 
   // creates a new task (start with type="water")
   Future<bool> createTask(String type) async {
+    final client = MqttServerClient("test.mosquitto.org", "flutter_client_1");
+    client.port = 1883;
+    client.keepAlivePeriod = 30000;
+
+    await client.connect();
+
+    client.subscribe('plant_partner/act_notif', MqttQos.atLeastOnce);
+
+
     final resp = await http.post(
       Uri.parse("$url/tasks/createTask"),
       headers: {'Content-Type': 'application/json'},
@@ -150,6 +159,18 @@ static Future<void> triggerSensor(String sensor) async {
 
     if (resp.statusCode != 200) {
       print('failed createTask: ${resp.statusCode}');
+    }
+
+    try {
+
+      final List<MqttReceivedMessage<MqttMessage?>>? messages = await client.updates!.first;
+
+      final recMess = messages![0].payload as MqttPublishMessage;
+      final pt = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+
+      print('Notification: $pt');
+    } catch (e) {
+      print('Encountered Subscription and Listening Error');
     }
 
     return resp.statusCode == 200;
