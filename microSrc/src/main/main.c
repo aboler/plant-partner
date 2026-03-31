@@ -18,28 +18,29 @@
 #include "../peripherals/communication/mqtt.h"
 #include "../peripherals/communication/wifi.h"
 #include "../peripherals/uart_driver.h"
+#include "../peripherals/communication/ringbuf.h"
 
 #define MAX_TRANSMISSION_ATTEMPTS            5
-
 const static char *TAG = "DEBUG";
 
-// Set up networking - all Networking depends on nvs_init()
-static esp_err_t nvs_init()
-{
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
-    {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        ret = nvs_flash_init();
-    }
-    return ret;
-}
+const static char *TOPIC_AUTO_NOTIF = "plant_partner/auto_notif";
+const static char *TOPIC_ACT_COMPLETE = "plant_partner/act_compl";
+const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
+const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare toggled";
+const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
+const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
+const static char *MESSAGE_WATER_DONE = "Water Complete";
+const static char *MESSAGE_LIGHT_DONE = "Light Complete";
+const static char *MESSAGE_NUTRI_DONE = "Nutrients Complete";
+
+
+
+
+
+
 
 void app_main(void)
 {
-    // Used by all
-    ESP_ERROR_CHECK(nvs_init());
-
     // Declare variables
     int adc_raw, voltage;
     bool auto_care_on, light_calibration_successful, moisture_calibration_successful;
@@ -87,18 +88,23 @@ void app_main(void)
             // Grab MQTT topic and data
             message = read_data();
             topic = read_topic();
-
+            //publish_mqtt("plant_partner/just_looped", "just looped");
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
             // Toggle autocare enable command
-            if (strcmp(topic, "plant_partner/act_tog_en") == 0)
-            {
-                if (strcmp(message, "Autocare enabled") == 0)
-                    auto_care_on = true;
-                else    
-                    auto_care_on = false;
+            if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0 && strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0)
+            {   
+                //Toggle effect
+                    auto_care_on = !auto_care_on;
 
-                ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
+                    if(auto_care_on == true)
+                        publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
+                    else
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
+                
+
+
+                //ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);*/
             }
             // Sample command
             else if (strcmp(topic, "plant_partner/ack") == 0)
@@ -140,8 +146,10 @@ void app_main(void)
                     }
 
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
-                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_WATER_DONE);
                 }
 
                 // If want to just control light
@@ -178,8 +186,7 @@ void app_main(void)
                             break;
                     }
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
-                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d]", p_ptr->lightIntensity, p_ptr->soilMoisture);
                 }
 
                 // If want to just control fertilizer
@@ -209,6 +216,9 @@ void app_main(void)
                     ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
                              p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+
+                    // Confirm the actuation was completed
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
                 }
                 // Otherwise do default action 
                 else
@@ -308,6 +318,10 @@ void app_main(void)
                     ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
                              p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }    
+            }
+            else{
+                
+                ESP_LOGI(TAG, "MESSAGE ERROR");
             }
         }
 
