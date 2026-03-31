@@ -319,7 +319,7 @@ void app_main(void)
                 ESP_LOGI(TAG, "INVALID TOPIC");
             }
         }
-
+        
         // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));
     }

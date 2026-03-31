@@ -28,4 +28,22 @@ class Plant {
       autoSchedule: json['autoSchedule'] ?? false,
     );
   }
+
+  static String moistureLevel(double value) {
+    if (value < 30) return "Low";
+    if (value < 70) return "Average";
+    return "High";
+  }
+
+  static String lightLevel(int value) {
+    if (value < 300) return "Low";
+    if (value < 700) return "Average";
+    return "High";
+  }
+
+  static String nutrientLevel(int value) {
+    if (value < 30) return "Low";
+    if (value < 70) return "Average";
+    return "High";
+  }
 }
