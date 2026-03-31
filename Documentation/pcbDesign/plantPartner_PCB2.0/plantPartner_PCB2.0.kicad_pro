@@ -228,6 +228,14 @@
   "erc": {
     "erc_exclusions": [
       [
+        "label_dangling|812800|889000|90ab608e-ab4f-45f9-86bf-687ccc41aa1e|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c||",
+        "Cannot use UART0 due to ESP32 Debug messages"
+      ],
+      [
+        "label_dangling|812800|914400|27800476-dc27-47b9-81b1-dad4c5cace9f|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c||",
+        "Cannot use UART0 due to ESP32 Debug messages"
+      ],
+      [
         "pin_not_connected|393700|330200|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
         "Intentional DC"
       ],
@@ -242,6 +250,10 @@
       [
         "pin_not_driven|393700|330200|fa381db3-1e5f-4fe2-a57b-9e5545b1f98c|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
         "Intentional DC"
+      ],
+      [
+        "pin_not_driven|774700|889000|107200d9-8fd7-47db-90f9-35f8f1c080e1|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
+        "Cannot use UART0 due to ESP32 Debug messages"
       ],
       [
         "power_pin_not_driven|749300|228600|c5f23c9e-dad3-4fe6-acf8-f940a9903197|00000000-0000-0000-0000-000000000000|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|/5d6d1fcd-58ef-4882-9096-01b290b76f3c|",
