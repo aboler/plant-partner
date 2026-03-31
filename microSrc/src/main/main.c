@@ -119,8 +119,8 @@ void app_main(void)
                     // Update measured value
                     if (moisture_calibration_successful)
                     {
-                        adc_read(WATER, adc1_handle, &adc_raw);
-                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+                        adc_read(MOISTURE, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
 
                         if (voltage < 0)
                         {
