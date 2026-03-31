@@ -324,15 +324,6 @@ void app_main(void)
                 ESP_LOGI(TAG, "MESSAGE ERROR");
             }
         }
-
-        ESP_LOGI(TAG, "HTTP test...");
-        http_put_plant_data(client, p_ptr);
-
-        esp_err_t err = esp_http_client_perform(client);
-        ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-
-        //waiting 30 seconds
-        vTaskDelay(pdMS_TO_TICKS(30000));
         
         // Must be at end of while loop, allows other CPU to activate
         vTaskDelay(pdMS_TO_TICKS(200));
