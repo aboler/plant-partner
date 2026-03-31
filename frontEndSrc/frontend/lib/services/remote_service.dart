@@ -33,7 +33,8 @@ class RemoteService {
     return null;
   }
 
-  Future<void> triggerAllSensors() async {
+  Future<bool> triggerAllSensors() async {
+    try {
     final client = MqttServerClient("10.0.2.2", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
@@ -50,9 +51,15 @@ class RemoteService {
     );
 
     client.disconnect();
+    return true;
+  } catch (e) {
+    print("triggerAllSensors failed: $e");
+    return false;
+  }
 }
 
-Future<void> lightMode() async {
+Future<bool> lightMode() async {
+    try { 
     final client = MqttServerClient("10.0.2.2", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
@@ -69,9 +76,15 @@ Future<void> lightMode() async {
     );
 
     client.disconnect();
+    return true;
+  } catch (e) {
+    print("lightMode failed: $e");
+    return false;
+  }
 }
 
-static Future<void> triggerSensor(String sensor) async {
+static Future<bool> triggerSensor(String sensor) async {
+  try {
     final client = MqttServerClient("10.0.2.2", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
@@ -88,6 +101,11 @@ static Future<void> triggerSensor(String sensor) async {
     );
 
     client.disconnect();
+    return true;
+  } catch (e) {
+    print("triggerSensor failed: $e");
+    return false;
+  }
 }
 
   Future<bool> setAutoSchedule(bool enabled) async {
