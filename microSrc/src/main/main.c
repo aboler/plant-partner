@@ -25,9 +25,11 @@ const static char *TAG = "DEBUG";
 
 const static char *TOPIC_AUTO_NOTIF = "plant_partner/auto_notif";
 const static char *TOPIC_ACT_COMPLETE = "plant_partner/act_compl";
+const static char *TOPIC_INIT_TOGGLE = "plant_partner/autocare_startup";
 const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
 const static char *TOPIC_CHECK_SENSORS = "plant_partner/ack";
-const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare toggled";
+const static char *TOPIC_START_UP = "plant_partner/esp_startup";
+const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare enabled";
 const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
 const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
 const static char *MESSAGE_WATER_DONE = "Water Complete";
@@ -75,6 +77,8 @@ void app_main(void)
     // Initialize UART for RS485 communication with nutrient sensor
     uart_rs485_init();
 
+    publish_mqtt(TOPIC_START_UP, "Start up");
+
     while (1)
     {
         // Yield until MQTT sends message
@@ -86,20 +90,30 @@ void app_main(void)
 
             ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
 
+            if (strcmp(topic, TOPIC_INIT_TOGGLE) == 0)
+            { 
+                if(strcmp(message, "false") == 0)
+                    auto_care_on = false;
+                else
+                    auto_care_on = true;
+
+                ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
+            }
             // Toggle autocare enable command
-            if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0 && strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0)
+            else if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0)
             {   
                 //Toggle effect
-                    auto_care_on = !auto_care_on;
-
-                    if(auto_care_on == true)
-                        publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
-                    else
-                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
-                
-
-
-                //ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);*/
+                if(strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0)
+                {
+                    auto_care_on = true;
+                    publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
+                }
+                else
+                {
+                    auto_care_on = false;
+                    publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_OFF);
+                }
+                ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
             }
             // Sample command
             else if (strcmp(topic, TOPIC_CHECK_SENSORS) == 0)
