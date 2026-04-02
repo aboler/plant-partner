@@ -30,9 +30,7 @@ async function readControlVar(client) {
         }
     }
     try {
-        //client.publish('plant_partner/ack', 'default');
-        //client.publish("plant_partner/act_tog_en", "Autocare toggled");
-        //console.log('Successful Default Request');
+        client.publish('plant_partner/ack', 'default');
     } catch (err) {
         console.log('ERROR: Unsuccessful Default Request');
     }
@@ -40,7 +38,11 @@ async function readControlVar(client) {
 //
 
 // MQTT Broker Setup
+<<<<<<< HEAD
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; // CHANGE IP !!
+=======
+const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; mqtt://test.mosquitto.org:1883
+>>>>>>> main
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
 //const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
 const ACT_INTERVAL_MS = 30000; // 60 seconds, 1 minute
@@ -71,7 +73,7 @@ mqttClient.on('message', async (topic, message) => {
     switch (topic) {
         case "plant_partner/auto_en" :
             //for toggling autocare on esp32
-            mqttClient.publish("plant_partner/act_tog_en", "Autocare toggled");
+            mqttClient.publish("plant_partner/act_tog_en", message);
             break;
         case "plant_partner/esp_startup" :
             //for getting the current autocare status and sending to esp32 on its reset
@@ -83,7 +85,6 @@ mqttClient.on('message', async (topic, message) => {
             mqttClient.publish("plant_partner/act_notif", message);
             break;
         case "plant_partner/auto_notif" :
-            console.log("Received message from auto_notif" + message);
             mqttClient.publish("plant_partner/auto_error_notif", message);
             break;
         default :

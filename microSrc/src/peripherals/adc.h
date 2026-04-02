@@ -9,8 +9,8 @@
 #define ADC_UNIT                ADC_UNIT_1
 #define ADC_ATTEN               ADC_ATTEN_DB_12
 #define ADC_BITWIDTH            ADC_BITWIDTH_DEFAULT
-#define ADC_LIGHT_CHANNEL       ADC_CHANNEL_0
-#define ADC_MOISTURE_CHANNEL    ADC_CHANNEL_3
+#define ADC_LIGHT_CHANNEL       ADC_CHANNEL_3
+#define ADC_MOISTURE_CHANNEL    ADC_CHANNEL_0
 #define LIGHT                   true
 #define MOISTURE                false
 
