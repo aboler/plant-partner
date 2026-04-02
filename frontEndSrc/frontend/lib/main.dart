@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/nav.dart';
 import 'package:frontend/routes.dart';
 import 'package:frontend/services/mqtt_service.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -56,6 +57,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+        textTheme: GoogleFonts.merriweatherSansTextTheme(),
       ),
     );
   }
