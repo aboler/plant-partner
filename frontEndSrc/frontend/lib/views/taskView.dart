@@ -60,6 +60,14 @@ class _TaskViewState extends State<TaskView> {
                 value: "water",
                 child: Text("Water plant"),
               ),
+              DropdownMenuItem(
+                value: "light",
+                child: Text("Turn on light"),
+              ),
+              DropdownMenuItem(
+                value: "nutrients",
+                child: Text("Add nutrients"),
+              ),
             ],
             onChanged: (val) {
               if (val != null) selectedType = val;
@@ -101,6 +109,8 @@ class _TaskViewState extends State<TaskView> {
 
   String taskLabel(String type) {
     if (type == "water") return "Water plant";
+    if (type == "light") return "Turn on light";
+    if (type == "nutrients") return "Add nutrients";
     return type;
   }
 
