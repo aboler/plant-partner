@@ -7,13 +7,11 @@ import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
 const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower'; // CHANGE IP !!
-//const String baseUrl = 'http://:8000/plants/getPlantByName/Sunflower';
-
+const String url = "http://10.0.2.2:8000"; // CHANGE IP !!
+final client = MqttServerClient("10.0.2.2", "flutter_client_1"); // CHANGE IP !!
 //For http and mqtt, change ip to 127.0.0.1
 
 class RemoteService {
-  static const String url = "http://127.0.0.1:8000";
-  //static const String url = "http://:8000";
 
   Future<Plant?> getPlant() async {
     final resp = await http.get(Uri.parse(baseUrl));
@@ -34,7 +32,6 @@ class RemoteService {
 
   Future<bool> triggerAllSensors() async {
     try {
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1"); // CHANGE IP !!
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -59,7 +56,6 @@ class RemoteService {
 
 Future<bool> lightMode() async {
     try { 
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1"); // CHANGE IP !!
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -84,8 +80,6 @@ Future<bool> lightMode() async {
 
 static Future<bool> triggerSensor(String sensor) async {
   try {
-    //final client = MqttServerClient("127.0.0.1", "flutter_client_1"); // CHANGE IP !!
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -109,8 +103,6 @@ static Future<bool> triggerSensor(String sensor) async {
 }
 
   Future<bool> setAutoSchedule(bool enabled) async {
-    //final client = MqttServerClient("127.0.0.1", "flutter_client_1"); // CHANGE IP !!
-    final client = MqttServerClient("10.0.2.2", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 20;
 
@@ -157,7 +149,6 @@ static Future<bool> triggerSensor(String sensor) async {
 
   // creates a new task (start with type="water")
   Future<bool> createTask(String type) async {
-    final client = MqttServerClient("test.mosquitto.org", "flutter_client_1");
     client.port = 1883;
     client.keepAlivePeriod = 30000;
 
