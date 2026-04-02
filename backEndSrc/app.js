@@ -29,8 +29,12 @@ async function readControlVar(client) {
             console.log('ERROR: Task NOT deleted');
         }
     }
+}
+
+async function autoSample(client) {
     try {
         client.publish('plant_partner/ack', 'default');
+        client.publish('plant_partner/auto_error_notif', 'autosampling completed');
     } catch (err) {
         console.log('ERROR: Unsuccessful Default Request');
     }
@@ -40,8 +44,8 @@ async function readControlVar(client) {
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; // CHANGE IP !!
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
-//const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
-const ACT_INTERVAL_MS = 30000; // 60 seconds, 1 minute
+const ACT_INTERVAL_MS = 30000; // 30 seconds
+const SAMPLE_INTERVAL_MS = 45000; // 45 seconds
 
 mqttClient.on('connect', async () => {
 
@@ -59,6 +63,10 @@ mqttClient.on('connect', async () => {
     setInterval(() => {
         readControlVar(mqttClient);
     }, ACT_INTERVAL_MS);
+
+    setInterval(() => {
+        autoSample(mqttClient);
+    }, SAMPLE_INTERVAL_MS);
     
 });
 
