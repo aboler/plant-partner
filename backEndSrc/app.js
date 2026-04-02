@@ -35,6 +35,7 @@ async function autoSample(client) {
     try {
         client.publish('plant_partner/ack', 'default');
         client.publish('plant_partner/auto_error_notif', 'autosampling completed');
+        console.log('suucessful sampling');
     } catch (err) {
         console.log('ERROR: Unsuccessful Default Request');
     }
@@ -42,7 +43,7 @@ async function autoSample(client) {
 //
 
 // MQTT Broker Setup
-const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; mqtt://test.mosquitto.org:1883 // CHANGE IP !!
+const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://test.mosquitto.org:1883' // 'mqtt://localhost:1883'; mqtt://test.mosquitto.org:1883 // CHANGE IP !!
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
 const ACT_INTERVAL_MS = 30000; // 30 seconds
 const SAMPLE_INTERVAL_MS = 45000; // 45 seconds
