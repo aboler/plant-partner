@@ -40,7 +40,7 @@ async function readControlVar(client) {
 //
 
 // MQTT Broker Setup
-const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://test.mosquitto.org:1883' // 'mqtt://localhost:1883';
+const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; // CHANGE IP !!
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
 //const SAMPLE_INTERVAL_MS = 30000; // 30 seconds
 const ACT_INTERVAL_MS = 30000; // 60 seconds, 1 minute
