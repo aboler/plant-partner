@@ -1,30 +1,30 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
+//import 'package:mqtt_client/mqtt_browser_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:frontend/main.dart';
 
 class MqttService {
   MqttServerClient? _client;
   final String _identifier;
-  final String _host;
+  //final String _host;
   final String _topic;
 
   MqttService({
     required String identifier,
-    required String host,
+    //required String host,
     required String topic,
   })  : _identifier = identifier,
-        _host = host,
+        //_host = host,
         _topic = topic;
 
   Future<void> initMqttClient() async {
-    _client = MqttServerClient(_host, _identifier);
-
+    _client = MqttServerClient('localhost', _identifier);
     _client!.port = 1883;
+
     _client!.keepAlivePeriod = 20;
     _client!.logging(on: true);
-    _client!.setProtocolV311();
 
     _client!.onConnected = onConnected;
     _client!.onDisconnected = onDisconnected;

@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
     mqttService = MqttService(
       identifier: 'flutter_client_1',
-      host: 'test.mosquitto.org', //adjust based on what broker were using
+      //host: 'wss://test.mosquitto.org:8081/mqtt', //adjust based on what broker were using
       topic: 'plant_partner/#',
     );
 
