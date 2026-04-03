@@ -6,9 +6,9 @@ import 'dart:convert';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-const String baseUrl = 'http://127.0.0.1:8000/plants/getPlantByName/Sunflower'; // CHANGE IP !!
-const String url = "http://127.0.0.1:8000"; // CHANGE IP !!
-final client = MqttServerClient("127.0.0.1", "flutter_client_1"); // CHANGE IP !!
+const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower'; // CHANGE IP !!
+const String url = "http://10.0.2.2:8000"; // CHANGE IP !!
+final client = MqttServerClient("10.0.2.2", "flutter_client_1"); // CHANGE IP !!
 //For http and mqtt, change ip to 127.0.0.1
 
 class RemoteService {
@@ -148,8 +148,12 @@ static Future<bool> triggerSensor(String sensor) async {
   }
 
   // creates a new task (start with type="water")
-  Future<bool> createTask(String type) async {
-
+  Future<bool> createTask(
+    String type,
+    String startDate,
+    String endDate,
+    String time,
+  ) async {
     final resp = await http.post(
       Uri.parse("$url/tasks/createTask"),
       headers: {'Content-Type': 'application/json'},
@@ -157,14 +161,18 @@ static Future<bool> triggerSensor(String sensor) async {
         'plantName': 'Sunflower',
         'type': type,
         'status': 'pending',
+        'startDate': startDate,
+        'endDate': endDate,
+        'time': time,
       }),
-    );
+  );
 
-    if (resp.statusCode != 200) {
+    if (resp.statusCode != 200 && resp.statusCode != 201) {
       print('failed createTask: ${resp.statusCode}');
+      print('response body: ${resp.body}');
     }
 
-    return resp.statusCode == 200;
+    return resp.statusCode == 200 || resp.statusCode == 201;
   }
 
   // marks a task as done

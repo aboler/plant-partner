@@ -2,9 +2,23 @@ import Task from "../model/taskModel.js";
 
 export const createTask = async (req, res) => {
    try {
-      const taskData = new Task(req.body);
+      const { plantName, type, status, startDate, endDate, time } = req.body;
+
+      if (!plantName || !type || !startDate || !endDate || !time) {
+         return res.status(400).json({ error: "Missing required task fields" });
+      }
+
+      const taskData = new Task({
+         plantName,
+         type,
+         status: status || "pending",
+         startDate,
+         endDate,
+         time,
+      });
+
       const savedTask = await taskData.save();
-      res.status(200).json(savedTask);
+      res.status(201).json(savedTask);
    } catch (error) {
       res.status(400).json({ error: "Failed to create task" });
    }
