@@ -148,8 +148,12 @@ static Future<bool> triggerSensor(String sensor) async {
   }
 
   // creates a new task (start with type="water")
-  Future<bool> createTask(String type) async {
-
+  Future<bool> createTask(
+    String type,
+    String startDate,
+    String endDate,
+    String time,
+  ) async {
     final resp = await http.post(
       Uri.parse("$url/tasks/createTask"),
       headers: {'Content-Type': 'application/json'},
@@ -157,14 +161,18 @@ static Future<bool> triggerSensor(String sensor) async {
         'plantName': 'Sunflower',
         'type': type,
         'status': 'pending',
+        'startDate': startDate,
+        'endDate': endDate,
+        'time': time,
       }),
-    );
+  );
 
-    if (resp.statusCode != 200) {
+    if (resp.statusCode != 200 && resp.statusCode != 201) {
       print('failed createTask: ${resp.statusCode}');
+      print('response body: ${resp.body}');
     }
 
-    return resp.statusCode == 200;
+    return resp.statusCode == 200 || resp.statusCode == 201;
   }
 
   // marks a task as done

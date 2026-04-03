@@ -3,6 +3,7 @@ import 'package:frontend/views/homeView.dart';
 import 'package:frontend/views/settingsView.dart';
 import 'package:frontend/views/taskView.dart';
 
+// bottom nav bar
 class Nav extends StatefulWidget {
   const Nav({super.key});
 
@@ -17,6 +18,7 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
+        indicatorColor: Color.fromARGB(217, 245, 177, 126),
         backgroundColor: const Color.fromARGB(255, 250, 223, 179),
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
