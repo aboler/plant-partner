@@ -30,20 +30,22 @@ class Plant {
   }
 
   static String moistureLevel(double value) {
-    if (value < 30) return "Low";
-    if (value < 70) return "Average";
-    return "High";
+    if (value < 1500) return "High"; //wet
+    if (value < 1900) return "Average";
+    return "Low"; //dry [1900, 2803 max]
   }
 
   static String lightLevel(int value) {
-    if (value < 300) return "Low";
-    if (value < 700) return "Average";
-    return "High";
+    if (value < 1000) return "Low"; //dark
+    if (value <= 1400) return "Average";
+    return "High"; //sunny
   }
 
   static String nutrientLevel(int value) {
-    if (value < 30) return "Low";
-    if (value < 70) return "Average";
+    if (value < 6) return "Low";
+    if (value < 21) return "Average";
     return "High";
   }
+  //need the threshold to be that whenthe sum off these nutrients <60
+  // then turn on the fertilizer
 }
