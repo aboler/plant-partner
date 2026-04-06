@@ -13,27 +13,37 @@ import mqtt from "mqtt";
 //Functions for reading control variables 
 async function readControlVar(client) {
     const taskCursor = Task.find().cursor();
+    const date = new Date();
     for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {      
         if(t.status == 'pending') {
-            try {
-                client.publish('plant_partner/ack', t.type);
-                console.log('Successful Actuation Request');
-            } catch (err) {
-                console.log('ERROR: Missed Actuation Request');
+            const timeStr = t.time + ':00';
+            const comp_date = new Date(t.endDate + 'T' + timeStr);
+
+            console.log(timeStr);
+            console.log(comp_date.getTime()-(date.getTime() - 30100));
+            console.log(date.getTime() - comp_date.getTime());
+
+            if (((comp_date.getTime()-(date.getTime() - 30100)) >= 0) && ((date.getTime() - comp_date.getTime()) >= 0)) {
+                try {
+                    client.publish('plant_partner/task', t.type);
+                    console.log('Successful Actuation Request');
+                } catch (err) {
+                    console.log('ERROR: Missed Actuation Request');
+                }
+                try {
+                    await t.deleteOne();
+                    console.log('Task deleted');
+                } catch (err) {
+                    console.log('ERROR: Task NOT deleted');
+                }
             }
         } 
-        try {
-            await t.deleteOne();
-            console.log('Task deleted');
-        } catch (err) {
-            console.log('ERROR: Task NOT deleted');
-        }
     }
 }
 
 async function autoSample(client) {
     try {
-        client.publish('plant_partner/ack', 'default');
+        client.publish('plant_partner/task', 'default');
         client.publish('plant_partner/auto_error_notif', 'autosampling completed');
         console.log('suucessful sampling');
     } catch (err) {
@@ -45,8 +55,8 @@ async function autoSample(client) {
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; mqtt://test.mosquitto.org:1883 // CHANGE IP !!
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
-const ACT_INTERVAL_MS = 31000; // 30 seconds
-const SAMPLE_INTERVAL_MS = 45000; // 45 seconds
+const ACT_INTERVAL_MS = 30000; // 15 seconds
+const SAMPLE_INTERVAL_MS = 47000; // 47 seconds
 
 mqttClient.on('connect', async () => {
 
@@ -123,3 +133,5 @@ mongoose.connect(MONGOURL).then(() => {
 app.use("/sensors", route);
 app.use("/plants", router);
 app.use("/tasks", taskRouter);
+
+// 
