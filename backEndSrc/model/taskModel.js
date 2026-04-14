@@ -9,6 +9,7 @@ const taskSchema = new mongoose.Schema(
       startDate: { type: String, required: true },
       endDate: { type: String, required: true },
       time: { type: String, required: true },
+      repeatDays: { type: [String], default: [] },
    },
    { timestamps: true }
 );

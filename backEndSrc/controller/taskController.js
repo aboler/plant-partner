@@ -2,7 +2,7 @@ import Task from "../model/taskModel.js";
 
 export const createTask = async (req, res) => {
    try {
-      const { plantName, type, status, startDate, endDate, time } = req.body;
+      const { plantName, type, status, startDate, endDate, time, repeatDays } = req.body;
 
       if (!plantName || !type || !startDate || !endDate || !time) {
          return res.status(400).json({ error: "Missing required task fields" });
@@ -15,6 +15,7 @@ export const createTask = async (req, res) => {
          startDate,
          endDate,
          time,
+         repeatDays: repeatDays || [],
       });
 
       const savedTask = await taskData.save();
