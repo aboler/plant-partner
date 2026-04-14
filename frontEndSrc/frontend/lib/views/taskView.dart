@@ -45,11 +45,34 @@ class _TaskViewState extends State<TaskView> {
     );
   }
 
+  Widget buildDayChip(
+    String day,
+    List<String> selectedDays,
+    void Function(void Function()) setDialogState,
+  ) {
+    final isSelected = selectedDays.contains(day);
+
+    return FilterChip(
+      label: Text(day),
+      selected: isSelected,
+      onSelected: (selected) {
+        setDialogState(() {
+          if (selected) {
+            selectedDays.add(day);
+          } else {
+            selectedDays.remove(day);
+          }
+        });
+      },
+    );
+  }
+
   Future<void> addTaskDialog() async {
     String selectedType = "water";
     DateTime? selectedStartDate;
     DateTime? selectedEndDate;
     TimeOfDay? selectedTime;
+    List<String> selectedDays = [];
 
     await showDialog(
       context: context,
@@ -118,7 +141,7 @@ class _TaskViewState extends State<TaskView> {
                         child: Text(
                           selectedStartDate == null
                               ? "Choose Start Date"
-                              : "Start Date: ${DateFormat('MMM d, yyyy').format(selectedStartDate!)}",
+                              : "Start Date: ${DateFormat('MM dd, yyyy').format(selectedStartDate!)}",
                         ),
                       ),
                     ),
@@ -146,7 +169,7 @@ class _TaskViewState extends State<TaskView> {
                         child: Text(
                           selectedEndDate == null
                               ? "Choose End Date"
-                              : "End Date: ${DateFormat('MMM d, yyyy').format(selectedEndDate!)}",
+                              : "End Date: ${DateFormat('MM dd, yyyy').format(selectedEndDate!)}",
                         ),
                       ),
                     ),
@@ -173,6 +196,27 @@ class _TaskViewState extends State<TaskView> {
                               : "Time: ${selectedTime!.format(context)}",
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    const Text(
+                      "Repeat Days",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        buildDayChip("M", selectedDays, setDialogState),
+                        buildDayChip("T", selectedDays, setDialogState),
+                        buildDayChip("W", selectedDays, setDialogState),
+                        buildDayChip("Th", selectedDays, setDialogState),
+                        buildDayChip("F", selectedDays, setDialogState),
+                        buildDayChip("Sa", selectedDays, setDialogState),
+                        buildDayChip("Su", selectedDays, setDialogState),
+                      ],
                     ),
                   ],
                 ),
@@ -221,6 +265,7 @@ class _TaskViewState extends State<TaskView> {
                       startDateStr,
                       endDateStr,
                       timeStr,
+                      selectedDays,
                     );
 
                     await loadData();
@@ -264,6 +309,9 @@ class _TaskViewState extends State<TaskView> {
     }
     if (t.time != null) {
       lines.add("time: ${t.time}");
+    }
+    if (t.repeatDays.isNotEmpty) {
+      lines.add("days: ${t.repeatDays.join(", ")}");
     }
 
     return lines.join(" • ");

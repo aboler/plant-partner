@@ -153,6 +153,7 @@ static Future<bool> triggerSensor(String sensor) async {
     String startDate,
     String endDate,
     String time,
+    List<String> repeatDays,
   ) async {
     final resp = await http.post(
       Uri.parse("$url/tasks/createTask"),
@@ -164,6 +165,7 @@ static Future<bool> triggerSensor(String sensor) async {
         'startDate': startDate,
         'endDate': endDate,
         'time': time,
+        'repeatDays': repeatDays,
       }),
   );
 

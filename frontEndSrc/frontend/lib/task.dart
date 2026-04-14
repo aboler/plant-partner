@@ -5,6 +5,7 @@ class Task {
   final String? startDate;
   final String? endDate;
   final String? time;
+  final List<String> repeatDays;
 
   Task({
     required this.id,
@@ -13,6 +14,7 @@ class Task {
     this.startDate,
     this.endDate,
     this.time,
+    required this.repeatDays,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,9 @@ class Task {
       startDate: json['startDate'],
       endDate: json['endDate'],
       time: json['time'],
+      repeatDays: json['repeatDays'] != null
+        ? List<String>.from(json['repeatDays'])
+        : [],
     );
   }
 }
