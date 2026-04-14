@@ -105,10 +105,8 @@ void app_main(void)
             topic = read_topic();
 
             ESP_LOGI("While Loop, Most Recently read ", "Topic: %s, Data: %s", topic, message);
-            
 
-
-        if (strcmp(topic, TOPIC_INIT_TOGGLE) == 0)
+            if (strcmp(topic, TOPIC_INIT_TOGGLE) == 0)
             { 
                 if(strcmp(message, "false") == 0)
                     auto_care_on = false;
