@@ -31,6 +31,7 @@ const static char *TOPIC_CHECK_SENSORS = "plant_partner/ack";
 const static char *TOPIC_TASK_MENU    = "plant_partner/task";
 const static char *TOPIC_START_UP = "plant_partner/esp_startup";
 const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare enabled";
+const static char *DEACTIVATION_MESSAGE_AUTOCARE = "Autocare disabled";
 
 //Control Messages
 const static char *CONTROL_WATER = "water";
@@ -44,13 +45,18 @@ const static char *MESSAGE_WATER_DONE = "Water Complete";
 const static char *MESSAGE_LIGHT_DONE = "Light Complete";
 const static char *MESSAGE_NUTRI_DONE = "Nutrients Complete";
 
-
-
 static void water_plant()
 {
     modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
     vTaskDelay(pdMS_TO_TICKS(300));
     modify_pump_duty_cycle(WATER, 0);
+}
+
+static void fertilize_plant()
+{
+    modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+    vTaskDelay(pdMS_TO_TICKS(300));
+    modify_pump_duty_cycle(FERTLIZER, 0);
 }
 
 void app_main(void)
@@ -69,7 +75,6 @@ void app_main(void)
 
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData *p_ptr = &p;
-
 
     // Start up peripheral communication needed to interface with the database
     start_wifi();
@@ -115,7 +120,7 @@ void app_main(void)
                 else
                     auto_care_on = !auto_care_on;
 
-                ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
+                ESP_LOGI(TAG, "Initialized autocare to: %d", auto_care_on);
             }
             // Toggle autocare enable command
             else if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0)
@@ -125,11 +130,20 @@ void app_main(void)
                     auto_care_on = true;
                     publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_ON);
                 }
-                else
+                else if(strcmp(message, DEACTIVATION_MESSAGE_AUTOCARE) == 0)
                 {
                     auto_care_on = false;
                     publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
                 }
+                else
+                {
+                    auto_care_on = !auto_care_on;
+                    if(auto_care_on)
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_ON);
+                    else
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
+                }
+
                 ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
             }
             // Read all sensors and send to database
@@ -164,6 +178,16 @@ void app_main(void)
                 uart_rs485_read(p_ptr);
                 ESP_LOGI(TAG, "Finished RS485 read...");
 
+                // Send data to database
+                http_put_plant_data(client, p_ptr);
+                ESP_LOGI(TAG, "HTTP request...");
+                for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                {
+                    err = esp_http_client_perform(client);
+                    if (err == ESP_OK)
+                        break;
+                }
+                ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
                 ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], N[%d], P[%d], K[%d]",
                          p_ptr->lightIntensity, p_ptr->soilMoisture,
                          p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
@@ -173,7 +197,7 @@ void app_main(void)
             {
                 publish_mqtt("plant_partner/state","ENTERED TaskMenu");
                 ESP_LOGI(TAG, "ENTER TASK MENU WITH MESSAGE: %s", message);
-                if(strcmp(message, CONTROL_WATER) == 0)
+                if(strstr(message, CONTROL_WATER) != NULL)
                 {
                     if(auto_care_on)
                     {
@@ -216,7 +240,7 @@ void app_main(void)
 
                     publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_WATER_DONE);
                 }
-                else if(strcmp(message, CONTROL_LIGHT) == 0)
+                if(strstr(message, CONTROL_LIGHT) != NULL)
                 {
                     if(auto_care_on)
                     {
@@ -263,8 +287,7 @@ void app_main(void)
 
                     publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_LIGHT_DONE);
                 }
-                // If want to just control fertilizer
-                else if(strcmp(message, CONTROL_NUTRIENTS) == 0)
+                if(strstr(message, CONTROL_NUTRIENTS) != NULL)
                 {
                     if(auto_care_on)
                     {
@@ -277,9 +300,7 @@ void app_main(void)
                         {
                             ESP_LOGI(TAG, "LOW NUTRIENTS: Current sum[%d] is below threshold", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
 
-                            modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                            vTaskDelay(pdMS_TO_TICKS(300));
-                            modify_pump_duty_cycle(FERTLIZER, 0);
+                            fertilize_plant();
                         }
                         else
                         {
@@ -288,9 +309,7 @@ void app_main(void)
                     }
                     else
                     {
-                        modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                        vTaskDelay(pdMS_TO_TICKS(300));
-                        modify_pump_duty_cycle(FERTLIZER, 0);
+                        fertilize_plant();
 
                         ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
                         uart_rs485_read(p_ptr);
@@ -301,30 +320,23 @@ void app_main(void)
 
                     publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
                 }
-                else
+
+                // Send data to database
+                http_put_plant_data(client, p_ptr);
+                ESP_LOGI(TAG, "HTTP request...");
+                for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
                 {
-                    ESP_LOGW(TAG, "UNRECOGNIZED TASK MESSAGE: %s", message);
+                    err = esp_http_client_perform(client);
+                    if (err == ESP_OK)
+                        break;
                 }
+                ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             }
             else
             {
                 ESP_LOGI(TAG, "ERROR, TOPIC: %s IS NOT RECOGNIZED", topic);
             }
-
-
-    }
-
-
-     // Send data to database
-    http_put_plant_data(client, p_ptr);
-    ESP_LOGI(TAG, "HTTP request...");
-    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
-    {
-            err = esp_http_client_perform(client);
-            if (err == ESP_OK)
-                    break;
-    }
-    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+        }
 
     vTaskDelay(pdMS_TO_TICKS(200));
     }
