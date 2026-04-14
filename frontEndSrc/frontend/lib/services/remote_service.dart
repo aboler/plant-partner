@@ -6,9 +6,9 @@ import 'dart:convert';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-const String baseUrl = 'http://10.0.2.2:8000/plants/getPlantByName/Sunflower'; // CHANGE IP !!
-const String url = "http://10.0.2.2:8000"; // CHANGE IP !!
-final client = MqttServerClient("10.0.2.2", "flutter_client_1"); // CHANGE IP !!
+const String baseUrl = 'http://127.0.0.1:8000/plants/getPlantByName/Sunflower'; // CHANGE IP !!
+const String url = "http://127.0.0.1:8000"; // CHANGE IP !!
+final client = MqttServerClient("127.0.0.1", "flutter_client_1"); // CHANGE IP !!
 //For http and mqtt, change ip to 127.0.0.1
 
 class RemoteService {
