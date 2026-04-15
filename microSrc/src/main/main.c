@@ -28,13 +28,36 @@ const static char *TOPIC_ACT_COMPLETE = "plant_partner/act_compl";
 const static char *TOPIC_INIT_TOGGLE = "plant_partner/autocare_startup";
 const static char *TOPIC_CHECK_TOGGLE = "plant_partner/act_tog_en";
 const static char *TOPIC_CHECK_SENSORS = "plant_partner/ack";
+const static char *TOPIC_TASK_MENU    = "plant_partner/task";
 const static char *TOPIC_START_UP = "plant_partner/esp_startup";
 const static char *ACTIVATION_MESSAGE_AUTOCARE = "Autocare enabled";
+const static char *DEACTIVATION_MESSAGE_AUTOCARE = "Autocare disabled";
+
+//Control Messages
+const static char *CONTROL_WATER = "water";
+const static char *CONTROL_LIGHT = "light";
+const static char *CONTROL_NUTRIENTS = "nutrients";
+
+//Handshakes
 const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
 const static char *MESSAGE_AUTOCARE_OFF = "Autocare OFF";
 const static char *MESSAGE_WATER_DONE = "Water Complete";
 const static char *MESSAGE_LIGHT_DONE = "Light Complete";
 const static char *MESSAGE_NUTRI_DONE = "Nutrients Complete";
+
+static void water_plant()
+{
+    modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
+    vTaskDelay(pdMS_TO_TICKS(300));
+    modify_pump_duty_cycle(WATER, 0);
+}
+
+static void fertilize_plant()
+{
+    modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
+    vTaskDelay(pdMS_TO_TICKS(300));
+    modify_pump_duty_cycle(FERTLIZER, 0);
+}
 
 void app_main(void)
 {
@@ -52,7 +75,6 @@ void app_main(void)
 
     struct plantData p = {"Sunflower", 1, 2, 3, 4, 5};
     struct plantData *p_ptr = &p;
-
 
     // Start up peripheral communication needed to interface with the database
     start_wifi();
@@ -81,14 +103,13 @@ void app_main(void)
 
     while (1)
     {
-        // Yield until MQTT sends message
         if (mqtt_check_buffer_ready())
         {
-            // Grab MQTT topic and data
+            // Recieve topic and message
             message = read_data();
             topic = read_topic();
 
-            ESP_LOGI("main", "Topic: %s, Data: %s", topic, message);
+            ESP_LOGI("While Loop, Most Recently read ", "Topic: %s, Data: %s", topic, message);
 
             if (strcmp(topic, TOPIC_INIT_TOGGLE) == 0)
             { 
@@ -99,27 +120,36 @@ void app_main(void)
                 else
                     auto_care_on = !auto_care_on;
 
-                ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
+                ESP_LOGI(TAG, "Initialized autocare to: %d", auto_care_on);
             }
             // Toggle autocare enable command
             else if (strcmp(topic, TOPIC_CHECK_TOGGLE) == 0)
             {   
-                //Toggle effect
                 if(strcmp(message, ACTIVATION_MESSAGE_AUTOCARE) == 0)
                 {
                     auto_care_on = true;
-                    publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_ON);
+                    publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_ON);
+                }
+                else if(strcmp(message, DEACTIVATION_MESSAGE_AUTOCARE) == 0)
+                {
+                    auto_care_on = false;
+                    publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
                 }
                 else
                 {
-                    auto_care_on = false;
-                    publish_mqtt(TOPIC_AUTO_NOTIF , MESSAGE_AUTOCARE_OFF);
+                    auto_care_on = !auto_care_on;
+                    if(auto_care_on)
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_ON);
+                    else
+                        publish_mqtt(TOPIC_AUTO_NOTIF, MESSAGE_AUTOCARE_OFF);
                 }
+
                 ESP_LOGI(TAG, "Toggle autocare to: %d", auto_care_on);
             }
-            // Sample command
+            // Read all sensors and send to database
             else if (strcmp(topic, TOPIC_CHECK_SENSORS) == 0)
             {
+                // Button functionality for quick actuation
                 // If want to just control water
                 if(strcmp(message, "water") == 0)
                 {
@@ -231,50 +261,117 @@ void app_main(void)
                     // Confirm the actuation was completed
                     publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
                 }
-                // Otherwise do default action 
+                // If didn't press a button and just want to sample sensors
                 else
                 {
-                    // 1. Assess and store light if configured
-                    if (light_calibration_successful)
-                    {
-                        adc_read(LIGHT, adc1_handle, &adc_raw);
-                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+                    publish_mqtt("plant_partner/state","ENTERED CHECK SENSORS");
+                    ESP_LOGI(TAG, "Entered Check Sensors");
 
-                        if (voltage < 0)
-                        {
-                            ESP_LOGW(TAG, "Invalid light reading", voltage);
-                        }
-                        else
-                        {
-                            p_ptr->lightIntensity = voltage;
-                        }
-                    }
-
-                    // 2. Assess and store moisture if configured
                     if (moisture_calibration_successful)
                     {
                         adc_read(MOISTURE, adc1_handle, &adc_raw);
                         adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
 
                         if (voltage < 0)
-                        {
-                            ESP_LOGW(TAG, "Invalid moisture reading", voltage);
-                        }
+                            ESP_LOGW(TAG, "Invalid moisture reading");
                         else
-                        {
                             p_ptr->soilMoisture = voltage;
-                        }
                     }
 
-                    // 3. Assess and store nutrient data
+                    if (light_calibration_successful)
+                    {
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                            ESP_LOGW(TAG, "Invalid light reading");
+                        else
+                            p_ptr->lightIntensity = voltage;
+                    }
+
                     ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
                     uart_rs485_read(p_ptr);
-                    ESP_LOGI(TAG, "Finished RS485 read ...");
+                    ESP_LOGI(TAG, "Finished RS485 read...");
 
-                    // 4. Actuate if auto_schedule is on AND if needed
-                    if (auto_care_on)
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
                     {
-                        // Light
+                        err = esp_http_client_perform(client);
+                        if (err == ESP_OK)
+                            break;
+                    }
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], N[%d], P[%d], K[%d]",
+                            p_ptr->lightIntensity, p_ptr->soilMoisture,
+                            p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
+                }
+            }
+            // Task menu
+            else if (strcmp(topic, TOPIC_TASK_MENU) == 0)
+            {
+                publish_mqtt("plant_partner/state","ENTERED TaskMenu");
+                ESP_LOGI(TAG, "ENTER TASK MENU WITH MESSAGE: %s", message);
+                if(strstr(message, CONTROL_WATER) != NULL)
+                {
+                    if(auto_care_on)
+                    {
+                        // Check moisture before watering
+                        if (moisture_calibration_successful)
+                        {
+                            adc_read(MOISTURE, adc1_handle, &adc_raw);
+                            adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+
+                            if (voltage < 0)
+                                ESP_LOGW(TAG, "Invalid moisture reading");
+                            else
+                                p_ptr->soilMoisture = voltage;
+                        }
+
+                        if (p_ptr->soilMoisture < MOISTURE_THRESHOLD)
+                            ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
+                        else
+                        {
+                            ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
+                            water_plant();
+                        }
+                    }
+                    else
+                    {
+                        water_plant();
+
+                        if (moisture_calibration_successful)
+                        {
+                            adc_read(MOISTURE, adc1_handle, &adc_raw);
+                            adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+
+                            if (voltage < 0)
+                                ESP_LOGW(TAG, "Invalid moisture reading");
+                            else
+                                p_ptr->soilMoisture = voltage;
+                        }
+                        ESP_LOGI(TAG, "Water toggled: %d", p_ptr->soilMoisture);
+                    }
+
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_WATER_DONE);
+                }
+                if(strstr(message, CONTROL_LIGHT) != NULL)
+                {
+                    if(auto_care_on)
+                    {
+                        // Check light before enabling
+                        if (light_calibration_successful)
+                        {
+                            adc_read(LIGHT, adc1_handle, &adc_raw);
+                            adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                            if (voltage < 0)
+                                ESP_LOGW(TAG, "Invalid light reading");
+                            else
+                                p_ptr->lightIntensity = voltage;
+                        }
+
                         if (p_ptr->lightIntensity < LED_THRESHOLD)
                         {
                             set_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
@@ -285,58 +382,78 @@ void app_main(void)
                             clear_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
                             ESP_LOGI(TAG, "LED OFF: Light %d mV is above threshold", p_ptr->lightIntensity);
                         }
+                        
+                    }
+                    else
+                    {
+                        toggle_activeHigh_LED(OUTPUT, EXTERNAL_LED_GPIO);
 
-                        // Moisture
-                        if (p_ptr->soilMoisture < MOISTURE_THRESHOLD)
-                            ESP_LOGI(TAG, "WET: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
-                        else
+                        if (light_calibration_successful)
                         {
-                            ESP_LOGI(TAG, "DRY: ADC%d Channel[%d] Showing How Wet: %d ", ADC_UNIT_1 + 1, ADC_MOISTURE_CHANNEL, p_ptr->soilMoisture);
+                            adc_read(LIGHT, adc1_handle, &adc_raw);
+                            adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
 
-                            // Actuate water pump
-                            modify_pump_duty_cycle(WATER, PWM_DUTY_100_PERCENT);
-                            vTaskDelay(pdMS_TO_TICKS(300));
-                            modify_pump_duty_cycle(WATER, 0);
+                            if (voltage < 0)
+                                ESP_LOGW(TAG, "Invalid light reading");
+                            else
+                                p_ptr->lightIntensity = voltage;
                         }
+                        ESP_LOGI(TAG, "LED toggled: %d", p_ptr->lightIntensity);
+                    }
 
-                        // Fertilizer
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_LIGHT_DONE);
+                }
+                if(strstr(message, CONTROL_NUTRIENTS) != NULL)
+                {
+                    if(auto_care_on)
+                    {
+                        // Check NPK before fertilizing
+                        ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                        uart_rs485_read(p_ptr);
+                        ESP_LOGI(TAG, "Finished RS485 read ...");
+
                         if (p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel < NPK_THRESHOLD)
                         {
-                            ESP_LOGI(TAG, "LOW NUTRIENTS: Current sum[%d] is < 60", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
+                            ESP_LOGI(TAG, "LOW NUTRIENTS: Current sum[%d] is below threshold", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
 
-                            // Actuate fertilizer pump
-                            modify_pump_duty_cycle(FERTLIZER, PWM_DUTY_100_PERCENT);
-                            vTaskDelay(pdMS_TO_TICKS(300));
-                            modify_pump_duty_cycle(FERTLIZER, 0);
+                            fertilize_plant();
                         }
                         else
                         {
-                            ESP_LOGI(TAG, "GOOD NUTRIENTS: Current sum[%d] is >= 60", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
+                            ESP_LOGI(TAG, "GOOD NUTRIENTS: Current sum[%d] is above threshold", p_ptr->nLevel + p_ptr->pLevel + p_ptr->kLevel);
                         }
                     }
-
-                    // 5. Send data to database
-                    http_put_plant_data(client, p_ptr);
-                    ESP_LOGI(TAG, "HTTP request...");
-                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    else
                     {
-                        err = esp_http_client_perform(client);
+                        fertilize_plant();
 
-                        if (err == ESP_OK)
-                            break;
+                        ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                        uart_rs485_read(p_ptr);
+                        ESP_LOGI(TAG, "Finished RS485 read ...");
+                        ESP_LOGI(TAG, "Fertilizer toggled: N[%d], P[%d], K[%d]",
+                                 p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                     }
-                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
-                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], Nitrogen[%d], Phosphorus:[%d], Potassium:[%d]", 
-                             p_ptr->lightIntensity, p_ptr->soilMoisture, p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
-                }    
+
+                    publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
+                }
+
+                // Send data to database
+                http_put_plant_data(client, p_ptr);
+                ESP_LOGI(TAG, "HTTP request...");
+                for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                {
+                    err = esp_http_client_perform(client);
+                    if (err == ESP_OK)
+                        break;
+                }
+                ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
             }
             else
             {
-                ESP_LOGI(TAG, "INVALID TOPIC");
+                ESP_LOGI(TAG, "ERROR, TOPIC: %s IS NOT RECOGNIZED", topic);
             }
         }
-        
-        // Must be at end of while loop, allows other CPU to activate
-        vTaskDelay(pdMS_TO_TICKS(200));
+
+    vTaskDelay(pdMS_TO_TICKS(200));
     }
 }
