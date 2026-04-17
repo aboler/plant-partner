@@ -2,19 +2,19 @@ import Task from "../model/taskModel.js";
 
 export const createTask = async (req, res) => {
    try {
-      const { plantName, type, status, startDate, endDate, time } = req.body;
+      const { plantName, taskTypes, startDate, endDate, time, repeatDays } = req.body;
 
-      if (!plantName || !type || !startDate || !endDate || !time) {
+      if (!plantName || !taskTypes || taskTypes.length === 0 || !startDate || !endDate || !time) {
          return res.status(400).json({ error: "Missing required task fields" });
       }
 
       const taskData = new Task({
          plantName,
-         type,
-         status: status || "pending",
+         taskTypes,
          startDate,
          endDate,
          time,
+         repeatDays: repeatDays || [],
       });
 
       const savedTask = await taskData.save();
@@ -49,5 +49,41 @@ export const markTaskDone = async (req, res) => {
       res.status(200).json(task);
    } catch (error) {
       res.status(500).json({ error: "Failed to update task" });
+   }
+};
+
+export const updateTask = async (req, res) => {
+   try {
+      const id = req.params.id;
+
+      const updatedTask = await Task.findByIdAndUpdate(
+         id,
+         req.body,
+         { new: true }
+      );
+
+      if (!updatedTask) {
+         return res.status(404).json({ message: "Task not found" });
+      }
+
+      res.status(200).json(updatedTask);
+   } catch (error) {
+      res.status(500).json({ error: "Failed to update task" });
+   }
+};
+
+export const deleteTask = async (req, res) => {
+   try {
+      const id = req.params.id;
+
+      const deletedTask = await Task.findByIdAndDelete(id);
+
+      if (!deletedTask) {
+         return res.status(404).json({ message: "Task not found" });
+      }
+
+      res.status(200).json({ message: "Task deleted successfully" });
+   } catch (error) {
+      res.status(500).json({ error: "Failed to delete task" });
    }
 };
