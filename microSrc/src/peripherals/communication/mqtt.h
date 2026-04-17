@@ -6,6 +6,7 @@
 #define MQTT_TOPIC_ACK "plant_partner/ack"
 #define MQTT_TOPIC_STARTUP "plant_partner/autocare_startup"
 #define MQTT_TOPIC_AUTOCARE "plant_partner/act_tog_en"
+#define MQTT_TOPIC_TASKS "plant_partner/task"
 #define MSG_SIZE    256
 #define QOS         0
 #define TOPIC_NAME  64

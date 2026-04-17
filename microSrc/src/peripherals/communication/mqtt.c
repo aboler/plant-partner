@@ -43,6 +43,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             msg_id = esp_mqtt_client_subscribe(client, MQTT_TOPIC_ACK, QOS);
             msg_id = esp_mqtt_client_subscribe(client, MQTT_TOPIC_STARTUP, QOS);
             msg_id = esp_mqtt_client_subscribe(client, MQTT_TOPIC_AUTOCARE, QOS);
+            msg_id = esp_mqtt_client_subscribe(client, MQTT_TOPIC_TASKS, QOS);
 
             we_connected = true;
             break;
