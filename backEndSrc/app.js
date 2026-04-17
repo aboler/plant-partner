@@ -15,29 +15,63 @@ async function readControlVar(client) {
     const taskCursor = Task.find().cursor();
     const date = new Date();
     for (let t = await taskCursor.next(); t != null; t = await taskCursor.next()) {      
-        if(t.status == 'pending') {
-            const timeStr = t.time + ':00';
-            const comp_date = new Date(t.endDate + 'T' + timeStr);
+        const timeStr = t.time + ':00';
+        const comp_date = new Date(t.endDate + 'T' + timeStr);
+        const act_period = new Date(date.toISOString().substring(0, 10) + 'T' + timeStr);
+        //need variables to get the current weekday and variables to get the current time (not datetime, just time, military)
 
-            console.log(timeStr);
-            console.log(comp_date.getTime()-(date.getTime() - 30100));
-            console.log(date.getTime() - comp_date.getTime());
+        let current_day = "Null";
 
-            if (((comp_date.getTime()-(date.getTime() - 30100)) >= 0) && ((date.getTime() - comp_date.getTime()) >= 0)) {
-                try {
-                    client.publish('plant_partner/task', t.type);
-                    console.log('Successful Actuation Request');
-                } catch (err) {
-                    console.log('ERROR: Missed Actuation Request');
+        switch (date.getDay()) {
+            case 0:
+                current_day = "Su";
+                break;
+            case 1:
+                current_day = "M";
+                break;
+            case 2:
+                current_day = "T";
+                break;
+            case 3:
+                current_day = "W";
+                break;
+            case 4:
+                current_day = "Th";
+                break;
+            case 5:
+                current_day = "F";
+                break;
+            case 6:
+                current_day = "Sa";
+                break;
+            default:
+                console.log('Error: Failed to get Current Weekday.');
+                break;
+        }
+
+        //Check if task is on its time stamp and on a correct weekday in order to execute the task
+        if (((act_period.getTime() - (date.getTime() - 30100)) >= 0) && ((date.getTime() - act_period.getTime()) >= 0) && (t.repeatDays.includes(current_day))) {
+            try {
+                let task_list = "T:";
+                for (const task of t.taskTypes) {
+                    task_list = task_list + task + " ";
                 }
-                try {
-                    await t.deleteOne();
-                    console.log('Task deleted');
-                } catch (err) {
-                    console.log('ERROR: Task NOT deleted');
-                }
+                client.publish('plant_partner/task', task_list);
+                console.log('Successful Actuation Request');
+            } catch (err) {
+                console.log('ERROR: Missed Actuation Request');
             }
-        } 
+        }
+
+        // Check if the task is on its end date and time in order to delete it
+        if (((comp_date.getTime()-(date.getTime() - 30100)) >= 0) && ((date.getTime() - comp_date.getTime()) >= 0)) {
+            try {
+                await t.deleteOne();
+                console.log('Task deleted');
+            } catch (err) {
+                console.log('ERROR: Task NOT deleted');
+            }
+        }
     }
 }
 
