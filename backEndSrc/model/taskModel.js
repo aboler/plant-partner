@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const taskSchema = new mongoose.Schema(
    {
       plantName: { type: String, required: true },
-      type: { type: String, required: true },
-      status: { type: String, default: "" },
+      taskTypes: { type: [String], required: true },
 
       startDate: { type: String, required: true },
       endDate: { type: String, required: true },

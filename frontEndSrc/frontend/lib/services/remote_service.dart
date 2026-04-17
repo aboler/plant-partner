@@ -149,7 +149,7 @@ static Future<bool> triggerSensor(String sensor) async {
 
   // creates a new task (start with type="water")
   Future<bool> createTask(
-    String type,
+    List<String> taskTypes,
     String startDate,
     String endDate,
     String time,
@@ -160,8 +160,7 @@ static Future<bool> triggerSensor(String sensor) async {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'plantName': 'Sunflower',
-        'type': type,
-        'status': 'pending',
+        'taskTypes': taskTypes,
         'startDate': startDate,
         'endDate': endDate,
         'time': time,
@@ -189,4 +188,45 @@ static Future<bool> triggerSensor(String sensor) async {
 
     return resp.statusCode == 200;
   }
+
+  Future<bool> deleteTask(String id) async {
+    final resp = await http.delete(
+      Uri.parse("$url/tasks/deleteTask/$id"),
+    );
+
+    if (resp.statusCode != 200) {
+      print('failed deleteTask: ${resp.statusCode}');
+      print('response body: ${resp.body}');
+    }
+
+    return resp.statusCode == 200;
+  }
+
+  Future<bool> updateTask(
+    String id,
+    List<String> taskTypes,
+    String startDate,
+    String endDate,
+    String time,
+    List<String> repeatDays,
+    ) async {
+      final resp = await http.put(
+        Uri.parse("$url/tasks/updateTask/$id"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'taskTypes': taskTypes,
+          'startDate': startDate,
+          'endDate': endDate,
+          'time': time,
+          'repeatDays': repeatDays,
+        }),
+      );
+
+      if (resp.statusCode != 200) {
+        print('failed updateTask: ${resp.statusCode}');
+        print('response body: ${resp.body}');
+      }
+
+      return resp.statusCode == 200;
+    }
 }
