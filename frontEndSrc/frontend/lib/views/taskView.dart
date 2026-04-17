@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/plant.dart';
 import 'package:frontend/task.dart';
 import 'package:frontend/services/remote_service.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';  
 
 class TaskView extends StatefulWidget {
   const TaskView({super.key});
@@ -275,9 +275,7 @@ class _TaskViewState extends State<TaskView> {
                           final picked = await showDatePicker(
                             context: context,
                             initialDate: tempStartDate ?? DateTime.now(),
-                            firstDate: DateTime.now().subtract(
-                              const Duration(days: 365),
-                            ),
+                            firstDate: DateTime.now(),
                             lastDate: DateTime.now().add(
                               const Duration(days: 3650),
                             ),
@@ -310,7 +308,7 @@ class _TaskViewState extends State<TaskView> {
                             context: context,
                             initialDate:
                                 tempEndDate ?? tempStartDate ?? DateTime.now(),
-                            firstDate: tempStartDate ?? DateTime.now(),
+                            firstDate: tempStartDate != null ? tempStartDate! : DateTime.now(),
                             lastDate: DateTime.now().add(
                               const Duration(days: 3650),
                             ),
