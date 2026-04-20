@@ -50,7 +50,7 @@ async function readControlVar(client) {
         }
 
         //Check if task is on its time stamp and on a correct weekday in order to execute the task
-        if (((act_period.getTime() - (date.getTime() - 30100)) >= 0) && ((date.getTime() - act_period.getTime()) >= 0) && (t.repeatDays.includes(current_day))) {
+        if (((act_period.getTime() - (date.getTime() - 20100)) >= 0) && ((date.getTime() - act_period.getTime()) >= 0) && (t.repeatDays.includes(current_day))) {
             try {
                 let task_list = "T:";
                 for (const task of t.taskTypes) {
@@ -64,7 +64,7 @@ async function readControlVar(client) {
         }
 
         // Check if the task is on its end date and time in order to delete it
-        if (((comp_date.getTime()-(date.getTime() - 30100)) >= 0) && ((date.getTime() - comp_date.getTime()) >= 0)) {
+        if (((comp_date.getTime()-(date.getTime() - 20100)) >= 0) && ((date.getTime() - comp_date.getTime()) >= 0)) {
             try {
                 await t.deleteOne();
                 console.log('Task deleted');
@@ -89,7 +89,7 @@ async function autoSample(client) {
 // MQTT Broker Setup
 const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883' // 'mqtt://localhost:1883'; mqtt://test.mosquitto.org:1883 // CHANGE IP !!
 const mqttClient = mqtt.connect(MQTT_BROKER_URL);
-const ACT_INTERVAL_MS = 30000; // 15 seconds
+const ACT_INTERVAL_MS = 20000; // 20 seconds
 const SAMPLE_INTERVAL_MS = 47000; // 47 seconds
 
 mqttClient.on('connect', async () => {
