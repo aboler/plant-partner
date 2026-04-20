@@ -37,6 +37,7 @@ const static char *DEACTIVATION_MESSAGE_AUTOCARE = "Autocare disabled";
 const static char *CONTROL_WATER = "water";
 const static char *CONTROL_LIGHT = "light";
 const static char *CONTROL_NUTRIENTS = "nutrients";
+const static char *CONTROL_DEFAULT = "default";
 
 //Handshakes
 const static char *MESSAGE_AUTOCARE_ON = "Autocare ON";
@@ -435,6 +436,53 @@ void app_main(void)
                     }
 
                     publish_mqtt(TOPIC_ACT_COMPLETE, MESSAGE_NUTRI_DONE);
+                }
+                if (strstr(message, CONTROL_DEFAULT) != NULL){
+                    // If message contains an unrecognized control command 
+                    // read all sensors and update database without actuation
+
+                    publish_mqtt("plant_partner/state","ENTERED CHECK SENSORS");
+                    ESP_LOGI(TAG, "Entered Check Sensors");
+
+                    if (moisture_calibration_successful)
+                    {
+                        adc_read(MOISTURE, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(moisture_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                            ESP_LOGW(TAG, "Invalid moisture reading");
+                        else
+                            p_ptr->soilMoisture = voltage;
+                    }
+
+                    if (light_calibration_successful)
+                    {
+                        adc_read(LIGHT, adc1_handle, &adc_raw);
+                        adc_rawToVoltage(light_cali_adc1_handle, adc_raw, &voltage);
+
+                        if (voltage < 0)
+                            ESP_LOGW(TAG, "Invalid light reading");
+                        else
+                            p_ptr->lightIntensity = voltage;
+                    }
+
+                    ESP_LOGI(TAG, "Reading from RS485-connected nutrient sensor...");
+                    uart_rs485_read(p_ptr);
+                    ESP_LOGI(TAG, "Finished RS485 read...");
+
+                    // Send data to database
+                    http_put_plant_data(client, p_ptr);
+                    ESP_LOGI(TAG, "HTTP request...");
+                    for (uint8_t try_count = 0; try_count < MAX_TRANSMISSION_ATTEMPTS; try_count++)
+                    {
+                        err = esp_http_client_perform(client);
+                        if (err == ESP_OK)
+                            break;
+                    }
+                    ESP_LOGI(TAG, "HTTP done: %s", esp_err_to_name(err));
+                    ESP_LOGI(TAG, "Plant data: Light[%d], Moisture:[%d], N[%d], P[%d], K[%d]",
+                            p_ptr->lightIntensity, p_ptr->soilMoisture,
+                            p_ptr->nLevel, p_ptr->pLevel, p_ptr->kLevel);
                 }
 
                 // Send data to database
